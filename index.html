@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Cloud</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+</head>
+<body class="dash-bg">
+    <nav class="topnav index-nav" id="myTopnav">
+        <ul>
+            <li>
+                <a href="./index.html" class="active">Micro Cloud</a>
+                <i class="fa fa-mixcloud"></i>
+            </li>
+            <li>
+                <a href="./stats.php">User Stats</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
+                <div class="dropdown-content">
+                    <a href="./todo-list.html">Add Task</a>
+                    <a href="./views/show-tasks.php">Manage Tasks</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
+                <div class="dropdown-content">
+                    <a href="./journal.html">Create Entry</a>
+                    <a href="./views/logs.php">All Entries</a>
+                </div>
+            </li>
+            <li style="float:right"><a href="#">Donate</a></li>
+            <li style="float:right"><a href="#">GitHub</a></li>
+            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </ul>
+    </nav>
+    <main>
+        <div class="dash-title">
+            <h1>Micro Cloud</h1>
+            <p>Productivity applications for personal use.</p>
+        </div>
+        <div class="grid-container uline">
+            <div>
+                <a class="dash-item" href="./views/show-tasks.php">
+                    <i class="fa fa-list-ol spc-1"></i>
+                    <br>
+                   <span class="sup-text">Manage Tasks</span> 
+                </a>
+            </div> 
+            <div>
+                <a class="dash-item" href="#">
+                    <i class="fa fa-line-chart spc-1"></i>
+                    <br>
+                   <span class="sup-text">Productivity Analytics</span> 
+                </a>
+            </div> 
+            <div>
+                <a class="dash-item" href="./views/logs.php">
+                    <i class="fa  fa-file-text-o spc-1"></i>
+                    <br>
+                    <span class="sup-text">View Notes</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="main.js"></script>
+    <script>
+        // range slider display
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+        
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+    </script>
+    <!-- jQuery then Javascript libraries
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     -->
+</body>
+</html>

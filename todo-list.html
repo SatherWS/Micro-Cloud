@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+</head>
+<body class="todo-bg">
+    <nav class="topnav" id="myTopnav">
+        <ul>
+            <li>
+                <a href="./index.html" class="active">Micro Cloud</a>
+                <i class="fa fa-mixcloud"></i>
+            </li>
+            <li>
+                <a href="#">User Stats</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
+                <div class="dropdown-content">
+                    <a href="./todo-list.html">Add Task</a>
+                    <a href="./views/show-tasks.php">Manage Tasks</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
+                <div class="dropdown-content">
+                    <a href="./journal.html">Create Entry</a>
+                    <a href="./views/logs.php">All Entries</a>
+                </div>
+            </li>
+            <li style="float:right"><a href="#">Donate</a></li>
+            <li style="float:right"><a href="#">Github</a></li>
+            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </ul>
+    </nav>
+    <form action="add_entry.php" method="post" class="app">
+        <div class="form-container">
+            <div></div>
+            <div class="todo-panel">
+                <h1>TODO List</h1>
+                <div class="form-body">
+                    <label>Task Description</label><br>
+                    <input type="text" name="subs" 
+                    placeholder="Type Task Description" class="todo-item spc-n" required>
+                    <br><br>
+                    <label>Deadline</label><br>
+                    <input type="date" name="end-date" class="spc-n" required>
+                    <input type="time" name="time-due" class="spc-n" required>
+                    <br><br>
+                    <label>Additional Options</label><br>
+                    <select name="importance" class="spc-n" required>
+                        <option value="none" selected disabled hidden> 
+                            Rank Importance
+                        </option>
+                        <option value="Low">Low Importance</option>
+                        <option value="Medium">Medium Importance</option>
+                        <option value="High">High Importance</option>
+                    </select>
+
+                    <select name="repeat" class="spc-n rep-item" required>
+                        <option value="none" selected disabled hidden> 
+                            Repeat? 
+                        </option>
+                        <option value="daily">do not</option>
+                        <option value="daily">daily</option>
+                        <option value="weekly">weekly</option>
+                        <option value="monthly">monthly</option>
+                        <option value="yearly">yearly</option>
+                    </select>
+                </div>
+                <br>
+                <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">
+            </div>
+            <div></div>
+        </div>
+    </form>
+    <script src="main.js"></script>
+    <!-- jQuery then Javascript libraries
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     -->
+</body>
+</html>
