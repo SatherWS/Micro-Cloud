@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="log-container log-details">
-        <form action="../edit_entry.php" method="post">
+        <form action="../controllers/edit_entry.php" method="post">
             <?php
                 if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {

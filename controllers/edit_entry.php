@@ -15,7 +15,7 @@
         $journal_edit = $_POST['edited'];
         $stmnt -> bind_param("ss", $journal_edit, $_POST['edit']);
         $stmnt -> execute();
-        header("Location: ./views/journal-details.php?journal=".$_POST['edit']);
+        header("Location: ../views/journal-details.php?journal=".$_POST['edit']);
         echo $_POST['edit'];
     }
          
@@ -25,7 +25,7 @@
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST['delete']);
         $stmnt -> execute();
-        header("Location: ./views/show-tasks.php");
+        header("Location: ../views/show-tasks.php");
     }
 
     if ($_POST['change-status']) {
@@ -35,8 +35,7 @@
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['change-status'], $id);
         $stmnt -> execute();
-        header("Location: ./views/task-details.php?task=".$id);
+        header("Location: ../views/task-details.php?task=".$id);
     }
     $curs -> close();
-
 ?>
