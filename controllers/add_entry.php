@@ -1,5 +1,5 @@
 <?php
-    include './config/database.php';
+    include '../config/database.php';
    
     $database = new Database();
     $curs = $database->getConnection();
@@ -17,7 +17,7 @@
         $rating = $_POST["rating"];
         $stmnt -> bind_param("sss", $subject, $msg, $rating);
         $stmnt -> execute();
-        header("Location: ./views/logs.php");
+        header("Location: ../views/logs.php");
     }
 
     // add task to todo list
@@ -32,7 +32,7 @@
             $time = $_POST["time-due"];
             $stmnt -> bind_param("ssss", $subject, $end, $imprt, $time);
             $stmnt -> execute();
-            header("Location: ./views/show-tasks.php");
+            header("Location: ../views/show-tasks.php");
         }
     }
     $curs -> close();
