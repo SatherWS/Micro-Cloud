@@ -8,6 +8,10 @@ body {
     font-family: 'PT Sans', sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 nav {
     padding: 0 1rem;
 }
@@ -123,6 +127,7 @@ textarea {
     padding: 2rem;
     margin: 10px;
     margin-bottom: 0;
+    padding-bottom: 0;
     text-align: center;
     background: transparent;
     /*background-image: linear-gradient(150deg, #fff 50%, #333 40%);*/
@@ -459,4 +464,18 @@ table {
     justify-content: space-between;
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  /* ---------------------------------+
+    Mobile Responsive Section         |
+  -----------------------------------*/
+  @media only screen and (max-width: 600px) {
+	main {
+	   margin-top: 0;
+	   margin-left: .5rem;
+	   margin-right: .5rem;
+	}
+	.dash-title {
+	   padding: 1rem .5rem;
+	}
   }

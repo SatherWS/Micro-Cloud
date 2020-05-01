@@ -35,7 +35,7 @@
                 },
 
                 data: [{
-                    type: "area",
+                    type: "splineArea",
                     showInLegend: true,
                     dataPoints: <?php 
                     echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
