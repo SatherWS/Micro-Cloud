@@ -14,6 +14,8 @@ a {
 
 nav {
     padding: 0 1rem;
+    background: #e8e8e8;
+    border-bottom: solid 2px;
 }
 
 .app {
