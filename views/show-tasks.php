@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Tasks</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
@@ -19,13 +19,10 @@
         
         if ($filter) {
             $result = mysqli_query($curs, "select * from todolist where status = '$filter' order by deadline desc");
-            //$total = mysqli_num_rows($result);
-            //$total .= $filter;
             if ($filter == 'SHOW ALL') {
                 $result = mysqli_query($curs, "select * from todolist order by deadline desc");
             }
         }
-        //$total = mysqli_num_rows($result)+" outstanding";
         $total = mysqli_num_rows($result)
         
     ?>
@@ -36,10 +33,7 @@
                 <i class="fa fa-mixcloud"></i>
             </li>
             <li>
-                <a href="#">User Stats</a>
-            </li>
-            <li>
-                <a href="../download_data.php">Download Data</a>
+                <a href="../stats.php">User Stats</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Todo App</a>

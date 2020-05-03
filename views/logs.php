@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logs</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
@@ -16,7 +16,7 @@
                 <i class="fa fa-mixcloud"></i>
             </li>
             <li>
-                <a href="#">User Stats</a>
+                <a href="../stats.php">User Stats</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Todo App</a>
@@ -54,7 +54,8 @@
                 <h2 id='logs-title'>All Journals</h2>
             </div>
             <div class="add-log">
-                <a href="../journal.html"><i class="fa fa-plus-circle"></i>New Journal Entry</a>
+                <a href="../journal.html"><i class="fa fa-plus-circle"></i>
+                <span class="opt-desc">Add Entry</span></a>
             </div>
         </div>
     </div>

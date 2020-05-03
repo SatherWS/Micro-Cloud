@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal Details</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
@@ -33,7 +33,7 @@
                 </div>
             </li>
             <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">Login</a></li>
+            <li style="float:right"><a href="#">GitHub</a></li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -78,9 +78,13 @@
             </div>
             <div class="add-log">
                 <form action="./journal-details.php" method="post">
-                    <button><i class="fa fa-save"></i>Save Journal Entry</button>
-                    <button type="submit" name="edit" value="<?php echo $_GET['journal']; ?>"><i class="fa fa-edit"></i>Edit Journal Entry</button>
-                    <button type='submit' name='delete' value="<?php echo $_GET['journal']; ?>"><i class='fa fa-close'></i>Delete Journal Entry</button>
+                    <button><i class="fa fa-save"></i><span class="opt-desc">Save Journal Entry</span></button>
+
+                    <button type="submit" name="edit" value="<?php echo $_GET['journal']; ?>">
+                    <i class="fa fa-edit"></i><span class="opt-desc">Edit Journal Entry</span></button>
+
+                    <button type='submit' name='delete' value="<?php echo $_GET['journal']; ?>">
+                    <i class='fa fa-close'></i><span class="opt-desc">Delete Journal Entry</span></button>
                 </form>
             </div>
         </div>
