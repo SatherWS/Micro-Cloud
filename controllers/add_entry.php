@@ -22,7 +22,7 @@
 
     // add task to todo list
     if ($_POST['add-task']) {
-        $sql = "insert into TodoList(description, deadline, importance, time_due) values (?, ?, ?, ?)";
+        $sql = "insert into todolist(description, deadline, importance, time_due) values (?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

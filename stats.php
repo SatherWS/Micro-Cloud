@@ -4,7 +4,6 @@
     $curs = $db->getConnection();
     $total = 0;
 
-   
     if ($_POST["range"]) {
         $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
         mysqli_query($curs, $sql);
@@ -15,7 +14,8 @@
         print_r($result);
 
         $total = mysqli_num_rows($result);
-    } else {
+    } 
+    else {
         $sql = "select rating, date(date_created) as dr from journal";
         $result = mysqli_query($curs, $sql);
         $total = mysqli_num_rows($result);
@@ -25,6 +25,14 @@
     while($row = mysqli_fetch_assoc($result)) {
         $data = array("y" => $row["rating"], "label" => $row["dr"]);
         array_push($dataPoints, $data);
+    }
+
+    $taskPoints = array();
+    $sql1 = "select status, count(*) from todolist group by status";
+    $rt = mysqli_query($curs, $sql1);
+    while($row = mysqli_fetch_assoc($rt)) {
+        $data = array("y" => $row["count(*)"], "label" => $row["status"]);
+        array_push($taskPoints, $data);
     }
 ?>
 
@@ -40,7 +48,6 @@
 
                 data: [{
                     type: "splineArea",
-                    showInLegend: true,
                     dataPoints: <?php 
                     echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
                     lineThickness: 5
@@ -56,7 +63,7 @@
                     type: "pie",
                     yValueFormatString: "#,##0.00\"%\"",
                     indexLabel: "{label} ({y})",
-                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                    dataPoints: <?php echo json_encode($taskPoints, JSON_NUMERIC_CHECK); ?>
                 }]
             });
             chart2.render();
@@ -119,7 +126,6 @@
          $result = mysqli_query($curs, $sql);
          $avg = $result -> fetch_row();
     ?>
-    
     <div class="avgs">
         <h3>Mood Average: <?php print_r($avg[0]) ?></h3>
         <h3>
@@ -131,13 +137,32 @@
             ?>
         </h3>
     </div>
-    
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <?php
 
+    ?>
     <div class="pie-box">
         <div class="pie-data">
             <h2>TODO List Statistics</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati blanditiis maiores veniam ad illo? Doloremque, vel delectus nihil atque reprehenderit repudiandae et nostrum, eveniet deserunt perspiciatis quaerat sed ipsa sunt!</p>
+            <table>
+                <tr>
+                    <td>Tasks Completed:</td>
+                    <td><?php echo $taskPoints[0]["y"] ?></td>
+                </tr>
+                <tr>
+                    <td>Tasks Stuck:</td>
+                    <td><?php echo $taskPoints[1]["y"] ?></td>
+                </tr>
+                <tr>
+                    <td>Tasks Not Started:</td>
+                    <td><?php echo $taskPoints[2]["y"] ?></td>
+                </tr>
+                <tr>
+                    <td>Tasks In Progress:</td>
+                    <td><?php echo $taskPoints[3]["y"] ?></td>
+                </tr>
+            </table>
+            <h3>Total Tasks: <?php echo $taskPoints[0]["y"]+$taskPoints[1]["y"]+$taskPoints[2]["y"]+$taskPoints[3]["y"] ?></h3>
         </div>
         <div id="pieContainer" style="height: 370px; width: 100%;"></div>
     </div>
