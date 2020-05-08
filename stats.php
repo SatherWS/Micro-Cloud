@@ -34,6 +34,14 @@
         $data = array("y" => $row["count(*)"], "label" => $row["status"]);
         array_push($taskPoints, $data);
     }
+    $total_tasks =  $taskPoints[0]+$taskPoints[1]+$taskPoints[2]+$taskPoints[3];
+    /*
+    $avgs = array();
+    foreach($taskPoints as $item) {
+  	//$t_avg["y"] = $t_avg["y"] / $total_tasks;
+	$data = array("y" => ($item["y"] / $total_tasks), "label" => $item["label"]);
+    }
+    */
 ?>
 
 <!DOCTYPE HTML>
@@ -41,7 +49,9 @@
 <head>
     <script>
         window.onload = function () {
-            var chart = new CanvasJS.Chart("chartContainer", {
+            
+	    // line graph
+	    var chart = new CanvasJS.Chart("chartContainer", {
                 axisY: {
                     lineThickness: 0
                 },
@@ -61,7 +71,7 @@
       
                 data: [{
                     type: "pie",
-                    yValueFormatString: "#,##0.00\"%\"",
+                    yValueFormatString: "#,##0\"\"",
                     indexLabel: "{label} ({y})",
                     dataPoints: <?php echo json_encode($taskPoints, JSON_NUMERIC_CHECK); ?>
                 }]
@@ -109,7 +119,7 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h2 id='logs-title'>User Statistics</h2>
+                <h2 id='logs-title'>Mood Statistics</h2>
             </div>
 
             <div class="add-log">
@@ -146,20 +156,20 @@
             <h2>TODO List Statistics</h2>
             <table>
                 <tr>
-                    <td>Tasks Completed:</td>
-                    <td><?php echo $taskPoints[0]["y"] ?></td>
+                    <td>Tasks Completed</td>
+                    <td style="text-align: right"><?php echo $taskPoints[0]["y"] ?></td>
                 </tr>
                 <tr>
-                    <td>Tasks Stuck:</td>
-                    <td><?php echo $taskPoints[1]["y"] ?></td>
+                    <td>Tasks Stuck</td>
+                    <td style="text-align: right"><?php echo $taskPoints[1]["y"] ?></td>
                 </tr>
                 <tr>
-                    <td>Tasks Not Started:</td>
-                    <td><?php echo $taskPoints[2]["y"] ?></td>
+                    <td>Tasks Not Started</td>
+                    <td style="text-align: right"><?php echo $taskPoints[2]["y"] ?></td>
                 </tr>
                 <tr>
-                    <td>Tasks In Progress:</td>
-                    <td><?php echo $taskPoints[3]["y"] ?></td>
+                    <td>Tasks In Progress</td>
+                    <td style="text-align: right"><?php echo $taskPoints[3]["y"] ?></td>
                 </tr>
             </table>
             <h3>Total Tasks: <?php echo $taskPoints[0]["y"]+$taskPoints[1]["y"]+$taskPoints[2]["y"]+$taskPoints[3]["y"] ?></h3>

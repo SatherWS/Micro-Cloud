@@ -32,7 +32,7 @@
                     <a href="./logs.php">All Entries</a>
                 </div>
             </li>
-            <li style="float:right"><a href="#">Sign Up</a></li>
+            <li style="float:right"><a href="#">Donate</a></li>
             <li style="float:right"><a href="#">Github</a></li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>
