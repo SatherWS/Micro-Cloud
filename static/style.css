@@ -65,6 +65,9 @@ textarea {
 /*-------------------------------------------------------*
 * JOURNAL SECTION                                        |
 *-------------------------------------------------------*/
+.sec-2 {
+    text-align:center;
+}
 
 .slider {
     -webkit-appearance: none;
@@ -320,7 +323,6 @@ ul {
 }
 
 .todo-panel {
-    text-align: center;
     background: #e8e8e8;
     border-radius: .25rem;
     border: solid #000 3px;
