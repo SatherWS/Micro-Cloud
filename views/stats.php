@@ -1,5 +1,5 @@
 <?php
-    include_once "./config/database.php";
+    include_once "../config/database.php";
     $db = new database();
     $curs = $db->getConnection();
     $total = 0;
@@ -34,14 +34,9 @@
         $data = array("y" => $row["count(*)"], "label" => $row["status"]);
         array_push($taskPoints, $data);
     }
-    $total_tasks =  $taskPoints[0]+$taskPoints[1]+$taskPoints[2]+$taskPoints[3];
-    /*
-    $avgs = array();
-    foreach($taskPoints as $item) {
-  	//$t_avg["y"] = $t_avg["y"] / $total_tasks;
-	$data = array("y" => ($item["y"] / $total_tasks), "label" => $item["label"]);
-    }
-    */
+    // below sum was causing errors
+    //$total_tasks =  $taskPoints[0]+$taskPoints[1]+$taskPoints[2]+$taskPoints[3];
+
 ?>
 
 <!DOCTYPE HTML>
@@ -86,7 +81,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
     <body>
-    <nav class="topnav index-nav" id="myTopnav">
+    <nav class="topnav parent-nav" id="myTopnav">
         <ul>
             <li>
                 <a href="./index.html" class="active">Micro Cloud</a>
@@ -108,6 +103,12 @@
                     <a href="./journal.html">Create Entry</a>
                     <a href="./views/logs.php">All Entries</a>
                 </div>
+            </li>
+            <li>
+                <a href="./join-chat.php">Chatroom App</a>
+            </li>
+            <li>
+                <a href="./join-chat.php">Votting App</a>
             </li>
             <li style="float:right"><a href="#">Donate</a></li>
             <li style="float:right"><a href="#">GitHub</a></li>

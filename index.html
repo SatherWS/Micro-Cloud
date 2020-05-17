@@ -12,76 +12,91 @@
     <nav class="topnav index-nav parent-nav" id="myTopnav">
         <ul>
             <li>
-                <a href="./index.html" class="active">Micro Cloud</a>
+                <a href="#" class="active">Micro Cloud</a>
                 <i class="fa fa-mixcloud"></i>
             </li>
+        </ul>
+        <ul>
             <li>
-                <a href="./stats.php">User Stats</a>
+                <a href="./views/join-chat.php">Chatrooms</a>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="./todo-list.html">Add Task</a>
-                    <a href="./views/show-tasks.php">Manage Tasks</a>
-                </div>
+            <li>
+                <a href="#">Music</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Journal App</a>
                 <div class="dropdown-content">
-                    <a href="./journal.html">Create Entry</a>
+                    <a href="./views/journal.html">Create Entry</a>
                     <a href="./views/logs.php">All Entries</a>
                 </div>
             </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">GitHub</a></li>
+            <li>
+                <a href="./views/join-chat.php">Votting App</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Todo List</a>
+                <div class="dropdown-content">
+                    <a href="./views/todo-list.html">Add Task</a>
+                    <a href="./views/show-tasks.php">Manage Tasks</a>
+                </div>
+            </li>
+            <li>
+                <a href="./views/stats.php">Analytics</a>
+            </li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">GitHub</a></li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>
             </a>
         </ul>
     </nav>
     <main>
-        <div class="dash-title">
-            <h1>Micro Cloud</h1>
-            <p>Productivity applications for personal use.</p>
-        </div>
-        <div class="grid-container uline">
+        <div class="grid-container">
+            <div>
+                <a class="dash-item" href="./views/join-chat.php">
+                    <i class="fa  fa-comments-o spc-1"></i>
+                    <br>
+                    <span class="sup-text">Chat Room</span>
+                </a>
+            </div>
+            <div>
+                <a class="dash-item" href="./views/logs.php">
+                    <i class="fa fa-music spc-1"></i>
+                    <br>
+                    <span class="sup-text">Music Player</span>
+                </a>
+            </div>
+            <div>
+                <a class="dash-item" href="./views/logs.php">
+                    <i class="fa  fa-file-text-o spc-1"></i>
+                    <br>
+                    <span class="sup-text">HTML Notepad</span>
+                </a>
+            </div>
+            <div>
+                <a class="dash-item" href="./views/logs.php">
+                    <i class="fa fa-bar-chart spc-1"></i>
+                    <br>
+                    <span class="sup-text">Votting App</span>
+                </a>
+            </div>
             <div>
                 <a class="dash-item" href="./views/show-tasks.php">
                     <i class="fa fa-list-ol spc-1"></i>
                     <br>
                    <span class="sup-text">Manage Tasks</span> 
                 </a>
-            </div> 
+            </div>
             <div>
-                <a class="dash-item" href="./stats.php">
+                <a class="dash-item" href="./views/stats.php">
                     <i class="fa fa-line-chart spc-1"></i>
                     <br>
-                   <span class="sup-text">Productivity Analytics</span> 
+                   <span class="sup-text">Analytics</span> 
                 </a>
-            </div> 
-            <div>
-                <a class="dash-item" href="./views/logs.php">
-                    <i class="fa  fa-file-text-o spc-1"></i>
-                    <br>
-                    <span class="sup-text">View Notes</span>
-                </a>
-            </div>
+            </div>  
         </div>
-    </main>
-    <script src="main.js"></script>
-    <script>
-        // range slider display
-        var slider = document.getElementById("myRange");
-        var output = document.getElementById("demo");
-        output.innerHTML = slider.value;
         
-        slider.oninput = function() {
-          output.innerHTML = this.value;
-        }
-    </script>
-    <!-- jQuery then Javascript libraries
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-     -->
+    </main>
+    <script src="./static/main.js"></script>
 </body>
 </html>

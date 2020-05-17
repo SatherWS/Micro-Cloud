@@ -40,7 +40,6 @@
         </ul>
     </nav>
     <?php 
-        //include_once '../edit_entry.php';
         include_once '../config/database.php';
         $database = new Database();
         $curs = $database->getConnection();
@@ -51,7 +50,7 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h2 id='logs-title'>All Journals</h2>
+                <h3 id='logs-title'>All Journals</h3>
             </div>
             <div class="add-log">
                 <a href="../journal.html"><i class="fa fa-plus-circle"></i>
@@ -76,17 +75,8 @@
                             echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
                             echo "<td>". $row["subject"]. "</td>";
                             echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
-                            //echo "<td>". $row["preview"]. "...</td>";
                             echo "<td>". $row["rating"]. "</td>";
                             echo "<td>". $row["date_created"] ."</td></tr>";
-                            /*
-                            $icon_str = "<td><button id='options' type='submit' name='btn-submit' value='".$row["id"];
-                            $icon_str .= "'><i class='fa fa-eye'></i></button>";
-                            $icon_str .= "<button id='options' type='submit' name='edit' value='".$row["id"];
-                            $icon_str .= "'><i class='fa fa-edit'></i></button>";
-                            $icon_str .= "<button id='options' type='submit' name='delete' value='".$row["id"];
-                            $icon_str .= "'><i class='fa fa-close'></i></button</td>";
-                            */
                         }
                     } 
                     else {
