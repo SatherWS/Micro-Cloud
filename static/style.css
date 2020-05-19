@@ -132,27 +132,11 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
-/*
-.dash-title {
-  margin: 10px;
-}
 
-.dash-title h1 {
-  font-size: 38pt;
-}
-
-.dash-title p {
-  font-size: 22pt;
-}
-*/
 .dash-item {
-  color: #fff;
+  color: #000;
   text-decoration: none;
   font-weight: bold;
-}
-
-.dash-container a {
-  color: #fff;
 }
 
 main {
@@ -564,6 +548,42 @@ tr:hover {background-color:#f5f5f5;}
 
   .pie-data {
     width: 700px;
+  }
+  
+  /* ---------------------------------+
+    Chatroom Section                  |
+  -----------------------------------*/
+  .fixed-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .form-control {
+    width: 80%;
+    padding: .5rem;
+  }
+
+  /* ---------------------------------+
+    Voting App Section                |
+  -----------------------------------*/
+  .feature-panel {
+    margin-top: .5rem;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .feature-btns {
+    text-align: right;
+  }
+  .feature-btns input {
+    margin-top:1rem;
+    padding: .5rem 1rem;
+    width: 150px;
   }
   /* ---------------------------------+
     Mobile Responsive Section         |

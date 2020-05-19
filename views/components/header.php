@@ -20,7 +20,7 @@
             </div>
         </li>
         <li>
-            <a href="./views/join-chat.php">Votting App</a>
+            <a href="./polls.php">Votting App</a>
         </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">Todo List</a>

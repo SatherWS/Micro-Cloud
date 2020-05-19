@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="topnav" id="myTopnav">
+        <ul>
+            <li>
+                <a href="../index.html" class="active">Micro Cloud</a>
+                <i class="fa fa-mixcloud"></i>
+            </li>
+            <li>
+                <a href="../stats.php">User Stats</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
+                <div class="dropdown-content">
+                    <a href="../todo-list.html">Add Task</a>
+                    <a href="./show-tasks.php">Manage Tasks</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
+                <div class="dropdown-content">
+                    <a href="../journal.html">Create Entry</a>
+                    <a href="./logs.php">All Entries</a>
+                </div>
+            </li>
+            <li style="float:right"><a href="#">Donate</a></li>
+            <li style="float:right"><a href="#">Github</a></li>
+            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </ul>
+    </nav>
+    <?php 
+        include_once '../config/database.php';
+        $database = new Database();
+        $curs = $database->getConnection();
+        $sql = "select id, topic, admin, date_created from polls order by date_created desc";
+        $result = mysqli_query($curs, $sql);
+    ?>
+
+
+    <div class="log-container">
+        <!-- Latest Poll Here -->
+        <div class="feature-panel">
+            <div>
+                <h2>Latest Poll: <?php echo "Poll Topic" ?></h2>
+                <h2>By:</h2>
+                <h2>Date:</h2>
+            </div>
+            <div class="feature-btns">
+                <input type="submit" value="Cast Vote">
+                <br>
+                <input type="submit" value="Modify Ballot">
+            </div>
+        </div>
+        <div class="svg-bg">
+            <div class="log-header">    
+                <div class="review">
+                    <h3 id='logs-title'>Available Polls</h3>
+                </div>
+                <div class="add-log">
+                    <a href="../journal.html"><i class="fa fa-plus-circle"></i>
+                    <span class="opt-desc">Add Poll</span></a>
+                </div>
+            </div>
+        </div>
+        <form id="notes" action="./journal-details.php" method="post">
+            <table class="data">
+                <tr class="tbl-head">
+                    <th>ID</th>
+                    <th>TOPIC</th>
+                    <th>RESULT</th>
+                    <th>CREATOR</th>
+                    <th>YES COUNT</th>
+                    <th>NO COUNT</th>
+                    <th>MAYBE COUNT</th>
+                    <th>DATE CREATED</th>
+                </tr>
+                <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $id = $row["id"];
+                            echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
+                            echo "<td>". $row["topic"]. "</td>";
+                            echo "<td>"."Temp Value". "...</td>";
+                            echo "<td>". $row["admin"]. "</td>";
+                            echo "<td>"."Temp Value". "...</td>";
+                            echo "<td>". $row["date_created"] ."</td></tr>";
+                        }
+                    } 
+                    else {
+                        echo "<p>0 results</p>";
+                    }
+                    $curs -> close();
+                ?>
+            </table>
+        </form>
+    </div>
+    <script>
+    function myFunction(id) {
+        window.location='./journal-details.php?journal='+id;
+    }
+    </script>
+    <script src="../main.js"></script>
+</body>
+</html>

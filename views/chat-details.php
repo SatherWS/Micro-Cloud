@@ -35,7 +35,14 @@
 	<div class="log-container">
 		<div id="display_info" ></div>
 	</div>
-
+	<form method="post" class="fixed-bottom">
+        <div class="input-group sender-style">
+            <input type="text" name="msg" class="form-control" id="send-msg" placeholder="Enter you message here..." required>
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-secondary">Send Message</button>
+            </span>
+        </div>
+    </form>
 	<script src="../static/main.js"></script>	 
 </body>
 </html>

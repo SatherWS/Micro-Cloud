@@ -74,7 +74,7 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h2 id="logs-title">Journal ID #<?php echo $_GET['journal']; ?></h2>
+                <h3 id="logs-title">Journal ID #<?php echo $_GET['journal']; ?></h3>
             </div>
             <div class="add-log">
                 <form action="./journal-details.php" method="post">

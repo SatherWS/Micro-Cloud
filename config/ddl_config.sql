@@ -40,3 +40,39 @@ CREATE TABLE todo_list (
 	importance varchar(10) NOT NULL,
 	date_created datetime DEFAULT CURRENT_TIMESTAMP
 );
+
+--
+-- Table structure for table `topics`
+--
+
+CREATE TABLE `polls` (
+  `id` int(11) primary key auto_increment,
+  `admin` varchar(30) NOT NULL,
+  `topic` varchar(100) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP
+);
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE `votes` (
+  `id` int(11) primary key auto_increment not null,
+  `topic_id` int(11) not null,
+  `username` varchar(20) not null,
+  `vote` text not null,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (topic_id) references polls(id)
+);
+
+--
+-- Indexes for table `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+COMMIT;
+
+
