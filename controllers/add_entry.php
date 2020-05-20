@@ -1,5 +1,5 @@
 <?php
-    include '../config/database.php';
+    include ('../config/database.php');
    
     $database = new Database();
     $curs = $database->getConnection();
@@ -10,30 +10,59 @@
 
     // create journal entry
     if ($_POST['add-journal']) {
-        $sql = "insert into journal(subject, message, rating) values (?, ?, ?)";
-        $stmnt = mysqli_prepare($curs, $sql);
+        $rating = $_POST["rating"];
         $subject = $_POST["jsubject"];
         $msg = nl2br($_POST["note"]);
-        $rating = $_POST["rating"];
-        $stmnt -> bind_param("sss", $subject, $msg, $rating);
-        $stmnt -> execute();
-        header("Location: ../views/logs.php");
+
+        if ($_POST['omit']) {
+            $sql = "insert into journal(subject, message) values (?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ss", $subject, $msg);
+            $stmnt -> execute();
+        }
+        else {
+            $sql = "insert into journal(subject, message, rating) values (?, ?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("sss", $subject, $msg, $rating);
+            $stmnt -> execute();
+        }
+        //header("Location: ../views/logs.php");
     }
 
     // add task to todo list
     if ($_POST['add-task']) {
         $sql = "insert into todolist(description, deadline, importance, time_due) values (?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $subject = $_POST["subs"]; 
-            $end = $_POST["end-date"];
-            $imprt = $_POST["importance"];
-            $time = $_POST["time-due"];
-            $stmnt -> bind_param("ssss", $subject, $end, $imprt, $time);
-            $stmnt -> execute();
-            header("Location: ../views/show-tasks.php");
-        }
+        $subject = $_POST["subs"]; 
+        $end = $_POST["end-date"];
+        $imprt = $_POST["importance"];
+        $time = $_POST["time-due"];
+        $stmnt -> bind_param("ssss", $subject, $end, $imprt, $time);
+        $stmnt -> execute();
+        header("Location: ../views/show-tasks.php");
     }
+
+    // add voting topic to table of polls
+    if ($_POST["topic"] && $_POST["admin"]) {
+        $sql = "insert into polls(admin, topic) values (?, ?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("ss", $_POST['admin'], $_POST['topic']);
+        $stmnt -> execute();
+        header("location: ../views/polls.php");
+    }
+
+    // cast vote to selected poll
+    if ( $_POST["ballot"]) {
+        $vote = mysqli_real_escape_string($curs,$_POST['ballot']);
+        $sql_add = "INSERT INTO votes(vote) VALUES('$vote')";
+        $insert = $mysqli->query($sql_add);
+        if ( $insert ) {
+            echo "Success! Row ID: {$db->insert_id}";
+            header("location: ../views/polls.php");
+        } 
+    }
+
+    // chatroom if statement here
+
     $curs -> close();
 ?>

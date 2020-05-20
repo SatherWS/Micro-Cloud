@@ -21,14 +21,14 @@
 	</script>
 </head>
 <body>
-	<?php include("../views/components/header.php");?>
+	<?php include("./components/header.php");?>
 	<div class="svg-bg">
         <div class="log-header">  
 			<div>
 				<h3 id="logs-title">Chatroom</h3>
 			</div>
 			<div>
-				<a href="#">Exit Room</a>
+				<a href="./join-chat.php">Exit Room</a>
 			</div>
 		</div>
 	</div>

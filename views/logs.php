@@ -9,38 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="topnav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="../stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="../todo-list.html">Add Task</a>
-                    <a href="./show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="../journal.html">Create Entry</a>
-                    <a href="./logs.php">All Entries</a>
-                </div>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">Github</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
-    <?php 
-        include_once '../config/database.php';
+    <?php
+        include("./components/header.php"); 
+        include_once ('../config/database.php');
         $database = new Database();
         $curs = $database->getConnection();
         $sql = "select id, subject, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
@@ -52,9 +23,11 @@
             <div class="review">
                 <h3 id='logs-title'>All Journals</h3>
             </div>
-            <div class="add-log">
-                <a href="../journal.html"><i class="fa fa-plus-circle"></i>
-                <span class="opt-desc">Add Entry</span></a>
+            <div class="add-btn">
+                <a href="./create-journal.php">
+                    <span class="opt-desc">Add Entry</span>
+                    <i class="fa fa-plus-circle"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -92,6 +65,6 @@
         window.location='./journal-details.php?journal='+id;
     }
     </script>
-    <script src="../main.js"></script>
+    <script src="../static/main.js"></script>
 </body>
 </html>

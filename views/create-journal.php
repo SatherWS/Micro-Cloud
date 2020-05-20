@@ -10,76 +10,49 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="todo-bg">
-    <nav class="topnav parent-nav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="./stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="./todo-list.html">Add Task</a>
-                    <a href="./views/show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="./journal.html">Create Entry</a>
-                    <a href="./views/logs.php">All Entries</a>
-                </div>
-            </li>
-            <li>
-                <a href="./join-chat.php">Chatroom App</a>
-            </li>
-            <li>
-                <a href="./join-chat.php">Votting App</a>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">GitHub</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
-    <form action="../controllers/add_entry.php" method="post" class="app">
+    <?php include("./components/header.php");?>
+    <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
             <div></div>
+
             <div class="todo-panel">
                 <h1>Journal Application</h1>
                 <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
                 <br><br>
                 <textarea rows="7" cols="55" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>
-		<div class="sec-2">
+    		        <div class="sec-2">
                     <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                     <div class="j-box">
-                        <b><p>Mood Rating: <span id="demo"></span></p></b>
+                        <label>Mood Rating: <span id="demo"></span></label>
                         <div style="text-align: left;">
-                            <p class="attach"><a href="#" id="myBtn">Add Attachment</a></p>
+                        <label class="container">
+                          <input type="checkbox" name="omit">
+                          <span class="checkmark"></span>
+                          Omit Mood Rating
+                        </label>
+                        <!-- Use in Music App Possibly
+                          <p class="attach"><a href="#" id="myBtn">Add Attachment</a></p>
+                        -->
                         </div>
                     </div>
-   	 	    <input name="add-journal" class="spc-n" id="form-control" type="submit">
-                    <br>
-		</div>
+                </div>
+                <input name="add-journal" class="spc-n spc-m" type="submit">
             </div>
             <div></div>
         </div>
-        <!-- Modal -->
+
+        <!-- Modal Use in Music App Possibly -->
         <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Either provide a url to an image or upload a file directly</p>
-                <input type="file" name="" id="">
-                <input type="text" placeholder="Enter URL Here" id="form-control" class="spc-n">
-                <br><br>
-                <span class="other-close attach">Add Attachment</span>
-            </div>
+          <!-- Modal content -->
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>Either provide a url to an image or upload a file directly</p>
+              <input type="file" name="" id="">
+              <input type="text" placeholder="Enter URL Here" id="form-control" class="spc-n">
+              <br><br>
+              <span class="other-close attach">Add Attachment</span>
+          </div>
         </div>
     </form>
     <script>
@@ -114,7 +87,7 @@
         }
         
     </script>
-    <script src="main.js"></script>
+    <script src="../static/main.js"></script>
     <script>
         // range slider display
         var slider = document.getElementById("myRange");

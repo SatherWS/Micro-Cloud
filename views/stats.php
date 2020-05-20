@@ -1,126 +1,59 @@
-<?php
-    include_once "../config/database.php";
-    $db = new database();
-    $curs = $db->getConnection();
-    $total = 0;
-
-    if ($_POST["range"]) {
-        $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
-        mysqli_query($curs, $sql);
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["start-date"], $_POST["end-date"]);
-        $stmnt -> execute();
-        $result = $stmnt -> get_result();
-        print_r($result);
-
-        $total = mysqli_num_rows($result);
-    } 
-    else {
-        $sql = "select rating, date(date_created) as dr from journal";
-        $result = mysqli_query($curs, $sql);
-        $total = mysqli_num_rows($result);
-    }
-    
-    $dataPoints = array();
-    while($row = mysqli_fetch_assoc($result)) {
-        $data = array("y" => $row["rating"], "label" => $row["dr"]);
-        array_push($dataPoints, $data);
-    }
-
-    $taskPoints = array();
-    $sql1 = "select status, count(*) from todolist group by status";
-    $rt = mysqli_query($curs, $sql1);
-    while($row = mysqli_fetch_assoc($rt)) {
-        $data = array("y" => $row["count(*)"], "label" => $row["status"]);
-        array_push($taskPoints, $data);
-    }
-    // below sum was causing errors
-    //$total_tasks =  $taskPoints[0]+$taskPoints[1]+$taskPoints[2]+$taskPoints[3];
-
-?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
-    <script>
-        window.onload = function () {
-            
-	    // line graph
-	    var chart = new CanvasJS.Chart("chartContainer", {
-                axisY: {
-                    lineThickness: 0
-                },
-
-                data: [{
-                    type: "splineArea",
-                    dataPoints: <?php 
-                    echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
-                    lineThickness: 5
-                }]
-            });
-            chart.render();
-
-            // pie chart
-            var chart2 = new CanvasJS.Chart("pieContainer", {
-                animationEnabled: true,
-      
-                data: [{
-                    type: "pie",
-                    yValueFormatString: "#,##0\"\"",
-                    indexLabel: "{label} ({y})",
-                    dataPoints: <?php echo json_encode($taskPoints, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
-            chart2.render();
-        }
-    </script>
+    
     
     <title>Micro Cloud</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
     <body>
-    <nav class="topnav parent-nav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="./index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="./stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="./todo-list.html">Add Task</a>
-                    <a href="./views/show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="./journal.html">Create Entry</a>
-                    <a href="./views/logs.php">All Entries</a>
-                </div>
-            </li>
-            <li>
-                <a href="./join-chat.php">Chatroom App</a>
-            </li>
-            <li>
-                <a href="./join-chat.php">Votting App</a>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">GitHub</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
+    <?php
+        include("./components/header.php");
+        include_once "../config/database.php";
+        $db = new database();
+        $curs = $db->getConnection();
+        $total = 0;
+
+        if ($_POST["range"]) {
+            $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
+            mysqli_query($curs, $sql);
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ss", $_POST["start-date"], $_POST["end-date"]);
+            $stmnt -> execute();
+            $result = $stmnt -> get_result();
+            print_r($result);
+
+            $total = mysqli_num_rows($result);
+        } 
+        else {
+            $sql = "select rating, date(date_created) as dr from journal";
+            $result = mysqli_query($curs, $sql);
+            $total = mysqli_num_rows($result);
+        }
+        
+        $dataPoints = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $data = array("y" => $row["rating"], "label" => $row["dr"]);
+            array_push($dataPoints, $data);
+        }
+
+        $taskPoints = array();
+        $sql1 = "select status, count(*) from todolist group by status";
+        $rt = mysqli_query($curs, $sql1);
+        while($row = mysqli_fetch_assoc($rt)) {
+            $data = array("y" => $row["count(*)"], "label" => $row["status"]);
+            array_push($taskPoints, $data);
+        }
+        // below sum was causing errors
+        //$total_tasks =  $taskPoints[0]+$taskPoints[1]+$taskPoints[2]+$taskPoints[3];
+
+    ?>
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h2 id='logs-title'>Mood Statistics</h2>
+                <h3 id='logs-title'>Mood Statistics</h3>
             </div>
 
             <div class="add-log">
@@ -179,5 +112,38 @@
     </div>
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        window.onload = function () {
+            
+	    // line graph code
+	    var chart = new CanvasJS.Chart("chartContainer", {
+                axisY: {
+                    lineThickness: 0
+                },
+
+                data: [{
+                    type: "splineArea",
+                    dataPoints: <?php 
+                    echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
+                    lineThickness: 5
+                }]
+            });
+            chart.render();
+
+            // pie chart code
+            var chart2 = new CanvasJS.Chart("pieContainer", {
+                animationEnabled: true,
+      
+                data: [{
+                    type: "pie",
+                    yValueFormatString: "#,##0\"\"",
+                    indexLabel: "{label} ({y})",
+                    dataPoints: <?php echo json_encode($taskPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart2.render();
+        }
+    </script>
+    <script src="../static/main.js"></script>
     </body>
 </html>   

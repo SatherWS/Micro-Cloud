@@ -11,7 +11,8 @@
 </head>
 <body>
     <?php
-        include "../config/database.php";
+        include("./components/header.php");
+        include ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
         $result = mysqli_query($curs, "select * from todolist where status = 'IN PROGRESS' or status = 'NOT STARTED' order by deadline");
@@ -26,36 +27,6 @@
         $total = mysqli_num_rows($result)
         
     ?>
-    <nav class="topnav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="../stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="../todo-list.html">Add Task</a>
-                    <a href="./show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="../journal.html">Create Entry</a>
-                    <a href="./logs.php">All Entries</a>
-                </div>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">Github</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
     <div class="svg-bg2">
         <div class="log-header">    
             <div class="review">
@@ -100,12 +71,6 @@
                             echo "<td>".$row["time_due"]."</td>";
                             echo "<td>".$row["importance"]."</td>";
                             echo "<td>".$row["date_created"]."</td> </tr>";
-                            /*
-                            $icon_str = "<td><button id='options' type='submit' name='edit' value='".$row["id"];
-                            $icon_str .= "'><i class='fa fa-edit'></i></button>";
-                            $icon_str .= "<button id='options' type='submit' name='delete' value='".$row["id"];
-                            $icon_str .= "'><i class='fa fa-close'></i></button></td>";
-                            */
                         }
                     }
                     else {
@@ -121,6 +86,6 @@
             window.location = "./task-details.php?task="+id;
         }
     </script>
-    <script src="../main.js"></script>
+    <script src="../static/main.js"></script>
 </body>
 </html>

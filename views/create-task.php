@@ -9,42 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="todo-bg">
-    <nav class="topnav index-nav parent-nav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="./stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="./todo-list.html">Add Task</a>
-                    <a href="./views/show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="./journal.html">Create Entry</a>
-                    <a href="./views/logs.php">All Entries</a>
-                </div>
-            </li>
-            <li>
-                <a href="./join-chat.php">Chatroom App</a>
-            </li>
-            <li>
-                <a href="./join-chat.php">Votting App</a>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">GitHub</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
+    <?php include("./components/header.php")?>
     <form action="../controllers/add_entry.php" method="post" class="app">
         <div class="form-container">
             <div></div>
@@ -86,7 +51,7 @@
             <div></div>
         </div>
     </form>
-    <script src="main.js"></script>
+    <script src="../static/main.js"></script>
     <!-- jQuery then Javascript libraries
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

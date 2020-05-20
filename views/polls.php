@@ -9,37 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="topnav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="../stats.php">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="../todo-list.html">Add Task</a>
-                    <a href="./show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="../journal.html">Create Entry</a>
-                    <a href="./logs.php">All Entries</a>
-                </div>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">Github</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
-    <?php 
+    <?php
+        include("../views/components/header.php"); 
         include_once '../config/database.php';
         $database = new Database();
         $curs = $database->getConnection();
@@ -58,17 +29,15 @@
             </div>
             <div class="feature-btns">
                 <input type="submit" value="Cast Vote">
-                <br>
-                <input type="submit" value="Modify Ballot">
             </div>
         </div>
-        <div class="svg-bg">
-            <div class="log-header">    
+        <div class="svg-bg rad-5">
+            <div class="polls-header">    
                 <div class="review">
-                    <h3 id='logs-title'>Available Polls</h3>
+                    <h3 id='polls-title'>Election History</h3>
                 </div>
-                <div class="add-log">
-                    <a href="../journal.html"><i class="fa fa-plus-circle"></i>
+                <div class="add-btn">
+                    <a href="./create-poll.php"><i class="fa fa-plus-circle"></i>
                     <span class="opt-desc">Add Poll</span></a>
                 </div>
             </div>
@@ -89,11 +58,17 @@
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             $id = $row["id"];
-                            echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
+                            echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$id."'> <td>". $id. "</td>";
                             echo "<td>". $row["topic"]. "</td>";
-                            echo "<td>"."Temp Value". "...</td>";
+                            
+                            echo "<td>"."TBD". "</td>";
+                            
                             echo "<td>". $row["admin"]. "</td>";
-                            echo "<td>"."Temp Value". "...</td>";
+                            
+                            echo "<td>"."100". "</td>";
+                            echo "<td>"."0". "</td>";
+                            echo "<td>"."0". "</td>";
+                            
                             echo "<td>". $row["date_created"] ."</td></tr>";
                         }
                     } 
@@ -110,6 +85,6 @@
         window.location='./journal-details.php?journal='+id;
     }
     </script>
-    <script src="../main.js"></script>
+    <script src="../static/main.js"></script>
 </body>
 </html>

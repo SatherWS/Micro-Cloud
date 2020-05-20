@@ -9,38 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="topnav" id="myTopnav">
-        <ul>
-            <li>
-                <a href="../index.html" class="active">Micro Cloud</a>
-                <i class="fa fa-mixcloud"></i>
-            </li>
-            <li>
-                <a href="#">User Stats</a>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Todo App</a>
-                <div class="dropdown-content">
-                    <a href="./todo-list.html">Add Task</a>
-                    <a href="./show-tasks.php">Manage Tasks</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Journal App</a>
-                <div class="dropdown-content">
-                    <a href="../journal.html">Create Entry</a>
-                    <a href="./logs.php">All Entries</a>
-                </div>
-            </li>
-            <li style="float:right"><a href="#">Donate</a></li>
-            <li style="float:right"><a href="#">GitHub</a></li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </ul>
-    </nav>
     <?php 
-        include_once '../config/database.php';
+        include("./components/header.php");
+        include_once ('../config/database.php');
         $database = new Database();
         $curs = $database->getConnection();
 
@@ -78,8 +49,6 @@
             </div>
             <div class="add-log">
                 <form action="./journal-details.php" method="post">
-                    <button><i class="fa fa-save"></i><span class="opt-desc">Save Journal Entry</span></button>
-
                     <button type="submit" name="edit" value="<?php echo $_GET['journal']; ?>">
                     <i class="fa fa-edit"></i><span class="opt-desc">Edit Journal Entry</span></button>
 
@@ -119,6 +88,6 @@
             */
         ?>
     </div>
-    <script src="../main.js"></script>
+    <script src="../static/main.js"></script>
 </body>
 </html>

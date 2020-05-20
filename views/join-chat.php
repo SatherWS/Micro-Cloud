@@ -15,9 +15,11 @@
             <div class="review">
                 <h3 id='logs-title'>Available Chatrooms</h3>
             </div>
-            <div class="add-log">
-                <a href="../journal.html"><i class="fa fa-plus-circle"></i>
-                <span>Add Chatroom</span></a>
+            <div class="add-btn">
+                <a href="../journal.html">
+                    <span>Create Chatroom</span>
+                    <i class="fa fa-plus-circle"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -71,6 +73,6 @@
         window.location='./chat-details.php?room='+id;
     }
     </script>
-    <script src="../main.js"></script>
+    <script src="../static/main.js"></script>
 </body>
 </html>
