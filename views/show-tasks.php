@@ -31,11 +31,11 @@
         <div class="log-header">    
             <div class="review">
                 <?php
-                echo "<h3 id='logs-title'>Total Tasks: $total</h3>";
+                    echo "<h3 id='logs-title'>Total Tasks: $total</h3>";
                 ?>
             </div>
             <div class="add-log">
-                <form action="./show-tasks.php" method="POST">
+                <form method="POST">
                     <select name="s-status" id="myselect" onchange="this.form.submit()">
                         <option value="none" selected disabled hidden>Filter Tasks by Status</option>
                         <option value="SHOW ALL">SHOW ALL</option>

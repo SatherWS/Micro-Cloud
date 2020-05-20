@@ -11,19 +11,30 @@
 <body>
     <?php
         include("../views/components/header.php"); 
-        include_once '../config/database.php';
+        include_once ('../config/database.php');
         $database = new Database();
         $curs = $database->getConnection();
         $sql = "select id, topic, admin, date_created from polls order by date_created desc";
         $result = mysqli_query($curs, $sql);
     ?>
-
-
+    <div class="svg-bg rad-5">
+        <div class="polls-header">    
+            <div class="review">
+                <h3 id='polls-title'>Election History</h3>
+            </div>
+            <div class="add-btn">
+                <a href="./create-poll.php">
+                    <span class="opt-desc">Add Poll</span>
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="log-container">
-        <!-- Latest Poll Here -->
+        <!-- Latest Poll Here 
         <div class="feature-panel">
             <div>
-                <h2>Latest Poll: <?php echo "Poll Topic" ?></h2>
+                <h2>Latest Poll: </h2>
                 <h2>By:</h2>
                 <h2>Date:</h2>
             </div>
@@ -31,17 +42,8 @@
                 <input type="submit" value="Cast Vote">
             </div>
         </div>
-        <div class="svg-bg rad-5">
-            <div class="polls-header">    
-                <div class="review">
-                    <h3 id='polls-title'>Election History</h3>
-                </div>
-                <div class="add-btn">
-                    <a href="./create-poll.php"><i class="fa fa-plus-circle"></i>
-                    <span class="opt-desc">Add Poll</span></a>
-                </div>
-            </div>
-        </div>
+        -->
+        
         <form id="notes" action="./journal-details.php" method="post">
             <table class="data">
                 <tr class="tbl-head">

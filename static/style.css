@@ -75,6 +75,11 @@ textarea {
 /*-------------------------------------------------------*
 * JOURNAL SECTION                                        |
 *-------------------------------------------------------*/
+.cat-select {
+  margin-bottom: 18px;
+  border: none;
+}
+
 .sec-2 {
     text-align:center;
 }
@@ -456,22 +461,18 @@ ul {
 .todo-item {
     font-size: 14pt;
     width: 328px;
-    border: solid 1px;
 }
 
 input[type="date"] {
     font-size: 14pt;
-    border: solid 1px;
 }
 
 input[type="time"] {
     font-size: 14pt;
-    border: solid 1px;
 }
 
 select {
     font-size: 14pt;
-    border: solid 1px;
 }
 
 .rep-item {
@@ -654,10 +655,15 @@ tr:hover {background-color:#f5f5f5;}
   .feature-panel {
     margin: 1rem 0;
     padding: 1rem 2rem;
-    background-color: #f1f1f1;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
+    background-image: 
+    linear-gradient(
+      to bottom,
+      rgba(0, 199, 255, 0.68), rgba(0, 199, 255, 0.68)),
+      url(../imgs/test3.jpg);
+    background-position-y: -180px;
   }
   .feature-btns {
     text-align: right;

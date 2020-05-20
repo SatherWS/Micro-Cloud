@@ -21,7 +21,12 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h3 id='logs-title'>All Journals</h3>
+                <form method="POST" class="cat-select">
+                    <select name="s-status" id="myselect" onchange="this.form.submit()">
+                        <option value="none" selected disabled hidden>Filter Journals by Category</option>
+                        <option value="SHOW ALL">SHOW ALL</option>
+                    </select>
+                </form>
             </div>
             <div class="add-btn">
                 <a href="./create-journal.php">
