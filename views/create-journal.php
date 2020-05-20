@@ -14,12 +14,11 @@
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
             <div></div>
-
             <div class="todo-panel">
                 <h1>Journal Application</h1>
                 <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
                 <br><br>
-                <textarea rows="7" cols="55" placeholder="Text area for writting notes" name="note"></textarea>
+                <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>
     		        <div class="sec-2">
                     <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>

@@ -26,7 +26,7 @@
             $stmnt -> bind_param("sss", $subject, $msg, $rating);
             $stmnt -> execute();
         }
-        //header("Location: ../views/logs.php");
+        header("Location: ../views/logs.php");
     }
 
     // add task to todo list
