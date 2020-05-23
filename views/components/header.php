@@ -1,8 +1,8 @@
 <nav class="topnav index-nav parent-nav" id="myTopnav">
     <ul>
         <li>
-            <a href="../index.html" class="active">Micro Cloud</a>
-            <i class="fa fa-mixcloud"></i>
+            <a href="../index.html" class="active">Micro Server</a>
+            <i class="fa fa-wifi"></i>
         </li>
     </ul>
     <ul class="topnav-list">

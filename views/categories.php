@@ -19,11 +19,10 @@
 
         $database = new Database();
         $curs = $database->getConnection();
-        $sql = "select category from journal where category is not null";
+        $sql = "select distinct category from journal where category is not null";
         $result = mysqli_query($curs, $sql);
-        echo $_GET['id'];
     ?>
-    <form action="../controllers/add_entry.php" method="post">
+    <form method="post">
         <div class="cat-grid">
             <div>
                 <a href="#" id="myBtn">
@@ -41,6 +40,24 @@
             ?>
         </div>
     </form>
+    <?php
+        if ($_POST['category'] && $_GET['rating'] != null) {
+            $category = $_POST['category'];
+            $sql = "insert into journal(subject, message, rating, category) values (?, ?, ?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ssss", $_GET['subject'], $_GET['message'], $_GET['rating'], $category);
+            $stmnt -> execute();
+            header("Location: ../views/logs.php");
+        }
+        if ($_POST['category'] && $_GET['rating'] == null) {
+            $category = $_POST['category'];
+            $sql = "insert into journal(subject, message, category) values (?, ?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("sss", $_GET['subject'], $_GET['message'], $category);
+            $stmnt -> execute();
+            header("Location: ../views/logs.php");
+        }
+    ?>
     <script src="../static/modal.js"></script>
     <script src="../static/main.js"></script>
 </body>

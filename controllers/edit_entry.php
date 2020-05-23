@@ -7,10 +7,6 @@
         die("Connection failed: " . $curs->connect_error);
     }
     
-    if ($_POST["category"]) {
-        $sql = "";
-    }
-    
     if ($_POST['edit']) {
         $sql = "update journal set message = ? where id = ?";
         mysqli_query($curs, $sql);
