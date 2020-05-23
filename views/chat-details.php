@@ -27,8 +27,12 @@
 			<div>
 				<h3 id="logs-title">Chatroom</h3>
 			</div>
-			<div>
-				<a href="./join-chat.php">Exit Room</a>
+			<div class="add-btn">
+				
+				<a href="./join-chat.php">
+					<i class="fa fa-arrow-circle-left"></i>
+					Exit Room
+				</a>
 			</div>
 		</div>
 	</div>

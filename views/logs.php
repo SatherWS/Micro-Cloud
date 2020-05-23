@@ -11,7 +11,7 @@
 <body>
     <?php
         include("./components/header.php"); 
-        include_once ('../config/database.php');
+        include_once ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
         $sql = "select id, subject, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";

@@ -426,7 +426,7 @@ ul {
   
   @media screen and (max-width: 600px) {
     .sup-text {
-      display: none;
+      font-size: 16pt;
     }
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
@@ -549,6 +549,29 @@ button {
 
 .message-p {
   font-size: 14pt;
+}
+/* Categories Section *************************/
+.cat-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  margin: 2rem 3rem;
+  text-align: center;
+}
+
+.cat-grid div {
+  padding: 1rem;
+  text-align: center;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.cat-grid div button {
+  font-size: 25px;
 }
 /* Todo & Journal Icons ***********************/
 .fa-save:before {
@@ -705,12 +728,12 @@ tr:hover {background-color:#f5f5f5;}
     .dash-title {
       padding: 1rem .5rem;
     }
-    .todo-panel {
-      width: 400px;
-    }
-    textarea {
-      width: 365px;
-    }
+
+    .todo-panel { width: 400px; }
+    
+    textarea { width: 365px; }
+
+    .slider { width:375px; }
     #form-control {
       width: 365px;
     }

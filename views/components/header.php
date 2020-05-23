@@ -16,6 +16,7 @@
             <a href="javascript:void(0)" class="dropbtn">Journal App</a>
             <div class="dropdown-content">
                 <a href="./create-journal.php">Create Entry</a>
+                <a href="./categories.php">Categories</a>
                 <a href="./logs.php">Manage Entries</a>
             </div>
         </li>
@@ -33,11 +34,16 @@
                 <a href="./polls.php">All Topics</a>
             </div>
         </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Settings</a>
+            <div class="dropdown-content">
+                <a href="#">Docs</a>
+                <a href="#">Security</a>
+            </div>
+        </li>
         <li>
             <a href="./stats.php">Analytics</a>
         </li>
-        <li><a href="#">Donate</a></li>
-        <li><a href="#">GitHub</a></li>
         <a href="javascript:void(0);" class="icon" onclick="navToggle()">
             <i class="fa fa-bars"></i>
         </a>

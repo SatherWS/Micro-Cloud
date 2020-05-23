@@ -6,11 +6,14 @@
     if ($curs->connect_error) {
         die("Connection failed: " . $curs->connect_error);
     }
-
-    $sql = "update journal set message = ? where id = ?";
-    mysqli_query($curs, $sql);
+    
+    if ($_POST["category"]) {
+        $sql = "";
+    }
     
     if ($_POST['edit']) {
+        $sql = "update journal set message = ? where id = ?";
+        mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
         $journal_edit = $_POST['edited'];
         $stmnt -> bind_param("ss", $journal_edit, $_POST['edit']);

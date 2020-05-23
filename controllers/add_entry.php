@@ -9,28 +9,45 @@
     }
 
     // create journal entry
-    if ($_POST['add-journal']) {
+    if ($_POST['add-journal'] || $_POST['category']) {
         $rating = $_POST["rating"];
         $subject = $_POST["jsubject"];
         $msg = nl2br($_POST["note"]);
 
-        if ($_POST['omit']) {
-            $sql = "insert into journal(subject, message) values (?, ?)";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("ss", $subject, $msg);
-            $stmnt -> execute();
+        header("Location: ../views/categories.php");
+
+        if ($_POST['category']) {
+            $category = $_POST['category'];
+
+            if ($_POST['omit']) {
+                $sql = "insert into journal(subject, message, category) values (?, ?, ?)";
+                $stmnt = mysqli_prepare($curs, $sql);
+                $stmnt -> bind_param("sss", $subject, $msg, $category);
+                $stmnt -> execute();
+            }
+            else {
+                $sql = "insert into journal(subject, message, rating, category) values (?, ?, ?, ?)";
+                $stmnt = mysqli_prepare($curs, $sql);
+                $stmnt -> bind_param("ssss", $subject, $msg, $rating, $category);
+                $stmnt -> execute();
+            }
+            header("Location: ../views/logs.php");
         }
-        else {
-            $sql = "insert into journal(subject, message, rating) values (?, ?, ?)";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("sss", $subject, $msg, $rating);
-            $stmnt -> execute();
-        }
+    }
+
+    /*
+    if ($_POST['add-category']) {
+        $sql = "update journal set category = ? where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("ss", $_GET['id'], $_POST['category']);
+        $stmnt -> execute();
         header("Location: ../views/logs.php");
     }
+    */
 
     // add task to todo list
     if ($_POST['add-task']) {
+        echo $_POST['add-task'];
         $sql = "insert into todolist(description, deadline, importance, time_due) values (?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $subject = $_POST["subs"]; 

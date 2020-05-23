@@ -84,7 +84,7 @@
     </div>
     <script>
     function myFunction(id) {
-        window.location='./journal-details.php?journal='+id;
+        window.location='./poll-details.php?poll='+id;
     }
     </script>
     <script src="../static/main.js"></script>

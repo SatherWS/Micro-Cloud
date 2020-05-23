@@ -35,8 +35,10 @@
         
         $dataPoints = array();
         while($row = mysqli_fetch_assoc($result)) {
-            $data = array("y" => $row["rating"], "label" => $row["dr"]);
-            array_push($dataPoints, $data);
+            if ($row["rating"] != null) {
+                $data = array("y" => $row["rating"], "label" => $row["dr"]);
+                array_push($dataPoints, $data);
+            }
         }
 
         $taskPoints = array();

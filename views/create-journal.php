@@ -30,9 +30,6 @@
                           <span class="checkmark"></span>
                           Omit Mood Rating
                         </label>
-                        <!-- Use in Music App Possibly
-                          <p class="attach"><a href="#" id="myBtn">Add Attachment</a></p>
-                        -->
                         </div>
                     </div>
                 </div>
@@ -40,52 +37,8 @@
             </div>
             <div></div>
         </div>
-
-        <!-- Modal Use in Music App Possibly -->
-        <div id="myModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-              <span class="close">&times;</span>
-              <p>Either provide a url to an image or upload a file directly</p>
-              <input type="file" name="" id="">
-              <input type="text" placeholder="Enter URL Here" id="form-control" class="spc-n">
-              <br><br>
-              <span class="other-close attach">Add Attachment</span>
-          </div>
-        </div>
     </form>
-    <script>
-        // Get the modal, open and close buttons
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("myBtn");
-        var span = document.getElementsByClassName("close")[0];
-        var end = document.getElementsByClassName("other-close")[0];
-        
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        
-        // Close when the user clicks add attachment button
-        end.onclick = function() {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        
-    </script>
+    
     <script src="../static/main.js"></script>
     <script>
         // range slider display
