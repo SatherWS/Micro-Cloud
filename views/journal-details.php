@@ -41,12 +41,10 @@
             $stmnt -> execute();
             header("Location: ./logs.php");
         }
+        
     ?>
     <div class="svg-bg">
-        <div class="log-header">    
-            <div class="review">
-                <h3 id="logs-title">Journal ID #<?php echo $_GET['journal']; ?></h3>
-            </div>
+        <div class="log-header">
             <div class="add-log">
                 <form action="./journal-details.php" method="post">
                     <button type="submit" name="edit" value="<?php echo $_GET['journal']; ?>">
@@ -55,39 +53,59 @@
                     <button type='submit' name='delete' value="<?php echo $_GET['journal']; ?>">
                     <i class='fa fa-close'></i><span class="opt-desc">Delete Journal Entry</span></button>
                 </form>
+            </div>    
+            <div class="review">
+                <h3 id="logs-title">
+                <?php
+                    $sql2 = "select * from journal where id = ".$_GET['journal'];
+                    if ($_POST['edit'])
+                        $sql2 = "select * from journal where id = ".$_POST['edit'];
+                    $results2 = mysqli_query($curs, $sql2);
+                    if (mysqli_num_rows($results2) > 0) {
+                        while ($row = mysqli_fetch_assoc($results2)) {
+                            echo "Subject: ".$row["subject"];
+                        }
+                    }
+                ?>
+                </h3>
             </div>
         </div>
     </div>
-    <div class="log-container log-details">
-        <form action="../controllers/edit_entry.php" method="post">
-            <?php
-                if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
-                    while($row = mysqli_fetch_assoc($results)) {
-                        echo "<h2>Subject: ".$row['subject']."</h2>";
-                        echo "<h3>".$row['date_created']."</h3>";
-                        echo "<p>Mood Rating: ".$row['rating']."</p>";
-                        echo "<p class='message-p'>".$row['message']."</p>";
-                    }
-                }
-                if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
-                    while($row = mysqli_fetch_assoc($results)) {
-                        echo "<h3>Editing: ".$row['subject']."</h3>";
-                        echo "<textarea name='edited' cols='100' rows='14'>".$row['message']."</textarea>";
-                        echo "<br><button type='submit' name='edit' value='".$row['id']."'>Save Changes</button>";
-                        echo "<a href='./logs.php'>Cancel</a>";    
-                    }
-                }
-            ?>
-        </form>
+    <form action="../controllers/edit_entry.php" method="post">
         <?php
-            // Better way to store images
-            /*
-            $image = 'http://www.google.com/doodle4google/images/d4g_logo_global.jpg';
-            $imageData = base64_encode(file_get_contents($image));
-            echo '<img src="data:image/jpeg;base64,'.$imageData.'">';
-            */
+            if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
+                while($row = mysqli_fetch_assoc($results)) {
+                    echo "<div class='detail-topper'>";
+                    echo "<h4>".$row['date_created']."</h4>";
+                    if ($row['rating'] == null)
+                        echo "<h4>Mood Rating: N/A</h4>";
+                    else
+                        echo "<h4>Mood Rating: ".$row['rating']."</h4>";
+                    echo "</div>";
+                    echo "<div class='log-container log-details'>";
+                    echo "<p class='message-p'>".$row['message']."</p>";
+                    echo "</div>";
+                }
+            }
+            if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
+                while($row = mysqli_fetch_assoc($results)) {
+                    echo "<div class='log-container log-details editor'>";
+                    echo "<textarea name='edited' cols='100' rows='14'>".$row['message']."</textarea>";
+                    echo "<br><button type='submit' name='edit' value='".$row['id']."'>Save Changes</button>";
+                    echo "<a href='./logs.php'>Cancel</a>"; 
+                    echo "</div>";
+                }
+            }
         ?>
-    </div>
+    </form>
+    <?php
+        // Better way to store images
+        /*
+        $image = 'http://www.google.com/doodle4google/images/d4g_logo_global.jpg';
+        $imageData = base64_encode(file_get_contents($image));
+        echo '<img src="data:image/jpeg;base64,'.$imageData.'">';
+        */
+    ?>
     <script src="../static/main.js"></script>
 </body>
 </html>

@@ -13,14 +13,14 @@
 -->
 
 <!-- Modal for Categories Section -->
-<form action="" method="post">
+<form method="post">
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add New Category</h2>
-            <input type="text" placeholder="Enter a Name for the New Category" id="form-control" class="spc-n">
+            <input type="text" name="category" placeholder="Enter a Name for the New Category" id="form-control" class="spc-n">
             <br><br><br>
-            <span type="submit" name="add-category" class="other-close attach">Create Category</span>
+            <button type="submit" name="add-category" class="other-close attach">Create Category</button>
         </div>
     </div>
 </form>

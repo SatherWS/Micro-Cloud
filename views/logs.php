@@ -14,25 +14,28 @@
         include_once ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
-        $sql = "select id, subject, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
+        $sql = "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
         $result = mysqli_query($curs, $sql);
+
+        // select by category
+        /*
+        $sql2 = "select distinct category from journal";
+        $result2 = mysqli_query($curs, $sql2);
+        */
     ?>
 
     <div class="svg-bg">
         <div class="log-header">    
-            <div class="review">
-                <form method="POST" class="cat-select">
-                    <select name="s-status" id="myselect" onchange="this.form.submit()">
-                        <option value="none" selected disabled hidden>Filter Journals by Category</option>
-                        <option value="SHOW ALL">SHOW ALL</option>
-                    </select>
-                </form>
-            </div>
             <div class="add-btn">
-                <a href="./create-journal.php">
-                    <span class="opt-desc">Add Entry</span>
-                    <i class="fa fa-plus-circle"></i>
-                </a>
+                <h3 id="logs-title">
+                    <a href="./create-journal.php">
+                        <span class="opt-desc">Add Entry</span>
+                        <i class="fa fa-plus-circle"></i>
+                    </a>
+                </h3>
+            </div>
+            <div class="review">
+                <h3>Total Journals</h3>
             </div>
         </div>
     </div>
@@ -43,16 +46,22 @@
                     <th>ID</th>
                     <th>SUBJECT</th>
                     <th>PREVIEW</th>
+                    <th>CATEGORY</th>
                     <th>MOOD RATING</th>
                     <th>DATE & TIME CREATED</th>
                 </tr>
                 <?php
+                    $filter = $_GET["category"];
+                    if ($filter) {
+                        $result = mysqli_query($curs, "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal where category = '$filter' order by date_created");
+                    }
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                            $id = $row["id"];
+                            $id = $row['id'];
                             echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
                             echo "<td>". $row["subject"]. "</td>";
                             echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
+                            echo "<td>". $row["category"]. "</td>";
                             echo "<td>". $row["rating"]. "</td>";
                             echo "<td>". $row["date_created"] ."</td></tr>";
                         }

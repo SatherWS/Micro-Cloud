@@ -31,12 +31,24 @@
                     </i>
                 </a>
             </div>
+            
             <?php
+                // if we're adding an entry/category create submit button, else link to journals
                 if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
-                        echo "<div><button type='submit' name='category' value='".$row["category"]."'>".$row["category"]."</button></div>";
+                        if ($_GET['subject']) {
+                            echo "<div>";
+                            echo "<button type='submit' name='category' value='".$row["category"]."'>".$row["category"]."</button>";
+                            echo "</div>";
+                        }
+                        else {
+                            echo "<div>";
+                            echo "<a href='./logs.php?category=".$row["category"]."'>".$row["category"]."</a>";
+                            echo "</div>";
+                        }
                     }
                 }
+                
             ?>
         </div>
     </form>

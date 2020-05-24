@@ -28,16 +28,11 @@
         
     ?>
     <div class="svg-bg2">
-        <div class="log-header">    
-            <div class="review">
-                <?php
-                    echo "<h3 id='logs-title'>Total Tasks: $total</h3>";
-                ?>
-            </div>
-            <div class="add-log">
+        <div class="log-header">
+            <div>
                 <form method="POST">
-                    <select name="s-status" id="myselect" onchange="this.form.submit()">
-                        <option value="none" selected disabled hidden>Filter Tasks by Status</option>
+                    <select  class="selector" name="s-status" id="myselect" onchange="this.form.submit()">
+                        <option value="none" selected disabled hidden>Filter by Status</option>
                         <option value="SHOW ALL">SHOW ALL</option>
                         <option value="NOT STARTED">NOT STARTED</option>
                         <option value="IN PROGRESS">IN PROGRESS</option>
@@ -45,7 +40,13 @@
                         <option value="COMPLETED">COMPLETED</option>
                     </select>
                 </form>
+            </div>    
+            <div class="review">
+                <?php
+                    echo "<h3 id='logs-title'>Total Tasks: $total</h3>";
+                ?>
             </div>
+            
         </div>
     </div>
     <div class="log-container">
