@@ -10,7 +10,7 @@
             <a href="./join-chat.php">Chatrooms</a>
         </li>
         <li>
-            <a href="#">Music App</a>
+            <a href="./upload-data.php">Data Storage</a>
         </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">Journal App</a>
@@ -21,7 +21,7 @@
             </div>
         </li>
         <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Todo List</a>
+            <a href="javascript:void(0)" class="dropbtn">Task List</a>
             <div class="dropdown-content">
                 <a href="./create-task.php">Add Task</a>
                 <a href="./show-tasks.php">Manage Tasks</a>

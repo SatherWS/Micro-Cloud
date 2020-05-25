@@ -16,9 +16,10 @@
         $database = new Database();
         $curs = $database->getConnection();
         $result = mysqli_query($curs, "select * from todolist where status = 'IN PROGRESS' or status = 'NOT STARTED' order by deadline");
-        $filter = $_POST['s-status'];
+        $filter = "Pending";
         
-        if ($filter) {
+        if ($_POST['s-status']) {
+            $filter = $_POST['s-status'];
             $result = mysqli_query($curs, "select * from todolist where status = '$filter' order by deadline desc");
             if ($filter == 'SHOW ALL') {
                 $result = mysqli_query($curs, "select * from todolist order by deadline desc");
@@ -43,7 +44,7 @@
             </div>    
             <div class="review">
                 <?php
-                    echo "<h3 id='logs-title'>Total Tasks: $total</h3>";
+                    echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
                 ?>
             </div>
             

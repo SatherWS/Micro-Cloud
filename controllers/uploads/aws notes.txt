@@ -1,0 +1,23 @@
+AWS Server Notes
+
+database-2
+mysql: admin
+password: P3rsonaFiv3
+
+shell command
+mysql -h database-2.co8emtfir2nv.us-east-2.rds.amazonaws.com -P 3306 -u admin -p
+
+ssh command to ubuntu server
+ssh -i ~/documents/alice.pem ubuntu@ec2-3-15-204-162.us-east-2.compute.amazonaws.com
+
+edit apache config and wsgi file
+sudo nano /etc/apache2/sites-enabled/Assurance_Wireless.conf
+
+reset apache config (better method is first)
+sudo service apache2 restart
+sudo /etc/init.d/apache2 reload
+
+view error log
+cat /var/log/apache2/error.log
+
+

@@ -20,9 +20,10 @@
                     <input type="text" name="subs" 
                     placeholder="Type Task Description" class="todo-item spc-n" required>
                     <br><br>
-                    <label>Deadline</label><br>
-                    <input type="date" name="end-date" class="spc-n" required>
-                    <input type="time" name="time-due" class="spc-n" required>
+                    <label>Date Due</label><br>
+                    <input type="date" name="end-date" class="todo-item spc-n" required><br><br>
+                    <label>Time Due</label><br>
+                    <input type="time" name="time-due" class="todo-item spc-n" required>
                     <br><br>
                     <label>Additional Options</label><br>
                     <select name="importance" class="spc-n" required>

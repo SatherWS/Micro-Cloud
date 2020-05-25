@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs</title>
+    <title>Universal Uploader</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -14,23 +14,24 @@
         include_once ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
+        /*
         $sql = "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
         $result = mysqli_query($curs, $sql);
         $total = mysqli_num_rows($result);
+        */
     ?>
 
     <div class="svg-bg">
         <div class="log-header">    
             <div class="add-btn">
-                <h3 id="logs-title">
-                    <a href="./create-journal.php">
-                        <span class="opt-desc">Add Entry</span>
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </h3>
+                <form action="../controllers/upload.php" method="post" enctype="multipart/form-data">
+                    <input type="file" webkitdirectory="" mozdirectory="" multiple="" name="files[]" id="files">
+                    <br>
+                    <input type="submit" value="Upload File">
+                </form>
             </div>
             <div class="review">
-                <h3><?php echo $total; ?> Total Journals</h3>
+                <h3>Upload File or Folder <i class="fa fa-upload"></i></h3>
             </div>
         </div>
     </div>
@@ -39,13 +40,14 @@
             <table class="data">
                 <tr class="tbl-head">
                     <th>ID</th>
-                    <th>SUBJECT</th>
-                    <th>PREVIEW</th>
-                    <th>CATEGORY</th>
-                    <th>MOOD RATING</th>
-                    <th>DATE & TIME CREATED</th>
+                    <th>NAME</th>
+                    <th>SIZE</th>
+                    <th>LOCATION</th>
+                    <th>SOURCE IP</th>
+                    <th>DATE & TIME UPLOADED</th>
                 </tr>
                 <?php
+                /*
                     $filter = $_GET["category"];
                     if ($filter) {
                         $result = mysqli_query($curs, "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal where category = '$filter' order by date_created desc");
@@ -65,6 +67,7 @@
                         echo "<p>0 results</p>";
                     }
                     $curs -> close();
+                */
                 ?>
             </table>
         </form>

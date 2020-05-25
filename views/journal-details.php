@@ -63,7 +63,7 @@
                     $results2 = mysqli_query($curs, $sql2);
                     if (mysqli_num_rows($results2) > 0) {
                         while ($row = mysqli_fetch_assoc($results2)) {
-                            echo "Subject: ".$row["subject"];
+                            echo $row["subject"];
                         }
                     }
                 ?>
