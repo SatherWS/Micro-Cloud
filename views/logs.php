@@ -42,7 +42,7 @@
                     <th>SUBJECT</th>
                     <th>PREVIEW</th>
                     <th>CATEGORY</th>
-                    <th>MOOD RATING</th>
+                    <th style="text-align:center">MOOD RATING</th>
                     <th>DATE & TIME CREATED</th>
                 </tr>
                 <?php
@@ -57,7 +57,7 @@
                             echo "<td>". $row["subject"]. "</td>";
                             echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                             echo "<td>". $row["category"]. "</td>";
-                            echo "<td>". $row["rating"]. "</td>";
+                            echo "<td style='text-align:center'>". $row["rating"]. "</td>";
                             echo "<td>". $row["date_created"] ."</td></tr>";
                         }
                     } 

@@ -270,7 +270,7 @@ main {
   url('../imgs/background.jpg');
   */
 }
-.grid-container div{
+.grid-container div:nth-child(1){
   background-image: 
   linear-gradient(
     to bottom,
@@ -283,10 +283,10 @@ main {
   background-image:
     linear-gradient(
       to bottom,
-      rgba(82,235,100, 0.863), rgba(82,235,100, 0.863)),
-      url(../imgs/music.jpg);
+      rgba(138, 224, 242, 0.68), rgba(138, 224, 242, 0.68)),
+      url(../imgs/database.jpg);
+  background-size: cover;
   background-position-y: -90px;
-  background-position-x: 50px;
 }
 
 .grid-container div:nth-child(3){

@@ -7,17 +7,14 @@
     </ul>
     <ul class="topnav-list">
         <li>
-            <a href="./join-chat.php">Chatrooms</a>
-        </li>
-        <li>
-            <a href="./upload-data.php">Data Storage</a>
+            <a href="./uploaded-data.php">Data Storage</a>
         </li>
         <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Journal App</a>
+            <a href="javascript:void(0)" class="dropbtn">Note Station</a>
             <div class="dropdown-content">
-                <a href="./create-journal.php">Create Entry</a>
+                <a href="./create-journal.php">Create Note</a>
                 <a href="./categories.php">Categories</a>
-                <a href="./logs.php">Manage Entries</a>
+                <a href="./logs.php">Manage Notes</a>
             </div>
         </li>
         <li class="dropdown">
@@ -43,6 +40,9 @@
         </li>
         <li>
             <a href="./stats.php">Analytics</a>
+        </li>
+        <li>
+            <a href="./join-chat.php">Chatrooms</a>
         </li>
         <a href="javascript:void(0);" class="icon" onclick="navToggle()">
             <i class="fa fa-bars"></i>

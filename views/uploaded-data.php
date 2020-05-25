@@ -11,6 +11,8 @@
 <body>
     <?php
         include("./components/header.php"); 
+        //include("./components/upload-modal.php"); 
+        include("./components/modal.php"); 
         include_once ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
@@ -24,13 +26,10 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="add-btn">
-                <form action="../controllers/upload.php" method="post" enctype="multipart/form-data">
-                    <input type="file" webkitdirectory="" mozdirectory="" multiple="" name="files[]" id="files">
-                    <br>
-                    <input type="submit" value="Upload File">
-                </form>
+                <a href="#" id="myBtn">Upload Data <i class="fa fa-upload"></i></a>
             </div>
             <div class="review">
+                <?php echo $_SERVER['REMOTE_ADDR']; ?>
                 <h3>Upload File or Folder <i class="fa fa-upload"></i></h3>
             </div>
         </div>
@@ -78,5 +77,6 @@
     }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>
