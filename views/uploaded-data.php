@@ -29,8 +29,8 @@
                 <a href="#" id="myBtn">Upload Data <i class="fa fa-upload"></i></a>
             </div>
             <div class="review">
-                <?php echo $_SERVER['REMOTE_ADDR']; ?>
-                <h3>Upload File or Folder <i class="fa fa-upload"></i></h3>
+                
+                <h3>Current User: <?php echo getenv("username");?></h3>
             </div>
         </div>
     </div>
