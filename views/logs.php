@@ -20,7 +20,10 @@
     ?>
 
     <div class="svg-bg">
-        <div class="log-header">    
+        <div class="log-header">
+            <div class="review">
+                <h3><?php echo $total; ?> Total Journals</h3>
+            </div>    
             <div class="add-btn">
                 <h3 id="logs-title">
                     <a href="./create-journal.php">
@@ -29,9 +32,7 @@
                     </a>
                 </h3>
             </div>
-            <div class="review">
-                <h3><?php echo $total; ?> Total Journals</h3>
-            </div>
+
         </div>
     </div>
     <div class="log-container">

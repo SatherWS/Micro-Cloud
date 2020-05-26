@@ -58,12 +58,13 @@
                 <h3 id="logs-title">
                 <?php
                     $sql2 = "select * from journal where id = ".$_GET['journal'];
-                    if ($_POST['edit'])
+                    if ($_POST['edit']) {
                         $sql2 = "select * from journal where id = ".$_POST['edit'];
+                    }
                     $results2 = mysqli_query($curs, $sql2);
                     if (mysqli_num_rows($results2) > 0) {
                         while ($row = mysqli_fetch_assoc($results2)) {
-                            echo $row["subject"];
+                            echo "Category: ".$row["category"];
                         }
                     }
                 ?>
@@ -76,7 +77,8 @@
             if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='detail-topper'>";
-                    echo "<h4>".$row['date_created']."</h4>";
+                    echo "<div><h3 class='padb'>".$row['subject']."</h3>";
+                    echo "<small>".$row['date_created']."</small></div>";
                     if ($row['rating'] == null)
                         echo "<h4>Mood Rating: N/A</h4>";
                     else

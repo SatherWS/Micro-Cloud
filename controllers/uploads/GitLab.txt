@@ -1,4 +1,0 @@
-Open SSL
-
-server.key -- braille
-challenge key -- P3rsonaFiv3

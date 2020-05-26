@@ -25,12 +25,11 @@
 
     <div class="svg-bg">
         <div class="log-header">    
+            <div class="review">
+                <h3>Current User: <?php echo getenv("username");?></h3>
+            </div>
             <div class="add-btn">
                 <a href="#" id="myBtn">Upload Data <i class="fa fa-upload"></i></a>
-            </div>
-            <div class="review">
-                
-                <h3>Current User: <?php echo getenv("username");?></h3>
             </div>
         </div>
     </div>
