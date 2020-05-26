@@ -20,20 +20,20 @@
                 <br><br>
                 <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>
-    		        <div class="sec-2">
-                        <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
-                        <div class="j-box">
-                            <div>
-                                <label class="container">
-                                    <input type="checkbox" name="omit">
-                                    <span class="checkmark"></span>
-                                    Omit Mood Rating
-                                </label>
-                            </div>
-                            <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
+                <div class="sec-2">
+                    <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
+                    <div class="j-box">
+                        <div>
+                            <label class="container">
+                                <input type="checkbox" name="omit">
+                                <span class="checkmark"></span>
+                                Omit Mood Rating
+                            </label>
                         </div>
-                        <br>
-                        <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
+                        <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
+                    </div>
+                    <br>
+                    <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
                 </div>
             </div>
             <div></div>
