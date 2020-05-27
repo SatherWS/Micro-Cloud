@@ -31,18 +31,14 @@
                 <a href="./polls.php">All Topics</a>
             </div>
         </li>
-        <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Settings</a>
-            <div class="dropdown-content">
-                <a href="#">Docs</a>
-                <a href="#">Security</a>
-            </div>
-        </li>
         <li>
             <a href="./stats.php">Analytics</a>
         </li>
         <li>
             <a href="./join-chat.php">Chatrooms</a>
+        </li>
+        <li>
+            <a href="#">Security</a>
         </li>
         <a href="javascript:void(0);" class="icon" onclick="navToggle()">
             <i class="fa fa-bars"></i>

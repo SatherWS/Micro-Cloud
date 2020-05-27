@@ -65,17 +65,18 @@
         header("location: ../views/polls.php");
     }
 
+    /*
     // cast vote to selected poll
     if ( $_POST["ballot"]) {
-        $vote = mysqli_real_escape_string($curs,$_POST['ballot']);
-        $sql_add = "INSERT INTO votes(vote) VALUES('$vote')";
-        $insert = $mysqli->query($sql_add);
+        $sql = "INSERT INTO votes(topic_id, vote, username) VALUES(?, ?, ?)";
+        $stmnt = $mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("sss", $_GET["topic"],)
         if ( $insert ) {
             echo "Success! Row ID: {$db->insert_id}";
             header("location: ../views/polls.php");
         } 
     }
-
+    */
     // chatroom if statement here
 
     $curs -> close();

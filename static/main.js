@@ -18,9 +18,11 @@ function navToggle() {
  }
 
 // hide journal form after submit
+/*
 function hideForm() {
-  document.getElementById('post-journal').style.display = 'none';
+  document.getElementById('vote-caster').style.display = 'none';
 }
+*/
 /*
 // journal app - error does not allow clicking other options
 $("#notes").on('click','tr',function(e){

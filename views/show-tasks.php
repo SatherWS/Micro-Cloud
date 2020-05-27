@@ -26,10 +26,14 @@
             }
         }
         $total = mysqli_num_rows($result)
-        
     ?>
     <div class="svg-bg2">
         <div class="log-header">
+            <div class="review">
+                <?php
+                    echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
+                ?>
+            </div>
             <div>
                 <form method="POST">
                     <select  class="selector" name="s-status" id="myselect" onchange="this.form.submit()">
@@ -41,13 +45,7 @@
                         <option value="COMPLETED">COMPLETED</option>
                     </select>
                 </form>
-            </div>    
-            <div class="review">
-                <?php
-                    echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
-                ?>
-            </div>
-            
+            </div>  
         </div>
     </div>
     <div class="log-container">
