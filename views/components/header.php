@@ -7,7 +7,10 @@
     </ul>
     <ul class="topnav-list">
         <li>
-            <a href="./uploaded-data.php">Data Storage</a>
+            <a href="./data-storage.php">Data Storage</a>
+        </li>
+        <li>
+            <a href="./join-chat.php">Chatrooms</a>
         </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">Note Station</a>
@@ -33,9 +36,6 @@
         </li>
         <li>
             <a href="./stats.php">Analytics</a>
-        </li>
-        <li>
-            <a href="./join-chat.php">Chatrooms</a>
         </li>
         <li>
             <a href="#">Security</a>

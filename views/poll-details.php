@@ -30,29 +30,32 @@
             $stmnt -> bind_param("sss", $_GET["poll"], $_POST["ballot"], $_POST["usr"]);
             $stmnt -> execute();
         }
+
+        function hasVoted($curs, $voted) {
+            $sql = "select id from votes where username = ? and topic_id = ?";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ss", $voted, $_GET["poll"]);
+            $stmnt -> execute();
+            $results = $stmnt -> get_result();
+            if (mysqli_num_rows($results) > 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     ?>
     <div class="svg-bg">
         <form method="post" id="vote-caster">
             <div class="log-header">
-                <div>
-                    <?php
-                        if ($row["admin"] == getenv("username")) {
-                            echo "<h3> You are the admin.</h3>";
-                            echo "<input type='hidden' value='".getenv('username')."' name='usr' class='form-control' placeholder='Enter Your Name'>";
-                        }
-                        else {
-                            echo "<label>Username:</label>";
-                            echo "<input type='text' value='".getenv('username')."' name='usr' class='form-control' placeholder='Enter Your Name'>";
-                        }
-                    ?>
-                </div>
-                <div>
-                    <label>Cast Your Vote Here:</label>
-                    <br>
-                    <button type="submit" name="ballot" value="yes" class="vote-btn">Yes</button>
-                    <button type="submit" name="ballot" value="no" class="vote-btn">No</button>
-                    <button type="submit" name="ballot" value="maybe" class="vote-btn">Maybe</button>
-                </div>
+                <?php
+                    if (hasVoted($curs, getenv("username"))) {
+                        include("./components/poll-headers/not-voted.php");
+                    }
+                    else {
+                        include("./components/poll-headers/voted.php");
+                    }
+                ?>
             </div>
         </form>
     </div>
@@ -63,7 +66,6 @@
             <canvas style="position: relative; width: 600px; height: 460px;" id="myChart"></canvas>
         </div>
     </div>
-
     <?php
         // data for bar graph visual
         $sql2 = "select vote, count(*) as counts from votes where topic_id = ? group by vote";
@@ -87,13 +89,6 @@
             }
         }
     ?>
-    <script>
-    $(document).ready(function() {
-        $("#vote-caster").submit(function(e) {
-            $("#vote-caster").hide();
-        });
-    });
-    </script>
     <!--Graph Script-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
@@ -115,7 +110,6 @@
                     borderColor: '#fff'
                 }]
             },
-            
             // Configuration options go here
             options: {
                 maintainAspectRatio:false

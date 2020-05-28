@@ -24,17 +24,11 @@
     ?>
     <form method="post">
         <div class="cat-grid">
-            <div>
-                <a href="#" id="myBtn">
-                    <i class="fa fa-plus">
-                        Add Category
-                    </i>
-                </a>
-            </div>
-            
             <?php
                 // if we're adding an entry/category create submit button, else link to journals
                 if (mysqli_num_rows($result) > 0) {
+                    if ($_GET['subject'])
+                        echo "<div><a href='#' id='myBtn'><i class='fa fa-plus'>Add Category</i></a></div>";
                     while($row = mysqli_fetch_assoc($result)) {
                         if ($_GET['subject']) {
                             echo "<div>";
@@ -48,7 +42,6 @@
                         }
                     }
                 }
-                
             ?>
         </div>
     </form>

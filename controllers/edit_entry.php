@@ -15,7 +15,6 @@
         $stmnt -> bind_param("ss", $journal_edit, $_POST['edit']);
         $stmnt -> execute();
         header("Location: ../views/journal-details.php?journal=".$_POST['edit']);
-        echo $_POST['edit'];
     }
          
     if ($_POST['delete']) {

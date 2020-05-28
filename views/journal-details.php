@@ -11,9 +11,13 @@
 <body>
     <?php 
         include("./components/header.php");
+        include("./components/note-headers/forms.php");
         include_once ('../config/database.php');
         $database = new Database();
         $curs = $database->getConnection();
+
+        $form = new FormGenerator();
+        $show_editor = true;
 
         if ($_GET['journal']) {
             $id = $_GET['journal'];
@@ -22,6 +26,7 @@
             $stmnt -> bind_param("s", $id);
             $stmnt -> execute();
             $results = $stmnt -> get_result();
+            $show_editor = false;
         }
 
         if ($_POST['edit']) {
@@ -41,19 +46,9 @@
             $stmnt -> execute();
             header("Location: ./logs.php");
         }
-        
     ?>
     <div class="svg-bg">
         <div class="log-header">
-            <div class="add-log">
-                <form action="./journal-details.php" method="post">
-                    <button type="submit" name="edit" value="<?php echo $_GET['journal']; ?>">
-                    <i class="fa fa-edit"></i><span class="opt-desc">Edit Journal Entry</span></button>
-
-                    <button type='submit' name='delete' value="<?php echo $_GET['journal']; ?>">
-                    <i class='fa fa-close'></i><span class="opt-desc">Delete Journal Entry</span></button>
-                </form>
-            </div>    
             <div class="review">
                 <h3 id="logs-title">
                 <?php
@@ -70,10 +65,21 @@
                 ?>
                 </h3>
             </div>
+            <div class="add-log">
+                <?php
+                    if ($show_editor) {
+                        $form -> showEditor($_GET["journal"]);                        
+                    }
+                    else {
+                        $form -> showDefault($_GET["journal"]);
+                    }
+                ?>
+            </div>    
         </div>
     </div>
-    <form action="../controllers/edit_entry.php" method="post">
+    <form action="../controllers/edit_entry.php" method="post" id="editor">
         <?php
+        // display journal entry in plain text or inside a textarea
             if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='detail-topper'>";
@@ -89,25 +95,25 @@
                     echo "</div>";
                 }
             }
+
             if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='log-container log-details editor'>";
                     echo "<textarea name='edited' cols='100' rows='14'>".$row['message']."</textarea>";
+                    echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
+                    /*
                     echo "<br><button type='submit' name='edit' value='".$row['id']."'>Save Changes</button>";
                     echo "<a href='./logs.php'>Cancel</a>"; 
-                    echo "</div>";
+                    */
                 }
             }
         ?>
     </form>
-    <?php
-        // Better way to store images
-        /*
-        $image = 'http://www.google.com/doodle4google/images/d4g_logo_global.jpg';
-        $imageData = base64_encode(file_get_contents($image));
-        echo '<img src="data:image/jpeg;base64,'.$imageData.'">';
-        */
-    ?>
+    <script>
+        function triggerForm() {
+            document.getElementById("editor").submit();
+        }
+    </script>
     <script src="../static/main.js"></script>
 </body>
 </html>

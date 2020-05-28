@@ -15,7 +15,7 @@
         <div class="form-container">
             <div></div>
             <div class="todo-panel">
-                <h1>Journal Application</h1>
+                <h1>Create New Note</h1>
                 <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
                 <br><br>
                 <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>

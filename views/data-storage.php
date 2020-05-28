@@ -5,22 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Uploader</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php
         include("./components/header.php"); 
-        //include("./components/upload-modal.php"); 
-        include("./components/modal.php"); 
+        include("./components/upload-modal.php"); 
         include_once ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
-        /*
-        $sql = "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
-        $result = mysqli_query($curs, $sql);
-        $total = mysqli_num_rows($result);
-        */
     ?>
 
     <div class="svg-bg">
@@ -76,6 +71,32 @@
     }
     </script>
     <script src="../static/main.js"></script>
+    <!--
+    <script>
+        // Get the modal, open and close buttons
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        var end = document.getElementsByClassName("other-close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+        
+        // Close when the user clicks add attachment button
+        end.onclick = function() {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    -->
     <script src="../static/modal.js"></script>
 </body>
 </html>
