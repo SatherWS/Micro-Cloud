@@ -84,13 +84,12 @@
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='detail-topper'>";
                     echo "<div><h3 class='padb'>".$row['subject']."</h3>";
-                    echo "<small>".$row['date_created']."</small></div>";
+                    echo "<small>".$row['date_created']."</small>";
                     if ($row['rating'] == null)
-                        echo "<h4>Mood Rating: N/A</h4>";
+                        echo "<br><small>Mood Rating: N/A</small></div>";
                     else
-                        echo "<h4>Mood Rating: ".$row['rating']."</h4>";
-                    echo "</div>";
-                    echo "<div class='log-container log-details'>";
+                        echo "<br><small>Mood Rating: ".$row['rating']."</small></div>";
+                    echo "<div class='log-details'>";
                     echo "<p class='message-p'>".$row['message']."</p>";
                     echo "</div>";
                 }

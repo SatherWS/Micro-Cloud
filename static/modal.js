@@ -22,3 +22,9 @@
    }
  }
  
+ // close window on click outside of modal d/n work
+ window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

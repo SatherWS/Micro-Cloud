@@ -13,7 +13,6 @@ a {
 }
 
 nav {
-    padding: 0 1rem;
     box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
 }
 
@@ -541,11 +540,8 @@ select {
 .log-container {
   padding: 0 2rem;
 }
-
 /* Task and Journal for detail views *********************************/
 .detail-topper {
-  display: flex;
-  justify-content: space-between;
   padding: 0 2rem;
 }
 
@@ -595,7 +591,7 @@ button {
 }
 
 .message-p {
-  font-size: 14pt;
+  font-size: 15pt;
 }
 /* Categories Section *************************/
 .cat-grid {
@@ -784,6 +780,9 @@ tr:hover {background-color:#f5f5f5;}
     Mobile Responsive Section         |
   -----------------------------------*/
   @media only screen and (max-width: 600px) {
+    .parent-nav {
+      padding: 0;
+    }
     main {
       margin-top: 0;
       margin-left: .5rem;
@@ -825,6 +824,11 @@ tr:hover {background-color:#f5f5f5;}
     .log-header {
       padding-left: 0;
       padding-right: .6rem;
+      padding-left: 1rem;
+    }
+
+    .detail-topper {
+      padding: 0 1rem;
     }
 
     /* add category modal */
@@ -838,8 +842,9 @@ tr:hover {background-color:#f5f5f5;}
     .opt-desc {
       display: none;
     }
+
     .log-details {
-      width: 400px;
+      width: 340px;
     }
   }
 
