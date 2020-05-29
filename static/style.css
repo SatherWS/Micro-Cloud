@@ -845,6 +845,9 @@ tr:hover {background-color:#f5f5f5;}
 
     .log-details {
       width: 340px;
+    }
+
+    .editor {
       padding: 0 1rem;
     }
   }
