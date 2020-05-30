@@ -58,7 +58,10 @@
                             echo "<td>". $row["subject"]. "</td>";
                             echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                             echo "<td>". $row["category"]. "</td>";
-                            echo "<td style='text-align:center'>". $row["rating"]. "</td>";
+                            if ($row['rating'])
+                                echo "<td class='m-rate'>". $row["rating"]. "</td>";
+                            else
+                                echo "<td class='m-rate'>N/A</td>";
                             echo "<td>". $row["date_created"] ."</td></tr>";
                         }
                     } 

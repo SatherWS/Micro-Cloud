@@ -52,7 +52,7 @@
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("ssss", $_GET['subject'], $_GET['message'], $_GET['rating'], $category);
             $stmnt -> execute();
-            header("Location: ./logs.php");
+            header("Location: logs.php");
         }
         if ($_POST['category'] && $_GET['rating'] == null) {
             $category = $_POST['category'];
@@ -60,7 +60,7 @@
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("sss", $_GET['subject'], $_GET['message'], $category);
             $stmnt -> execute();
-            header("Location: ./logs.php");
+            header("Location: logs.php");
         }
     ?>
     <script src="../static/modal.js"></script>
