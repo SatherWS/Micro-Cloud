@@ -1,6 +1,6 @@
 <div>
     <label>Username:</label>
-    <input type='text' value='<?php echo getenv('username');?>' name='usr' class='form-control' placeholder='Enter Your Name'>
+    <input type='text' value='<?php echo $_SERVER['REMOTE_ADDR'];?>' name='usr' class='form-control' placeholder='Enter Your Name'>
 </div>
 <div>
     <label>Cast Your Vote Here:</label>

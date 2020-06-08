@@ -49,7 +49,7 @@
         <form method="post" id="vote-caster">
             <div class="log-header">
                 <?php
-                    if (hasVoted($curs, getenv("username"))) {
+                    if (hasVoted($curs, $_SERVER['REMOTE_ADDR'])) {
                         include("./components/poll-headers/not-voted.php");
                     }
                     else {
