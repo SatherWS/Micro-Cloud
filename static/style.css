@@ -139,6 +139,11 @@ textarea {
   margin-top: 0px!important;
 }
 
+.cat-list {
+  margin-left: 1rem;
+  width: 655px;
+}
+
 .sec-2 {
     text-align:center;
 }

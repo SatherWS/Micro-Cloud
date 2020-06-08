@@ -12,7 +12,7 @@
 </div>
 -->
 
-<!-- Modal for Categories Section -->
+<!-- Modal for Creating a new journal category -->
 <form method="post">
     <div id="myModal" class="modal">
         <div class="modal-content">

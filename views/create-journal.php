@@ -10,13 +10,30 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="todo-bg">
-    <?php include("./components/header.php");?>
+    <?php 
+        include("./components/header.php");
+        include_once("../config/database.php");
+        $database = new Database();
+        $curs = $database->getConnection();
+        $sql = "select distinct category from journal where category is not null";
+        $result = mysqli_query($curs, $sql);
+    ?>
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
             <div></div>
             <div class="todo-panel">
                 <h1>Create New Note</h1>
                 <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
+                <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list">
+                <datalist id="categoryList">
+                <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='".$row["category"]."'>";
+                        }
+                    }
+                ?>
+                </datalist>
                 <br><br>
                 <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>

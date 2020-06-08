@@ -11,16 +11,28 @@
     // create journal entry
     if ($_POST['add-journal']) {
         $subject = $_POST["jsubject"];
+        $category = $_POST["category"];
         $rating = $_POST["rating"];
         $msg = nl2br($_POST["note"]);
         
         if ($_POST['omit']) {
-            $data = array('subject'=> $subject, 'message' => $msg, 'rating' => null);
+            //$data = array('subject'=> $subject, 'message' => $msg, 'rating' => null);
+            $sql = "insert into journal(subject, message, category) values (?, ?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("sss", $subject, $msg, $category);
+            $stmnt -> execute();
+            header("Location: ../views/logs.php");
         }
         else {
-            $data = array('subject'=> $subject,'message' => $msg, 'rating'=> $rating);
+            //$data = array('subject'=> $subject,'message' => $msg, 'rating'=> $rating);
+            $sql = "insert into journal(subject, message, rating, category) values (?, ?, ?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ssss", $subject, $msg, $rating, $category);
+            $stmnt -> execute();
+            header("Location: ../views/logs.php");
         }
-        header("Location: ../views/categories.php?".http_build_query($data));
+        
+        //header("Location: ../views/categories.php?".http_build_query($data));
     }
     /*
     if ($_POST['category']) {
