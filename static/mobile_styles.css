@@ -1,0 +1,139 @@
+  /* ---------------------------------+
+    Mobile Responsive Section         |
+  -----------------------------------*/
+  @media only screen and (max-width: 600px) {
+    .parent-nav {
+      padding: 0;
+    }
+    main {
+      margin-top: 0;
+      padding: 0 1rem;
+    }
+    .form-container {
+      display: block;
+    }
+    .dash-title {
+      padding: 1rem .5rem;
+    }
+
+    .todo-panel { 
+      width: 330px; 
+    }
+    
+    textarea { width: 320px; }
+    .slider { width:320px; }
+
+    #form-control {
+      width: 320px;
+    }
+    #form-control2 {
+      width: 300px;
+    }
+    .j-box label {
+      font-size: 18px!important;
+    }
+
+    .rep-item {
+      margin-top: 10px;
+      width: 199px;
+    }
+    /* logs.php */
+    .m-rate {
+      text-align: left;
+    }
+    /* journal detail views */
+    .svg-bg {
+      width: 100%;
+    }
+    .log-header {
+      padding-left: 0;
+      padding-right: .6rem;
+      padding-left: 1rem;
+    }
+    iframe {
+      width: 340px;
+      height: auto;
+    }
+
+    .detail-topper {
+      padding: 0 1rem;
+    }
+
+    /* add category modal */
+    .modal-content {
+      width: 80%!important;
+    }
+    .log-bg {
+      background: #f1f1f1;
+    }
+
+  }
+
+  @media only screen and (max-width: 700px) {
+    /*
+    .opt-desc {
+      font-size: 12pt;
+    }
+    */
+    .log-details {
+      width: 340px;
+    }
+
+    .editor {
+      padding: 0 1rem;
+    }
+  }
+
+  /* Make Tables Responsive */
+  @media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    .tbl-head {
+      display: none;
+    }
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr { 
+      display: block; 
+    }
+    
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    tr { 
+      border: 1px solid #ccc; 
+      margin-top: 1rem;
+      box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+    }
+    
+    td { 
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee; 
+      position: relative;
+      padding-left: 35%; 
+    }
+    
+    td:before { 
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+    }
+    
+    /*
+    Label the data, need to have different classes for different tables
+    */
+    td:nth-of-type(1):before { content: "Journal ID"; }
+    td:nth-of-type(2):before { content: "Title"; }
+    td:nth-of-type(3):before { content: "Preview"; }
+    td:nth-of-type(4):before { content: "Category"; }  
+    td:nth-of-type(5):before { content: "Mood Rating"; }
+    td:nth-of-type(6):before { content: "Date Posted"; }
+  }

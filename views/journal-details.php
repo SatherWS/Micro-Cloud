@@ -82,6 +82,7 @@
         // display journal entry in plain text or inside a textarea
             if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
+                    echo "<div class='log-details'>";
                     echo "<div class='detail-topper'>";
                     echo "<div><h3 class='padb'>".$row['subject']."</h3>";
                     echo "<small>".$row['date_created']."</small>";
@@ -89,7 +90,6 @@
                         echo "<br><small>Mood Rating: N/A</small></div>";
                     else
                         echo "<br><small>Mood Rating: ".$row['rating']."</small></div>";
-                    echo "<div class='log-details'>";
                     echo "<p class='message-p'>".$row['message']."</p>";
                     echo "</div>";
                 }
@@ -98,7 +98,7 @@
             if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='log-container log-details editor'>";
-                    echo "<textarea name='edited' cols='100' rows='14'>".$row['message']."</textarea>";
+                    echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                     echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
                     /*
                     echo "<br><button type='submit' name='edit' value='".$row['id']."'>Save Changes</button>";
