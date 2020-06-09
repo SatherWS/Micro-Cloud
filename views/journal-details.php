@@ -84,7 +84,7 @@
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='log-details'>";
                     echo "<div class='detail-topper'>";
-                    echo "<div><h3 class='padb'>".$row['subject']."</h3>";
+                    echo "<div><h2 class='padb'>".$row['subject']."</h2>";
                     echo "<small>".$row['date_created']."</small>";
                     if ($row['rating'] == null)
                         echo "<br><small>Mood Rating: N/A</small></div>";
@@ -97,13 +97,9 @@
 
             if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
-                    echo "<div class='log-container log-details editor'>";
+                    echo "<div class='log-container editor'>";
                     echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                     echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
-                    /*
-                    echo "<br><button type='submit' name='edit' value='".$row['id']."'>Save Changes</button>";
-                    echo "<a href='./logs.php'>Cancel</a>"; 
-                    */
                 }
             }
         ?>

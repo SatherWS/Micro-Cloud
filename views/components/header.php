@@ -41,9 +41,9 @@
             <li>
                 <a href="#">Security</a>
             </li>
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
         </ul>
+        <a href="javascript:void(0);" class="icon" onclick="navToggle()">
+            <i class="fa fa-bars"></i>
+        </a>
     </div>
 </nav>

@@ -23,22 +23,24 @@
             <div></div>
             <div class="todo-panel">
                 <h1>Create New Note</h1>
-                <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
-                <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list">
-                <datalist id="categoryList">
-                <?php
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='".$row["category"]."'>";
+                <div class="flex-subs">
+                    <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n" required>
+                    <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list">
+                    <datalist id="categoryList">
+                    <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='".$row["category"]."'>";
+                            }
                         }
-                    }
-                ?>
-                </datalist>
-                <br><br>
+                    ?>
+                    </datalist>
+                </div>
+                <br>
                 <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>
-                <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                 <div class="sec-2">
+                    <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                     <div class="j-box">
                         <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
                         <div>
