@@ -27,7 +27,7 @@
             <div class="add-btn">
                 <h3 id="logs-title">
                     <a href="./create-journal.php">
-                        <span class="opt-desc">Add Entry</span>
+                        <span>Add Entry</span>
                         <i class="fa fa-plus-circle"></i>
                     </a>
                 </h3>
