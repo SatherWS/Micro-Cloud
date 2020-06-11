@@ -628,12 +628,13 @@ select {
 }
 
 .log-details {
-  width: 650px;
+  width: 750px;
   margin: 0 auto;
 }
 
 .padb {
   margin-bottom: .5rem;
+  font-size: 22pt;
 }
 
 .j-box {
@@ -670,7 +671,7 @@ button {
 }
 
 .message-p {
-  font-size: 18pt;
+  font-size: 22pt;
 }
 /* Categories Section *************************/
 .cat-grid {
