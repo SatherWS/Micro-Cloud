@@ -23,7 +23,7 @@
         $results = $stmnt -> get_result();
         $row = mysqli_fetch_assoc($results);
 
-        // cast vote to selected poll
+        // cast vote to selected poll if vote btn is clicked
         if ( $_POST["ballot"]) {
             $sql = "insert into votes(topic_id, vote, username) values (?, ?, ?)";
             $stmnt = mysqli_prepare($curs, $sql);

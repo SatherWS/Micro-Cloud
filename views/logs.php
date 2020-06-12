@@ -37,7 +37,7 @@
     </div>
     <div class="log-container">
         <form id="notes" action="./journal-details.php" method="post">
-            <table class="data">
+            <table class="data journal-tab">
                 <tr class="tbl-head">
                     <th>ID</th>
                     <th>SUBJECT</th>

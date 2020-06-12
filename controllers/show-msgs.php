@@ -23,4 +23,5 @@
 		echo "<p>".$row['time_submitted']."</p>";
 	}
 
+	//$curs -> close();
 ?>

@@ -66,9 +66,10 @@
         </form>
     </div>
     <script>
-    function myFunction(id) {
-        window.location='./journal-details.php?journal='+id;
-    }
+        // NOT IN USE 6/11/2020
+        function myFunction(id) {
+            window.location='./journal-details.php?journal='+id;
+        }
     </script>
     <script src="../static/main.js"></script>
     <!--

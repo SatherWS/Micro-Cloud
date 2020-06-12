@@ -18,9 +18,9 @@
             <div></div>
             <div class="todo-panel">
                 <h1>Journal Application</h1>
-                <input type="text" name="topic" placeholder="Subject to Vote On" id="form-control" class="spc-n" required>
-                <br><br>
-                <input type="text" name="admin" placeholder="Enter Your Name" id="form-control" class="spc-n" required>
+                <h3>Username: <?php echo $_SERVER['REMOTE_ADDR'];?></h3>
+                <input type="text" name="topic" placeholder="Create Topic to Vote On" id="form-control" class="spc-n" required>
+                <input type="hidden" name="admin" value="<?php echo $_SERVER['REMOTE_ADDR'];?>" required>
                 <br><br>
                 <input class="spc-n spc-m" type="submit">
             </div>

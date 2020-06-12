@@ -5,31 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Chat Room</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include("./components/header.php");?>
+    <?php 
+        include_once ('../config/database.php');
+        include("./components/header.php");
+        include("./components/chatroom-modal.php"); 
+        $database = new Database();
+        $curs = $database->getConnection();
+        $sql = "select * from chatroom";
+        $result = mysqli_query($curs, $sql);
+    ?>
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
                 <h3 id='logs-title'>Available Chatrooms</h3>
             </div>
             <div class="add-btn">
-                <a href="../journal.html">
+                <a href="#" id="myBtn">
                     <span>Create Chatroom</span>
                     <i class="fa fa-plus-circle"></i>
                 </a>
             </div>
         </div>
     </div>
-    <?php
-        include_once '../config/database.php';
-        $database = new Database();
-        $curs = $database->getConnection();
-        $sql = "select * from chatroom";
-        $result = mysqli_query($curs, $sql);
-    ?>
     <div class="log-container">
         <form action="" method="post">
             <table>
@@ -74,5 +76,6 @@
     }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>

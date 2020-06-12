@@ -50,7 +50,7 @@
     </div>
     <div class="log-container">
         <form action="../edit_entry.php" method="post" id="tasks">
-            <table class="data">
+            <table class="data task-tab">
                 <tr class="tbl-head">
                     <th>ID</th>
                     <th>DESCRIPTION</th>

@@ -21,7 +21,19 @@
 	</script>
 </head>
 <body>
-	<?php include("./components/header.php");?>
+	<?php 
+		include("./components/header.php");
+		include_once ('../config/database.php');
+        $database = new Database();
+		$curs = $database->getConnection();
+		
+		if ($_POST['msg']) {
+			$sql = "insert into messages(name, msg, room_id) values(?, ?, ?)";
+			$stmnt = mysqli_prepare($curs, $sql);
+			$stmnt -> bind_param("sss", $_SERVER["REMOTE_ADDR"], $_POST["msg"], $_GET["room"]);
+			$stmnt -> execute();
+		}
+	?>
 	<div class="svg-bg">
         <div class="log-header">  
 			<div>
@@ -43,7 +55,7 @@
         <div class="input-group sender-style">
             <input type="text" name="msg" class="form-control" id="send-msg" placeholder="Enter you message here..." required>
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-secondary">Send Message</button>
+                <button type="submit" class="attach">Send Message</button>
             </span>
         </div>
     </form>

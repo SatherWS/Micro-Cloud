@@ -24,14 +24,14 @@
             </div>
             <div class="add-btn">
                 <a href="./create-poll.php">
-                    <span class="opt-desc">Add Poll</span>
+                    <span>Add Poll</span>
                     <i class="fa fa-plus-circle"></i>
                 </a>
             </div>
         </div>
     </div>
     <div class="log-container">
-        <!-- Latest Poll Here 
+        <!-- Featured Poll Concept, May never implement 
         <div class="feature-panel">
             <div>
                 <h2>Latest Poll: </h2>
@@ -45,7 +45,7 @@
         -->
         
         <form id="notes" action="./journal-details.php" method="post">
-            <table class="data">
+            <table class="data poll-tab">
                 <tr class="tbl-head">
                     <th>ID</th>
                     <th>TOPIC</th>

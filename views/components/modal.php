@@ -13,6 +13,7 @@
 -->
 
 <!-- Modal for Creating a new journal category -->
+<!-- The modal below is not necessary anymore. It would be nice to combine all modals into one file -->
 <form method="post">
     <div id="myModal" class="modal">
         <div class="modal-content">
