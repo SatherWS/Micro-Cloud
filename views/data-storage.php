@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="log-container">
-        <form id="notes" action="./journal-details.php" method="post">
+        <form id="notes" action="" method="post">
             <table class="data">
                 <tr class="tbl-head">
                     <th>ID</th>

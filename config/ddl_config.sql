@@ -76,17 +76,18 @@ ALTER TABLE `votes`
 COMMIT;
 
 CREATE TABLE `chatroom` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL primary key auto_increment,
   `subject` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `creator` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `time_created` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL primary key auto_increment,
   `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `room_id` int(11) NOT NULL,
   `msg` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `time_submitted` datetime DEFAULT CURRENT_TIMESTAMP
+  `time_submitted` datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (room_id) references chatroom(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

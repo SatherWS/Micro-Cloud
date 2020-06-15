@@ -1,6 +1,6 @@
 <div>
-    <h3><?php echo $_SERVER['REMOTE_ADDR'];?> is Voting</h3>
-    <input type='hidden' value='<?php echo $_SERVER['REMOTE_ADDR'];?>' name='usr' class='form-control' placeholder='Enter Your Name'>
+    <h3><?php echo gethostbyaddr($_SERVER['REMOTE_ADDR']);?> is Voting</h3>
+    <input type='hidden' value='<?php echo gethostbyaddr($_SERVER['REMOTE_ADDR']);?>' name='usr' class='form-control' placeholder='Enter Your Name'>
 </div>
 <div>
     <label>Cast Your Vote Here:</label>

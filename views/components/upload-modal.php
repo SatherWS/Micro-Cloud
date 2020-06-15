@@ -6,10 +6,10 @@
             <h2>Upload a File or Folder</h2>
             <!--<input type="file" name="files" id="files">-->
             
-            <input type="radio" name="fileop" id="">
+            <input type="radio" name="fileop" value="single">
             <label>Upload Single File</label>
             <br><br>
-            <input type="radio" name="fileop" id="">
+            <input type="radio" name="fileop" value="multi">
             <label>Upload Entire Folder</label>
             <br><br>
             <input type="file" webkitdirectory="" mozdirectory="" multiple="" name="files[]" id="files">

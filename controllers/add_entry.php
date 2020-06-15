@@ -13,7 +13,7 @@
         $subject = $_POST["jsubject"];
         $category = $_POST["category"];
         $rating = $_POST["rating"];
-        $msg = nl2br($_POST["note"]);
+        $msg = $_POST["note"];
         
         if ($_POST['omit']) {
             //$data = array('subject'=> $subject, 'message' => $msg, 'rating' => null);

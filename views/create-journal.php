@@ -20,7 +20,6 @@
     ?>
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
-            <div></div>
             <div class="todo-panel">
                 <h1>Create New Note</h1>
                 <div class="flex-subs">
@@ -54,7 +53,6 @@
                     <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
                 </div>
             </div>
-            <div></div>
         </div>
     </form>
     

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micro Cloud</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -55,7 +55,7 @@
     <div class="svg-bg">
         <div class="log-header">    
             <div class="review">
-                <h3 id='logs-title'>Mood Statistics</h3>
+                <h3 id='logs-title'>Analytics</h3>
             </div>
 
             <div class="add-log">
@@ -84,9 +84,6 @@
         </h3>
     </div>
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <?php
-
-    ?>
     <div class="pie-box">
         <div class="pie-data">
             <h2>TODO List Statistics</h2>
