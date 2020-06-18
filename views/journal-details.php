@@ -81,6 +81,7 @@
     <form action="../controllers/edit_entry.php" method="post" id="editor">
         <?php
         // display journal entry in plain text or inside a textarea
+        // raw data is stored in lhapps database and decoded with nl2br() function
             if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
                 while($row = mysqli_fetch_assoc($results)) {
                     echo "<div class='log-details'>";
