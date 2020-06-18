@@ -19,6 +19,7 @@
 		}
 		loaddata();
 	</script>
+	<link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
 	<?php 
