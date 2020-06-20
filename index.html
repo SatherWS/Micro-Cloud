@@ -38,15 +38,18 @@
                     </div>
                 </li>
                 <li>
-                    <a href="./views/join-chat.php">Chatrooms</a>
-                </li>
-                <li>
-                    <a href="./views/polls.php">Votting App</a>
-                </li>
-                <li>
                     <a href="./views/stats.php">Analytics</a>
                 </li>
-                <li><a href="#">Settings</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Bonus Apps</a>
+                    <div class="dropdown-content">
+                        <a href="./views/join-chat.php">Chatrooms</a>
+                        <a href="./views/polls.php">Votting App</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Login</a>
+                </li>
                 <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                     <i class="fa fa-bars"></i>
                 </a>
@@ -84,21 +87,20 @@
                 </a>
             </div>
             <div>
-                <a class="dash-item" href="./views/polls.php">
-                    <i class="fa fa-bar-chart spc-1"></i>
-                    <br>
-                    <span class="sup-text">Votting App</span>
-                </a>
-            </div>
-            <div>
                 <a class="dash-item" href="./views/stats.php">
                     <i class="fa fa-line-chart spc-1"></i>
                     <br>
                    <span class="sup-text">Analytics</span> 
                 </a>
             </div>  
+            <div>
+                <a class="dash-item" href="./views/polls.php">
+                    <i class="fa fa-bar-chart spc-1"></i>
+                    <br>
+                    <span class="sup-text">Additional Apps</span>
+                </a>
+            </div>
         </div>
-        
     </main>
     <script src="./static/main.js"></script>
 </body>

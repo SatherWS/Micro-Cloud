@@ -9,7 +9,7 @@
 	<script>
 		function loaddata() {
 			$.ajax({
-				url: "../controllers/show-msgs.php?room="+<?php echo $_GET['room'] ?>,
+				url: "../controllers/show_msgs.php?room="+<?php echo $_GET['room'] ?>,
 				success: function (response) {
 					$( '#display_info' ).html(response);
 				}

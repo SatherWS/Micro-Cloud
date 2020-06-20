@@ -321,6 +321,7 @@ main {
   linear-gradient(
     to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55)),
     url(../imgs/journal.jpg);
+  background-size: cover;
 }
 
 .grid-container div:nth-child(2){
@@ -350,8 +351,8 @@ main {
 .grid-container div:nth-child(5){
   background-image:
     linear-gradient(
-      to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55)),
-      url(../imgs/voting.jpg);
+      to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+      url(../imgs/analytics-blur.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -359,8 +360,8 @@ main {
 .grid-container div:nth-child(6){
   background-image:
   linear-gradient(
-    to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55)),
-    url(../imgs/analytics-blur.jpg);
+    to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+    url(../imgs/voting.jpg);    
   background-size: cover;
 }
 /*
@@ -431,7 +432,6 @@ ul {
   .dropdown .dropbtn {
     border: none;
     outline: none;
-    background-color: #fff;
     font-family: inherit;
     margin: 0;
   }
@@ -450,7 +450,7 @@ ul {
     margin-top: 0.8rem;
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #fff;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -465,7 +465,9 @@ ul {
     text-align: left;
   }
   
-  .dropdown-content a:hover {background-color: #f1f1f1;}
+  .dropdown-content a:hover {
+    background-color: inherit;
+  }
   
   .dropdown:hover .dropdown-content {
     display: block; 
@@ -572,6 +574,7 @@ select {
 .rep-item {
   width: 140px;
 }
+
 /*-------------------------------------------------------*
 * LOGS.PHP SECTION                                       |
 *-------------------------------------------------------*/
@@ -589,6 +592,8 @@ select {
   padding:10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #logs-title {
@@ -860,8 +865,36 @@ tr:hover {background-color:#f5f5f5;}
   /* ---------------------------------+
     Mobile Responsive Section         |
   -----------------------------------*/
+  
+  /* removed only keyword before screen keyword 6/18 */
+  @media screen and (max-width: 700px) {
+    /*
+    .opt-desc {
+      font-size: 12pt;
+    }
+    */
+    .opt-desc {
+      display: none;
+    }
+    .log-details {
+      width: 540px;
+      margin: 0;
+    }
+
+    .editor {
+      padding: 0 1rem;
+      width: 375px;
+      text-align: left;
+    }
+
+    .edit-field {
+      margin-top: .5rem;
+    }
+  }
+
   /* used for smart phones */
-  @media only screen and (max-width: 600px) {
+  /* removed only keyword before screen keyword 6/18 */
+  @media screen and (max-width: 600px) {
     /* nav bar */
     .topnav-list {
       margin-right: 1.6rem;
@@ -951,32 +984,11 @@ tr:hover {background-color:#f5f5f5;}
     .log-bg {
       background: #f1f1f1;
     }
-
-  }
-
-  @media only screen and (max-width: 700px) {
-    /*
-    .opt-desc {
-      font-size: 12pt;
-    }
-    */
-    .opt-desc {
-      display: none;
-    }
     .log-details {
       width: 340px;
       margin: 0;
     }
 
-    .editor {
-      padding: 0 1rem;
-      width: 375px;
-      text-align: left;
-    }
-
-    .edit-field {
-      margin-top: .5rem;
-    }
   }
 
   /* Make Tables Responsive */
