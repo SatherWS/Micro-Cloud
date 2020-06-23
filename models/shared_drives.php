@@ -1,7 +1,8 @@
 <?php
     class Storage {
-        // get the available storage in /mnt folder
+        
         public function getDirSpace() {
+            // return available storage of each folder in /mnt 
             $gigs = [];
             $parent = "/mnt";
             $drives = scandir($parent);
@@ -17,7 +18,7 @@
     }
 
     $test = new Storage();
-    $drive = $test -> getDirSpace();
+    $drives = $test -> getDirSpace();
 
     foreach ($drives as $d) {
         echo $d."\n";
