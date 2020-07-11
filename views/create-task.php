@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body class="todo-bg">
-    <?php include("./components/header.php")?>
+    <?php include("./components/header.php");?>
     <form action="../controllers/add_entry.php" method="post" class="app">
         <div class="form-container">
             <div></div>
@@ -20,6 +20,8 @@
                     <label>Task Description</label><br>
                     <input type="text" name="subs" 
                     placeholder="Type Task Description" class="todo-item spc-n" required>
+                    <br><br>
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
                     <br><br>
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required><br><br>

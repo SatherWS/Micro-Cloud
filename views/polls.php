@@ -63,15 +63,11 @@
                             $id = $row["id"];
                             echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$id."'> <td>". $id. "</td>";
                             echo "<td>". $row["topic"]. "</td>";
-                            
                             echo "<td>"."TBD". "</td>";
-                            
                             echo "<td>". $row["admin"]. "</td>";
-                            
                             echo "<td>"."100". "</td>";
                             echo "<td>"."0". "</td>";
                             echo "<td>"."0". "</td>";
-                            
                             echo "<td>". $row["date_created"] ."</td></tr>";
                         }
                     } 

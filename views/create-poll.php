@@ -18,7 +18,7 @@
         <div class="form-container">
             <div></div>
             <div class="todo-panel">
-                <h1>Journal Application</h1>
+                <h1>Create New Ballot</h1>
                 <h3>Username: <?php echo $_SERVER['REMOTE_ADDR'];?></h3>
                 <input type="text" name="topic" placeholder="Create Topic to Vote On" id="form-control" class="spc-n" required>
                 <input type="hidden" name="admin" value="<?php echo $_SERVER['REMOTE_ADDR'];?>" required>
