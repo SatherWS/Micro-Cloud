@@ -8,12 +8,12 @@
 -- PHP Version: 7.3.11
 
 --
--- Database: lhapps
+-- Database: note_web
 --
-CREATE DATABASE if not exists lhapps;
-USE lhapps;
-DROP TABLE journal;
-DROP TABLE todo_list;
+CREATE DATABASE if not exists note_web;
+USE note_web;
+DROP TABLE IF EXISTS journal;
+DROP TABLE IF EXISTS todo_list;
 -- --------------------------------------------------------
 
 --
@@ -24,7 +24,8 @@ CREATE TABLE journal (
   id int(11) primary key auto_increment,
   subject varchar(45) NOT NULL,
   message varchar(300) NOT NULL,
-  rating int(11) NOT NULL,
+  category varchar(45) NOT NULL,
+  rating int(11),
   date_created datetime DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -65,22 +66,13 @@ CREATE TABLE `votes` (
   foreign key (topic_id) references polls(id)
 );
 
---
--- Indexes for table `votes`
---
-ALTER TABLE `votes`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
-COMMIT;
 
 CREATE TABLE `chatroom` (
   `id` int(11) NOT NULL primary key auto_increment,
   `subject` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `creator` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `time_created` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL primary key auto_increment,
@@ -89,5 +81,5 @@ CREATE TABLE `messages` (
   `msg` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `time_submitted` datetime DEFAULT CURRENT_TIMESTAMP,
   foreign key (room_id) references chatroom(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 

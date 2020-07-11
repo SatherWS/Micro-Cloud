@@ -15,15 +15,14 @@
         $rating = $_POST["rating"];
         $msg = $_POST["note"];
         
-        if ($_POST['omit']) {
-            //$data = array('subject'=> $subject, 'message' => $msg, 'rating' => null);
+        // check if check box is posted
+        if (isset($_POST['omit'])) {
             $sql = "insert into journal(subject, message, category) values (?, ?, ?)";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("sss", $subject, $msg, $category);
             $stmnt -> execute();
         }
         else {
-            //$data = array('subject'=> $subject,'message' => $msg, 'rating'=> $rating);
             $sql = "insert into journal(subject, message, rating, category) values (?, ?, ?, ?)";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("ssss", $subject, $msg, $rating, $category);

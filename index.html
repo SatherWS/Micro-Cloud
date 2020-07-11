@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note Station</title>
+    <title>Note Web</title>
     <link rel="stylesheet" href="static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -14,21 +14,20 @@
         <div class="index-nav parent-nav">
             <ul>
                 <li>
-                    <a href="#" class="active">Micro Server</a>
+                    <a href="#" class="active">Note Web</a>
                     <i class="fa fa-wifi"></i>
                 </li>
             </ul>
             <ul class="topnav-list">
-                <li>
-                    <a href="./views/data-storage.php">Data Storage</a>
-                </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Note Web</a>
+                    <a href="javascript:void(0)" class="dropbtn">Notepad</a>
                     <div class="dropdown-content">
                         <a href="./views/create-journal.php">Create Note</a>
-                        <a href="./views/categories.php">Note Categories</a>
                         <a href="./views/logs.php">All Entries</a>
                     </div>
+                </li>
+                <li>
+                    <a href="./views/categories.php">Categories</a>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Task List</a>
@@ -43,8 +42,9 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">Bonus Apps</a>
                     <div class="dropdown-content">
+                        <a href="./views/data-storage.php">Data Storage</a>
                         <a href="./views/join-chat.php">Chatrooms</a>
-                        <a href="./views/polls.php">Votting App</a>
+                        <a href="./views/bonus_apps/polls.php">Votting App</a>
                     </div>
                 </li>
                 <li>

@@ -42,7 +42,6 @@
                 <div class="sec-2">
                     <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                     <div class="j-box">
-                        <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
                         <div>
                             <label class="container">
                                 <input type="checkbox" name="omit">
@@ -50,6 +49,7 @@
                                 Omit Mood Rating
                             </label>
                         </div>
+                        <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
                     </div>
                     <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
                 </div>

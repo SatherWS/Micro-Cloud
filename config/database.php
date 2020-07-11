@@ -1,9 +1,9 @@
 <?php
     class Database{
         private $server = "localhost";
-        private $db = "lhapps";
+        private $db = "note_web";
         private $user = "root";
-        private $pass = "mysql";
+        private $pass = "root";
     
         public function getConnection(){
             $curs = new mysqli($this->server, $this->user, $this->pass, $this->db);
