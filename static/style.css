@@ -560,6 +560,7 @@ ul {
 .scroll-item {
   border-bottom: 2px solid #f1f1f1;
   margin: 1rem;
+  width: 500px;
 }
 .scroll-item:hover {
   background: #f1f1f1;
@@ -581,6 +582,7 @@ ul {
 .todo-panel {
     background: #fff;
     border-radius: 5px;
+    width: 60%;
     padding: 1.5rem;
     box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
 }

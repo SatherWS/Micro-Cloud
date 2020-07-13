@@ -12,7 +12,7 @@
 --
 CREATE DATABASE if not exists note_web;
 USE note_web;
-DROP TABLE IF EXISTS journal;
+--DROP TABLE IF EXISTS journal;
 DROP TABLE IF EXISTS todo_list;
 -- --------------------------------------------------------
 
