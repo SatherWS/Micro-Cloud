@@ -2,7 +2,7 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../index.html" class="active">Note Web</a>
+                <a href="../index.html" class="active">Note Console</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
@@ -25,13 +25,13 @@
                 </div>
             </li>
             <li>
-                <a href="./stats.php">Analytics</a>
+                <a href="./analytics.php">Analytics</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Bonus Apps</a>
                 <div class="dropdown-content">
-                    <a href="./data-storage.php">Data Storage</a>
-                    <a href="./join-chat.php">Chatrooms</a>
+                    <a href="./bonus_apps/data-storage.php">Data Storage</a>
+                    <a href="./bonus_apps/join-chat.php">Chatrooms</a>
                     <a href="./bonus_apps/polls.php">Votting App</a>
                 </div>
             </li>

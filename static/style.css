@@ -294,8 +294,10 @@ main {
 
 .dash-bg {
   background: #f1f1f1;
+  /*
   background-image: url("../imgs/dash-bg.svg");
   background-repeat: no-repeat;
+  */
   height: 100vh;
 }
 
@@ -544,6 +546,25 @@ ul {
   }
 /*********************************************************/
 /* To Do App Section */
+.todo-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scroll-pane {
+  overflow-y: scroll;
+  padding: 1rem;
+  height: 550px;
+}
+
+.scroll-item {
+  border-bottom: 2px solid #f1f1f1;
+  margin: 1rem;
+}
+.scroll-item:hover {
+  background: #f1f1f1;
+}
+
 #form-control2 { 
   width: 345px;
   padding: 10px!important;
@@ -585,7 +606,7 @@ select {
 }
 
 .rep-item {
-  width: 140px;
+  width: 100%;
 }
 
 /*-------------------------------------------------------*
@@ -863,9 +884,10 @@ tr:hover {background-color:#f5f5f5;}
   .add-btn a {
     color: #000;
     font-weight: bold;
-    border: solid 2px;
+    /* border: solid 2px; */
+    background: #fff;
     border-radius: 5px;
-    padding: .35rem;
+    padding: .5rem;
   }
 
   .polls-header {
@@ -893,6 +915,20 @@ tr:hover {background-color:#f5f5f5;}
   @media screen and (min-height: 930px) {
     textarea {
       height: 420px;
+    }
+  }
+  @media screen and (max-width: 830px) {
+    .todo-flex {
+      display: block;
+    }
+    .scroll-pane {
+      padding: 0;
+    }
+    .todo-item {
+      width: 95%;
+    }
+    .todo-txt-area {
+      width: 95%!important;
     }
   }
   @media screen and (max-height: 700px) {

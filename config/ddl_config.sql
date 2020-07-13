@@ -34,10 +34,12 @@ CREATE TABLE journal (
 --
 
 CREATE TABLE todo_list (
-	id int primary key auto_increment not null,
-	description varchar(45) not null,
-	start_date datetime,
+	id int primary key auto_increment NOT NULL,
+	title varchar(45) NOT NULL,
+  description varchar(100),
 	deadline date NOT NULL,
+  time_due time NOT NULL,
+  task_repeat varchar(10) NULL,
 	importance varchar(10) NOT NULL,
 	date_created datetime DEFAULT CURRENT_TIMESTAMP
 );

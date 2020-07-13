@@ -33,16 +33,12 @@
 
     // add task to todo list
     if ($_POST['add-task']) {
-        echo $_POST['add-task'];
-        $sql = "insert into todolist(description, deadline, importance, time_due) values (?, ?, ?, ?)";
+        $sql = "insert into todo_list(title, deadline, time_due, importance) values (?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $subject = $_POST["subs"]; 
-        $end = $_POST["end-date"];
-        $imprt = $_POST["importance"];
-        $time = $_POST["time-due"];
-        $stmnt -> bind_param("ssss", $subject, $end, $imprt, $time);
+        $stmnt -> bind_param("ssss", $_POST["title"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"]);
         $stmnt -> execute();
-        header("Location: ../views/show-tasks.php");
+        header("Location: ../views/create-task.php");
+        //header("Location: ../views/show-tasks.php");
     }
 
     // add voting topic to table of polls
