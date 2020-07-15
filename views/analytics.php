@@ -1,6 +1,5 @@
 <?php
-    include("./components/header.php");
-    include_once "../config/database.php";
+    include_once ("../config/database.php");
     $db = new database();
     $curs = $db->getConnection();
     $total = 0;
@@ -99,10 +98,11 @@
   </script>
 </head>
 <body>
+<?php include("./components/header.php");?>
 <div class="svg-bg">
     <div class="log-header">    
         <div class="review">
-            <h3 id='logs-title'>Analytics</h3>
+            <h2 id='logs-title'>Analytics</h2>
         </div>
         <!--
         <div class="add-log">
@@ -116,6 +116,7 @@
     </div>
 </div>
 <article class="main-page">
+<!-- Task List Section ===========================================-->
 <form action="./analytics.php" method="POST">
     <div class="log-header">    
         <div class="review">
@@ -130,12 +131,27 @@
 <!-- Gantt chart div -->
 <div id="chart_div"></div>
 
-<!-- Google pie chart div -->
+<!-- Google pie chart section =================================-->
 <div class="pie-box">
     <div class="pie-data">
-        <h2>Task List Options</h2>
-        <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+        <h2>Task List Summary</h2>
+        <table class="data journal-tab">
+            <tr class="tbl-head">
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+            <?php
+                $sql3 = "select status, count(*) from todo_list group by 'status'";
+                $result = mysqli_query($curs, $sql3);
+            
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr><td>".$row["status"]."</td>";
+                    echo "<td>".$row["count(*)"]."</td></tr>";
+                }
+            ?>
+        </table>
         <br><br>
+        <a href="./show-tasks.php" class="date-btn">View Tasks</a>
         <a href="./create-task.php" class="date-btn">Create Task</a>
     </div>
     <div class="a-panel">
@@ -143,22 +159,25 @@
     </div>
 </div>
 
+<!-- Mood Ratings Section ==========================-->
 <?php   
     $sql = "select avg(rating) from journal";
     $result = mysqli_query($curs, $sql);
     $avg = $result -> fetch_row();
 ?>
 <div class="avgs">
-    <h3>Mood Average: <?php print_r($avg[0]) ?></h3>
-    <h3>
+    <h2>Mood Average: <?php print_r($avg[0]) ?></h2>
+    <h2>
     <?php 
         if ($_POST['range'])
             echo "All ".$total. " ratings from ".$_POST['start-date']." to ".$_POST['end-date'];
         else
             echo "All ".$total." Ratings";
     ?>
-    </h3>
+    </h2>
 </div>
+
+<!-- Line Graph Section Start ================================-->
 <form action="./analytics.php" method="POST">
     <div class="log-header">    
         <div class="review">
@@ -174,7 +193,7 @@
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </article>
 
-<!-- google pie chart script -->
+<!-- google pie chart script =========================================-->
 <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
