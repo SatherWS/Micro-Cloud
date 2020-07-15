@@ -26,6 +26,9 @@
     <form method="post">
         <div class="cat-panel">
             <h1>Journal Categories</h1>
+            <div>
+                <a href="" class="date-btn">File View</a>
+            </div>
         </div>
         
         <div class="cat-grid">

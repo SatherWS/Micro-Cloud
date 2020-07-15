@@ -23,7 +23,7 @@
                     <label>Task Description</label><br>
                     <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
                     <br><br>
-                    <textarea name="description" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
+                    <textarea name="descript" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
                     <br><br>
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required><br><br>

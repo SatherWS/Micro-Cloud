@@ -20,8 +20,10 @@
     $test = new Storage();
     $drives = $test -> getDirSpace();
 
+    echo "<ul>";
     foreach ($drives as $d) {
-        echo $d."\n";
+        echo "<li>".$d."</li>\n";
     }
+    echo "</ul>";
 
 ?>

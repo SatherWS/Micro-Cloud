@@ -15,10 +15,25 @@ USE note_web;
 --DROP TABLE IF EXISTS journal;
 DROP TABLE IF EXISTS todo_list;
 -- --------------------------------------------------------
+create table teams (
+  id int primary key auto_increment,
+  team_name varchar(50) not null,
+  date_created datetime default current_timestamp
+);
 
---
--- Table structure for table day_logger
---
+create table users (
+  id int primary key auto_increment,
+  usr varchar(75) not null,
+  pswd varchar(75) not null,
+  teamid int not null,
+  date_created datetime default current_timestamp,
+  foreign key (teamid) references teams(id)
+);
+
+-- Will need to add user foreign keys to the following tables
+-- journal
+-- todo_list
+-- file paths/shortcodes? (not created yet)
 
 CREATE TABLE journal (
   id int(11) primary key auto_increment,
@@ -37,7 +52,7 @@ CREATE TABLE todo_list (
 	id int primary key auto_increment NOT NULL,
 	title varchar(45) NOT NULL,
   description varchar(100),
-  status varchar(30) DEFAULT "Not Started" ,
+  status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,
   time_due time NOT NULL,
   task_repeat varchar(10) NULL,

@@ -2,7 +2,7 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../index.html" class="active">Note Console</a>
+                <a href="../index.html" class="active">Consciencec</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
