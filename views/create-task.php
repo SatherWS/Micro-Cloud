@@ -18,12 +18,12 @@
         <div class="todo-panel">
             <div class="todo-flex">
                 <section> <!-- Contain task submit form -->
-                <h1>TODO List</h1>
+                <h1>Task Creator</h1>
                 <div class="form-body">
                     <label>Task Description</label><br>
                     <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
                     <br><br>
-                    <textarea name="desc" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
+                    <textarea name="description" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
                     <br><br>
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required><br><br>
@@ -70,9 +70,10 @@
     </div>
 </form>
 <script src="../static/main.js"></script>
-<!-- jQuery then Javascript libraries
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    -->
+<script>
+    function getTask(id) {
+        window.location = "./task-details.php?task="+id;
+    }
+</script>
 </body>
 </html>

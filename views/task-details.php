@@ -18,7 +18,7 @@
 
         if ($_GET['task']) {
             $id = $_GET['task'];
-            $sql = "select * from todolist where id = ?";
+            $sql = "select * from todo_list where id = ?";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $id);
             $stmnt -> execute();
@@ -27,7 +27,7 @@
 
         if ($_POST['edit']) {
             $id = $_POST['edit'];
-            $sql = "select * from todolist where id = ?";
+            $sql = "select * from todo_list where id = ?";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $id);
             $stmnt -> execute();
@@ -35,7 +35,7 @@
         }
 
         if ($_POST['delete']) {
-            $sql = "delete from todolist where id = ?";
+            $sql = "delete from todo_list where id = ?";
             mysqli_query($curs, $sql);
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $_POST['delete']);

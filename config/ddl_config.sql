@@ -37,6 +37,7 @@ CREATE TABLE todo_list (
 	id int primary key auto_increment NOT NULL,
 	title varchar(45) NOT NULL,
   description varchar(100),
+  status varchar(30) DEFAULT "Not Started" ,
 	deadline date NOT NULL,
   time_due time NOT NULL,
   task_repeat varchar(10) NULL,

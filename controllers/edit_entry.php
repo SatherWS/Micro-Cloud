@@ -20,7 +20,7 @@
     }
          
     if ($_POST['delete']) {
-        $sql = "delete from todolist where id = ?";
+        $sql = "delete from todo_list where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST['delete']);
@@ -30,7 +30,7 @@
 
     if ($_POST['change-status']) {
         $id = $_POST['task-id'];
-        $sql = "update todolist set status = ? where id = ?";
+        $sql = "update todo_list set status = ? where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['change-status'], $id);

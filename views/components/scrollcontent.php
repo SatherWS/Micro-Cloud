@@ -2,11 +2,12 @@
     include("../config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
-    $sql = "select * from todo_list";
+    $sql = "select * from todo_list order by deadline desc";
     $result = mysqli_query($curs, $sql);
 
     while($row = mysqli_fetch_assoc($result)) {
-        $html = "<div class='scroll-item'>";
+        $id = $row["id"];
+        $html = "<div class='scroll-item' onclick='getTask($id)'>";
         $html .= "<h3>".$row["title"]."</h3>";
         $html .= "<h4>".$row["deadline"]."</h4>";
         $html .= "<p>".$row["description"]."</p></div>";
@@ -18,5 +19,4 @@
     <h3></h3>
     <h4></h4>
     <p></p>
-    
 </div>

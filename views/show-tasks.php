@@ -16,14 +16,14 @@
         include ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
-        $result = mysqli_query($curs, "select * from todolist where status = 'IN PROGRESS' or status = 'NOT STARTED' order by deadline");
+        $result = mysqli_query($curs, "select * from todo_list where status = 'IN PROGRESS' or status = 'NOT STARTED' order by deadline");
         $filter = "Pending";
         
         if ($_POST['s-status']) {
             $filter = $_POST['s-status'];
-            $result = mysqli_query($curs, "select * from todolist where status = '$filter' order by deadline desc");
+            $result = mysqli_query($curs, "select * from todo_list where status = '$filter' order by deadline desc");
             if ($filter == 'SHOW ALL') {
-                $result = mysqli_query($curs, "select * from todolist order by deadline desc");
+                $result = mysqli_query($curs, "select * from todo_list order by deadline desc");
             }
         }
         $total = mysqli_num_rows($result)
