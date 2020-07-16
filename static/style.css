@@ -633,7 +633,7 @@ input[type="time"] {
 }
 
 select {
-    font-size: 14pt;
+  font-size: 14pt;
 }
 
 .rep-item {
@@ -971,6 +971,16 @@ tr:hover {background-color:#f5f5f5;}
   /* ---------------------------------+
     Mobile Responsive Section         |
   -----------------------------------*/
+  @media screen and (max-width: 1370px) {
+    /* In progress */
+    #form-control {
+      width: 45%;
+    }
+    .cat-list {
+      width: 48%;
+    }
+  }
+
   @media screen and (max-width: 1290px) {
     /* Smaller laptops */
     .todo-panel {
@@ -979,8 +989,11 @@ tr:hover {background-color:#f5f5f5;}
     .scroll-item {
       width: 550px;
     }
-    .cat-list {width: 392.5px;}
+    
+    .cat-list {width: 40%;}
+    /*
     textarea {width: 995px;}
+    */
   }
 
   @media screen and (min-height: 930px) {
@@ -994,6 +1007,7 @@ tr:hover {background-color:#f5f5f5;}
       padding: 1rem 0;
     }
   }
+
   @media screen and (max-width: 830px) {
     .todo-flex {
       display: block;
@@ -1064,7 +1078,8 @@ tr:hover {background-color:#f5f5f5;}
     }
 
     .todo-panel { 
-      width: 330px; 
+      width: 330px;
+      margin: 0 auto; 
     }
     
     textarea { 
