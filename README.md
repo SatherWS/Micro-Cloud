@@ -6,8 +6,7 @@
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publically hosted.
 
 ## TODO 
-- [ ] Adjust note editing textarea for mobile viewing
-- [ ] Adjust gradient headers
+- [X] Adjust note editing textarea for mobile viewing
 - [ ] Fix file path errors in bonus apps
 - [ ] Move mood rating system to bonus apps
 - [ ] Implement user authentication
