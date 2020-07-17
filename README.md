@@ -7,7 +7,7 @@ This GitHub repository contains source code for project management software. It'
 
 ## TODO 
 - [X] Adjust note editing textarea for mobile viewing
-- [ ] Fix file path errors in bonus apps
+- [X] Fix file path errors in bonus apps
 - [ ] Move mood rating system to bonus apps
 - [ ] Implement user authentication
 - [ ] Integrate data into gantt chart 
