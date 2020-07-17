@@ -38,16 +38,6 @@
         $stmnt -> bind_param("sssss", $_POST["title"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"]);
         $stmnt -> execute();
         header("Location: ../views/create-task.php");
-        //header("Location: ../views/show-tasks.php");
-    }
-
-    // add voting topic to table of polls
-    if ($_POST["topic"] && $_POST["admin"]) {
-        $sql = "insert into polls(admin, topic) values (?, ?)";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST['admin'], $_POST['topic']);
-        $stmnt -> execute();
-        header("Location: ../views/polls.php");
     }
 
     // add chatroom to database
@@ -56,7 +46,7 @@
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST["room"], $_POST["username"]);
         $stmnt -> execute();
-        header("Location: ../views/join-chat.php");
+        header("Location: ../views/bonus_apps/join-chat.php");
     }
 
     $curs -> close();

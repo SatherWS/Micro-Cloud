@@ -13,9 +13,10 @@
           }
         }
       }
-    header("Location: ../views/data-storage.php");
+    header("Location: ../views/bonus_apps/data-storage.php");
   }
   
+  // TODO: Implement single uploads if radio button is clicked
   // below is code for uploading single image files
   // Check if image file is a actual image or fake image
   if($_POST["fileop"] == "single") {
@@ -52,7 +53,7 @@
     else {
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        header("Location: ../views/uploaded-data.php");
+        header("Location: ../views/bonus_apps/uploaded-data.php");
       } 
       else {
         echo "Sorry, there was an error uploading your file.";

@@ -79,7 +79,7 @@ CREATE TABLE `votes` (
   `id` int(11) primary key auto_increment not null,
   `topic_id` int(11) not null,
   `username` varchar(20) not null,
-  `vote` text not null,
+  `vote` varchar(10) not null,
   `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
   foreign key (topic_id) references polls(id)
 );

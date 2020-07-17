@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Uploader</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/modal.css">
+    <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" href="../../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
     <?php
-        include("./components/header.php"); 
-        include("./components/upload-modal.php"); 
-        include_once ("../config/database.php");
+        include("./templates/nav.php"); 
+        include("../components/upload-modal.php"); 
+        include_once ("../../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
     ?>
@@ -72,7 +72,7 @@
             window.location='./journal-details.php?journal='+id;
         }
     </script>
-    <script src="../static/main.js"></script>
+    <script src="../../static/main.js"></script>
     <!--
     <script>
         // Get the modal, open and close buttons
@@ -99,6 +99,6 @@
         }
     </script>
     -->
-    <script src="../static/modal.js"></script>
+    <script src="../../static/modal.js"></script>
 </body>
 </html>

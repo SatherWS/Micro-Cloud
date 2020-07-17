@@ -6,9 +6,20 @@
 <body class="todo-bg">
     <?php
         include("./templates/nav.php");
-        include("../controllers/add_entry.php");  
+        include("../../config/database.php");
+
+        $db = new Database();
+        $curs = $db->getConnection();
+        // add voting topic to table of polls
+        if ($_POST["topic"] && $_POST["admin"]) {
+            $sql = "insert into polls(admin, topic) values (?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("ss", $_POST['admin'], $_POST['topic']);
+            $stmnt -> execute();
+            header("Location: ./polls.php");
+        }  
     ?>
-    <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
+    <form method="post" class="app"  id="post-journal">
         <div class="form-container">
             <div></div>
             <div class="todo-panel">

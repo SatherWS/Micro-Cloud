@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cast a Vote</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="shortcut icon" href="../favicon.png" >
+    <?php 
+        include("./templates/head.php");
+        ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL); 
+    ?>
 </head>
 <body>
 <?php
-    include("./components/header.php");
-    include("../controllers/add_entry.php");
-    include_once ('../config/database.php');
+    include("./templates/nav.php");
+    //include("../../controllers/add_entry.php");
+    include_once ('../../config/database.php');
     $database = new Database();
     $curs = $database->getConnection();
     $sql = "select admin, topic from polls where id = ?";
@@ -51,10 +49,10 @@
         <div class="log-header">
             <?php
                 if (hasVoted($curs, $_SERVER['REMOTE_ADDR'])) {
-                    include("./components/poll-headers/not-voted.php");
+                    include("./templates/poll-headers/not-voted.php");
                 }
                 else {
-                    include("./components/poll-headers/voted.php");
+                    include("./templates/poll-headers/voted.php");
                 }
             ?>
         </div>
@@ -152,6 +150,6 @@
         }
     });
 </script>
-<script src="../static/main.js"></script>
+<script src="../../static/main.js"></script>
 </body>
 </html>

@@ -1,15 +1,15 @@
 <html>
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../static/style.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<?php 
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL); 
+		include("./templates/head.php");
+	?>
 	<script>
 		function loaddata() {
 			$.ajax({
-				url: "../controllers/show_msgs.php?room="+<?php echo $_GET['room'] ?>,
+				url: "./controllers/show_msgs.php?room="+<?php echo $_GET['room'] ?>,
 				success: function (response) {
 					$( '#display_info' ).html(response);
 				}
@@ -23,12 +23,12 @@
 </head>
 <body>
 	<?php 
-		include("./components/header.php");
-		include_once ('../config/database.php');
+		include("./templates/nav.php");
+		include_once ('../../config/database.php');
         $database = new Database();
 		$curs = $database->getConnection();
 		
-		if ($_POST['msg']) {
+		if (isset($_POST['msg'])) {
 			$sql = "insert into messages(name, msg, room_id) values(?, ?, ?)";
 			$stmnt = mysqli_prepare($curs, $sql);
 			$stmnt -> bind_param("sss", $_SERVER["REMOTE_ADDR"], $_POST["msg"], $_GET["room"]);
@@ -38,7 +38,7 @@
 	<div class="svg-bg">
         <div class="log-header">  
 			<div>
-				<h3 id="logs-title">Chatroom</h3>
+				<h3 id="logs-title">Chatroom <?php echo $_GET["room"];?></h3>
 			</div>
 			<div class="add-btn">
 				
@@ -60,6 +60,6 @@
             </span>
         </div>
     </form>
-	<script src="../static/main.js"></script>	 
+	<script src="../../static/main.js"></script>	 
 </body>
 </html>

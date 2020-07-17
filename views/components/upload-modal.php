@@ -1,5 +1,5 @@
 
-<form action="../controllers/upload.php" method="post" enctype="multipart/form-data">
+<form action="../../controllers/upload.php" method="post" enctype="multipart/form-data">
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

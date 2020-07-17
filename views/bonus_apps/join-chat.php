@@ -10,7 +10,7 @@
     include("../components/chatroom-modal.php"); 
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select * from chatroom";
+    $sql = "select * from chatroom order by time_created desc";
     $result = mysqli_query($curs, $sql);
 ?>
 <div class="svg-bg">
