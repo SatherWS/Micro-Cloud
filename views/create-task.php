@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if (!isset($_SESSION["unq_user"])){
+    header("Location: ./login.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +24,19 @@
         <div class="todo-panel">
             <div class="todo-flex">
                 <section> <!-- Contain task submit form -->
-                <h1>Task Creator</h1>
+                <h1>Add a New Task</h1>
                 <div class="form-body">
                     <label>Task Description</label><br>
                     <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
+                    <br><br>
+                    <select name="assignee" class="spc-n rep-item" required>
+                        <option value="none" selected disabled hidden> 
+                            Select Team Member
+                        </option>
+                        <option value="Low">Self</option>
+                        <option value="Medium">User 1</option>
+                        <option value="High">User 2</option>
+                    </select>
                     <br><br>
                     <textarea name="descript" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
                     <br><br>

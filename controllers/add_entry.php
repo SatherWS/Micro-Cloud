@@ -1,53 +1,65 @@
 <?php
-    include ('../config/database.php');
-   
-    $database = new Database();
-    $curs = $database->getConnection();
+/*
+*   This controller script handles the creation of tasks and user posts.
+*   Note: Lines 52 and below may need to removed if site is hosted, since it belongs to bonus apps.
+*   Author: Colin Sather
+*/
+session_start();
+if (!isset($_SESSION["unq_user"])){
+    header("Location: ./login.html");
+}
+include ('../config/database.php');
+$database = new Database();
+$curs = $database->getConnection();
+
+if ($curs->connect_error) {
+    die("Connection failed: " . $curs->connect_error);
+}
+
+// create journal entry
+if ($_POST['add-journal']) {
+    $subject = $_POST["jsubject"];
+    $category = $_POST["category"];
+    $msg = $_POST["note"];
+    $priv = "T";
     
-    if ($curs->connect_error) {
-        die("Connection failed: " . $curs->connect_error);
-    }
-
-    // create journal entry
-    if ($_POST['add-journal']) {
-        $subject = $_POST["jsubject"];
-        $category = $_POST["category"];
-        $rating = $_POST["rating"];
-        $msg = $_POST["note"];
-        
-        // check if check box is posted
-        if (isset($_POST['omit'])) {
-            $sql = "insert into journal(subject, message, category) values (?, ?, ?)";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("sss", $subject, $msg, $category);
-            $stmnt -> execute();
-        }
-        else {
-            $sql = "insert into journal(subject, message, rating, category) values (?, ?, ?, ?)";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("ssss", $subject, $msg, $rating, $category);
-            $stmnt -> execute();
-        }
-        header("Location: ../views/logs.php");        
-    }
-
-    // add task to todo list
-    if ($_POST['add-task']) {
-        $sql = "insert into todo_list(title, description, deadline, time_due, importance) values (?, ?, ?, ?, ?)";
+    // check if check box is posted, if true mark journal as private
+    // TODO: Add team id to posts and tasks
+    if (isset($_POST['omit'])) {
+        $sql = "insert into journal(subject, message, category, creator, is_private) values (?, ?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("sssss", $_POST["title"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"]);
+        // set journal to private 
+        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["unq_user"], $priv);
         $stmnt -> execute();
-        header("Location: ../views/create-task.php");
     }
-
-    // add chatroom to database
-    if ($_POST['add-chatroom']) {
-        $sql = "insert into chatroom(subject, creator) values(?, ?)";
+    else {
+        // set journal to public
+        $sql = "insert into journal(subject, message, category, creator) values (?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["room"], $_POST["username"]);
+        $stmnt -> bind_param("ssss", $subject, $msg, $category, $_SESSION["unq_user"]);
         $stmnt -> execute();
-        header("Location: ../views/bonus_apps/join-chat.php");
     }
+    header("Location: ../views/logs.php");        
+}
 
-    $curs -> close();
+// add task to todo list
+if ($_POST['add-task']) {
+    $sql = "insert into todo_list(title, description, deadline, time_due, importance, creator) values (?, ?, ?, ?, ?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("ssssss", $_POST["title"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"], $_SESSION["unq_user"]);
+    $stmnt -> execute();
+    header("Location: ../views/create-task.php");
+}
+
+// TODO: MOVE TO BONUS APPS CONTROLLERS
+// add chatroom to database
+if ($_POST['add-chatroom']) {
+    $sql = "insert into chatroom(subject, creator) values(?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("ss", $_POST["room"], $_POST["username"]);
+    $stmnt -> execute();
+    header("Location: ../views/bonus_apps/join-chat.php");
+}
+
+$curs -> close();
 ?>

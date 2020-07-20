@@ -8,26 +8,30 @@
 -- PHP Version: 7.3.11
 
 --
--- Database: note_web
+-- Database on inspiron machine: note_web
+-- Database on main machine: lhapps
+-- Database should be called grooper or something
 --
-CREATE DATABASE if not exists note_web;
-USE note_web;
+
+--CREATE DATABASE if not exists note_web;
+--USE note_web;
 --DROP TABLE IF EXISTS journal;
 DROP TABLE IF EXISTS todo_list;
--- --------------------------------------------------------
+
 create table teams (
   id int primary key auto_increment,
-  team_name varchar(50) not null,
+  team_name varchar(50) not null unique,
   date_created datetime default current_timestamp
 );
 
 create table users (
   id int primary key auto_increment,
-  usr varchar(75) not null,
-  pswd varchar(75) not null,
-  teamid int not null,
+  email varchar(75) not null unique,
+  username varchar(75) not null,
+  pswd varchar(300) not null,
+  team varchar(50),
   date_created datetime default current_timestamp,
-  foreign key (teamid) references teams(id)
+  foreign key (team) references teams(team_name)
 );
 
 -- Will need to add user foreign keys to the following tables
@@ -40,8 +44,10 @@ CREATE TABLE journal (
   subject varchar(45) NOT NULL,
   message varchar(300) NOT NULL,
   category varchar(45) NOT NULL,
-  rating int(11),
-  date_created datetime DEFAULT CURRENT_TIMESTAMP
+  creator varchar(50) NOT NULL,
+  is_private char(1) default "F" not null,
+  date_created datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (creator) references users(email)
 );
 
 --
@@ -57,8 +63,17 @@ CREATE TABLE todo_list (
   time_due time NOT NULL,
   task_repeat varchar(10) NULL,
 	importance varchar(10) NOT NULL,
-	date_created datetime DEFAULT CURRENT_TIMESTAMP
+  assignee varchar(50),
+  creator varchar(50) NOT NULL,
+	date_created datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (assignee) references users(email),
+  foreign key (creator) references users(email)
 );
+
+/* 
+*   The tables below are for the bonus applications and 
+*   may not be included in the live website. 
+*/
 
 --
 -- Table structure for table `topics`
@@ -101,3 +116,10 @@ CREATE TABLE `messages` (
   foreign key (room_id) references chatroom(id)
 );
 
+create table ratings (
+  id int primary key auto_increment not null,
+  rating int(11),
+  user_email varchar(75) not null unique,
+  date_created datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (user_email) references users(email)
+);

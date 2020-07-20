@@ -2,7 +2,7 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../index.html" class="active">Consciencec</a>
+                <a href="../views/index.php" class="active">Grooper Tech</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
@@ -33,10 +33,11 @@
                     <a href="./bonus_apps/data-storage.php">Data Storage</a>
                     <a href="./bonus_apps/join-chat.php">Chatrooms</a>
                     <a href="./bonus_apps/polls.php">Votting App</a>
+                    <a href="./bonus_apps/pain-rating.php">Pain Rating</a>
                 </div>
             </li>
             <li>
-                <a href="#">Login</a>
+                <a href="../controllers/logout.php">Logout</a>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>

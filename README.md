@@ -8,13 +8,22 @@ This GitHub repository contains source code for project management software. It'
 ## TODO 
 - [X] Adjust note editing textarea for mobile viewing
 - [X] Fix file path errors in bonus apps
-- [ ] Move mood rating system to bonus apps
-- [ ] Implement user authentication
+- [X] Move mood rating system to bonus apps
+- [X] Implement user authentication
 - [ ] Integrate data into gantt chart 
 - [ ] Improve analytics UI 
 - [ ] Implement repeat task option
 
 Tasks for online version
-- [ ] Implement user teams
-- [ ] Assign tasks to users
+- [X] Implement user teams
+- [X] Assign tasks to users
 
+### Notes to self
+#### Join by username
+```
+select journal.subject, journal.creator, todo_list.creator, todo_list.title
+from journal
+inner join todo_list on journal.creator =  todo_list.creator;
+```
+
+#### Join by team

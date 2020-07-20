@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])){
+        header("Location: ./login.html");
+    }
+    include("./components/header.php"); 
+    include_once ("../config/database.php");
+    $database = new Database();
+    $curs = $database->getConnection();
+    $sql = "select id, subject, category, substring(message,1, 45) as preview, date_created from journal order by date_created desc";
+    $result = mysqli_query($curs, $sql);
+    $total = mysqli_num_rows($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,16 +23,6 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body class="log-bg">
-    <?php
-        include("./components/header.php"); 
-        include_once ("../config/database.php");
-        $database = new Database();
-        $curs = $database->getConnection();
-        $sql = "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal order by date_created desc";
-        $result = mysqli_query($curs, $sql);
-        $total = mysqli_num_rows($result);
-    ?>
-
     <div class="svg-bg">
         <div class="log-header">
             <div class="review">
@@ -42,28 +45,30 @@
                 <tr class="tbl-head">
                     <th>ID</th>
                     <th>SUBJECT</th>
+                    <th>CREATOR</th>
                     <th>PREVIEW</th>
                     <th>CATEGORY</th>
-                    <th style="text-align:center">MOOD RATING</th>
                     <th>DATE & TIME CREATED</th>
                 </tr>
                 <?php
                     $filter = $_GET["category"];
+                    $search = "select id, subject, creator, category, substring(message,1, 45) as preview, rating, date_created from journal where category = '$filter' order by date_created desc";
                     if ($filter) {
-                        $result = mysqli_query($curs, "select id, subject, category, substring(message,1, 45) as preview, rating, date_created from journal where category = '$filter' order by date_created desc");
+                        $result = mysqli_query($curs, $search);
                     }
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             $id = $row['id'];
                             echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
                             echo "<td>". $row["subject"]. "</td>";
+                            echo "<td>".$row["creator"]."</td>";
                             echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                             echo "<td>". $row["category"]. "</td>";
+                            echo "<td>".$row["date_created"]."</td></tr>";
+                            
+                            
                             if ($row['rating'])
-                                echo "<td class='m-rate'>". $row["rating"]. "</td>";
-                            else
-                                echo "<td class='m-rate'>N/A</td>";
-                            echo "<td>". $row["date_created"] ."</td></tr>";
+                                echo "<td class='m-rate'>". $row[""]. "</td>";
                         }
                     } 
                     else {

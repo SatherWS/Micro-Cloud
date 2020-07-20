@@ -141,10 +141,10 @@
                 <th>Count</th>
             </tr>
             <?php
-                $sql3 = "select status, count(*) from todo_list group by 'status'";
-                $result = mysqli_query($curs, $sql3);
+                $sql3 = "select status, count(*) from todo_list group by status";
+                $result2 = mysqli_query($curs, $sql3);
             
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result2)) {
                     echo "<tr><td>".$row["status"]."</td>";
                     echo "<td>".$row["count(*)"]."</td></tr>";
                 }

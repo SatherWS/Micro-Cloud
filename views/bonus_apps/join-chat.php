@@ -7,7 +7,7 @@
 <?php 
     include_once ('../../config/database.php');
     include("./templates/nav.php");
-    include("../components/chatroom-modal.php"); 
+    include("./templates/chatroom-modal.php"); 
     $database = new Database();
     $curs = $database->getConnection();
     $sql = "select * from chatroom order by time_created desc";

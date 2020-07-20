@@ -37,7 +37,7 @@
             </div>
             <div>
                 <form method="POST">
-                    <select  class="selector" name="s-status" id="myselect" onchange="this.form.submit()">
+                    <select  class="main-selector" name="s-status" id="myselect" onchange="this.form.submit()">
                         <option value="none" selected disabled hidden>Filter by Status</option>
                         <option value="SHOW ALL">SHOW ALL</option>
                         <option value="NOT STARTED">NOT STARTED</option>

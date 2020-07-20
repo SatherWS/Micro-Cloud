@@ -13,7 +13,7 @@
 <body>
     <?php
         include("./templates/nav.php"); 
-        include("../components/upload-modal.php"); 
+        include("./templates/upload-modal.php"); 
         include_once ("../../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();

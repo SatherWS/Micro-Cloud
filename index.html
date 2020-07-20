@@ -1,122 +1,23 @@
 <!DOCTYPE html>
-<!-- Possibly rename to Conscience Console -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consciencec - productivity applications</title>
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.png" >
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        a {
+            padding: 0 2rem;
+        }
+    </style>
 </head>
-<body class="dash-bg">
-    <nav class="topnav" id="myTopnav">
-        <div class="index-nav parent-nav">
-            <ul>
-                <li>
-                    <a href="#" class="active">Consciencec</a>
-                    <i class="fa fa-wifi"></i>
-                </li>
-            </ul>
-            <ul class="topnav-list">
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Notepad</a>
-                    <div class="dropdown-content">
-                        <a href="./views/create-journal.php">Create Note</a>
-                        <a href="./views/logs.php">All Entries</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="./views/categories.php">Categories</a>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Task List</a>
-                    <div class="dropdown-content">
-                        <a href="./views/create-task.php">Add Task</a>
-                        <a href="./views/show-tasks.php">Manage Tasks</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="./views/analytics.php">Analytics</a>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn">Bonus Apps</a>
-                    <div class="dropdown-content">
-                        <a href="./views/bonus_apps/data-storage.php">Data Storage</a>
-                        <a href="./views/bonus_apps/join-chat.php">Chatrooms</a>
-                        <a href="./views/bonus_apps/polls.php">Votting App</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">Login</a>
-                </li>
-                <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </ul>
-        </div>
-    </nav>
-    <main>
-        <div class="home-intro">
-            <h1 class="intro-header">Welcome to the Console!</h1>
-            <p class="intro-desc">This is a pretty decent way to track your tasks and ideas.</p>
-        </div>
-        <div class="grid-container">
-            <div>
-                <a class="dash-item" href="./views/logs.php">
-                    <i class="fa  fa-pencil spc-1"></i>
-                    <br>
-                    <span class="sup-text">View Notes</span>
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./views/show-tasks.php">
-                    <i class="fa fa-list-ol spc-1"></i>
-                    <br>
-                   <span class="sup-text">View Tasks</span> 
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./views/analytics.php">
-                    <i class="fa fa-line-chart spc-1"></i>
-                    <br>
-                   <span class="sup-text">Analytics</span> 
-                </a>
-            </div>  
-            <div>
-                <a class="dash-item" href="./views/polls.php">
-                    <i class="fa fa-bar-chart spc-1"></i>
-                    <br>
-                    <span class="sup-text">Bonus Apps</span>
-                </a>
-            </div>
-            <!--
-            <div>
-                <a class="dash-item" href="./views/join-chat.php">
-                    <i class="fa  fa-comments-o spc-1"></i>
-                    <br>
-                    <span class="sup-text">Available Storage</span>
-                </a>
-            </div>
-
-            <div>
-                <a class="dash-item" href="./views/data-storage.php">
-                    <i class="fa fa-database spc-1"></i>
-                    <br>
-                    <span class="sup-text">Upload Data</span>
-                </a>
-            </div>
-            -->
-        </div>
-        <footer class="dash-footer">
-            <h3><a>About</a></h3>
-            <h3><a>LAN Version</a></h3>
-            <h3><a>GitHub</a></h3>
-            <h3><a>Support</a></h3>
-        </footer>
-    </main>
-
-    <script src="./static/main.js"></script>
+<body>
+    <h1>Temp Home Page</h1>
+    <!-- TODO: change below php files to html files -->
+    <a href="./views/login.html">Login</a>
+    <a href="./views/signup.html">Sign Up</a>
+    <a href="./views/index.php">Dashboard</a>
 </body>
 </html>

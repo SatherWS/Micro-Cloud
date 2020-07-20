@@ -1,3 +1,14 @@
+<?php 
+    session_start();
+    if (!isset($_SESSION["unq_user"])){
+        header("Location: ./login.html");
+    }
+    include_once("../config/database.php");
+    $database = new Database();
+    $curs = $database->getConnection();
+    $sql = "select distinct category from journal where category is not null";
+    $result = mysqli_query($curs, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +22,7 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body class="todo-bg">
-    <?php 
-        include("./components/header.php");
-        include_once("../config/database.php");
-        $database = new Database();
-        $curs = $database->getConnection();
-        $sql = "select distinct category from journal where category is not null";
-        $result = mysqli_query($curs, $sql);
-    ?>
+    <?php include("./components/header.php");?>
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
             <div class="todo-panel">
@@ -39,7 +43,13 @@
                 <br>
                 <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
                 <br><br>
+                <label class="container">
+                    <input type="checkbox" name="omit">
+                    <span class="checkmark"></span>
+                    Make Private
+                </label>
                 <div class="sec-2">
+                    <!--
                     <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                     <div class="j-box">
                         <div>
@@ -51,6 +61,7 @@
                         </div>
                         <label style="text-align: left;">Mood Rating: <span id="demo"></span></label>
                     </div>
+                    -->
                     <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
                 </div>
             </div>
