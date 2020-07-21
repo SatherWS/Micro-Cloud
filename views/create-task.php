@@ -1,8 +1,21 @@
 <?php 
-session_start();
-if (!isset($_SESSION["unq_user"])){
-    header("Location: ./login.html");
-}
+    session_start();
+    if (!isset($_SESSION["unq_user"])){
+        header("Location: ./login.html");
+    }
+    include_once("../config/database.php");
+    include("./components/scrollcontent.php");
+
+    $db = new Database();
+    $curs = $db -> getConnection();
+    $sql = "select email from users where team = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $results = $stmnt -> get_result();
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +46,13 @@ if (!isset($_SESSION["unq_user"])){
                         <option value="none" selected disabled hidden> 
                             Select Team Member
                         </option>
-                        <option value="Low">Self</option>
-                        <option value="Medium">User 1</option>
-                        <option value="High">User 2</option>
+                        <option value="None">None</option>
+                        <option value="<?php echo $_SESSION["unq_user"]?>">Self</option>
+                        <?php
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
+                            }
+                        ?>
                     </select>
                     <br><br>
                     <textarea name="descript" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
@@ -45,7 +62,16 @@ if (!isset($_SESSION["unq_user"])){
                     <label>Time Due</label><br>
                     <input type="time" name="time-due" class="todo-item spc-n" required>
                     <br><br>
-                    <label>Additional Options</label><br>
+                    <label>Rating</label><br>
+                    <select name="importance" class="spc-n rep-item" required>
+                        <option value="none" selected disabled hidden> 
+                            Rank Importance
+                        </option>
+                        <option value="Low">Low Importance</option>
+                        <option value="Medium">Medium Importance</option>
+                        <option value="High">High Importance</option>
+                    </select>
+                    <!--
                     <section class="todo-flex">
                         <div>
                             <select name="importance" class="spc-n rep-item" required>
@@ -57,6 +83,7 @@ if (!isset($_SESSION["unq_user"])){
                                 <option value="High">High Importance</option>
                             </select>
                         </div>
+                  
                         <div>
                             <select name="repeat" class="spc-n rep-item" required>
                                 <option value="none" selected disabled hidden> 
@@ -70,14 +97,18 @@ if (!isset($_SESSION["unq_user"])){
                             </select>
                         </div>
                     </section>
+                    -->
                 </div>
                 <br>
                 <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">
                 </section>
-                <section> <!-- Preview submitted tasks (needs to be responsive) -->
+                <section> <!-- Preview submitted tasks -->
                     <h1></h1>
                     <div class="scroll-pane">
-                        <?php include("./components/scrollcontent.php");?>
+                        <?php 
+                            $content = new Scroll();
+                            $content -> scroll_content($curs);
+                        ?>
                     </div>
                 </section>
             </div>

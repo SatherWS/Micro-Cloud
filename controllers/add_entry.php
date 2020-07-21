@@ -26,17 +26,17 @@ if ($_POST['add-journal']) {
     // check if check box is posted, if true mark journal as private
     // TODO: Add team id to posts and tasks
     if (isset($_POST['omit'])) {
-        $sql = "insert into journal(subject, message, category, creator, is_private) values (?, ?, ?, ?, ?)";
+        $sql = "insert into journal(subject, message, category, creator, team_name, is_private) values (?, ?, ?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         // set journal to private 
-        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["unq_user"], $priv);
+        $stmnt -> bind_param("ssssss", $subject, $msg, $category, $_SESSION["unq_user"], $_SESSION["team"], $priv);
         $stmnt -> execute();
     }
     else {
         // set journal to public
-        $sql = "insert into journal(subject, message, category, creator) values (?, ?, ?, ?)";
+        $sql = "insert into journal(subject, message, category, creator, team) values (?, ?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ssss", $subject, $msg, $category, $_SESSION["unq_user"]);
+        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["user"], $_SESSION["team"]);
         $stmnt -> execute();
     }
     header("Location: ../views/logs.php");        
@@ -44,9 +44,9 @@ if ($_POST['add-journal']) {
 
 // add task to todo list
 if ($_POST['add-task']) {
-    $sql = "insert into todo_list(title, description, deadline, time_due, importance, creator) values (?, ?, ?, ?, ?, ?)";
+    $sql = "insert into todo_list(title, assignee, description, deadline, time_due, importance, creator, team_name) values (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ssssss", $_POST["title"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"], $_SESSION["unq_user"]);
+    $stmnt -> bind_param("ssssssss", $_POST["title"], $_POST["assignee"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"], $_SESSION["unq_user"], $_SESSION["team"]);
     $stmnt -> execute();
     header("Location: ../views/create-task.php");
 }

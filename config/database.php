@@ -1,5 +1,5 @@
 <?php
-    class Database{
+    class Database {
         private $server = "localhost";
         //private $db = "note_web";
         private $db = "lhapps";

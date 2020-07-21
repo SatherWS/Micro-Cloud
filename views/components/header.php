@@ -2,7 +2,8 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../views/index.php" class="active">Grooper Tech</a>
+                <!-- Team Steep vs. Team Stoop -->
+                <a href="../views/index.php" class="active">Team Stoop</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>

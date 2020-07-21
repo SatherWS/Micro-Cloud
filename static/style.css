@@ -17,8 +17,8 @@ nav {
 }
 
 .fa-wifi {
-  /*font-size: 72px;*/
-  background: -webkit-linear-gradient(rgb(0, 210, 251), rgb(0, 218, 25));
+  /*background: -webkit-linear-gradient(rgb(0, 210, 251), rgb(0, 218, 25));*/
+  background: -webkit-linear-gradient(blue, red);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -85,6 +85,10 @@ ul.topnav-list {
 /*-------------------------------------------------------*
 * UI Input Components                                    |
 *-------------------------------------------------------*/
+::placeholder {
+  color: #000;
+  opacity: 1;
+}
 .main-selector {
   box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
   border: none;
@@ -152,9 +156,6 @@ textarea {
 /*-------------------------------------------------------*
 * JOURNAL SECTION                                        |
 *-------------------------------------------------------*/
-.review h3 {
-  margin-top: 0px!important;
-}
 
 .cat-list {
   margin-left: 1rem;
@@ -337,7 +338,7 @@ main {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   /*height: 90vh; */
   grid-gap: 10px;
   margin: 1rem 0;
@@ -519,7 +520,7 @@ ul {
 .scroll-pane {
   overflow-y: scroll;
   padding: 1rem;
-  height: 550px;
+  height: 590px;
 }
 
 .scroll-item {
@@ -555,19 +556,19 @@ ul {
 }
 
 .todo-item {
-    font-size: 14pt;
+    font-size: 16pt;
     width: 328px;
     background: #f1f1f1;
     border: none;
 }
 
 input[type="date"] {
-    font-size: 14pt;
+    font-size: 16pt;
     text-align: center;
 }
 
 input[type="time"] {
-    font-size: 14pt;
+    font-size: 16pt;
     text-align: center;
 }
 
@@ -577,6 +578,7 @@ select {
 
 .rep-item {
   width: 100%;
+  font-size: 16pt;
 }
 
 /*-------------------------------------------------------*
@@ -601,8 +603,11 @@ select {
 }
 
 #logs-title {
-  margin-block-start: 0!important;
   margin-left: 2rem;
+}
+
+.mr2rem {
+  margin-right: 2rem;
 }
 
 .log-header {
@@ -894,6 +899,7 @@ tr:hover {background-color:#f5f5f5;}
     background: #fff;
     border-radius: 5px;
     padding: .5rem;
+    box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
   }
 
   .polls-header {

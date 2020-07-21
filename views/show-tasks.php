@@ -29,7 +29,7 @@
         $total = mysqli_num_rows($result)
     ?>
     <div class="svg-bg2">
-        <div class="log-header">
+        <div class="todo-flex">
             <div class="review">
                 <?php
                     echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
@@ -37,7 +37,7 @@
             </div>
             <div>
                 <form method="POST">
-                    <select  class="main-selector" name="s-status" id="myselect" onchange="this.form.submit()">
+                    <select  class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
                         <option value="none" selected disabled hidden>Filter by Status</option>
                         <option value="SHOW ALL">SHOW ALL</option>
                         <option value="NOT STARTED">NOT STARTED</option>
@@ -54,7 +54,8 @@
             <table class="data task-tab">
                 <tr class="tbl-head">
                     <th>ID</th>
-                    <th>DESCRIPTION</th>
+                    <th>TITLE</th>
+                    <!--<th>DESCRIPTION</th>-->
                     <th>STATUS</th>
                     <th>DEADLINE</th>
                     <th>TIME DUE</th>
@@ -66,7 +67,8 @@
                         while($row = mysqli_fetch_assoc($result)) {
                             $id = $row["id"];
                             echo "<tr onclick='getTask($id)'><td>".$row["id"]."</td>";
-                            echo "<td>".$row["description"]."</td>";
+                            echo "<td>".$row["title"]."</td>";
+                            //echo "<td>".$row["description"]."</td>";
                             echo "<td>".$row["status"]."</td>";
                             echo "<td>".$row["deadline"]."</td>";
                             echo "<td>".$row["time_due"]."</td>";

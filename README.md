@@ -12,11 +12,20 @@ This GitHub repository contains source code for project management software. It'
 - [X] Implement user authentication
 - [ ] Integrate data into gantt chart 
 - [ ] Improve analytics UI 
-- [ ] Implement repeat task option
+- [X] Remove repeat task option
+- [ ] Change index.php to dashboard.php
+- [ ] Move imgs dir to static
+- [ ] Fix drop down hover nav
 
 Tasks for online version
 - [X] Implement user teams
 - [X] Assign tasks to users
+- [ ] Implement user options (add/drop teams, invite users)
+- [ ] Remove bonus apps
+- [ ] Design landing page
+- [ ] Create auth dir change login and signup to php scripts
+- [ ] Implement error messages
+- [ ] Write cron jobs to send email alerts regarding tasks
 
 ### Notes to self
 #### Join by username
@@ -27,3 +36,8 @@ inner join todo_list on journal.creator =  todo_list.creator;
 ```
 
 #### Join by team
+```
+select journal.subject, journal.creator, todo_list.creator, todo_list.title
+from journal
+inner join todo_list on journal.team_name =  todo_list.team_name;
+```

@@ -47,7 +47,9 @@ CREATE TABLE journal (
   creator varchar(50) NOT NULL,
   is_private char(1) default "F" not null,
   date_created datetime DEFAULT CURRENT_TIMESTAMP,
-  foreign key (creator) references users(email)
+  team_name varchar(50),
+  foreign key (creator) references users(email),
+  foreign key (team_name) references teams(team_name)
 );
 
 --
@@ -65,9 +67,11 @@ CREATE TABLE todo_list (
 	importance varchar(10) NOT NULL,
   assignee varchar(50),
   creator varchar(50) NOT NULL,
+  team_name varchar(50),
 	date_created datetime DEFAULT CURRENT_TIMESTAMP,
   foreign key (assignee) references users(email),
-  foreign key (creator) references users(email)
+  foreign key (creator) references users(email),
+  foreign key (team_name) references teams(team_name)
 );
 
 /* 
