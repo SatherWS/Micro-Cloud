@@ -265,13 +265,7 @@ textarea {
 
 .svg-bg {
   display: block;
-  background-image: url("../imgs/dash-bg.svg");
-  background-repeat: no-repeat;
-}
-
-.svg-bg2 {
-  display: block;
-  background-image: url("../imgs/dash-bg.svg");
+  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
   background-repeat: no-repeat;
 }
 
@@ -324,18 +318,6 @@ main {
   box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
 }
 
-.dash-bg {
-  background: #f1f1f1;
-  background-image: url(../imgs/dash-bg.svg);
-  /*
-  linear-gradient(
-    to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55)),
-    url(../imgs/dash-bg.svg);
-  */
-  background-repeat: no-repeat;
-  height: 60vh;
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
@@ -374,7 +356,7 @@ main {
 
 .activity {
   background: #fff;
-  box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
   border-radius: 8px;
   padding: 1rem;
   margin-top: 10px;
@@ -425,10 +407,11 @@ ul {
   }
   
   .dropdown-content {
-    margin-top: 0.8rem;
     display: none;
     position: absolute;
     background-color: #fff;
+    margin: -14px -16px;
+    top: 65px;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -444,7 +427,7 @@ ul {
   }
   
   .dropdown-content a:hover {
-    background-color: inherit;
+    background-color: #ddd;
   }
   
   .dropdown:hover .dropdown-content {
@@ -540,10 +523,14 @@ ul {
   border-radius: 5px;
 }
 
+/* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
-  background: #f1f1f1;
+  background: #fff;
+   /*
   background-image: url('../imgs/dash-bg.svg');
-  height: 60vh;
+  background: rgb(174,238,219);*/
+  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
+  height: 50vh;
   background-repeat: no-repeat;
 }
 
@@ -552,7 +539,7 @@ ul {
     border-radius: 5px;
     width: 60%;
     padding: 1.5rem;
-    box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
 }
 
 .todo-item {
@@ -608,14 +595,6 @@ select {
 
 .mr2rem {
   margin-right: 2rem;
-}
-
-.log-header {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 #options {
@@ -892,14 +871,13 @@ tr:hover {background-color:#f5f5f5;}
   }
 
   /* use in chat-details.php */
-  .add-btn a {
+  .add-btn a{
     color: #000;
-    font-weight: bold;
     /* border: solid 2px; */
     background: #fff;
-    border-radius: 5px;
-    padding: .5rem;
-    box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+    border-radius: 8px;
+    padding: .5rem 1rem;
+    box-shadow: 0 3px 5px -2px rgba(0,0,0,.2);
   }
 
   .polls-header {
@@ -949,6 +927,9 @@ tr:hover {background-color:#f5f5f5;}
     textarea {
       height: 420px;
     }
+    .scroll-item {
+      width: 350px;
+    }
   }
   
   /*
@@ -960,8 +941,9 @@ tr:hover {background-color:#f5f5f5;}
   */
 
   @media screen and (max-width: 830px) {
-    .todo-flex {
+    .task-ops {
       display: block;
+      margin-top: 10px;
     }
     .scroll-pane {
       padding: 0;
@@ -1135,6 +1117,7 @@ tr:hover {background-color:#f5f5f5;}
       border: 1px solid #ccc; 
       margin-top: 1rem;
       box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+      background: #fff;
     }
     
     td { 

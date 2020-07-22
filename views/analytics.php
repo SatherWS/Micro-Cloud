@@ -1,9 +1,14 @@
 <?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
+    }
     include_once ("../config/database.php");
     $db = new database();
     $curs = $db->getConnection();
     $total = 0;
 
+    /*
     if ($_POST["range2"]) {
         $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
         mysqli_query($curs, $sql);
@@ -28,7 +33,7 @@
             array_push($dataPoints, $data);
         }
     }
-
+    */
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -100,34 +105,25 @@
 <body>
 <?php include("./components/header.php");?>
 <div class="svg-bg">
-    <div class="log-header">    
+    <div class="todo-flex">    
         <div class="review">
-            <h2 id='logs-title'>Analytics</h2>
+        <label>Start Date:</label><br>
+                <input type="date" name="start-date" id=""> <br>
         </div>
-        <!--
-        <div class="add-log">
+        <div class="mr2rem">
             <form action="./analytics.php" method="POST">
-                <input type="date" name="start-date" id="">
-                <input type="date" name="end-date" id="">
+               
+                <label>End Date:</label><br>
+                <input type="date" name="end-date" id=""> <br><br>
                 <input type="submit" value="Set Range" name="range" class="date-btn">
+                <br>
             </form>
         </div>
-        -->
     </div>
 </div>
 <article class="main-page">
 <!-- Task List Section ===========================================-->
-<form action="./analytics.php" method="POST">
-    <div class="log-header">    
-        <div class="review">
-            <input type="date" name="start-date" id=""> 
-        </div>
-        <div>
-            <input type="date" name="end-date" id="">
-            <input type="submit" value="Set Range" name="range" class="date-btn">
-        </div>
-    </div>
-</form>
+
 <!-- Gantt chart div -->
 <div id="chart_div"></div>
 
@@ -159,38 +155,6 @@
     </div>
 </div>
 
-<!-- Mood Ratings Section ==========================-->
-<?php   
-    $sql = "select avg(rating) from journal";
-    $result = mysqli_query($curs, $sql);
-    $avg = $result -> fetch_row();
-?>
-<div class="avgs">
-    <h2>Mood Average: <?php print_r($avg[0]) ?></h2>
-    <h2>
-    <?php 
-        if ($_POST['range'])
-            echo "All ".$total. " ratings from ".$_POST['start-date']." to ".$_POST['end-date'];
-        else
-            echo "All ".$total." Ratings";
-    ?>
-    </h2>
-</div>
-
-<!-- Line Graph Section Start ================================-->
-<form action="./analytics.php" method="POST">
-    <div class="log-header">    
-        <div class="review">
-            <input type="date" name="start-date" id=""> 
-        </div>
-        <div>
-            <input type="date" name="end-date" id="">
-            <input type="submit" value="Set Range" name="range2" class="date-btn">
-        </div>
-    </div>
-</form>
-<!-- canvas js line graph -->
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </article>
 
 <!-- google pie chart script =========================================-->
@@ -220,26 +184,6 @@
     }
 </script>
 
-<!-- Canvas JS scripts -->
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-    window.onload = function () {
-        
-    // line graph code
-    var chart = new CanvasJS.Chart("chartContainer", {
-            axisY: {
-                lineThickness: 0
-            },
-
-            data: [{
-                type: "splineArea",
-                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>,
-                lineThickness: 5
-            }]
-        });
-        chart.render();
-    }
-</script>
 <script src="../static/main.js"></script>
 </body>
 </html>   

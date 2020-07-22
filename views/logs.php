@@ -1,7 +1,7 @@
 <?php
     session_start();
-    if (!isset($_SESSION["unq_user"])){
-        header("Location: ./login.html");
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
     }
     include_once ("../config/database.php");
     $database = new Database();
@@ -24,12 +24,12 @@
 <body class="log-bg">
     <?php include("./components/header.php");?>
     <div class="svg-bg">
-        <div class="log-header">
+        <div class="todo-flex">
             <div class="review">
-                <h3><?php echo $total;?> Total Journals</h3>
+                <h3 id="logs-title"><?php echo $total;?> Total Journals</h3>
             </div>    
             <div class="add-btn">
-                <h3 id="logs-title">
+                <h3 class="mr2rem">
                     <a href="./create-journal.php">
                         <span>Add Entry</span>
                         <i class="fa fa-plus-circle"></i>

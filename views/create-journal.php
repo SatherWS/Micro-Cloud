@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    if (!isset($_SESSION["unq_user"])){
-        header("Location: ./login.html");
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
     }
     include_once("../config/database.php");
     $database = new Database();

@@ -3,20 +3,18 @@
         <ul>
             <li>
                 <!-- Team Steep vs. Team Stoop -->
-                <a href="../views/index.php" class="active">Team Stoop</a>
+                <a href="../views/dashboard.php" class="active">Team Stoop</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
         <ul class="topnav-list">
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Notepad</a>
+                <a href="javascript:void(0)" class="dropbtn">Team Posts</a>
                 <div class="dropdown-content">
-                    <a href="./create-journal.php">Create Note</a>
-                    <a href="./logs.php">All Entries</a>
+                    <a href="./create-journal.php">Create Post</a>
+                    <a href="./logs.php">View Posts</a>
+                    <a href="./categories.php">Categories</a>
                 </div>
-            </li>
-            <li>
-                <a href="./categories.php">Categories</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Task List</a>

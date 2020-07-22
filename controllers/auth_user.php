@@ -22,10 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["auth_user"])) {
         $_SESSION["user"] = $row["username"];
         $_SESSION["team"] = $row["team"];
         $_SESSION["unq_user"] = $_POST["email"];
-        header("Location: ../views/index.php");
+        header("Location: ../views/dashboard.php");
     }
     else {
-        header("Location: ../views/login.html");
+        header("Location: ../authentication/login.php");
         echo "Incorrect creds";
     }
 }
@@ -40,14 +40,13 @@ function search_team($curs, $team) {
     $stmnt -> bind_param("s", $team);
     $stmnt -> execute();
     $results = $stmnt -> get_result();
-    //$row = mysqli_fetch_assoc($results);
     if ($results -> num_rows > 0)
         return true;
     else
         return false;
 }
 
-// add user to db 
+// add user to db if search_team = false create new team 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     $sql = "insert into users(email, username, pswd) values(?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
@@ -81,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $_SESSION["unq_user"] = $_POST["email"];
         $_SESSION["user"] = $_POST["usr"];
         $_SESSION["team"] = $_POST["team"];
-        header("Location: ../views/index.php");
+        header("Location: ../views/dashboard.php");
     }
 }
 ?>

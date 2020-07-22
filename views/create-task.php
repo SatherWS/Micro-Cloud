@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if (!isset($_SESSION["unq_user"])){
-        header("Location: ./login.html");
+        header("Location: ../authentication/login.php");
     }
     include_once("../config/database.php");
     include("./components/scrollcontent.php");
@@ -62,7 +62,7 @@
                     <label>Time Due</label><br>
                     <input type="time" name="time-due" class="todo-item spc-n" required>
                     <br><br>
-                    <label>Rating</label><br>
+                    <label>Importance Rating</label><br>
                     <select name="importance" class="spc-n rep-item" required>
                         <option value="none" selected disabled hidden> 
                             Rank Importance

@@ -49,7 +49,7 @@
         }
     ?>
     <div class="svg-bg">
-        <div class="log-header">
+        <div class="todo-flex">
             <div class="review">
                 <h3 id="logs-title">
                 <?php

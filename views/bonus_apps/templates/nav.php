@@ -2,7 +2,7 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../../views/index.php" class="active">Grooper Tech</a>
+                <a href="../../views/dashboard.php" class="active">Grooper Tech</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>

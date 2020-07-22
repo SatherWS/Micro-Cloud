@@ -1,4 +1,9 @@
-<!-- This is a bonus feature use select element to sort through categories -->
+<?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

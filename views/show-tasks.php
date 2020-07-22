@@ -1,4 +1,9 @@
-
+<?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,14 +33,14 @@
         }
         $total = mysqli_num_rows($result)
     ?>
-    <div class="svg-bg2">
+    <div class="svg-bg">
         <div class="todo-flex">
             <div class="review">
                 <?php
                     echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
                 ?>
             </div>
-            <div>
+            <div class="task-ops todo-flex">
                 <form method="POST">
                     <select  class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
                         <option value="none" selected disabled hidden>Filter by Status</option>
@@ -46,6 +51,14 @@
                         <option value="COMPLETED">COMPLETED</option>
                     </select>
                 </form>
+                <div class="add-btn">
+                    <h3 class="mr2rem">
+                        <a href="./create-task.php">
+                            <span>Add Task</span>
+                            <i class="fa fa-plus-circle"></i>
+                        </a>
+                    </h3>
+                </div>
             </div>  
         </div>
     </div>

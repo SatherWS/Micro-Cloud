@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../authentication/login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,14 +50,14 @@
         }
     ?>
     <div class="svg-bg">
-        <div class="log-header">    
+        <div class="todo-flex mr2rem">    
             <div class="review">
                 <h3 id="logs-title">Task ID #<?php echo $_GET['task'];?></h3>
             </div>
-            <div class="add-log">
+            <div>
                 <form action="./task-details.php" method="post">
-                    <button type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
-                    <button type='submit' name='delete' value="<?php echo $_GET['task']; ?>"><i class='fa fa-close'></i>Delete Task</button>
+                    <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
+                    <button class="add-btn" type='submit' name='delete' value="<?php echo $_GET['task']; ?>"><i class='fa fa-close'></i>Delete Task</button>
                 </form>
             </div>
         </div>

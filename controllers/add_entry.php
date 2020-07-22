@@ -6,7 +6,7 @@
 */
 session_start();
 if (!isset($_SESSION["unq_user"])){
-    header("Location: ./login.html");
+    header("Location: ../authentication/login.php");
 }
 include ('../config/database.php');
 $database = new Database();
@@ -51,7 +51,7 @@ if ($_POST['add-task']) {
     header("Location: ../views/create-task.php");
 }
 
-// TODO: MOVE TO BONUS APPS CONTROLLERS
+// TODO: MOVE TO BONUS APPS CONTROLLERS -----
 // add chatroom to database
 if ($_POST['add-chatroom']) {
     $sql = "insert into chatroom(subject, creator) values(?, ?)";

@@ -1,14 +1,18 @@
 <?php
+    session_start();
+    if (!isset($_SESSION["unq_user"])) {
+        header("Location: ../../authentication/login.php");
+    }
     include_once ("../../config/database.php");
     $db = new database();
     $curs = $db->getConnection();
     $total = 0;
 
     if ($_POST["range2"]) {
-        $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
+        $sql = "select rating, date(date_created) as dr from rating where (date_created between ? and ?) and user_email = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["start-date"], $_POST["end-date"]);
+        $stmnt -> bind_param("sss", $_POST["start-date"], $_POST["end-date"], $_SESSION["unq_user"]);
         $stmnt -> execute();
         $result = $stmnt -> get_result();
         print_r($result);
@@ -16,7 +20,7 @@
         $total = mysqli_num_rows($result);
     } 
     else {
-        $sql = "select rating, date(date_created) as dr from journal";
+        $sql = "select rating, date(date_created) as dr from ratings";
         $result = mysqli_query($curs, $sql);
         $total = mysqli_num_rows($result);
     }
@@ -36,18 +40,7 @@
     <?php include("./templates/head.php");?>
 </head>
 <body class="todo-bg">
-    <?php
-        include("./templates/nav.php");
-    /* 
-        include_once("../../config/database.php");
-        $database = new Database();
-        $curs = $database->getConnection();
-
-        // TODO: change this after users are implemented
-        $sql = "select distinct category from journal where category is not null";
-        $result = mysqli_query($curs, $sql);
-    */
-    ?>
+    <?php include("./templates/nav.php");?>
     <!-- Pain Rating Section Start ================================-->
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
     <div class="form-container">
@@ -59,14 +52,7 @@
             <div class="sec-2">
                 <input type="range" min="0" max="10" value="5" class="slider" id="myRange" name="rating" required>
                 <div class="j-box">
-                    <div>
-                        <label class="container">
-                            <input type="checkbox" name="omit">
-                            <span class="checkmark"></span>
-                            Omit Mood Rating
-                        </label>
-                    </div>
-                    <label style="text-align: left;">Pain Rating: <span id="demo"></span></label>
+                    <label>Pain Rating: <span id="demo"></span></label>
                 </div>
                 <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
             </div>
@@ -75,7 +61,7 @@
     </form>
     <!-- Mood Ratings Section ==========================-->
     <?php   
-        $sql = "select avg(rating) from journal";
+        $sql = "select avg(rating) from ratings";
         $result = mysqli_query($curs, $sql);
         $avg = $result -> fetch_row();
     ?>
