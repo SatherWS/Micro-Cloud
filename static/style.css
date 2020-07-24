@@ -90,7 +90,7 @@ ul.topnav-list {
   opacity: 1;
 }
 .main-selector {
-  box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
   border: none;
   padding: .5rem 1rem;
   border-radius: 8px;
@@ -363,7 +363,8 @@ main {
 }
 
 .activity-item {
-  width:50%;
+  width:60%;
+  font-size: 16pt;
 }
 .local-app-container {
   text-align: center;
@@ -478,7 +479,11 @@ ul {
     .sup-text {
       font-size: 16pt;
     }
-    .topnav.responsive {position: relative;}
+    .topnav.responsive {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
     .topnav.responsive .icon {
       position: absolute;
       right: 0;
@@ -489,6 +494,24 @@ ul {
       display: block;
       text-align: left;
     }
+
+    /* login mobile views */
+    .login-comp {
+      width: 95%;
+    }
+    .r-cols.todo-flex{
+      display: block;
+    }
+
+    /* dashboard mobile views */
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto;
+    }
+    .activity-item {
+      width: 100%;
+      font-size: 14pt;
+    }
   }
 
 
@@ -498,6 +521,10 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.flex-end {
+  align-items: flex-end;
 }
 
 .scroll-pane {
@@ -526,9 +553,6 @@ ul {
 /* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
   background: #fff;
-   /*
-  background-image: url('../imgs/dash-bg.svg');
-  background: rgb(174,238,219);*/
   background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
   height: 50vh;
   background-repeat: no-repeat;
@@ -605,6 +629,19 @@ select {
   padding: 0 2rem;
 }
 
+.log-container label {
+  padding-top: 1em;
+}
+.spc-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+/*
+.log-container input[type="date"] {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+*/
 /* Task and Journal for detail views *********************************/
 .row-c2 {
   /* use for MR.F */
@@ -770,7 +807,7 @@ tr:hover {background-color:#f5f5f5;}
   }
   */
   .main-page {
-    margin: 0 1rem;
+    margin: 2rem;
   }
   /*
   .a-panel {
@@ -788,7 +825,7 @@ tr:hover {background-color:#f5f5f5;}
     color: #fff;
     padding: 6px;
     border: none;
-    height: 28px;
+    height: 36px;
   }
 
   .spacer {
@@ -796,23 +833,26 @@ tr:hover {background-color:#f5f5f5;}
   }
 
   .pie-box {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 3rem;
-    padding-right: 0;
-    /*box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);*/
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 10px
   }
 
-  /*
-  .pie-data {
-    
-    width: 700px;
-    box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+  #piechart {
+    width: 50%; 
+    min-height: 450px;
+    display: block;
+    margin: 0 auto
   }
-  */
   .pie-data {
-    width: 700px;
+    background: #fff;
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 10px;
   }
+
   
   /* ---------------------------------+
     Chatroom Section                  |
@@ -931,14 +971,6 @@ tr:hover {background-color:#f5f5f5;}
       width: 350px;
     }
   }
-  
-  /*
-  @media screen and (min-height: 600px) {
-    .home-intro {
-      padding: 1rem 0;
-    }
-  }
-  */
 
   @media screen and (max-width: 830px) {
     .task-ops {
@@ -954,7 +986,12 @@ tr:hover {background-color:#f5f5f5;}
     .todo-txt-area {
       width: 95%!important;
     }
-    
+    .pie-box {
+      display: block;
+    }
+    .pie-data {
+      width: 100%;
+    }
   }
   /*
   @media screen and (max-height: 700px) {
@@ -966,6 +1003,11 @@ tr:hover {background-color:#f5f5f5;}
 
   /* Mobile responsive section start*/
   /* removed only keyword before screen keyword 6/18 */
+  @media screen and (max-width: 799px) {
+    .pie-data {
+      width: 100%;
+    }
+  }
   @media screen and (max-width: 700px) {
     /*
     .opt-desc {
@@ -987,6 +1029,9 @@ tr:hover {background-color:#f5f5f5;}
 
     .edit-field {
       margin-top: .5rem;
+    }
+    .pie-data{
+      width: 100%;
     }
   }
 
@@ -1013,10 +1058,15 @@ tr:hover {background-color:#f5f5f5;}
     }
 
     .todo-panel { 
-      width: 330px;
+      width: 300px;
       margin: 0 auto; 
     }
     
+    .dropdown-content {
+      top: 10px;
+      right: 162px;
+      min-height: 255px;
+    }
     /* Notes Section & Task list */
 
     textarea { 
@@ -1051,7 +1101,7 @@ tr:hover {background-color:#f5f5f5;}
 
     .rep-item {
       margin-top: 10px;
-      width: 199px;
+      /*width: 199px;*/
     }
     /* logs.php */
     .m-rate {
@@ -1152,13 +1202,15 @@ tr:hover {background-color:#f5f5f5;}
     /*
     Labeling mobile tables: Task Section
     */
-    .task-tab td:nth-of-type(1):before { content: "Task ID"; }
+    .task-tab td:nth-of-type(1):before { content: "Team"; }
     .task-tab td:nth-of-type(2):before { content: "Title"; }
     .task-tab td:nth-of-type(3):before { content: "Status"; }
     .task-tab td:nth-of-type(4):before { content: "Due Date"; }  
     .task-tab td:nth-of-type(5):before { content: "Time Due"; }
-    .task-tab td:nth-of-type(6):before { content: "Priority"; }
-    .task-tab td:nth-of-type(7):before { content: "Date Posted"; }
+    .task-tab td:nth-of-type(6):before { content: "Assigned To"; }
+    .task-tab td:nth-of-type(7):before { content: "Assigned By"}
+    .task-tab td:nth-of-type(8):before { content: "Priority"; }
+    .task-tab td:nth-of-type(9):before { content: "Date Posted"; }
 
     /*
     Labeling mobile tables: Voting Section

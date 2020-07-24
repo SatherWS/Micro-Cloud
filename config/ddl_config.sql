@@ -52,6 +52,17 @@ CREATE TABLE journal (
   foreign key (team_name) references teams(team_name)
 );
 
+-- NEW TABLE `comments`, ref journal 08/22/2020
+
+CREATE TABLE comments (
+  id int(11) primary key not null,
+  comment varchar not null,
+  user_email varchar not null,
+  journal_id int(11) not null,
+  foreign key(journal_id) references journal(id),
+  foreign key(user_email) references users(email)
+)
+
 --
 -- Table structure for table todo_list
 --

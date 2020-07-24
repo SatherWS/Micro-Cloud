@@ -35,7 +35,7 @@
 <form action="../controllers/add_entry.php" method="post" class="app">
     <div class="form-container">
         <div class="todo-panel">
-            <div class="todo-flex">
+            <div class="todo-flex r-cols">
                 <section> <!-- Contain task submit form -->
                 <h1>Add a New Task</h1>
                 <div class="form-body">

@@ -65,7 +65,7 @@
         $result = mysqli_query($curs, $sql);
         $avg = $result -> fetch_row();
     ?>
-    <div class="avgs">
+    <div class="todo-flex log-container">
         <h2>Mood Average: <?php print_r($avg[0]) ?></h2>
         <h2>
         <?php 
@@ -79,11 +79,11 @@
 
     <!-- Line Graph Section Start ================================-->
     <form action="./analytics.php" method="POST">
-        <div class="log-header">    
+        <div class="log-container todo-flex">    
             <div class="review">
                 <input type="date" name="start-date" id=""> 
             </div>
-            <div>
+            <div class="todo-flex flex-end">
                 <input type="date" name="end-date" id="">
                 <input type="submit" value="Set Range" name="range2" class="date-btn">
             </div>

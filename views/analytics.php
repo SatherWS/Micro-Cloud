@@ -8,32 +8,39 @@
     $curs = $db->getConnection();
     $total = 0;
 
-    /*
-    if ($_POST["range2"]) {
-        $sql = "select rating, date(date_created) as dr from journal where date_created between ? and ?";
-        mysqli_query($curs, $sql);
+    // data for gantt chart w/o range
+    $sql = "select date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $result = $stmnt -> get_result();
+
+    // data for gantt chart range
+    if ($_POST["range"]) {
+        $sql = "select assignee, creator, title, status, deadline, date(date_created) as created from todo_list where (date_created between ? and ?) and team_name = ?";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["start-date"], $_POST["end-date"]);
+        $stmnt -> bind_param("sss", $_POST["start-date"], $_POST["end-date"], $_SESSION["team"]);
         $stmnt -> execute();
         $result = $stmnt -> get_result();
-        print_r($result);
-
         $total = mysqli_num_rows($result);
-    } 
+        $test = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($test, $row);
+        }
+        echo json_encode($test);
+    }
+    
+    /* 
     else {
         $sql = "select rating, date(date_created) as dr from journal";
         $result = mysqli_query($curs, $sql);
         $total = mysqli_num_rows($result);
     }
-    
-    $dataPoints = array();
-    while($row = mysqli_fetch_assoc($result)) {
-        if ($row["rating"] != null) {
-            $data = array("y" => $row["rating"], "label" => $row["dr"]);
-            array_push($dataPoints, $data);
-        }
-    }
     */
+
+    // data for pie chart
+    $sql2 = "select status, count(*) from todo_list group by status";
+    $result2 = mysqli_query($curs, $sql2);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -52,7 +59,7 @@
 
     function drawChart() {
 
-      var data = new google.visualization.DataTable();
+      var data = new google.visualization.DataTable( );
       data.addColumn('string', 'Task ID');
       data.addColumn('string', 'Task Name');
       data.addColumn('string', 'Resource');
@@ -71,18 +78,6 @@
          new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
         ['2014Winter', 'Winter 2014', 'winter',
          new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
-        ['2015Spring', 'Spring 2015', 'spring',
-         new Date(2015, 2, 22), new Date(2015, 5, 20), null, 50, null],
-        ['2015Summer', 'Summer 2015', 'summer',
-         new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
-        ['2015Autumn', 'Autumn 2015', 'autumn',
-         new Date(2015, 8, 21), new Date(2015, 11, 20), null, 0, null],
-        ['2015Winter', 'Winter 2015', 'winter',
-         new Date(2015, 11, 21), new Date(2016, 2, 21), null, 0, null],
-        ['Football', 'Football Season', 'sports',
-         new Date(2014, 8, 4), new Date(2015, 1, 1), null, 100, null],
-        ['Baseball', 'Baseball Season', 'sports',
-         new Date(2015, 2, 31), new Date(2015, 9, 20), null, 14, null],
         ['Basketball', 'Basketball Season', 'sports',
          new Date(2014, 9, 28), new Date(2015, 5, 20), null, 86, null],
         ['Hockey', 'Hockey Season', 'sports',
@@ -92,7 +87,8 @@
       var options = {
         height: 400,
         gantt: {
-          trackHeight: 30
+          trackHeight: 50,
+          barHeight: 35
         }
       };
 
@@ -105,56 +101,96 @@
 <body>
 <?php include("./components/header.php");?>
 <div class="svg-bg">
+    <form action="./analytics.php" method="POST" class="log-container">
     <div class="todo-flex">    
-        <div class="review">
-        <label>Start Date:</label><br>
-                <input type="date" name="start-date" id=""> <br>
+        <div class="spc-container">
+            <label>Start Date</label><br>
+            <input type="date" name="start-date"><br>
         </div>
-        <div class="mr2rem">
-            <form action="./analytics.php" method="POST">
-               
-                <label>End Date:</label><br>
-                <input type="date" name="end-date" id=""> <br><br>
+        <div class="todo-flex flex-end spc-container">
+            <div>
+                <label>End Date</label><br>
+                <input type="date" name="end-date"> 
+            </div>
+            <div>
                 <input type="submit" value="Set Range" name="range" class="date-btn">
-                <br>
-            </form>
+            </div>
         </div>
     </div>
+    </form>
 </div>
 <article class="main-page">
-<!-- Task List Section ===========================================-->
+    <!-- Gantt chart div -->
+    <div id="chart_div"></div>
 
-<!-- Gantt chart div -->
-<div id="chart_div"></div>
+    <!-- Pie chart section -->
+    <div id="piechart"></div>
+    <!--
+    <div class="pie-box">
+        <div></div>
+        <div>
+        </div>
+        <div></div>
+    </div>
+    -->
 
-<!-- Google pie chart section =================================-->
-<div class="pie-box">
-    <div class="pie-data">
-        <h2>Task List Summary</h2>
-        <table class="data journal-tab">
-            <tr class="tbl-head">
-                <th>Status</th>
-                <th>Count</th>
-            </tr>
-            <?php
-                $sql3 = "select status, count(*) from todo_list group by status";
-                $result2 = mysqli_query($curs, $sql3);
-            
+    <!-- Data tables -->
+    <div class="pie-box">
+        <div class="pie-data">
+            <h2>Task List Summary</h2>
+            <table class="data journal-tab">
+                <tr class="tbl-head">
+                    <th>Status</th>
+                    <th>Count</th>
+                </tr>
+                <?php
+                    while ($row = mysqli_fetch_assoc($result2)) {
+                        echo "<tr><td>".$row["status"]."</td>";
+                        echo "<td>".$row["count(*)"]."</td></tr>";
+                    }
+                ?>
+            </table>
+            <br><br>
+            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+            <a href="./create-task.php" class="date-btn">Create Task</a>
+        </div>
+        <div class="pie-data">
+            <h2>Task List Summary</h2>
+            <table class="data journal-tab">
+                <tr class="tbl-head">
+                    <th>Status</th>
+                    <th>Count</th>
+                </tr>
+                <?php
                 while ($row = mysqli_fetch_assoc($result2)) {
                     echo "<tr><td>".$row["status"]."</td>";
                     echo "<td>".$row["count(*)"]."</td></tr>";
                 }
-            ?>
-        </table>
-        <br><br>
-        <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-        <a href="./create-task.php" class="date-btn">Create Task</a>
+                ?>
+            </table>
+            <br><br>
+            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+            <a href="./create-task.php" class="date-btn">Create Task</a>
+        </div>
+        <div class="pie-data">
+            <h2>Task List Summary</h2>
+            <table class="data journal-tab">
+                <tr class="tbl-head">
+                    <th>Status</th>
+                    <th>Count</th>
+                </tr>
+                <?php
+                while ($row = mysqli_fetch_assoc($result2)) {
+                    echo "<tr><td>".$row["status"]."</td>";
+                    echo "<td>".$row["count(*)"]."</td></tr>";
+                }
+                ?>
+            </table>
+            <br><br>
+            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+            <a href="./create-task.php" class="date-btn">Create Task</a>
+        </div>
     </div>
-    <div class="a-panel">
-        <div id="piechart" style="width: 900px; height: 500px;"></div>
-    </div>
-</div>
-
 </article>
 
 <!-- google pie chart script =========================================-->
@@ -176,7 +212,7 @@
         ?>);
 
         var options = {
-            title: 'Task History',
+            title: 'Total Tasks',
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

@@ -34,9 +34,9 @@ if ($_POST['add-journal']) {
     }
     else {
         // set journal to public
-        $sql = "insert into journal(subject, message, category, creator, team) values (?, ?, ?, ?, ?)";
+        $sql = "insert into journal(subject, message, category, creator, team_name) values (?, ?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["user"], $_SESSION["team"]);
+        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["unq_user"], $_SESSION["team"]);
         $stmnt -> execute();
     }
     header("Location: ../views/logs.php");        

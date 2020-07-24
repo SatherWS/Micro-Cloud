@@ -21,8 +21,11 @@
         include ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
-        $result = mysqli_query($curs, "select * from todo_list where status = 'IN PROGRESS' or status = 'NOT STARTED' order by deadline");
-        $filter = "Pending";
+        $sql = "select * from todo_list where team_name = ? and (status = 'IN PROGRESS' or status = 'NOT STARTED') order by deadline";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt ->  bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $result = $stmnt -> get_result();
         
         if ($_POST['s-status']) {
             $filter = $_POST['s-status'];
@@ -66,27 +69,29 @@
         <form action="../edit_entry.php" method="post" id="tasks">
             <table class="data task-tab">
                 <tr class="tbl-head">
-                    <th>ID</th>
+                    <th>TEAM</th>
                     <th>TITLE</th>
-                    <!--<th>DESCRIPTION</th>-->
                     <th>STATUS</th>
-                    <th>DEADLINE</th>
-                    <th>TIME DUE</th>
+                    <th>ASSIGNED TO</th>
+                    <th>ASSIGNED BY</th>
                     <th>IMPORTANCE</th>
-                    <th>DATE & TIME CREATED</th>
+                    <th>DATE CREATED</th>
+                    <th>DATE DUE</th>
+                    <th>TIME DUE</th>
                 </tr>
                 <?php
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             $id = $row["id"];
-                            echo "<tr onclick='getTask($id)'><td>".$row["id"]."</td>";
+                            echo "<tr onclick='getTask($id)'><td>".$row["team_name"]."</td>";
                             echo "<td>".$row["title"]."</td>";
-                            //echo "<td>".$row["description"]."</td>";
                             echo "<td>".$row["status"]."</td>";
-                            echo "<td>".$row["deadline"]."</td>";
-                            echo "<td>".$row["time_due"]."</td>";
+                            echo "<td>".$row["assignee"]."</td>";
+                            echo "<td>".$row["creator"]."</td>";
                             echo "<td>".$row["importance"]."</td>";
-                            echo "<td>".$row["date_created"]."</td> </tr>";
+                            echo "<td>".$row["date_created"]."</td>";
+                            echo "<td>".$row["deadline"]."</td>";
+                            echo "<td>".$row["time_due"]."</td></tr>";
                         }
                     }
                     else {

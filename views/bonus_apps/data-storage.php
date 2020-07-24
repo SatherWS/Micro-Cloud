@@ -20,7 +20,7 @@
     ?>
 
     <div class="svg-bg">
-        <div class="log-header">    
+        <div class="todo-flex log-container">    
             <div class="review">
                 <h3>Current User: <?php echo getenv("username");?></h3>
             </div>

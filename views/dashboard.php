@@ -8,26 +8,7 @@
     $curs = $db -> getConnection();
     $html = "";
 
-    if ($_POST["options-a"] == "all_posts") {
-        $sql = "select * from journal where team_name = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $_SESSION["team"]);
-        $stmnt -> execute();
-        $results = $stmnt -> get_result();
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $html .= "<div class='activity'><div class='todo-flex'>";
-                $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
-                $html .= "<p>".$row["message"]."</p></div>";
-                $html .= "<div><p>Created by ".$row["creator"]."</p>";
-                //$html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
-                $html .= "<div class='todo-flex'>";
-                $html .= "<p class='activity-item'>".$row["description"]."</p>";
-                $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
-            }
-        }
-    }
-
+    // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
     // select all tasks by team
     if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
         $sql = "select * from todo_list where team_name = ?";
@@ -36,23 +17,108 @@
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         while ($row = mysqli_fetch_assoc($results)) {
-            $html .= "<div class='activity'><div class='todo-flex'>";
+            $html .= "<div class='activity'><div class='todo-flex r-cols'>";
             $html .= "<div><h2>Task: ".$row["title"]."</h2>";
             $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
             $html .= "<div><p>Created by ".$row["creator"]."</p>";
             $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
-            $html .= "<div class='todo-flex'>";
-            $html .= "<p class='activity-item'>".$row["description"]."</p>";
+            $html .= "<div class='todo-flex r-cols'>";
+            $html .= "<div><h3>Description of Task</h3>";
+            $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
             $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
         }
     }
+
+    // select all posts by team
+    if ($_POST["options-a"] == "all_posts") {
+        $sql = "select * from journal where team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
+                $html .= "<h3>Category: ".$row["category"]."</h3></div>";
+                $html .= "<p>Created by ".$row["creator"]."</p></div>";
+                $html .= "<p class='activity-item'>".$row["message"]."</p>";
+                $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
+            }
+        }
+    }
+
+    // assigned tasks to current user
+    if ($_POST["options-a"] == "created_posts") {
+        $sql = "select * from journal where creator = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
+                $html .= "<h3>Category: ".$row["category"]."</h3></div>";
+                $html .= "<p>Created by ".$row["creator"]."</p></div>";
+                $html .= "<p class='activity-item'>".$row["message"]."</p>";
+                $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
+            }
+        }
+    }
+
+    // tasks assigned to current user
+    if ($_POST["options-a"] == "my_tasks") {
+        $sql = "select * from todo_list where assignee = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $html .= "<div><h2>Task: ".$row["title"]."</h2>";
+                $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
+                $html .= "<div><p>Created by ".$row["creator"]."</p>";
+                $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
+                $html .= "<div class='todo-flex r-cols'>";
+                $html .= "<div><h3>Description of Task</h3>";
+                $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
+                $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
+            }
+        }
+    }
+
+    // tasks created by current user
+    if ($_POST["options-a"] == "my_tasks") {
+        $sql = "select * from todo_list where creator = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $html .= "<div><h2>Task: ".$row["title"]."</h2>";
+                $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
+                $html .= "<div><p>Created by ".$row["creator"]."</p>";
+                $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
+                $html .= "<div class='todo-flex r-cols'>";
+                $html .= "<div><h3>Description of Task</h3>";
+                $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
+                $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
+            }
+        }
+    }
+
+    // TODO: MOVE ABOVE TO MODELS SINCE ITS DATA RELATED
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teamstoop | Dashboard</title>
+    <title>Teamswoop | Dashboard</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -67,17 +133,17 @@
         </div>
         <div class="grid-container">
             <div>
-                <a class="dash-item" href="./logs.php">
-                    <i class="fa  fa-pencil spc-1"></i>
+                <a class="dash-item" href="./create-task.php">
+                    <i class="fa fa-list-ol spc-1"></i>
                     <br>
-                    <span class="sup-text">View Notes</span>
+                   <span class="sup-text">Create Task</span> 
                 </a>
             </div>
             <div>
-                <a class="dash-item" href="./show-tasks.php">
-                    <i class="fa fa-list-ol spc-1"></i>
+                <a class="dash-item" href="./create-journal.php">
+                    <i class="fa  fa-pencil spc-1"></i>
                     <br>
-                   <span class="sup-text">View Tasks</span> 
+                    <span class="sup-text">Create Post</span>
                 </a>
             </div>
             <div>
@@ -109,9 +175,9 @@
                     <option value="none" selected disabled hi   dden>Activity Filter</option>
                     <option value="all_tasks">All Tasks</option>
                     <option value="all_posts">All Posts</option>
-                    <option value="my_tasks">My Tasks</option>
-                    <option value="created_tasks">Tasks Created</option>
                     <option value="created_posts">Posts Created</option>
+                    <option value="my_tasks">Assigned Tasks</option>
+                    <option value="created_tasks">Tasks Created</option>
                 </select>
             </form>
         </div>

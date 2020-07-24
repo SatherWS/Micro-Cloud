@@ -41,7 +41,7 @@
                     </datalist>
                 </div>
                 <br>
-                <textarea rows="7" placeholder="Text area for writting notes" name="note"></textarea>
+                <textarea rows="7" placeholder="Text area for creating a post..." name="note"></textarea>
                 <br><br>
                 <label class="container">
                     <input type="checkbox" name="omit">

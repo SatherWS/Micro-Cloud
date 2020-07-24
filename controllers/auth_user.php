@@ -25,8 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["auth_user"])) {
         header("Location: ../views/dashboard.php");
     }
     else {
-        header("Location: ../authentication/login.php");
-        echo "Incorrect creds";
+        header("Location: ../authentication/login.php?error='Incorrect credentials'");
     }
 }
 
