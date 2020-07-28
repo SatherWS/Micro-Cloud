@@ -565,6 +565,9 @@ ul {
   background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
   height: 50vh;
   background-repeat: no-repeat;
+}
+
+body {
   overflow-x: hidden;
 }
 
