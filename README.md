@@ -28,7 +28,7 @@ This GitHub repository contains source code for project management software. It'
 - [X] Fix bug: journal category creates a new team (really bad)
 - [X] Fix bug: minor display issue when posts are selected in dashboard
 - [X] Improve dashboard and create task UI on mobile
-- [ ] Make activity items clickable in dash
+- [X] Make activity items clickable in dash
 
 
 ### How to run locally

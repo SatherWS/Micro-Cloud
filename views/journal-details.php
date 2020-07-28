@@ -69,7 +69,7 @@
             ?>
             </h3>
         </div>
-        <div class="add-log">
+        <div class="task-ops todo-flex">
             <?php
                 if ($show_editor) {
                     $form -> showEditor($_GET["journal"]);                        

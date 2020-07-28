@@ -11,13 +11,14 @@
     // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
     // select all tasks by team
     if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
-        $sql = "select * from todo_list where team_name = ?";
+        $sql = "select * from todo_list where team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         while ($row = mysqli_fetch_assoc($results)) {
-            $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+            $id = $row["id"];
+            $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
             $html .= "<div><h2>Task: ".$row["title"]."</h2>";
             $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
             $html .= "<div><p>Created by ".$row["creator"]."</p>";
@@ -31,14 +32,15 @@
 
     // select all posts by team
     if ($_POST["options-a"] == "all_posts") {
-        $sql = "select * from journal where team_name = ?";
+        $sql = "select * from journal where team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         if (mysqli_num_rows($results) > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
-                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $id = $row["id"];
+                $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
                 $html .= "<h3>Category: ".$row["category"]."</h3></div>";
                 $html .= "<p>Created by ".$row["creator"]."</p></div>";
@@ -50,14 +52,15 @@
 
     // assigned tasks to current user
     if ($_POST["options-a"] == "created_posts") {
-        $sql = "select * from journal where creator = ?";
+        $sql = "select * from journal where creator = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["unq_user"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         if (mysqli_num_rows($results) > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
-                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $id = $row["id"];
+                $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
                 $html .= "<h3>Category: ".$row["category"]."</h3></div>";
                 $html .= "<p>Created by ".$row["creator"]."</p></div>";
@@ -69,14 +72,15 @@
 
     // tasks assigned to current user
     if ($_POST["options-a"] == "my_tasks") {
-        $sql = "select * from todo_list where assignee = ?";
+        $sql = "select * from todo_list where assignee = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["unq_user"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         if (mysqli_num_rows($results) > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
-                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $id = $row["id"];
+                $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
                 $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
@@ -91,14 +95,15 @@
 
     // tasks created by current user
     if ($_POST["options-a"] == "my_tasks") {
-        $sql = "select * from todo_list where creator = ?";
+        $sql = "select * from todo_list where creator = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["unq_user"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         if (mysqli_num_rows($results) > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
-                $html .= "<div class='activity'><div class='todo-flex r-cols'>";
+                $id = $row["id"];
+                $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
                 $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
@@ -153,7 +158,7 @@
                 </a>
             </div>
             <div>
-                <a class="dash-item" href="./analytics.php">
+                <a class="dash-item" href="./settings.php">
                     <i class="fa fa-gear spc-1"></i>
                     <br>
                    <span class="sup-text">Settings</span> 
@@ -175,6 +180,14 @@
         </div>
         <?php echo $html;?>
     </main>
+    <script>
+    function panelLinkP(id) {
+        window.location='./journal-details.php?journal='+id;
+    }
+    function panelLinkTD(id) {
+        window.location='./task-details.php?task='+id;
+    }
+    </script>
     <script src="../static/main.js"></script>
 </body>
 </html>

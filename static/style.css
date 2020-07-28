@@ -357,13 +357,25 @@ main {
   box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
   background: #fff;
 }
-
+.grid-container div:hover {
+  box-shadow: 0px 0px 7px 2px rgba(174,238,219,1);
+  color: rgba(43,211,235,1);
+}
+.grid-container a:hover {
+  color: rgba(43,211,235,1);
+}
+.grid-container i:hover {
+  color: rgba(43,211,235,1);
+}
 .activity {
   background: #fff;
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
   border-radius: 8px;
   padding: 1rem;
   margin-top: 10px;
+}
+.activity:hover {
+  box-shadow: 0px 0px 7px 2px rgba(43,211,235,1);
 }
 
 .activity-item {
@@ -579,13 +591,32 @@ element {
 }
 
 .todo-panel {
-    background: #fff;
-    border-radius: 5px;
-    width: 60%;
-    padding: 1.5rem;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  background: #fff;
+  border-radius: 5px;
+  width: 60%;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
 }
 
+
+/* settings section **/
+.settings-panel {
+  background: #fff;
+  border-radius: 5px;
+  width: 80%;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  margin: 0 auto;
+}
+
+.settings-space {
+  padding-top: 2rem;
+}
+.settings-flex {
+  display: flex;
+  justify-content: space-between;
+}
+/* end settings section *?
 .todo-item {
     font-size: 16pt;
     width: 328px;
@@ -754,6 +785,13 @@ button {
   font-size: 25px;
 }
 /* Todo & Journal Icons ***********************/
+/*
+.task-auto {
+  width: 80%;
+  margin: 0 auto;
+}
+*/
+
 .todo-txt-area {
   width: 328px!important;
   height: 125px!important;
@@ -935,7 +973,14 @@ tr:hover {background-color:#f5f5f5;}
   /* use in chat-details.php */
   .add-btn a{
     color: #000;
-    /* border: solid 2px; */
+    background: #fff;
+    border-radius: 8px;
+    padding: .5rem 1rem;
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  }
+
+  button.add-btn {
+    color: #000;
     background: #fff;
     border-radius: 8px;
     padding: .5rem 1rem;
@@ -1042,6 +1087,7 @@ tr:hover {background-color:#f5f5f5;}
     .log-details {
       width: 540px;
       margin: 0;
+      padding: 0 2rem;
     }
 
     .editor {

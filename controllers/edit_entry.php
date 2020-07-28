@@ -28,8 +28,8 @@
         header("Location: ../views/show-tasks.php");
     }
 
-    if ($_POST['change-status']) {
-        $id = $_POST['task-id'];
+    if ($_POST['modtask']) {
+        $id = $_POST['modtask'];
         $sql = "update todo_list set status = ? where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);

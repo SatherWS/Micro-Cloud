@@ -54,20 +54,22 @@
             <div class="review">
                 <h3 id="logs-title">Task ID #<?php echo $_GET['task'];?></h3>
             </div>
-            <div>
-                <form action="./task-details.php" method="post">
+            <div class="todo-flex">
+                <form action="./task-details.php" method="post" class="mr2rem">
                     <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
+                </form>
+                <form action="./task-details.php" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
                     <button class="add-btn" type='submit' name='delete' value="<?php echo $_GET['task']; ?>"><i class='fa fa-close'></i>Delete Task</button>
                 </form>
             </div>
         </div>
     </div>
     <div class="log-container">
-        <form action="../controllers/edit_entry.php" method="post">
+        <form action="../controllers/edit_entry.php" method="post" class="task-auto">
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
-                        echo "<h3>Task: ".$row['description']."</h3>";
+                        echo "<h2>Task: ".$row['title']."</h2>";
                         echo "<h3>Deadline: ".$row['deadline']." at ".$row["time_due"]."</h3>";
                         echo "<h3>Importance: ".$row['importance']."</h3>";
                         echo "<h4>STATUS: ".$row['status']."</h4>";
@@ -75,25 +77,24 @@
                 }
                 if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
-                        echo "<h3>Editing: ".$row['description']."</h3>";
+                        echo "<h2>Editing: ".$row['description']."</h2>";
                         echo "<lable>Edit Description</lable><br>";
                         echo "<input class='spc-n' id='form-control' name='edited'value='".$row['description']."'><br><br>";
                         echo "<lable>Change Deadline</lable><br>";
-                        echo "<input type='date' name='end-date' id='edit-drop' class='spc-n' required>";
-                        echo "<input type='time' name='time-due' class='spc-n' required><br><br>";
+                        echo "<input type='date' name='end-date' class='spc-n' id='form-control'><br><br>";
+                        echo "<lable>Change Time Due</lable><br>";
+                        echo "<input type='time' name='time-due' class='spc-n' id='form-control'><br><br>";
                         echo "<label>Change Importance Level</label><br>";
-                        echo "<select id='edit-drop' name='importance' class='spc-n' required>";
+                        echo "<select name='importance' class='spc-n' id='form-control'>";
                         echo "<option value='none' selected disabled hidden> Rank Importance</option>";
                         echo "<option value='Low'>Low Importance</option>";
                         echo "<option value='Medium'>Medium Importance</option>";
-                        echo "<option value='High'>High Importance</option></select>";
-                        echo "<input type='submit' value='Edit Task'>";
-
+                        echo "<option value='High'>High Importance</option></select><br><br>";
                     }
                 }
             ?>
-            <br>
-            <select name="change-status" class='spc-n'>
+            <label>Change Status</label><br>
+            <select name="change-status" class='spc-n' id="form-control">
                 <option value="none" selected disabled hidden> 
                     Update Status
                 </option>
@@ -103,11 +104,8 @@
                 <option value="DISTRACTED">DISTRACTED</option>
             </select>
             <br><br>
-            <button class="attach" type="submit" name="task-id" value="<?php echo $_GET['task']?>" id="update">
+            <button class="attach" type="submit" name="modtask" value="<?php echo $_GET['task'];?>">
                 Update Task
-            </button>
-            <button>
-                <a href="./show-tasks.php">Go Back</a>
             </button>
         </form>
     </div>
