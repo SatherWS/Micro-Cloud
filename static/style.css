@@ -569,6 +569,7 @@ ul {
 
 body {
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .todo-panel {
