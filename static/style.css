@@ -100,6 +100,10 @@ ul.topnav-list {
   width: 60%;
 }
 
+.error-msg {
+  color: red;
+}
+
 .spc-pt {
   padding-top: 2rem;
 }
@@ -512,6 +516,11 @@ ul {
       width: 100%;
       font-size: 14pt;
     }
+    /*
+    #piechart {
+      min-height: 800px;
+    }
+    */
   }
 
 
@@ -556,6 +565,7 @@ ul {
   background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
   height: 50vh;
   background-repeat: no-repeat;
+  overflow-x: hidden;
 }
 
 .todo-panel {
@@ -840,8 +850,10 @@ tr:hover {background-color:#f5f5f5;}
   }
 
   #piechart {
-    width: 50%; 
+    width: 100%; 
+    /*
     min-height: 450px;
+    */
     display: block;
     margin: 0 auto
   }
@@ -917,7 +929,7 @@ tr:hover {background-color:#f5f5f5;}
     background: #fff;
     border-radius: 8px;
     padding: .5rem 1rem;
-    box-shadow: 0 3px 5px -2px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
   }
 
   .polls-header {

@@ -1,7 +1,7 @@
 <?php
 /*
 *   This script controls how users are created and authenticated
-*   7/18/2020, Consciencec/Grouper (grooper.tech) grotech?
+*   7/24/2020, Teamswoop
 *   Author: Colin Sather
 */
 session_start();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["auth_user"])) {
 }
 
 /*
-*   User and Team creation section
+*   User and Team creation section (Signup form)
 */
 
 function search_team($curs, $team) {
@@ -45,6 +45,7 @@ function search_team($curs, $team) {
         return false;
 }
 
+// TODO: SEND INVITATION REQUEST INSTEAD OF UPDATING USERS TABLE RIGHT AWAY
 // add user to db if search_team = false create new team 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     $sql = "insert into users(email, username, pswd) values(?,?,?)";
@@ -80,6 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $_SESSION["user"] = $_POST["usr"];
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
+    }
+    else {
+        header("Location: ../authentication/signup.php?error="."Error email already in use");
     }
 }
 ?>

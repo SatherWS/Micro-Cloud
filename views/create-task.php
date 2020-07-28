@@ -13,9 +13,6 @@
     $stmnt -> bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
     $results = $stmnt -> get_result();
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

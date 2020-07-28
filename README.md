@@ -10,8 +10,8 @@ This GitHub repository contains source code for project management software. It'
 - [X] Fix file path errors in bonus apps
 - [X] Move mood rating system to bonus apps
 - [X] Implement user authentication
-- [ ] Integrate data into gantt chart 
-- [X] Improve analytics UI 
+- [X] Integrate data into gantt chart 
+- [X] Improve analytics UI
 - [X] Remove repeat task option
 - [X] Change index.php to dashboard.php
 - [X] Move imgs dir to static folder (or delete entirely)
@@ -19,15 +19,17 @@ This GitHub repository contains source code for project management software. It'
 - [X] Implement user teams
 - [X] Assign tasks to users
 - [ ] Implement user options (add/drop teams, accept/deny invites)
-- [ ] Remove bonus apps (do last)
+- [ ] Remove bonus apps and shared_drives.php (do last)
 - [ ] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
 - [ ] Implement error messages (login, signup and team creation/joining)
-- [ ] Write cron jobs to send email alerts regarding tasks
+- [ ] Write cron jobs to send email alerts regarding tasks (add after launch?)
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)
 - [X] Fix bug: minor display issue when posts are selected in dashboard
 - [X] Improve dashboard and create task UI on mobile
+- [ ] Make activity items clickable in dash
+
 
 ### How to run locally
 1. Install lamp stack server emulator, I used ampps 
@@ -35,4 +37,4 @@ This GitHub repository contains source code for project management software. It'
 3. Clone repo into ampps `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
 5. Open browser to 127.0.0.1/<repo-name>
-  
+   

@@ -9,11 +9,13 @@
     $total = 0;
 
     // data for gantt chart w/o range
+    /*
     $sql = "select date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
     $result = $stmnt -> get_result();
+    */
 
     // data for gantt chart range
     if ($_POST["range"]) {
@@ -41,6 +43,20 @@
     // data for pie chart
     $sql2 = "select status, count(*) from todo_list group by status";
     $result2 = mysqli_query($curs, $sql2);
+
+    // fetch gantt chart data 
+    include("../models/gantt.php");
+    $obj = new Issues();
+    $data = $obj -> get_tasks($curs, $_SESSION["team"]);
+
+    // format data from gantt model
+    $js = "";
+    while ($row = mysqli_fetch_assoc($data)) {
+        $js .= "['".$row["id"]."','".$row["title"]."','".$row["status"]."',";
+        $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$row["month(date_created)"].",".$row["day(date_created)"]."),";
+        $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$row["month(deadline)"].",".$row["day(deadline)"]."),";
+        $js .= "null, null, null],";
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -59,7 +75,7 @@
 
     function drawChart() {
 
-      var data = new google.visualization.DataTable( );
+      var data = new google.visualization.DataTable();
       data.addColumn('string', 'Task ID');
       data.addColumn('string', 'Task Name');
       data.addColumn('string', 'Resource');
@@ -68,27 +84,21 @@
       data.addColumn('number', 'Duration');
       data.addColumn('number', 'Percent Complete');
       data.addColumn('string', 'Dependencies');
+      
 
       data.addRows([
-        ['2014Spring', 'Spring 2014', 'spring',
-         new Date(2014, 2, 22), new Date(2014, 5, 20), null, 100, null],
-        ['2014Summer', 'Summer 2014', 'summer',
-         new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
-        ['2014Autumn', 'Autumn 2014', 'autumn',
-         new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
-        ['2014Winter', 'Winter 2014', 'winter',
-         new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
-        ['Basketball', 'Basketball Season', 'sports',
-         new Date(2014, 9, 28), new Date(2015, 5, 20), null, 86, null],
-        ['Hockey', 'Hockey Season', 'sports',
-         new Date(2014, 9, 8), new Date(2015, 5, 21), null, 89, null]
+        <?php
+            // truncate remaining comma of formatted dataset
+            echo substr($js, 0, -1);
+        ?>
       ]);
 
       var options = {
         height: 400,
         gantt: {
           trackHeight: 50,
-          barHeight: 35
+          barHeight: 35,
+          criticalPathEnabled: false,
         }
       };
 
@@ -121,21 +131,14 @@
 </div>
 <article class="main-page">
     <!-- Gantt chart div -->
+    <h1>Task Analytics from xx-xx-xxx to xx-xx-xxxx</h1>
     <div id="chart_div"></div>
 
-    <!-- Pie chart section -->
-    <div id="piechart"></div>
-    <!--
+    <!-- Pie chart data tables section -->
     <div class="pie-box">
-        <div></div>
-        <div>
+        <div class="pie-data">
+            <div id="piechart"></div>
         </div>
-        <div></div>
-    </div>
-    -->
-
-    <!-- Data tables -->
-    <div class="pie-box">
         <div class="pie-data">
             <h2>Task List Summary</h2>
             <table class="data journal-tab">
@@ -169,26 +172,6 @@
                 ?>
             </table>
             <br><br>
-            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-            <a href="./create-task.php" class="date-btn">Create Task</a>
-        </div>
-        <div class="pie-data">
-            <h2>Task List Summary</h2>
-            <table class="data journal-tab">
-                <tr class="tbl-head">
-                    <th>Status</th>
-                    <th>Count</th>
-                </tr>
-                <?php
-                while ($row = mysqli_fetch_assoc($result2)) {
-                    echo "<tr><td>".$row["status"]."</td>";
-                    echo "<td>".$row["count(*)"]."</td></tr>";
-                }
-                ?>
-            </table>
-            <br><br>
-            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-            <a href="./create-task.php" class="date-btn">Create Task</a>
         </div>
     </div>
 </article>

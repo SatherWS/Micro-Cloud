@@ -23,7 +23,7 @@
             $html .= "<div><p>Created by ".$row["creator"]."</p>";
             $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
-            $html .= "<div><h3>Description of Task</h3>";
+            $html .= "<div><h3>Status: ".$row["status"]."</h3>";
             $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
             $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
         }
@@ -82,7 +82,7 @@
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
                 $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<div><h3>Description of Task</h3>";
+                $html .= "<div><h3>Status: ".$row["status"]."</h3>";
                 $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
                 $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
             }
@@ -104,13 +104,12 @@
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
                 $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<div><h3>Description of Task</h3>";
+                $html .= "<div><h3>Status: ".$row["status"]."</h3>";
                 $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
                 $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
             }
         }
     }
-
     // TODO: MOVE ABOVE TO MODELS SINCE ITS DATA RELATED
 ?>
 <!DOCTYPE html>
@@ -164,13 +163,6 @@
         <div class="todo-flex">
             <h1 class="intro-header">My Team's Activity</h1>
             <form method="POST">
-            <!--            
-                <select class="main-selector" name="teams-a" id="myselect" onchange="this.form.submit()">
-                    <option value="show_all" selected>All Teams</option>
-                    <option value="posts">placeholder 1</option>
-                    <option value="tasks">placeholder 2</option>
-                </select>
-            -->
                 <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
                     <option value="none" selected disabled hi   dden>Activity Filter</option>
                     <option value="all_tasks">All Tasks</option>

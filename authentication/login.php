@@ -24,8 +24,15 @@
                         <input type="password" name="pswd" placeholder="Enter your password" class="spc-n login-comp" required>
                     </div>
                     <br>
-                    <p>Don't have an account? <a href="./signup.html">Sign up here.</a></p>
+                    <p>Don't have an account? <a href="./signup.php">Sign up here.</a></p>
                     <input name="auth_user" class="spc-n spc-m" type="submit" id="form-control2">
+                    <?php
+                        if (isset($_GET["error"])) {
+                            include("./error.php");
+                            $err = new AuthenticationError();
+                            echo $err->login_error();
+                        }
+                    ?>
                 </div>
             </div>
         </form>

@@ -73,7 +73,6 @@
                     <th>TITLE</th>
                     <th>STATUS</th>
                     <th>ASSIGNED TO</th>
-                    <th>ASSIGNED BY</th>
                     <th>IMPORTANCE</th>
                     <th>DATE CREATED</th>
                     <th>DATE DUE</th>
@@ -87,7 +86,7 @@
                             echo "<td>".$row["title"]."</td>";
                             echo "<td>".$row["status"]."</td>";
                             echo "<td>".$row["assignee"]."</td>";
-                            echo "<td>".$row["creator"]."</td>";
+                            //echo "<td>".$row["creator"]."</td>";
                             echo "<td>".$row["importance"]."</td>";
                             echo "<td>".$row["date_created"]."</td>";
                             echo "<td>".$row["deadline"]."</td>";
