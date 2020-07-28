@@ -567,9 +567,9 @@ ul {
   background-repeat: no-repeat;
 }
 
-body {
+html, body {
+  max-width: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 
 .todo-panel {
