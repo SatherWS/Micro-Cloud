@@ -45,7 +45,7 @@ create table users (
 CREATE TABLE journal (
   id int(11) primary key auto_increment,
   subject varchar(45) NOT NULL,
-  message varchar(300) NOT NULL,
+  message varchar(10000) NOT NULL,
   category varchar(45) NOT NULL,
   creator varchar(50) NOT NULL,
   is_private char(1) default "F" not null,

@@ -72,10 +72,12 @@
         <div class="task-ops todo-flex r-cols">
             <?php
                 if ($show_editor) {
-                    $form -> showEditor($_GET["journal"]);                        
+                    //$form -> showEditor($_GET["journal"]);                        
+                    include("./components/note-headers/save_post.php");
                 }
                 else {
-                    $form -> showDefault($_GET["journal"]);
+                    include("./components/note-headers/edit_post.php");
+                    //$form -> showDefault($_GET["journal"]);
                 }
             ?>
         </div>    
