@@ -115,12 +115,12 @@
     <div class="todo-flex">    
         <div class="spc-container">
             <label>Start Date</label><br>
-            <input type="date" name="start-date"><br>
+            <input type="date" name="start-date" class="simple-input"><br>
         </div>
         <div class="todo-flex flex-end spc-container">
             <div>
                 <label>End Date</label><br>
-                <input type="date" name="end-date"> 
+                <input type="date" name="end-date" class="simple-input"> 
             </div>
             <div>
                 <input type="submit" value="Set Range" name="range" class="date-btn">
@@ -158,17 +158,27 @@
             <a href="./create-task.php" class="date-btn">Create Task</a>
         </div>
         <div class="pie-data">
-            <h2>Task List Summary</h2>
+            <h2>Task Summary by User</h2>
             <table class="data journal-tab">
                 <tr class="tbl-head">
-                    <th>Status</th>
-                    <th>Count</th>
+                    <th>Team Mate</th>
+                    <th>Completed</th>
+                    <th>In Progress</th>
+                    <th>Stuck</th>
+                </tr>
+                <tr>
+                <td>csather</td>
+                <td>10</td>
+                <td>24</td>
+                <td>15</td>
                 </tr>
                 <?php
+                /*
                 while ($row = mysqli_fetch_assoc($result2)) {
                     echo "<tr><td>".$row["status"]."</td>";
                     echo "<td>".$row["count(*)"]."</td></tr>";
                 }
+                */
                 ?>
             </table>
             <br><br>

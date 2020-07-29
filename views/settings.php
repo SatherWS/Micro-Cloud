@@ -28,7 +28,7 @@
         <div class="settings-space">
             <div class="settings-panel">
                 <h1>User & Team Settings</h1>
-                <div class="settings-flex">
+                <div class="settings-flex r-cols">
                     <div>
                         <h2>Your User Info</h2>
                         <?php 
@@ -38,8 +38,9 @@
                         ?>
                     </div>
                     <form action="">
-                        <h2>Your Team Members</h2>
-                        <input type="text" name="user_email" placeholder="Add a new Team member" required>
+                        <h2>Members of <?php echo $_SESSION["team"];?></h2>
+                        <input type="text" name="user_email" placeholder="Add a new Team member" class="simple-input" required>
+                        <br><br>
                         <input type="submit" value="Invite User">
                         <?php
                             while ($row = mysqli_fetch_assoc($results)) {

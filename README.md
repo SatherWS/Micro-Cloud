@@ -18,17 +18,24 @@ This GitHub repository contains source code for project management software. It'
 - [X] Fix drop down hover nav
 - [X] Implement user teams
 - [X] Assign tasks to users
-- [ ] Implement user options (add/drop teams, accept/deny invites)
+- [ ] Implement user options (add/drop users to team)
 - [ ] Remove bonus apps and shared_drives.php (do last)
 - [ ] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
-- [ ] Implement error messages (login, signup and team creation/joining)
+- [ ] Implement error messages (login, signup and team creation/joining)  ** Do this one 07/28/2020
 - [ ] Write cron jobs to send email alerts regarding tasks (add after launch?)
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)
 - [X] Fix bug: minor display issue when posts are selected in dashboard
 - [X] Improve dashboard and create task UI on mobile
 - [X] Make activity items clickable in dash
+
+### NEW: 7/28/2020 
+- [ ] Confirm before deleting task, post or user
+- [ ] Create admin users
+- [ ] Drop users from teams
+- [ ] Analytics range selector
+- [ ] Restrict access for users to only view posts and tasks by their teams or themselves
 
 
 ### How to run locally

@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <!-- Team Steep vs. Team Stoop -->
-                <a href="../views/dashboard.php" class="active">Teamswoop</a>
+                <a href="../views/dashboard.php" class="active">Swoop.team</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
@@ -19,7 +19,7 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Task List</a>
                 <div class="dropdown-content">
-                    <a href="./create-task.php">Add Task</a>
+                    <a href="./create-task.php">Create Task</a>
                     <a href="./show-tasks.php">Manage Tasks</a>
                 </div>
             </li>

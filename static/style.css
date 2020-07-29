@@ -94,6 +94,7 @@ ul.topnav-list {
   border: none;
   padding: .5rem 1rem;
   border-radius: 8px;
+  font-size: 14pt;
 }
 /* login form */
 .login-comp {
@@ -139,6 +140,11 @@ textarea {
   padding: .5rem;
   background: #f1f1f1;
   border:none;
+  width: 100%;
+  -ms-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+  -webkit-box-sizing:content-box;
 }
 
 .spc-m {
@@ -518,6 +524,9 @@ ul {
     .r-cols.todo-flex{
       display: block;
     }
+    .r-cols.settings-flex{
+      display: block;
+    }
 
     /* dashboard mobile views */
     .grid-container {
@@ -557,7 +566,7 @@ ul {
 .scroll-item {
   border-bottom: 2px solid #f1f1f1;
   padding: 1rem;
-  width: 700px;
+  /*width: 400px;*/
 }
 .scroll-item:hover {
   background: #f1f1f1;
@@ -793,8 +802,9 @@ button {
 */
 
 .todo-txt-area {
-  width: 328px!important;
+  width: 100%!important;
   height: 125px!important;
+  font-size: 14pt;
 }
 .fa-save:before {
   padding-right: 8px;
@@ -864,6 +874,11 @@ tr:hover {background-color:#f5f5f5;}
     }
   }
   */
+  .simple-input {
+    padding: 7.7px;
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+    border: none;
+  }
   .main-page {
     margin: 2rem;
   }
@@ -1002,6 +1017,7 @@ tr:hover {background-color:#f5f5f5;}
   /* ---------------------------------+
     Responsive Section                |
   -----------------------------------*/
+  /* samsung monitor size */
   @media screen and (max-width: 1370px) {
     /* In progress */
     #form-control {
@@ -1035,7 +1051,7 @@ tr:hover {background-color:#f5f5f5;}
       height: 420px;
     }
     .scroll-item {
-      width: 350px;
+      width: 600px;
     }
   }
 

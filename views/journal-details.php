@@ -69,7 +69,7 @@
             ?>
             </h3>
         </div>
-        <div class="task-ops todo-flex">
+        <div class="task-ops todo-flex r-cols">
             <?php
                 if ($show_editor) {
                     $form -> showEditor($_GET["journal"]);                        
@@ -91,10 +91,6 @@
                 echo "<div class='detail-topper'>";
                 echo "<div><h1 class='padb'>".$row['subject']."</h1>";
                 echo "<small>".$row['date_created']."</small>";
-                if ($row['rating'] == null)
-                    echo "<br><small>Mood Rating: N/A</small></div>";
-                else
-                    echo "<br><small>Mood Rating: ".$row['rating']."</small></div>";
                 echo "<p class='message-p'>".nl2br($row['message'])."</p>";
                 echo "</div>";
             }

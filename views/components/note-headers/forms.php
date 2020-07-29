@@ -3,7 +3,7 @@
     class FormGenerator {
         
         public function showDefault($id) {
-            $msg = 'Do you really want to submit the form?';
+            $msg = "'Do you really want to submit the form?'";
             $form = "<form action='./journal-details.php' method='post' onsubmit='return confirm($msg);'>";
             $form .= "<button type='submit' name='delete' value='$id' class='add-btn'>";
             $form .= "<i class='fa fa-close'></i><span class='opt-desc'>Delete Note</span></button></form>";

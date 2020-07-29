@@ -52,7 +52,7 @@
                         ?>
                     </select>
                     <br><br>
-                    <textarea name="descript" id="" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
+                    <textarea name="descript" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
                     <br><br>
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required><br><br>
@@ -68,33 +68,6 @@
                         <option value="Medium">Medium Importance</option>
                         <option value="High">High Importance</option>
                     </select>
-                    <!--
-                    <section class="todo-flex">
-                        <div>
-                            <select name="importance" class="spc-n rep-item" required>
-                                <option value="none" selected disabled hidden> 
-                                    Rank Importance
-                                </option>
-                                <option value="Low">Low Importance</option>
-                                <option value="Medium">Medium Importance</option>
-                                <option value="High">High Importance</option>
-                            </select>
-                        </div>
-                  
-                        <div>
-                            <select name="repeat" class="spc-n rep-item" required>
-                                <option value="none" selected disabled hidden> 
-                                    Repeat? 
-                                </option>
-                                <option value="daily">do not</option>
-                                <option value="daily">daily</option>
-                                <option value="weekly">weekly</option>
-                                <option value="monthly">monthly</option>
-                                <option value="yearly">yearly</option>
-                            </select>
-                        </div>
-                    </section>
-                    -->
                 </div>
                 <br>
                 <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">

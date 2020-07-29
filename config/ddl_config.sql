@@ -21,7 +21,10 @@ DROP TABLE IF EXISTS todo_list;
 create table teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
-  date_created datetime default current_timestamp
+  admin varchar(75) not null,
+  date_created datetime default current_timestamp,
+  -- NEW: 7/28/2020
+  foreign key(admin) references users(email)
 );
 
 create table users (
