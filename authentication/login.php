@@ -25,7 +25,7 @@
                     </div>
                     <br>
                     <p>Don't have an account? <a href="./signup.php">Sign up here.</a></p>
-                    <input name="auth_user" class="spc-n spc-m" type="submit" id="form-control2">
+                    <input name="auth_user" class="spc-n" type="submit" id="form-control2">
                     <?php
                         if (isset($_GET["error"])) {
                             include("./error.php");

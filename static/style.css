@@ -528,6 +528,9 @@ ul {
     .r-cols.settings-flex{
       display: block;
     }
+    button.add-btn {
+      margin-bottom: 10px;
+    }
 
     /* dashboard mobile views */
     .grid-container {
