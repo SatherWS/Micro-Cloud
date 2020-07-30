@@ -14,7 +14,7 @@ This GitHub repository contains source code for project management software. It'
 - [X] Improve analytics UI
 - [X] Remove repeat task option
 - [X] Change index.php to dashboard.php
-- [X] Move imgs dir to static folder (or delete entirely)
+- [X] Delete imgs dir
 - [X] Fix drop down hover nav
 - [X] Implement user teams
 - [X] Assign tasks to users
@@ -31,11 +31,15 @@ This GitHub repository contains source code for project management software. It'
 - [X] Make activity items clickable in dash
 
 ### NEW: 7/28/2020 
-- [ ] Confirm before deleting task, post or user
+- [X] Confirm before deleting task, post or user
 - [ ] Create admin users
 - [ ] Drop users from teams
-- [ ] Analytics range selector
+- [ ] Analytics range selector  ** Do this one 07/29/2020
+  
+### Important tasks below will require a lot of rewritting
 - [ ] Restrict access for users to only view posts and tasks by their teams or themselves
+  - [ ] Use random number references in each post/task
+  - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
 
 
 ### How to run locally

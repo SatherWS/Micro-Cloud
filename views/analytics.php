@@ -6,18 +6,15 @@
     include_once ("../config/database.php");
     $db = new database();
     $curs = $db->getConnection();
+
+    // fetch gantt chart data model
+    include("../models/gantt.php");
+    $obj = new Issues();
+    $data = $obj -> get_tasks($curs, $_SESSION["team"]);
     $total = 0;
+    $js = "";
 
-    // data for gantt chart w/o range
-    /*
-    $sql = "select date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where team_name = ?";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $_SESSION["team"]);
-    $stmnt -> execute();
-    $result = $stmnt -> get_result();
-    */
-
-    // data for gantt chart range
+    // data for gantt chart w/ range
     if ($_POST["range"]) {
         $sql = "select assignee, creator, title, status, deadline, date(date_created) as created from todo_list where (date_created between ? and ?) and team_name = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -25,38 +22,27 @@
         $stmnt -> execute();
         $result = $stmnt -> get_result();
         $total = mysqli_num_rows($result);
-        $test = array();
         while ($row = mysqli_fetch_assoc($result)) {
-            array_push($test, $row);
+            $js .= "['".$row["id"]."','".$row["title"]."','".$row["status"]."',";
+            $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$row["month(date_created)"].",".$row["day(date_created)"]."),";
+            $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$row["month(deadline)"].",".$row["day(deadline)"]."),";
+            $js .= "null, null, null],";
         }
-        echo json_encode($test);
-    }
-    
-    /* 
+    } 
+    // data for gantt chart w/o range
     else {
-        $sql = "select rating, date(date_created) as dr from journal";
-        $result = mysqli_query($curs, $sql);
-        $total = mysqli_num_rows($result);
+        // format data from gantt model
+        while ($row = mysqli_fetch_assoc($data)) {
+            $js .= "['".$row["id"]."','".$row["title"]."','".$row["status"]."',";
+            $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$row["month(date_created)"].",".$row["day(date_created)"]."),";
+            $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$row["month(deadline)"].",".$row["day(deadline)"]."),";
+            $js .= "null, null, null],";
+        }
     }
-    */
 
     // data for pie chart
     $sql2 = "select status, count(*) from todo_list group by status";
     $result2 = mysqli_query($curs, $sql2);
-
-    // fetch gantt chart data 
-    include("../models/gantt.php");
-    $obj = new Issues();
-    $data = $obj -> get_tasks($curs, $_SESSION["team"]);
-
-    // format data from gantt model
-    $js = "";
-    while ($row = mysqli_fetch_assoc($data)) {
-        $js .= "['".$row["id"]."','".$row["title"]."','".$row["status"]."',";
-        $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$row["month(date_created)"].",".$row["day(date_created)"]."),";
-        $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$row["month(deadline)"].",".$row["day(deadline)"]."),";
-        $js .= "null, null, null],";
-    }
 ?>
 <!DOCTYPE HTML>
 <html>

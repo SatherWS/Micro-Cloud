@@ -20,7 +20,7 @@
             $id = $row["id"];
             $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
             $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-            $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
+            $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
             $html .= "<div><p>Created by ".$row["creator"]."</p>";
             $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
@@ -50,7 +50,7 @@
         }
     }
 
-    // assigned tasks to current user
+    // notes posted by current user
     if ($_POST["options-a"] == "created_posts") {
         $sql = "select * from journal where creator = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -82,7 +82,7 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
+                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
                 $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -105,7 +105,7 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<h3>Deadline: ".$row["time_due"]." ".$row["deadline"]."</h3></div>";
+                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
                 $html .= "<div><p>Created by ".$row["creator"]."</p>";
                 $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -187,6 +187,12 @@
     function panelLinkTD(id) {
         window.location='./task-details.php?task='+id;
     }
+    // event listener for preventing x-axis scrolling
+    var scrollEventHandler = function() {
+        window.scroll(0, window.pageYOffset)
+    }
+
+    window.addEventListener("scroll", scrollEventHandler, false);
     </script>
     <script src="../static/main.js"></script>
 </body>

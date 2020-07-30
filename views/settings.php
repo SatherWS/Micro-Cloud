@@ -30,7 +30,7 @@
                 <h1>User & Team Settings</h1>
                 <div class="settings-flex r-cols">
                     <div>
-                        <h2>Your User Info</h2>
+                        <h2>User Info</h2>
                         <?php 
                             echo "<p>Username: ".$_SESSION["user"]."</p>";
                             echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
@@ -49,8 +49,10 @@
                         ?>
                     </form>
                 </div>
+                <!-- WIP
+                <h1>Danger Zone</h1>
+                -->
             </div>
-
         </div>
     </div>
 </body>

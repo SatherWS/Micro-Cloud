@@ -14,7 +14,7 @@
     $result = mysqli_query($curs, $sql);
 ?>
 <div class="svg-bg">
-    <div class="log-header">    
+    <div class="todo-flex r-cols">    
         <div class="review">
             <h3 id='logs-title'>Available Chatrooms</h3>
         </div>

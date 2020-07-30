@@ -48,10 +48,10 @@
                 <tr class="tbl-head">
                     <th>ID</th>
                     <th>SUBJECT</th>
+                    <th>PREVIEW</th>
                     <th>CREATOR</th>
                     <th>TEAM</th>
                     <th>CATEGORY</th>
-                    <th>PREVIEW</th>
                     <th>DATE & TIME CREATED</th>
                 </tr>
                 <?php
@@ -66,10 +66,10 @@
                             $id = $row['id'];
                             echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["id"]. "</td>";
                             echo "<td>". $row["subject"]. "</td>";
+                            echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                             echo "<td>".$row["creator"]."</td>";
                             echo "<td>".$row["team_name"]."</td>";
                             echo "<td>". $row["category"]. "</td>";
-                            echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                             echo "<td>".$row["date_created"]."</td></tr>";
                         }
                     } 

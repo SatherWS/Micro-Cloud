@@ -81,10 +81,10 @@
     <form action="./analytics.php" method="POST">
         <div class="log-container todo-flex">    
             <div class="review">
-                <input type="date" name="start-date" id=""> 
+                <input type="date" name="start-date" class="simple-input"> 
             </div>
             <div class="todo-flex flex-end">
-                <input type="date" name="end-date" id="">
+                <input type="date" name="end-date" class="simple-input">
                 <input type="submit" value="Set Range" name="range2" class="date-btn">
             </div>
         </div>

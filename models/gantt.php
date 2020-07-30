@@ -11,5 +11,10 @@
             $results = $stmnt -> get_result();
             return $results;
         }
+        
+        // use for 2nd table in analytics view
+        function team_data($curs, $team) {
+            return 0;
+        }
     }
 ?>

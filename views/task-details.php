@@ -70,6 +70,7 @@
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
                         echo "<h2>Task: ".$row['title']."</h2>";
+                        echo "<p>".$row["description"]."</p>";
                         echo "<h3>Deadline: ".$row['deadline']." at ".$row["time_due"]."</h3>";
                         echo "<h3>Importance: ".$row['importance']."</h3>";
                         echo "<h4>STATUS: ".$row['status']."</h4>";
