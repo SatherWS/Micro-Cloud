@@ -530,6 +530,13 @@ ul {
     }
     button.add-btn {
       margin-bottom: 10px;
+      width: 100%;
+    }
+    #logs-title {
+      margin-left: 1rem!important;
+    }
+    .log-details {
+      padding: 0 1rem!important;
     }
 
     /* dashboard mobile views */
