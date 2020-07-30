@@ -21,8 +21,8 @@
             $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
             $html .= "<div><h2>Task: ".$row["title"]."</h2>";
             $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
-            $html .= "<div><p>Created by ".$row["creator"]."</p>";
-            $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
+            $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+            $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
             $html .= "<div><h3>Status: ".$row["status"]."</h3>";
             $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
@@ -44,7 +44,7 @@
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
                 $html .= "<h3>Category: ".$row["category"]."</h3></div>";
                 $html .= "<p>Created by ".$row["creator"]."</p></div>";
-                $html .= "<p class='activity-item'>".$row["message"]."</p>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p>";
                 $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
             }
         }
@@ -64,7 +64,7 @@
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
                 $html .= "<h3>Category: ".$row["category"]."</h3></div>";
                 $html .= "<p>Created by ".$row["creator"]."</p></div>";
-                $html .= "<p class='activity-item'>".$row["message"]."</p>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p>";
                 $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
             }
         }
@@ -83,8 +83,8 @@
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
                 $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
-                $html .= "<div><p>Created by ".$row["creator"]."</p>";
-                $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
+                $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+                $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
                 $html .= "<div><h3>Status: ".$row["status"]."</h3>";
                 $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
@@ -106,8 +106,8 @@
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
                 $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
-                $html .= "<div><p>Created by ".$row["creator"]."</p>";
-                $html .= "<p>Assigned to ".$row["assignee"]."</p></div></div>";
+                $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+                $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
                 $html .= "<div><h3>Status: ".$row["status"]."</h3>";
                 $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
@@ -165,7 +165,7 @@
                 </a>
             </div>   
         </div>
-        <div class="todo-flex">
+        <div class="todo-flex r-cols">
             <h1 class="intro-header">My Team's Activity</h1>
             <form method="POST">
                 <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
@@ -188,11 +188,13 @@
         window.location='./task-details.php?task='+id;
     }
     // event listener for preventing x-axis scrolling
+    /*
     var scrollEventHandler = function() {
         window.scroll(0, window.pageYOffset)
     }
 
     window.addEventListener("scroll", scrollEventHandler, false);
+    */  
     </script>
     <script src="../static/main.js"></script>
 </body>
