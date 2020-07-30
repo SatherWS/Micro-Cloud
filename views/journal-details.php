@@ -52,7 +52,7 @@
     // TODO: MOVE THIS TO MODELS OR CONTROLLERS ^
 ?>
 <div class="svg-bg">
-    <div class="todo-flex">
+    <div class="todo-flex r-cols">
         <div class="review">
             <h3 id="logs-title">
             <?php
@@ -69,7 +69,7 @@
             ?>
             </h3>
         </div>
-        <div class="task-ops todo-flex r-cols">
+        <div class="task-ops todo-flex">
             <?php
                 if ($show_editor) {
                     //$form -> showEditor($_GET["journal"]);                        
