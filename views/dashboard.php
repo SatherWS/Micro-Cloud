@@ -128,7 +128,8 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
-<body class="todo-bg">
+<body>
+    <div class="todo-bg">
     <?php include("./components/header.php");?>
     <main>
         <div class="home-intro">
@@ -180,6 +181,7 @@
         </div>
         <?php echo $html;?>
     </main>
+    </div>
     <script>
     function panelLinkP(id) {
         window.location='./journal-details.php?journal='+id;
