@@ -22,7 +22,7 @@ This GitHub repository contains source code for project management software. It'
 - [ ] Remove bonus apps and shared_drives.php (do last)
 - [ ] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
-- [ ] Implement error messages (login, signup and team creation/joining)  ** Do this one 07/28/2020
+- [ ] Implement error messages (login(done), signup and team creation/joining)  ** Do this one 07/28/2020
 - [ ] Write cron jobs to send email alerts regarding tasks (add after launch?)
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)
