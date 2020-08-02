@@ -21,7 +21,7 @@ if ($_POST['add-journal']) {
     $subject = $_POST["jsubject"];
     $category = $_POST["category"];
     $msg = $_POST["note"];
-    $priv = "T";
+    $priv = "Private";
     
     // check if check box is posted, if true mark journal as private
     // TODO: Add team id to posts and tasks
@@ -51,15 +51,6 @@ if ($_POST['add-task']) {
     header("Location: ../views/create-task.php");
 }
 
-// TODO: MOVE TO BONUS APPS CONTROLLERS -----
-// add chatroom to database
-if ($_POST['add-chatroom']) {
-    $sql = "insert into chatroom(subject, creator) values(?, ?)";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ss", $_POST["room"], $_POST["username"]);
-    $stmnt -> execute();
-    header("Location: ../views/bonus_apps/join-chat.php");
-}
 
 $curs -> close();
 ?>

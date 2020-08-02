@@ -20,13 +20,13 @@
             $id = $row["id"];
             $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
             $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-            $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
+            $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
+            $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
             $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
             $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
-            $html .= "<div><h3>Status: ".$row["status"]."</h3>";
-            $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
-            $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
+            $html .= "<p class='activity-item'>".$row["description"]."</p>";
+            $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
         }
     }
 
@@ -42,10 +42,11 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
-                $html .= "<h3>Category: ".$row["category"]."</h3></div>";
-                $html .= "<p>Created by ".$row["creator"]."</p></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p>";
-                $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
+                $html .= "<p><b>Category: </b>".$row["category"]."</p>";
+                $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
+                $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
+                $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p></div>";
             }
         }
     }
@@ -62,10 +63,11 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
-                $html .= "<h3>Category: ".$row["category"]."</h3></div>";
-                $html .= "<p>Created by ".$row["creator"]."</p></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p>";
-                $html .= "<small>Posted: ".$row["date_created"]."</small></div>";
+                $html .= "<p><b>Category: </b>".$row["category"]."</p>";
+                $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
+                $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
+                $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p></div>";
             }
         }
     }
@@ -82,19 +84,19 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
+                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<div><h3>Status: ".$row["status"]."</h3>";
-                $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
-                $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
+                $html .= "<p class='activity-item'>".$row["description"]."</p>";
+                $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
             }
         }
     }
 
     // tasks created by current user
-    if ($_POST["options-a"] == "my_tasks") {
+    if ($_POST["options-a"] == "created_tasks") {
         $sql = "select * from todo_list where creator = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["unq_user"]);
@@ -105,13 +107,13 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p></div>";
+                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<div><h3>Status: ".$row["status"]."</h3>";
-                $html .= "<p class='activity-item'>".$row["description"]."</p></div>";
-                $html .= "<small>Posted: ".$row["date_created"]."</small></div></div>";
+                $html .= "<p class='activity-item'>".$row["description"]."</p>";
+                $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
             }
         }
     }

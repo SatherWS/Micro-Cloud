@@ -25,18 +25,23 @@
 
         $database = new Database();
         $curs = $database->getConnection();
-        $sql = "select distinct category from journal where category is not null";
-        $result = mysqli_query($curs, $sql);
+        $sql = "select distinct category from journal where category is not null and team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("s", $_SESSION["team"]);
+        $stmnt->execute();
+        $result = $stmnt->get_result();
     ?>
     <form method="post">
         <div class="cat-panel">
-            <h1>Journal Categories</h1>
+            <h1>Note Categories</h1>
+            <!--
             <div>
                 <a href="" class="date-btn">File View</a>
             </div>
+            -->
         </div>
         
-        <div class="cat-grid">
+        <div class="r-cols cat-grid">
             <?php
                 if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {

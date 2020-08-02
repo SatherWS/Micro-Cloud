@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="log-container">
+    <div class="task-panel">
         <form action="../controllers/edit_entry.php" method="post" class="task-auto">
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
@@ -76,11 +76,14 @@
                         echo "<h4>STATUS: ".$row['status']."</h4>";
                     }
                 }
+                // Task editting view render
                 if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
                         echo "<h2>Editing: ".$row['description']."</h2>";
+                        echo "<lable>Edit Title</lable><br>";
+                        echo "<input class='spc-n' id='form-control' name='edited'value='".$row['title']."'><br><br>";
                         echo "<lable>Edit Description</lable><br>";
-                        echo "<input class='spc-n' id='form-control' name='edited'value='".$row['description']."'><br><br>";
+                        echo "<textarea id='form-control' name='edited' value='".$row['description']."'>".$row['description']."</textarea><br><br>";
                         echo "<lable>Change Deadline</lable><br>";
                         echo "<input type='date' name='end-date' class='spc-n' id='form-control'><br><br>";
                         echo "<lable>Change Time Due</lable><br>";

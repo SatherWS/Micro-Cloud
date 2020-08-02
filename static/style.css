@@ -6,7 +6,7 @@ html, body {
     margin:0;
     padding: 0;
     font-family: 'PT Sans', sans-serif;
-
+    /*font-family: baskerville, serif;*/
 }
   
 a {
@@ -14,7 +14,7 @@ a {
 }
 
 nav {
-    box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+  box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
 }
 
 .fa-wifi {
@@ -137,7 +137,7 @@ textarea {
 
 .spc-n {
   font-family: 'PT Sans', sans-serif;
-  font-size: 14pt;
+  font-size: 16pt;
   padding: .5rem;
   background: #f1f1f1;
   border:none;
@@ -303,8 +303,18 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
+.feed {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .intro-header {
   font-size: 32px;
+  color: #fff;
+}
+
+.home-intro h2 {
+  color: #fff;
 }
 
 .dash-item {
@@ -315,7 +325,7 @@ textarea {
 
 main {
   padding: 0 2rem;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -525,6 +535,12 @@ ul {
     .r-cols.todo-flex{
       display: block;
     }
+    .r-cols.cat-grid {
+      display: block;
+    }
+    .r-cols.cat-grid div {
+      margin-top: 10px;
+    }
     .r-cols.settings-flex{
       display: block;
     }
@@ -594,13 +610,17 @@ ul {
 /* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
   background: #fff;
-  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
+  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%); /* Old gradient */
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 50vh;
   background-repeat: no-repeat;
-  /*
-  max-width: 100%;
-  overflow-x: hidden;
-  */
+/* Possibly change to this gradient colors
+  background: #485563;  
+  background: -webkit-linear-gradient(to right, #29323c, #485563);
+  background: linear-gradient(to left, #29323c, #485563); 
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /* attempting to disable horizontal scrolling on dashboard
@@ -622,7 +642,25 @@ element {
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
 }
 
+.task-panel {
+  background: #fff;
+  border-radius: 5px;
+  width: 45%;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+}
 
+.task-panel select {
+  font-size: 16pt;
+}
+.task-panel input {
+  font-size: 16pt;
+}
+.task-panel textarea {
+  font-size: 16pt;
+  height: 250px;
+}
 /* settings section **/
 .settings-panel {
   background: #fff;
@@ -636,9 +674,14 @@ element {
 .settings-space {
   padding-top: 2rem;
 }
+
 .settings-flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.text-center {
+  text-align: center;
 }
 /* end settings section *?
 .todo-item {
@@ -819,7 +862,7 @@ button {
 .todo-txt-area {
   width: 100%!important;
   height: 125px!important;
-  font-size: 14pt;
+  font-size: 16pt;
 }
 .fa-save:before {
   padding-right: 8px;

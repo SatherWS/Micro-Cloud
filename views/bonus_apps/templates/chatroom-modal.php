@@ -1,4 +1,4 @@
-<form method="post" action="../../controllers/add_entry.php">
+<form method="post" action="../controllers/add_entry.php">
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>

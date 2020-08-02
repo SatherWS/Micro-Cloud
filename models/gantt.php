@@ -14,7 +14,14 @@
         
         // use for 2nd table in analytics view
         function team_data($curs, $team) {
+            $sql = "select count(*) from todo_list where team_name = ? group by status";
             return 0;
         }
+
+        // use for line graph to show tasks in progress, completed, etc.
+        function line_data($curs, $team) {
+            return 0;
+        }
+
     }
 ?>
