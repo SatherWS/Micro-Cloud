@@ -48,7 +48,7 @@ CREATE TABLE journal (
   message varchar(10000) NOT NULL,
   category varchar(45) NOT NULL,
   creator varchar(50) NOT NULL,
-  is_private char(1) default "Public" not null,
+  is_private varchar(20) default "Public" not null,
   date_created datetime DEFAULT CURRENT_TIMESTAMP,
   team_name varchar(50),
   foreign key (creator) references users(email),
