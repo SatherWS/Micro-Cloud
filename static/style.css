@@ -310,11 +310,6 @@ textarea {
 
 .intro-header {
   font-size: 32px;
-  color: #fff;
-}
-
-.home-intro h2 {
-  color: #fff;
 }
 
 .dash-item {
@@ -611,9 +606,9 @@ ul {
 .todo-bg {
   background: #fff;
   background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%); /* Old gradient */
-  background: #0F2027;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #5298b7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #5298b7, #207b9a, #194f65);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #5298b7, #207b9a, #194f65);
   height: 50vh;
   background-repeat: no-repeat;
 /* Possibly change to this gradient colors

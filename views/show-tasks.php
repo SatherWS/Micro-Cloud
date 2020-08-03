@@ -21,7 +21,8 @@
         include ("../config/database.php");
         $database = new Database();
         $curs = $database->getConnection();
-        $sql = "select * from todo_list where team_name = ? and (status = 'IN PROGRESS' or status = 'NOT STARTED') order by deadline";
+        //$sql = "select * from todo_list where team_name = ? and (status = 'IN PROGRESS' or status = 'NOT STARTED') order by deadline";
+        $sql = "select * from todo_list where team_name = ? order by deadline";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt ->  bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
