@@ -56,10 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     $results = mysqli_affected_rows($curs);
     
     if (search_team($curs, $_POST["team"])) {
-        $sql = "update users set team = ? where email = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["team"], $_POST["email"]);
-        $stmnt -> execute();
+        header("Location: ../authentication/confirm.php?email=".$_POST["email"]."?team=".$_POST["team"]);
     }
     else {
         // add team to database
@@ -76,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     }
 
     // if user is added correctly proceed to dashboard
-    if ($results) {
+    if ($results && !search_team($curs, $team)) {
         $_SESSION["unq_user"] = $_POST["email"];
         $_SESSION["user"] = $_POST["usr"];
         $_SESSION["team"] = $_POST["team"];

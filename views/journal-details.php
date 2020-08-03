@@ -12,14 +12,12 @@
 <body>
 <?php 
     include("./components/header.php");
-    include("./components/note-headers/forms.php");
 
     // TODO: MOVE THIS TO MODELS OR CONTROLLERS (remove team = ? you're an idiot)
     include_once('../config/database.php');
     $database = new Database();
     $curs = $database->getConnection();
 
-    $form = new FormGenerator();
     $show_editor = true;
 
     if ($_GET['journal']) {
