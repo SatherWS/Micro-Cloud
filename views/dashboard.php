@@ -46,7 +46,7 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p></div>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
             }
         }
     }
@@ -67,7 +67,7 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 75)."</p></div>";
+                $html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
             }
         }
     }
@@ -185,20 +185,12 @@
     </main>
     </div>
     <script>
-    function panelLinkP(id) {
-        window.location='./journal-details.php?journal='+id;
-    }
-    function panelLinkTD(id) {
-        window.location='./task-details.php?task='+id;
-    }
-    // event listener for preventing x-axis scrolling
-    /*
-    var scrollEventHandler = function() {
-        window.scroll(0, window.pageYOffset)
-    }
-
-    window.addEventListener("scroll", scrollEventHandler, false);
-    */  
+        function panelLinkP(id) {
+            window.location='./journal-details.php?journal='+id;
+        }
+        function panelLinkTD(id) {
+            window.location='./task-details.php?task='+id;
+        }
     </script>
     <script src="../static/main.js"></script>
 </body>

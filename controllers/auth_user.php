@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     $results = mysqli_affected_rows($curs);
     
     if (search_team($curs, $_POST["team"])) {
+        // is not working
         header("Location: ../authentication/confirm.php?email=".$_POST["email"]."?team=".$_POST["team"]);
     }
     else {
@@ -79,8 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
+    /*
     else {
         header("Location: ../authentication/signup.php?error="."Error email already in use");
     }
+    */
 }
 ?>

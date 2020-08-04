@@ -6,8 +6,11 @@
     include_once("../config/database.php");
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select distinct category from journal where category is not null";
-    $result = mysqli_query($curs, $sql);
+    $sql = "select distinct category from journal where category is not null and team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("s", $_SESSION["team"]);
+    $stmnt->execute();
+    $result = $stmnt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
