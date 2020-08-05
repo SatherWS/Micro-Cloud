@@ -33,8 +33,8 @@
     <div class="form-container">
         <div class="todo-panel">
             <div class="todo-flex r-cols">
-                <section> <!-- Contain task submit form -->
-                <h1>Add a New Task</h1>
+                <!-- Contains task submit form -->
+                <section> 
                 <div class="form-body">
                     <label>Task Description</label><br>
                     <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
@@ -72,8 +72,8 @@
                 <br>
                 <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">
                 </section>
-                <section> <!-- Preview submitted tasks -->
-                    <h1></h1>
+                <!-- Preview submitted tasks -->
+                <section> 
                     <div class="scroll-pane">
                         <?php 
                             $content = new Scroll();

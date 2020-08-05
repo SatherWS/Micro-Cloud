@@ -46,7 +46,10 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
+                // TODO: close p tag if substring contains an iframe tag (video, img etc)
+                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
+                $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
+                
             }
         }
     }
@@ -67,7 +70,9 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                $html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
+                // TODO: close p tag if substring contains an iframe tag (video, img etc)
+                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
+                $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
             }
         }
     }
@@ -135,8 +140,7 @@
     <?php include("./components/header.php");?>
     <main>
         <div class="home-intro">
-            <h1 class="intro-header">Welcome <?php echo $_SESSION["user"];?></h1>
-            <h2>Team: <?php echo $_SESSION["team"];?></h2>
+            <h1 class="intro-header">Welcome <?php echo $_SESSION["user"];?> of <?php echo $_SESSION["team"];?></h1>
         </div>
         <div class="grid-container">
             <div>

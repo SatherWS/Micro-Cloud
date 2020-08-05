@@ -54,7 +54,7 @@
             <div class="review">
                 <h3 id="logs-title">Task ID #<?php echo $_GET['task'];?></h3>
             </div>
-            <div class="todo-flex">
+            <div class="todo-flex r-cols">
                 <form action="./task-details.php" method="post" class="mr2rem">
                     <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
                 </form>

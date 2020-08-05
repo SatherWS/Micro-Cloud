@@ -21,7 +21,7 @@
         $stmnt -> execute();
         $result = $stmnt -> get_result();
         if ($result) {
-            // this is temporary
+            // this is temporary pseudocode
             $push_user = new Pusher();
             $add_guy = $push_user->add_guy();
         }
@@ -44,30 +44,35 @@
     <div class="todo-bg">
         <div class="settings-space">
             <div class="settings-panel">
-                <h1 class="text-center">User & Team Settings</h1>
+                <h1>User & Team Settings</h1>
                 <div class="settings-flex r-cols">
-                    <div>
-                        <h2>User Info</h2>
-                        <?php 
-                            echo "<p>Username: ".$_SESSION["user"]."</p>";
-                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                            echo "<p>Team: ".$_SESSION["team"]."</p>";
+                    <div class="add-worker">
+                        <form method="post">
+                            <h2>Add New Team Member</h2>
+                            <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
+                            <br><br>
+                            <input type="submit" name="search_user" value="Invite User">
+                        </form>
+                        
+                        <?php
+                            if (isset($_GET["error"])) {
+                                echo "<div><p>".$_GET["error"]."</p></div>";
+                            }
                             echo "<h2>Team Members of ".$_SESSION['team']."</h2>";
                             while ($row = mysqli_fetch_assoc($results)) {
                                 echo "<p>".$row["email"]."</p>";
                             }
                         ?>
                     </div>
-                    <form method="post">
-                        <h2>Add New Team Member</h2>
-                        <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
-                        <br><br>
-                        <?php
-                            if (isset($_GET["error"]))
-                                echo "<div><p>".$_GET["error"]."</p></div>";
+                    <div>
+                        <h2>Current User Info</h2>
+                        <?php 
+                            echo "<p>Username: ".$_SESSION["user"]."</p>";
+                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                            echo "<p>Team: ".$_SESSION["team"]."</p>";
                         ?>
-                        <input type="submit" name="search_user" value="Invite User">
-                    </form>
+                    </div>
+
                 </div>
                 <!-- WIP
                 <h1>Danger Zone</h1>

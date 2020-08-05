@@ -1,8 +1,35 @@
 <?php
+    include("./components/header.php");
+    include ("../config/database.php");
     session_start();
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
+
+    $database = new Database();
+    $curs = $database->getConnection();
+    $sql = "select * from todo_list where team_name = ? order by deadline";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt ->  bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $result = $stmnt -> get_result();
+    
+    if (isset($_POST['s-status'])) {
+        $sql = "select * from todo_list where status = ? and team_name = ? order by deadline desc";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("ss", $_POST['s-status'], $_SESSION["team"]);
+        $stmnt -> execute();
+        $result = $stmnt -> get_result();
+
+        if ($_POST["s-status"] == 'SHOW ALL') {
+            $sql = "select * from todo_list where team_name = ? order by deadline desc";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("s", $_SESSION["team"]);
+            $stmnt -> execute();
+            $result = $stmnt -> get_result();
+        }
+    }
+    $total = mysqli_num_rows($result)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,27 +43,6 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
-    <?php
-        include("./components/header.php");
-        include ("../config/database.php");
-        $database = new Database();
-        $curs = $database->getConnection();
-        //$sql = "select * from todo_list where team_name = ? and (status = 'IN PROGRESS' or status = 'NOT STARTED') order by deadline";
-        $sql = "select * from todo_list where team_name = ? order by deadline";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt ->  bind_param("s", $_SESSION["team"]);
-        $stmnt -> execute();
-        $result = $stmnt -> get_result();
-        
-        if ($_POST['s-status']) {
-            $filter = $_POST['s-status'];
-            $result = mysqli_query($curs, "select * from todo_list where status = '$filter' order by deadline desc");
-            if ($filter == 'SHOW ALL') {
-                $result = mysqli_query($curs, "select * from todo_list order by deadline desc");
-            }
-        }
-        $total = mysqli_num_rows($result)
-    ?>
     <div class="svg-bg">
         <div class="todo-flex">
             <div class="review">
@@ -70,10 +76,10 @@
         <form action="../edit_entry.php" method="post" id="tasks">
             <table class="data task-tab">
                 <tr class="tbl-head">
-                    <th>TEAM</th>
                     <th>TITLE</th>
                     <th>STATUS</th>
                     <th>ASSIGNED TO</th>
+                    <th>TEAM</th>
                     <th>IMPORTANCE</th>
                     <th>DATE CREATED</th>
                     <th>DATE DUE</th>
@@ -83,10 +89,10 @@
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
                             $id = $row["id"];
-                            echo "<tr onclick='getTask($id)'><td>".$row["team_name"]."</td>";
-                            echo "<td>".$row["title"]."</td>";
+                            echo "<tr onclick='getTask($id)'><td>".$row["title"]."</td>";
                             echo "<td>".$row["status"]."</td>";
                             echo "<td>".$row["assignee"]."</td>";
+                            echo "<td>".$row["team_name"]."</td>";
                             echo "<td>".$row["importance"]."</td>";
                             echo "<td>".$row["date_created"]."</td>";
                             echo "<td>".$row["deadline"]."</td>";
