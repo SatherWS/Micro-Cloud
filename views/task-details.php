@@ -3,6 +3,36 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
+    include ("../config/database.php");
+    $database = new Database();
+    $curs = $database->getConnection();
+
+    if ($_GET['task']) {
+        $id = $_GET['task'];
+        $sql = "select * from todo_list where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $id);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+    }
+
+    if ($_POST['edit']) {
+        $id = $_POST['edit'];
+        $sql = "select * from todo_list where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $id);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+    }
+
+    if ($_POST['delete']) {
+        $sql = "delete from todo_list where id = ?";
+        mysqli_query($curs, $sql);
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_POST['delete']);
+        $stmnt -> execute();
+        header("Location: ./show-tasks.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,39 +46,7 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
-    <?php
-        include("./components/header.php");
-        include ("../config/database.php");
-        $database = new Database();
-        $curs = $database->getConnection();
-
-        if ($_GET['task']) {
-            $id = $_GET['task'];
-            $sql = "select * from todo_list where id = ?";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("s", $id);
-            $stmnt -> execute();
-            $results = $stmnt -> get_result();
-        }
-
-        if ($_POST['edit']) {
-            $id = $_POST['edit'];
-            $sql = "select * from todo_list where id = ?";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("s", $id);
-            $stmnt -> execute();
-            $results = $stmnt -> get_result();
-        }
-
-        if ($_POST['delete']) {
-            $sql = "delete from todo_list where id = ?";
-            mysqli_query($curs, $sql);
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("s", $_POST['delete']);
-            $stmnt -> execute();
-            header("Location: ./show-tasks.php");
-        }
-    ?>
+    <?php include("./components/header.php"); ?>
     <div class="svg-bg">
         <div class="todo-flex mr2rem">    
             <div class="review">

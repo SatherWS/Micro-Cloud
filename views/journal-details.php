@@ -1,6 +1,4 @@
 <?php 
-    include("./components/header.php");
-
     // TODO: MOVE THIS TO MODELS OR CONTROLLERS (remove team = ? you're an idiot) v
     include_once('../config/database.php');
     $database = new Database();
@@ -49,6 +47,7 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
+<?php include("./components/header.php"); ?>
 <div class="svg-bg">
     <div class="todo-flex">
         <div class="review">

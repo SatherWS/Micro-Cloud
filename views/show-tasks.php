@@ -1,5 +1,4 @@
 <?php
-    include("./components/header.php");
     include ("../config/database.php");
     session_start();
     if (!isset($_SESSION["unq_user"])) {
@@ -43,6 +42,7 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
+    <?php include("./components/header.php"); ?>
     <div class="svg-bg">
         <div class="todo-flex">
             <div class="review">
