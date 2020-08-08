@@ -3,10 +3,9 @@
     include_once('../config/database.php');
     $database = new Database();
     $curs = $database->getConnection();
-
     $show_editor = true;
 
-    if ($_GET['journal']) {
+    if (isset($_GET['journal'])) {
         $id = $_GET['journal'];
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -16,7 +15,7 @@
         $show_editor = false;
     }
 
-    if ($_POST['edit']) {
+    if (isset($_POST['edit'])) {
         $id = $_POST['edit'];
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -25,7 +24,7 @@
         $results = $stmnt -> get_result();
     }
 
-    if ($_POST['delete']) {
+    if (isset($_POST['delete'])) {
         $sql = "delete from journal where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
@@ -53,6 +52,7 @@
         <div class="review">
             <h3 id="logs-title">
             <?php
+            /*
                 $sql2 = "select * from journal where id = ".$_GET['journal'];
                 if ($_POST['edit']) {
                     $sql2 = "select * from journal where id = ".$_POST['edit'];
@@ -63,6 +63,7 @@
                         echo "Category: ".$row["category"];
                     }
                 }
+            */
             ?>
             </h3>
         </div>
@@ -90,6 +91,7 @@
                 echo "<div class='detail-topper'>";
                 echo "<div><h1 class='padb'>".$row['subject']."</h1>";
                 echo "<small>".$row['date_created']."</small>";
+                echo "<small>".$row['category']."</small>";
                 echo "<p class='message-p'>".nl2br($row['message'])."</p>";
                 echo "</div>";
             }

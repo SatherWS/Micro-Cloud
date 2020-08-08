@@ -136,12 +136,13 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
-    <div class="todo-bg">
     <?php include("./components/header.php");?>
+
+    <div class="todo-bg-test">
+    <div class="svg-bg">
+        <p class="welcome"><?php echo $_SESSION["team"];?> | <?php echo $_SESSION["unq_user"];?></p>
+    </div>
     <main>
-        <div class="home-intro">
-            <h1 class="intro-header">Welcome <?php echo $_SESSION["user"];?> of <?php echo $_SESSION["team"];?></h1>
-        </div>
         <div class="grid-container">
             <div>
                 <a class="dash-item" href="./create-task.php">

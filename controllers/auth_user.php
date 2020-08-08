@@ -48,42 +48,53 @@ function search_team($curs, $team) {
 // TODO: SEND INVITATION REQUEST INSTEAD OF UPDATING USERS TABLE RIGHT AWAY
 // add user to db if search_team = false create new team 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
-    $sql = "insert into users(email, username, pswd) values(?,?,?)";
+    // we need to check which radio is selected and make sure the team exists or can be created
+    /*
+    $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
     $hash = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
-    $stmnt -> bind_param("sss", $_POST["email"], $_POST["usr"], $hash);
+    $stmnt -> bind_param("ssss", $_POST["email"], $_POST["team"], $_POST["usr"], $hash);
     $stmnt -> execute();
     $results = mysqli_affected_rows($curs);
-    
-    if (search_team($curs, $_POST["team"])) {
-        // is not working
-        header("Location: ../authentication/confirm.php?email=".$_POST["email"]."?team=".$_POST["team"]);
+    */
+    if ($_POST["radio"] == "join" && search_team($curs, $_POST["team"])) {
+        $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $hash = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
+        $stmnt -> bind_param("ssss", $_POST["email"], $_POST["team"], $_POST["usr"], $hash);
+        $stmnt -> execute();
+        header("Location: ../views/dashboard.php");
     }
-    else {
+    else if ($_POST["radio"] == "join" && !search_team($curs, $_POST["team"])) {
+        // team dne return error message
+        $msg = "Error: team does not exist";
+        header("Location: ../authentication/signup.php?error='$msg'");
+    }
+    else if ($_POST["radio"] == "create" && !search_team($curs, $_POST["team"])){
         // add team to database
         $sql = "insert into teams(team_name) values (?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST["team"]);
         $stmnt -> execute();
 
-        // add team to user
+        // update team name to user account
         $sql = "update users set team = ? where email = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST["team"], $_POST["email"]);
         $stmnt -> execute();
     }
 
+    /* seperate above code to function within class */
     // if user is added correctly proceed to dashboard
-    if ($results && !search_team($curs, $team)) {
+    // BUG: will always return non-unique email error message since $results DNE
+    if ($results) {
         $_SESSION["unq_user"] = $_POST["email"];
         $_SESSION["user"] = $_POST["usr"];
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
-    /*
     else {
-        header("Location: ../authentication/signup.php?error="."Error email already in use");
+        header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
     }
-    */
 }
 ?>

@@ -18,7 +18,17 @@
                     <p>Welcome to Teamswoop! To create an account enter the name of an existing team <br>or create a new team. Team names must be unique.</p>
                     <label>Team Name</label><br>
                     <input type="text" placeholder="New or existing team" name="team" class="spc-n login-comp" required>
-                    <br><br>
+                    
+                    <div class="todo-flex r-cols">
+                        <label class="container">Create New Team
+                            <input type="radio" checked="checked" name="radio" value="join">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Join Existing Team
+                            <input type="radio" name="radio" value="creates">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
                     <label>Email</label><br>
                     <input type="email" name="email" placeholder="Enter a valid email address" class="spc-n login-comp" required>
                     <br><br>

@@ -25,9 +25,9 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
-<body class="todo-bg">
+<body>
 <?php include("./components/header.php");?>
-
+<div class="todo-bg">
 <!-- TODO: seperate the form from the task view -->
 <form action="../controllers/add_entry.php" method="post" class="app">
     <div class="form-container">
@@ -85,6 +85,7 @@
         </div>
     </div>
 </form>
+</div>
 <script src="../static/main.js"></script>
 <script>
     function getTask(id) {

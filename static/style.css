@@ -80,7 +80,7 @@ ul.topnav-list {
     justify-content: space-between;
 }
 .app {
-    margin-top: 2rem;
+    padding-top: 2rem;
 }
 
 /*-------------------------------------------------------*
@@ -303,7 +303,12 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
-.feed {
+.welcome {
+  margin: 0!important;
+  padding: 1rem 2rem;
+  font-weight: bold;
+}
+  .feed {
   width: 80%;
   margin: 0 auto;
 }
@@ -494,78 +499,6 @@ ul {
     z-index: 10;
     color: #000;
   }
-  
-  @media screen and (max-width: 600px) {
-    .topnav-list li {display: none;}
-    .topnav a.icon {
-      float: right;
-      display: block;
-    }
-  }
-  
-  @media screen and (max-width: 600px) {
-    .sup-text {
-      font-size: 16pt;
-    }
-    .topnav.responsive {
-      position: fixed;
-      top: 0;
-      width: 100%;
-    }
-    .topnav.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .topnav.responsive li {
-      float: none;
-      display: block;
-      text-align: left;
-    }
-
-    /* login mobile views */
-    .login-comp {
-      width: 95%;
-    }
-    .r-cols.todo-flex{
-      display: block;
-    }
-    .r-cols.cat-grid {
-      display: block;
-    }
-    .r-cols.cat-grid div {
-      margin-top: 10px;
-    }
-    .r-cols.settings-flex{
-      display: block;
-    }
-    button.add-btn {
-      margin-bottom: 10px;
-      width: 100%;
-    }
-    #logs-title {
-      margin-left: 1rem!important;
-    }
-    .log-details {
-      padding: 0 1rem!important;
-    }
-
-    /* dashboard mobile views */
-    .grid-container {
-      display: grid;
-      grid-template-columns: auto auto;
-    }
-    .activity-item {
-      width: 100%;
-      font-size: 14pt;
-    }
-    /*
-    #piechart {
-      min-height: 800px;
-    }
-    */
-  }
-
 
 /*********************************************************/
 /* To Do App Section */
@@ -604,18 +537,25 @@ ul {
 
 /* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
-  background: #fff;
-  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%); /* Old gradient */
-  background: #5298b7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #5298b7, #207b9a, #194f65);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #f1f1f1;
+  /* fallback for old browsers 
+  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
+  background: #5298b7;
+  background: -webkit-linear-gradient(to right, #5298b7, #207b9a, #194f65);
   background: linear-gradient(to right, #5298b7, #207b9a, #194f65);
-  height: 50vh;
+  */
+  height: 60vh;
   background-repeat: no-repeat;
 /* Possibly change to this gradient colors
   background: #485563;  
   background: -webkit-linear-gradient(to right, #29323c, #485563);
   background: linear-gradient(to left, #29323c, #485563); 
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.todo-bg-test {
+  background: #f7f7f7;
+  background-repeat: no-repeat;
 }
 
 /* attempting to disable horizontal scrolling on dashboard
@@ -1242,11 +1182,16 @@ tr:hover {background-color:#f5f5f5;}
   }
   
   @media screen and (max-width: 700px) {
-    /*
-    .opt-desc {
-      font-size: 12pt;
+    .topnav-list li {
+      display: none;
     }
-    */
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+    .task-panel {
+      width: 80%;
+    }
     .opt-desc {
       display: none;
     }
@@ -1260,12 +1205,77 @@ tr:hover {background-color:#f5f5f5;}
       padding: 0 1rem;
       text-align: left;
     }
-
     .edit-field {
       margin-top: .5rem;
     }
     .pie-data{
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav-list li {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .sup-text {
+      font-size: 16pt;
+    }
+    .topnav.responsive {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive li {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+    /* login mobile views */
+    .login-comp {
+      width: 95%;
+    }
+    .r-cols.todo-flex{
+      display: block;
+    }
+    .r-cols.cat-grid {
+      display: block;
+    }
+    .r-cols.cat-grid div {
+      margin-top: 10px;
+    }
+    .r-cols.settings-flex{
+      display: block;
+    }
+    button.add-btn {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    #logs-title {
+      margin-left: 1rem!important;
+    }
+    .log-details {
+      padding: 0 1rem!important;
+    }
+
+    /* dashboard mobile views */
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto;
+    }
+    .activity-item {
+      width: 100%;
+      font-size: 14pt;
     }
   }
 
@@ -1302,7 +1312,6 @@ tr:hover {background-color:#f5f5f5;}
       min-height: 255px;
     }
     /* Notes Section & Task list */
-
     textarea { 
       width: 320px;
       font-size: 16pt;
@@ -1357,12 +1366,6 @@ tr:hover {background-color:#f5f5f5;}
       width: 320px;
       height: auto;
     }
-
-    /*
-    .detail-topper {
-      padding: 0 1rem;
-    }
-    */
 
     /* add category modal */
     .modal-content {

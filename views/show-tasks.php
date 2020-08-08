@@ -7,14 +7,14 @@
 
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select * from todo_list where team_name = ? order by deadline";
+    $sql = "select * from todo_list where team_name = ? order by date_created desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
     $result = $stmnt -> get_result();
     
     if (isset($_POST['s-status'])) {
-        $sql = "select * from todo_list where status = ? and team_name = ? order by deadline desc";
+        $sql = "select * from todo_list where status = ? and team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['s-status'], $_SESSION["team"]);
         $stmnt -> execute();

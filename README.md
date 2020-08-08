@@ -18,11 +18,11 @@ This GitHub repository contains source code for project management software. It'
 - [X] Fix drop down hover nav
 - [X] Implement user teams
 - [X] Assign tasks to users
-- [ ] Implement user options (add user to team)
 - [ ] Remove bonus apps and shared_drives.php (do last)
 - [X] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
-- [ ] Implement error messages (login(done), signup and team creation/joining)  ** Do this one 07/28/2020
+- [X] Login error messages
+- [ ] Signup error messages (team dne, team cannot be created, user already exists) **In progress** 
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)
 - [X] Fix bug: minor display issue when posts are selected in dashboard
@@ -31,17 +31,19 @@ This GitHub repository contains source code for project management software. It'
 
 ### Post deployment tasks last updated 7/28/2020 
 - [X] Confirm before deleting task, post or user
-- [ ] Create admin users
-- [ ] Drop users from teams
-- [ ] Analytics range selector  ** Do this one 07/29/2020
+- [ ] Create admin user options (team creator)
+- [ ] Analytics range selector  **In Progress**
 - [ ] Write cron jobs to send email alerts regarding tasks
 - [ ] Add comments to tasks and posts if not private
+- [ ] Implement user options (in progress, possibly moved to post deploy)
+  - [ ] add and remove user to team
+  - [ ] delete account
+  - [ ] quit team
     
-### Tasks below will require a lot of rewritting
+### Access restriction tasks
 - [ ] Restrict access for users to only view posts and tasks by their teams or themselves
   - [ ] Use random number references in each post/task
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
-
 
 ### How to run locally
 1. Install lamp stack server emulator, I used ampps 
