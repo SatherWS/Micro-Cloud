@@ -56,7 +56,7 @@ CREATE TABLE journal (
 );
 
 -- NEW TABLE `comments`, ref journal 08/22/2020
-
+-- NOT IMPLEMENTED
 CREATE TABLE comments (
   id int(11) primary key not null,
   comment varchar not null,
@@ -76,7 +76,7 @@ CREATE TABLE todo_list (
   description varchar(100),
   status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,
-  time_due time NOT NULL,
+  --time_due time NOT NULL,
   task_repeat varchar(10) NULL,
 	importance varchar(10) NOT NULL,
   assignee varchar(50),

@@ -28,12 +28,12 @@
         header("Location: ../views/show-tasks.php");
     }
 
-    if ($_POST['modtask']) {
+    if (isset($_POST['modtask'])) {
         $id = $_POST['modtask'];
-        $sql = "update todo_list set status = ? where id = ?";
+        $sql = "update todo_list set title=?, description=?, deadline=?, importance=?, status=? where id=?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST['change-status'], $id);
+        $stmnt -> bind_param("ssssss", $_POST["title"], $_POST["description"], $_POST["end-date"], $_POST["importance"], $_POST['change-status'], $id);
         $stmnt -> execute();
         header("Location: ../views/task-details.php?task=".$id);
     }

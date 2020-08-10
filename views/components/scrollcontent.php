@@ -13,7 +13,7 @@
                 $id = $row["id"];
                 $html .= "<div class='scroll-item' onclick='getTask($id)'>";
                 $html .= "<h3>".$row["title"]."</h3>";
-                $html .= "<h4>Deadline is ".$row["d"].", ".$row["time_due"]."</h4>";
+                $html .= "<h4>Deadline is ".$row["d"]."</h4>";
                 $html .= "<h4>Created on ".$row["date_created"]."</h4>";
                 $html .= "<p>Importance: ".$row["importance"]."</p>";
                 $html .= "<p>".$row["description"]."</p></div>";

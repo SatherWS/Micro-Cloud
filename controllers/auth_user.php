@@ -63,6 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $hash = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
         $stmnt -> bind_param("ssss", $_POST["email"], $_POST["team"], $_POST["usr"], $hash);
         $stmnt -> execute();
+
+        // create session and launch application
+        $_SESSION["unq_user"] = $_POST["email"];
+        $_SESSION["user"] = $_POST["usr"];
+        $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
     else if ($_POST["radio"] == "join" && !search_team($curs, $_POST["team"])) {
@@ -71,30 +76,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         header("Location: ../authentication/signup.php?error='$msg'");
     }
     else if ($_POST["radio"] == "create" && !search_team($curs, $_POST["team"])){
-        // add team to database
+        // add team to database, then add user account
         $sql = "insert into teams(team_name) values (?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST["team"]);
         $stmnt -> execute();
 
-        // update team name to user account
+        // update team name to user account (TODO: CHANGE TO ADD THEN CHECK FOR UNIQUENESS)
         $sql = "update users set team = ? where email = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST["team"], $_POST["email"]);
         $stmnt -> execute();
-    }
 
-    /* seperate above code to function within class */
-    // if user is added correctly proceed to dashboard
-    // BUG: will always return non-unique email error message since $results DNE
-    if ($results) {
+        // create session and launch application
         $_SESSION["unq_user"] = $_POST["email"];
         $_SESSION["user"] = $_POST["usr"];
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
-    else {
+    else if ($_POST["radio"] == "create" && search_team($curs, $_POST["team"])){
         header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
+    }
+    else {
+        // PLACEHOLDER
+        //header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
     }
 }
 ?>

@@ -22,6 +22,8 @@ This GitHub repository contains source code for project management software. It'
 - [X] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
 - [X] Login error messages
+- [X] Fix edit task bugs (does not allow modifications)
+  - [X] Possibly remove deadline time input and database columns
 - [ ] Signup error messages (team dne, team cannot be created, user already exists) **In progress** 
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)

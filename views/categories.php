@@ -33,7 +33,7 @@
     ?>
     <form method="post">
         <div class="cat-panel">
-            <h1>Note Categories</h1>
+            <h1>Available Categories</h1>
             <!--
             <div>
                 <a href="" class="date-btn">File View</a>

@@ -12,7 +12,8 @@
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
     $result = $stmnt -> get_result();
-    
+    $filter = $_POST['s-status'];
+
     if (isset($_POST['s-status'])) {
         $sql = "select * from todo_list where status = ? and team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -45,34 +46,28 @@
     <?php include("./components/header.php"); ?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <div class="review">
-                <?php
-                    echo "<h3 id='logs-title'>$total Tasks $filter</h3>";
-                ?>
+            <div class="add-btn">
+                <h3 class="ml2rem">
+                    <a href="./create-task.php">
+                        <span>Add Task</span>
+                        <i class="fa fa-plus-circle"></i>
+                    </a>
+                </h3>
             </div>
-            <div class="task-ops todo-flex">
-                <form method="POST">
-                    <select  class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
-                        <option value="none" selected disabled hidden>Filter by Status</option>
-                        <option value="SHOW ALL">SHOW ALL</option>
-                        <option value="NOT STARTED">NOT STARTED</option>
-                        <option value="IN PROGRESS">IN PROGRESS</option>
-                        <option value="STUCK">STUCK</option>
-                        <option value="COMPLETED">COMPLETED</option>
-                    </select>
-                </form>
-                <div class="add-btn">
-                    <h3 class="mr2rem">
-                        <a href="./create-task.php">
-                            <span>Add Task</span>
-                            <i class="fa fa-plus-circle"></i>
-                        </a>
-                    </h3>
-                </div>
-            </div>  
+            <form method="POST" class="mr2rem">
+                <select  class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
+                    <option value="none" selected disabled hidden>Filter by Status</option>
+                    <option value="SHOW ALL">SHOW ALL</option>
+                    <option value="NOT STARTED">NOT STARTED</option>
+                    <option value="IN PROGRESS">IN PROGRESS</option>
+                    <option value="STUCK">STUCK</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                </select>
+            </form>
         </div>
     </div>
     <div class="log-container">
+        <?php echo "<h3>$total TASKS $filter</h3>";?>
         <form action="../edit_entry.php" method="post" id="tasks">
             <table class="data task-tab">
                 <tr class="tbl-head">
@@ -82,8 +77,7 @@
                     <th>TEAM</th>
                     <th>IMPORTANCE</th>
                     <th>DATE CREATED</th>
-                    <th>DATE DUE</th>
-                    <th>TIME DUE</th>
+                    <th>DUE DATE</th>
                 </tr>
                 <?php
                     if (mysqli_num_rows($result) > 0) {

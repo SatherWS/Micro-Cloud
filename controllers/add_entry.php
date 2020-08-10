@@ -41,9 +41,9 @@ if ($_POST['add-journal']) {
 
 // add task to todo list
 if (isset($_POST['add-task'])) {
-    $sql = "insert into todo_list(title, assignee, description, deadline, time_due, importance, creator, team_name) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "insert into todo_list(title, assignee, description, deadline, importance, creator, team_name) values (?, ?, ?, ?, ?, ?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ssssssss", $_POST["title"], $_POST["assignee"], $_POST["descript"], $_POST["end-date"], $_POST["time-due"], $_POST["importance"], $_SESSION["unq_user"], $_SESSION["team"]);
+    $stmnt -> bind_param("sssssss", $_POST["title"], $_POST["assignee"], $_POST["descript"], $_POST["end-date"], $_POST["importance"], $_SESSION["unq_user"], $_SESSION["team"]);
     $stmnt -> execute();
     header("Location: ../views/show-tasks.php");
 }

@@ -48,6 +48,7 @@
 <body>
 <?php include("./components/header.php"); ?>
 <div class="svg-bg">
+    <!--
     <div class="todo-flex">
         <div class="review">
             <h3 id="logs-title">
@@ -67,19 +68,19 @@
             ?>
             </h3>
         </div>
+        -->
+
         <div class="task-ops todo-flex r-cols">
             <?php
                 if ($show_editor) {
-                    //$form -> showEditor($_GET["journal"]);                        
                     include("./components/note-headers/save_post.php");
                 }
                 else {
                     include("./components/note-headers/edit_post.php");
-                    //$form -> showDefault($_GET["journal"]);
                 }
             ?>
         </div>    
-    </div>
+    <!--</div>-->
 </div>
 <form action="../controllers/edit_entry.php" method="post" id="editor">
     <?php
@@ -90,8 +91,8 @@
                 echo "<div class='log-details'>";
                 echo "<div class='detail-topper'>";
                 echo "<div><h1 class='padb'>".$row['subject']."</h1>";
-                echo "<small>".$row['date_created']."</small>";
-                echo "<small>".$row['category']."</small>";
+                echo "<small>Posted: ".$row['date_created']."</small><br>";
+                echo "<small>Category: ".$row['category']."</small>";
                 echo "<p class='message-p'>".nl2br($row['message'])."</p>";
                 echo "</div>";
             }

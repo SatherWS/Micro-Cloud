@@ -41,7 +41,7 @@
 </head>
 <body>
     <?php include("./components/header.php");?>
-    <div class="todo-bg">
+    <div class="todo-bg-test">
         <div class="settings-space">
             <div class="settings-panel">
                 <h1>User & Team Settings</h1>
@@ -58,7 +58,7 @@
                             if (isset($_GET["error"])) {
                                 echo "<div><p>".$_GET["error"]."</p></div>";
                             }
-                            echo "<h2>Team Members of ".$_SESSION['team']."</h2>";
+                            echo "<h2>Members of ".$_SESSION['team']."</h2>";
                             while ($row = mysqli_fetch_assoc($results)) {
                                 echo "<p>".$row["email"]."</p>";
                             }
