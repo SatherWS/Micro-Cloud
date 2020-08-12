@@ -21,14 +21,13 @@
 						</div>
                         <label>Team Name</label><br>
                         <input type="text" placeholder="New or existing team" name="team" class="spc-n login-comp" required>
-                        
                         <div class="todo-flex r-cols">
                             <label class="container">Create New Team
-                                <input type="radio" checked="checked" name="radio" value="join">
+                                <input type="radio" checked="checked" name="radio" value="create">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="container">Join Existing Team
-                                <input type="radio" name="radio" value="creates">
+                                <input type="radio" name="radio" value="join">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -43,6 +42,10 @@
                         <br>
                         <br>
 						<div class="text-center">
+                            <?php 
+                                echo "<div class='error-msg'>";
+                                echo "<p>".$_GET["error"]."</p></div>";
+                            ?>
 							<p>Already have an account? <a href="./login.php">Sign in here.</a></p>
 							<input name="add_user" class="spc-n spc-m" type="submit" id="form-control2">
 						</div>

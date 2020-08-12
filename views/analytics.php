@@ -16,7 +16,7 @@
 
     // data for gantt chart w/ range
     if ($_POST["range"]) {
-        $sql = "select assignee, creator, title, status, deadline, date(date_created) as created from todo_list where (date_created between ? and ?) and team_name = ?";
+        $sql = "select id, title, status, date_format(date_created, '%Y'), month(date_created), day(date_created), date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where (date_created between ? and ?) and team_name = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("sss", $_POST["start-date"], $_POST["end-date"], $_SESSION["team"]);
         $stmnt -> execute();
@@ -112,13 +112,27 @@
 </div>
 <article class="main-page">
     <!-- Gantt chart div -->
-    <h1>Task Analytics from xx-xx-xxx to xx-xx-xxxx</h1>
+    <div class="text-center">
+        <?php
+            echo "<h1>".$_SESSION["team"]." Task Analytics</h1>";
+            if (isset($_POST["start-date"]) || isset($_POST["end-date"]))
+                echo "<p>From ".$_POST["start-date"]." to ".$_POST["end-date"]."</p>";
+            else
+                echo "<p>All tasks accounted for.</p>";
+        ?>
+    </div>
+    
     <div id="chart_div"></div>
 
     <!-- Pie chart data tables section -->
     <div class="pie-box">
         <div class="pie-data">
             <div id="piechart"></div>
+            <br><br>
+            <div class="text-center">
+            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+            <a href="./create-task.php" class="date-btn">Create Task</a>
+            </div>
         </div>
         <div class="pie-data">
             <h2>Task List Summary</h2>
@@ -128,38 +142,30 @@
                     <th>Count</th>
                 </tr>
                 <?php
+                    $result2 = $obj->team_data($curs, $_SESSION["team"]);
                     while ($row = mysqli_fetch_assoc($result2)) {
                         echo "<tr><td>".$row["status"]."</td>";
                         echo "<td>".$row["count(*)"]."</td></tr>";
                     }
                 ?>
             </table>
-            <br><br>
-            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-            <a href="./create-task.php" class="date-btn">Create Task</a>
         </div>
         <div class="pie-data">
             <h2>Task Summary by User</h2>
             <table class="data journal-tab">
+                
                 <tr class="tbl-head">
                     <th>Team Mate</th>
-                    <th>Completed</th>
-                    <th>In Progress</th>
-                    <th>Stuck</th>
-                </tr>
-                <tr>
-                <td>csather</td>
-                <td>10</td>
-                <td>24</td>
-                <td>15</td>
+                    <th>Staus</th>
+                    <th>Count</th>
                 </tr>
                 <?php
-                /*
-                while ($row = mysqli_fetch_assoc($result2)) {
-                    echo "<tr><td>".$row["status"]."</td>";
-                    echo "<td>".$row["count(*)"]."</td></tr>";
-                }
-                */
+                    $result3 = $obj->user_summaries($curs, $_SESSION["team"]);
+                    while ($row = mysqli_fetch_assoc($result3)) {
+                        echo "<tr><td>".$row["assignee"]."</td>";
+                        echo "<td>".$row["status"]."</td>";
+                        echo "<td>".$row["count(*)"]."</td></tr>";
+                    }
                 ?>
             </table>
             <br><br>
@@ -175,12 +181,7 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable(
         <?php
-            $chart_data = "[['Status', 'Task Count'],";
-        
-            while($row = mysqli_fetch_assoc($result2)) {
-                $chart_data .= "['".$row['status']."', ".$row["count(*)"]."],";
-            }
-            echo substr($chart_data, 0, -1)."]";
+            echo $obj->pie_data($curs, $_SESSION["team"]);
         ?>);
 
         var options = {

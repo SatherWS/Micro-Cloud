@@ -1,7 +1,6 @@
 <?php
 /*
 *   This script controls how users are created and authenticated
-*   7/24/2020, Teamswoop
 *   Author: Colin Sather
 */
 session_start();
@@ -32,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["auth_user"])) {
 /*
 *   User and Team creation section (Signup form)
 */
-
 function search_team($curs, $team) {
     $sql = "select team_name from teams where team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
@@ -45,18 +43,24 @@ function search_team($curs, $team) {
         return false;
 }
 
+/*
+function search_user($curs, $user) {
+    $sql = "select email from users where email = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $team);
+    $stmnt -> execute();
+    $results = $stmnt -> get_result();
+    if ($results -> num_rows > 0)
+        return true;
+    else
+        return false;    
+} 
+*/
+
 // TODO: SEND INVITATION REQUEST INSTEAD OF UPDATING USERS TABLE RIGHT AWAY
 // add user to db if search_team = false create new team 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
-    // we need to check which radio is selected and make sure the team exists or can be created
-    /*
-    $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $hash = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
-    $stmnt -> bind_param("ssss", $_POST["email"], $_POST["team"], $_POST["usr"], $hash);
-    $stmnt -> execute();
-    $results = mysqli_affected_rows($curs);
-    */
+    // check which radio is selected and make sure the team exists or can be created
     if ($_POST["radio"] == "join" && search_team($curs, $_POST["team"])) {
         $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -70,11 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
-    else if ($_POST["radio"] == "join" && !search_team($curs, $_POST["team"])) {
-        // team dne return error message
-        $msg = "Error: team does not exist";
-        header("Location: ../authentication/signup.php?error='$msg'");
-    }
+
     else if ($_POST["radio"] == "create" && !search_team($curs, $_POST["team"])){
         // add team to database, then add user account
         $sql = "insert into teams(team_name) values (?)";
@@ -82,10 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $stmnt -> bind_param("s", $_POST["team"]);
         $stmnt -> execute();
 
-        // update team name to user account (TODO: CHANGE TO ADD THEN CHECK FOR UNIQUENESS)
-        $sql = "update users set team = ? where email = ?";
+        // create user account
+        $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_POST["team"], $_POST["email"]);
+        $hash = password_hash($_POST["pswd"], PASSWORD_BCRYPT);
+        $stmnt -> bind_param("ssss", $_POST["email"], $_POST["team"], $_POST["usr"], $hash);
         $stmnt -> execute();
 
         // create session and launch application
@@ -94,12 +95,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         $_SESSION["team"] = $_POST["team"];
         header("Location: ../views/dashboard.php");
     }
+    // error messages: team dne or user non unique
+    else if ($_POST["radio"] == "join" && !search_team($curs, $_POST["team"])) {
+        $msg = "Error: team does not exist";
+        header("Location: ../authentication/signup.php?error='$msg'");
+    }
     else if ($_POST["radio"] == "create" && search_team($curs, $_POST["team"])){
         header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
     }
+}
+
+// send invite to user if user exists
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["invite_user"])) {
+    $sql = "insert into invites(receiver, sender, team_name) values (?,?,?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("sss", $_POST["user_email"], $_SESSION["unq_user"], $_SESSION["team"]);
+    
+    if ($stmnt->execute())
+        header("Location: ../views/settings.php?msg=Success: invitation sent!");
+    else
+        header("Location: ../views/settings.php?msg=Error: user does not exist");
+}
+
+// Receiever of invite either accepts or denies
+if (isset($_POST["accept"])) {
+    $sql = "update users set team = ? where email = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("ss", $_POST["accept"], $_SESSION["unq_user"]);
+    $stmnt->execute();
+    $sql = "update invites set status = 'accepted' where receiver = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt->execute();
+    header("Location: ../views/settings.php");
+}
+/*
+if (isset($_POST["accept"]) || isset($_POST["deny"])) {
+
+    if (isset($_POST["deny"])) {
+        $sql = "update users set team = ? where email = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("ss", $_POST["deny"], $_SESSION["unq_user"]);
+        $sql = "update invites set status = 'denied' where receiver = ?";
+    }
+    if ($stmnt->execute()) {
+        $_SESSION["team"] = $_POST["team_name"];
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("s", $_SESSION["unq_user"]);
+        $stmnt->execute();
+        header("Location: ../views/settings.php");
+    }
     else {
-        // PLACEHOLDER
-        //header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
+        header("Location: ../views/settings.php?err=Error could not join group");
     }
 }
+*/
 ?>

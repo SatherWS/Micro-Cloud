@@ -55,7 +55,7 @@
                 </h3>
             </div>
             <form method="POST" class="mr2rem">
-                <select  class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
+                <select class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
                     <option value="none" selected disabled hidden>Filter by Status</option>
                     <option value="SHOW ALL">SHOW ALL</option>
                     <option value="NOT STARTED">NOT STARTED</option>

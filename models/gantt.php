@@ -1,6 +1,7 @@
 <?php
     /*
-    Below function fetchs tasks for a given team    
+    * Below functions fetchs tasks for a given team.
+    *     
     */
     class Issues {
         function get_tasks($curs, $team) {
@@ -12,14 +13,38 @@
             return $results;
         }
         
+        // pie chart inner array to data table
+        function pie_data($curs, $team) {
+            $sql = "select status, count(*) from todo_list where team_name = ? group by status";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt->bind_param("s", $team);
+            $stmnt->execute();
+            $results = $stmnt->get_result();
+            $chart_data = "[['Status', 'Task Count'],";
+        
+            while($row = mysqli_fetch_assoc($results)) {
+                $chart_data .= "['".$row['status']."', ".$row["count(*)"]."],";
+            }
+            return substr($chart_data, 0, -1)."]";
+        }
+        
         // use for 2nd table in analytics view and pie chart
         function team_data($curs, $team) {
             // data for pie chart section
             $sql = "select status, count(*) from todo_list where team_name = ? group by status";
-            $stmnt = mysqli_prepare($curs, $sql2);
+            $stmnt = mysqli_prepare($curs, $sql);
             $stmnt->bind_param("s", $team);
             $stmnt->execute();
-            $result = $stmnt->get_result();
+            $results = $stmnt->get_result();
+            return $results;
+        }
+
+        function user_summaries($curs, $team) {
+            $sql = "select status, assignee, count(*) from todo_list where team_name = ? group by assignee, status";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt->bind_param("s", $team);
+            $stmnt->execute();
+            $results = $stmnt->get_result();
             return $results;
         }
 
@@ -28,17 +53,4 @@
             return 0;
         }
     }
-
-    /* delete later
-    class Summary {
-        function summary_table($curs, $team) {
-            // data for pie chart section
-            $sql2 = "select status, count(*) from todo_list where team_name = ? group by status";
-            $stmnt2 = mysqli_prepare($curs, $sql2);
-            $stmnt2->bind_param("s", $_SESSION["team"]);
-            $stmnt2->execute();
-            $result2 = $stmnt2->get_result();
-        }
-    }
-    */
 ?>
