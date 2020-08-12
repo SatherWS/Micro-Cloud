@@ -17,7 +17,7 @@
                     <div class="inner-panel">
 						<div class="text-center form-intro">
 							<h1>Sign Up Form</h1>
-							<p>Welcome to Teamswoop! To create an account enter the name of an existing team or create a new team. Team names must be unique.</p>
+							<p>To create an account enter the name of an existing team or create a new team. Team names must be unique.</p>
 						</div>
                         <label>Team Name</label><br>
                         <input type="text" placeholder="New or existing team" name="team" class="spc-n login-comp" required>

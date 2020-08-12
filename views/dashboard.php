@@ -140,7 +140,10 @@
 
     <div class="todo-bg-test">
     <div class="svg-bg">
-        <p class="welcome">Team: <?php echo $_SESSION["team"];?> | User: <?php echo $_SESSION["unq_user"];?></p>
+        <div class="todo-flex">
+            <p class="welcome">Team: <?php echo $_SESSION["team"];?></p>
+            <p class="welcome">User: <?php echo $_SESSION["unq_user"];?></p>
+        </div>
     </div>
     <main>
         <div class="grid-container">

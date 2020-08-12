@@ -51,7 +51,7 @@
                             <h2>Add New Team Member</h2>
                             <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
                             <br><br>
-                            <input type="submit" name="search_user" value="Invite User">
+                            <input type="submit" name="search_user" value="Invite User" id="form-control2">
                         </form>
                         
                         <?php

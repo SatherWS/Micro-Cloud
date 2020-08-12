@@ -39,10 +39,6 @@
             $js .= "null, null, null],";
         }
     }
-
-    // data for pie chart
-    $sql2 = "select status, count(*) from todo_list group by status";
-    $result2 = mysqli_query($curs, $sql2);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -89,7 +85,6 @@
       };
 
       var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
-
       chart.draw(data, options);
     }
   </script>
@@ -180,11 +175,9 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable(
         <?php
-            $sql1 = "select status, count(*) from todo_list group by status";
-            $rt = mysqli_query($curs, $sql1);
             $chart_data = "[['Status', 'Task Count'],";
         
-            while($row = mysqli_fetch_assoc($rt)) {
+            while($row = mysqli_fetch_assoc($result2)) {
                 $chart_data .= "['".$row['status']."', ".$row["count(*)"]."],";
             }
             echo substr($chart_data, 0, -1)."]";
