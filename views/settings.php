@@ -55,14 +55,17 @@
                 </div>
                 <div class="invites">
                     <h2>My Invite History</h2>
-                    <form action="../controllers/auth_user.php">
+                    <form action="../controllers/auth_user.php" method="post">
                     <table class="data journal-tab">
                     <?php
                     if (mysqli_num_rows($results3) > 0) {
                         include ("./components/settings-table.php");
                         while ($row=mysqli_fetch_assoc($results3)) {
                             $id = $row["team_name"];
-                            if ($_SESSION["unq_user"] == $row["receiver"]) {
+                            if ($row["status"] != "Pending") {
+                                echo "<tr><td></td>";
+                            }
+                            else if ($_SESSION["unq_user"] == $row["receiver"]) {
                                 echo "<tr><td><button class='accept-btn' type='submit' name='accept' value='$id'>Accept</button>";
                                 echo "<button class='deny-btn' type='submit' name='deny' value='$id'>Deny</button></td>";
                             }
@@ -85,14 +88,6 @@
                 </div>
                 <div class="settings-flex r-cols">
                     <div>
-                        <h2>Current User Info</h2>
-                        <?php 
-                            echo "<p>Username: ".$_SESSION["user"]."</p>";
-                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                            echo "<p>Team: ".$_SESSION["team"]."</p>";
-                        ?>
-                    </div>
-                    <div>
                         <?php
                             // for add teammate form
                             if (isset($_GET["error"])) {
@@ -104,12 +99,20 @@
                             }
                         ?>
                     </div>
+                    <div>
+                        <h2>Current User Info</h2>
+                        <?php 
+                            echo "<p>Username: ".$_SESSION["user"]."</p>";
+                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                            echo "<p>Team: ".$_SESSION["team"]."</p>";
+                        ?>
+                    </div>
                 </div>
-                <!-- WIP
-                <h1>Danger Zone</h1>
-                -->
+                <!-- WIP 
+                <h2>Danger Zone</h2>-->
             </div>
         </div>
     </div>
+    <script src="../static/main.js"></script>
 </body>
 </html>

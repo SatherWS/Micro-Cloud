@@ -131,7 +131,7 @@ textarea {
 .spc-n {
   font-family: 'PT Sans', sans-serif;
   font-size: 16pt;
-  padding: .5rem;
+  padding: .5rem 0;
   border: none;
   border-bottom: solid #000 1.5px;
   width: 100%;
@@ -324,6 +324,7 @@ main {
   padding: 0 2rem;
   width: auto;
   margin: 0 auto;
+  margin-bottom: 1rem;
 }
 
 .dash-footer {
@@ -663,7 +664,7 @@ element {
   text-align: center;
 }
 .form-intro {
-	width: 75%;
+	width: 85%;
 	margin: 0 auto;
 }
 .form-intro p {
@@ -1147,7 +1148,7 @@ tr:hover {background-color:#f5f5f5;}
 
   /* Mobile responsive section start*/
   /* removed only keyword before screen keyword 6/18 */
-  /* Make Tables Responsive */
+  /* Responsive Tables */
   @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px)  {
     /* dashboard adjustments */
@@ -1257,6 +1258,19 @@ tr:hover {background-color:#f5f5f5;}
     }
     .edit-field {
       margin-top: .5rem;
+    }
+    .topnav.responsive li {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .add-worker {
+      width:80%;
     }
   }
 

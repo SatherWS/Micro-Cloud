@@ -22,12 +22,12 @@
                         <label>Team Name</label><br>
                         <input type="text" placeholder="New or existing team" name="team" class="spc-n login-comp" required>
                         <div class="todo-flex r-cols">
-                            <label class="container">Create New Team
-                                <input type="radio" checked="checked" name="radio" value="create">
+                            <label class="container">Join Team
+                                <input type="radio" checked="checked" name="radio" value="join">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="container">Join Existing Team
-                                <input type="radio" name="radio" value="join">
+                            <label class="container">Create Team
+                                <input type="radio" name="radio" value="create">
                                 <span class="checkmark"></span>
                             </label>
                         </div>

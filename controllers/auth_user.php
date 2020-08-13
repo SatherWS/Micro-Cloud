@@ -127,27 +127,14 @@ if (isset($_POST["accept"])) {
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("s", $_SESSION["unq_user"]);
     $stmnt->execute();
+    $_SESSION["team"] = $_POST["accept"];
     header("Location: ../views/settings.php");
 }
-/*
-if (isset($_POST["accept"]) || isset($_POST["deny"])) {
-
-    if (isset($_POST["deny"])) {
-        $sql = "update users set team = ? where email = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("ss", $_POST["deny"], $_SESSION["unq_user"]);
-        $sql = "update invites set status = 'denied' where receiver = ?";
-    }
-    if ($stmnt->execute()) {
-        $_SESSION["team"] = $_POST["team_name"];
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("s", $_SESSION["unq_user"]);
-        $stmnt->execute();
-        header("Location: ../views/settings.php");
-    }
-    else {
-        header("Location: ../views/settings.php?err=Error could not join group");
-    }
+if (isset($_POST["deny"])) {
+    $sql = "delete from invites where receiver = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt->execute();
+    header("Location: ../views/settings.php");
 }
-*/
 ?>

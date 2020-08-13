@@ -42,7 +42,7 @@ create table invites (
   sender varchar(75) not null,
   receiver varchar(75) not null,
   team_name varchar(50) not null,
-  status varchar(20) default 'Pending' not null,
+  status varchar(20) default 'p ending' not null,
   date_created datetime default current_timestamp,
   foreign key(sender) references users(email),
   foreign key(receiver) references users(email),

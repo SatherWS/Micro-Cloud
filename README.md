@@ -37,7 +37,8 @@ This GitHub repository contains source code for project management software. It'
 - [X] Analytics range selector
 - [ ] Write cron jobs to send email alerts regarding tasks
 - [ ] Add comments to tasks and posts if not private
-- [ ] Implement user options (in progress, possibly moved to post deploy)
+- [ ] Email forgotten passwords
+- [ ] Implement user options
   - [ ] add and remove user to team
   - [ ] delete account
   - [ ] quit team
