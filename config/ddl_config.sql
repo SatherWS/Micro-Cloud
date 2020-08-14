@@ -16,7 +16,6 @@
 create table teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
-  admin varchar(75) not null,
   date_created datetime default current_timestamp
 );
 
