@@ -43,24 +43,13 @@ function search_team($curs, $team) {
         return false;
 }
 
-/*
-function search_user($curs, $user) {
-    $sql = "select email from users where email = ?";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $team);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
-    if ($results -> num_rows > 0)
-        return true;
-    else
-        return false;    
-} 
-*/
-
 // TODO: SEND INVITATION REQUEST INSTEAD OF UPDATING USERS TABLE RIGHT AWAY
 // add user to db if search_team = false create new team 
+// check which radio is selected and make sure the team exists or can be created
+// below if statement is an attempt at a minimum password length
+
+//if (strlen($_POST["pswd"]) >= 8 && isset($_POST["add_user"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
-    // check which radio is selected and make sure the team exists or can be created
     if ($_POST["radio"] == "join" && search_team($curs, $_POST["team"])) {
         $sql = "insert into users(email, team, username, pswd) values(?,?,?,?)";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -104,17 +93,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
         header("Location: ../authentication/signup.php?error="."Error: email accounts must be unique");
     }
 }
+/*
+else if (strlen($_POST["pswd"]) < 8) {
+    header("Location: ../authentication/signup.php?error=Error: password isn't long enough");
+}
+*/
 
-// send invite to user if user exists
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["invite_user"])) {
+// send invite to user if user exists and if invite is already sent
+function check_invites($curs, $user, $team) {
+    $sql = "select receiver, team_name from invites where receiver = ? and team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("ss", $user, $team);
+    if ($stmnt->execute)
+        return true;
+    else
+        return false;
+}
+
+if (isset($_POST["invite_user"]) && check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
     $sql = "insert into invites(receiver, sender, team_name) values (?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("sss", $_POST["user_email"], $_SESSION["unq_user"], $_SESSION["team"]);
-    
     if ($stmnt->execute())
         header("Location: ../views/settings.php?msg=Success: invitation sent!");
     else
         header("Location: ../views/settings.php?msg=Error: user does not exist");
+}
+else if (isset($_POST["invite_user"]) && !check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
+    header("Location: ../views/settings.php?msg=Error: invitation already sent or user DNE.");
 }
 
 // Receiever of invite either accepts or denies

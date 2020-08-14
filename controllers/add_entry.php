@@ -47,7 +47,5 @@ if (isset($_POST['add-task'])) {
     $stmnt -> execute();
     header("Location: ../views/show-tasks.php");
 }
-
-
 $curs -> close();
 ?>
