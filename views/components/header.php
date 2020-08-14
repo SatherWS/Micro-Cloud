@@ -26,14 +26,8 @@
             <li>
                 <a href="./analytics.php">Analytics</a>
             </li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Bonus Apps</a>
-                <div class="dropdown-content">
-                    <a href="./bonus_apps/data-storage.php">Data Storage</a>
-                    <a href="./bonus_apps/join-chat.php">Chatrooms</a>
-                    <a href="./bonus_apps/polls.php">Votting App</a>
-                    <a href="./bonus_apps/pain-rating.php">Pain Rating</a>
-                </div>
+            <li>
+                <a href="./settings.php">Settings</a>
             </li>
             <li>
                 <a href="../controllers/logout.php">Logout</a>
