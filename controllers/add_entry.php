@@ -20,7 +20,7 @@ if ($_POST['add-journal']) {
     $subject = $_POST["jsubject"];
     $category = $_POST["category"];
     $msg = $_POST["note"];
-    $priv = "T";
+    $priv = "private";
     
     // check if check box is posted, if true mark journal as private
     if (isset($_POST['omit'])) {

@@ -16,10 +16,10 @@
         $stmnt->execute();
         $result = $stmnt->get_result();
         $row = mysqli_fetch_assoc($result);
-        if ($user != $row["creator"] && $row["is_private"] == "F") {
+        if ($user != $row["creator"] && $row["is_private"] == "private") {
             return false;
         }
-        if ($user == $row["creator"] || $row["is_private"] == "T") {
+        if ($user == $row["creator"] || $row["is_private"] == "public") {
             return true;
         }
     }
