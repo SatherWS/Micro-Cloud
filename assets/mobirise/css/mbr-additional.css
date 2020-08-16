@@ -729,7 +729,7 @@ a {
   z-index: 1000;
   width: 100%;
   position: relative;
-  min-height: 84px;
+  /*min-height: 84px;*/
 }
 .cid-s6teCrATvk nav.navbar {
   position: fixed;
@@ -825,7 +825,7 @@ a {
   margin: 0 !important;
 }
 .cid-s6teCrATvk .navbar {
-  min-height: 84px;
+  /*min-height: 84px; */
   transition: all .3s;
   border-bottom: 1px solid transparent;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -928,9 +928,11 @@ a {
     padding-bottom: .5rem;
   }
 }
+/*
 .cid-s6teCrATvk .navbar.navbar-short {
   min-height: 84px;
 }
+*/
 .cid-s6teCrATvk .navbar.navbar-short .navbar-logo img {
   height: 3rem !important;
 }
@@ -1071,7 +1073,7 @@ a {
   }
 }
 .cid-s6teQRbOxV {
-  background-image: url("../../../assets/images/mbr-1920x1080.jpg");
+  background-image: url("../../../assets/images/test-landing.png");
 }
 .cid-s6teQRbOxV .mbr-text,
 .cid-s6teQRbOxV .mbr-section-btn {
