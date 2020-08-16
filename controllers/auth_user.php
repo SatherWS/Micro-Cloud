@@ -99,18 +99,24 @@ else if (strlen($_POST["pswd"]) < 8) {
 }
 */
 
+/*
+*   Invite user to team via settings.php
+*/
+
 // send invite to user if user exists and if invite is already sent
 function check_invites($curs, $user, $team) {
     $sql = "select receiver, team_name from invites where receiver = ? and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("ss", $user, $team);
-    if ($stmnt->execute)
-        return true;
-    else
+    $stmnt->execute();
+    $result = $stmnt->get_result();
+    if (mysqli_num_rows($result) == 0)
         return false;
+    else
+        return true;
 }
 
-if (isset($_POST["invite_user"]) && check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
+if (isset($_POST["invite_user"]) && !check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
     $sql = "insert into invites(receiver, sender, team_name) values (?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("sss", $_POST["user_email"], $_SESSION["unq_user"], $_SESSION["team"]);
@@ -119,7 +125,7 @@ if (isset($_POST["invite_user"]) && check_invites($curs, $_POST["user_email"], $
     else
         header("Location: ../views/settings.php?msg=Error: user does not exist");
 }
-else if (isset($_POST["invite_user"]) && !check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
+else if (isset($_POST["invite_user"]) && check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
     header("Location: ../views/settings.php?msg=Error: invitation already sent or user DNE.");
 }
 

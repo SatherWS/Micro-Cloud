@@ -7,7 +7,7 @@
             $html .= "<lable>Edit Title</lable><br>";
             $html .= "<input class='spc-n' name='title' value='".$row['title']."' required><br><br>";
             $html .= "<lable>Edit Description</lable><br>";
-            $html .= "<textarea name='description' value='".$row['description']."' required>".$row['description']."</textarea><br><br>";
+            $html .= "<textarea name='description' value='".$row['description']."'>".$row['description']."</textarea><br><br>";
             $html .= "<lable>Change Deadline</lable><br>";
             $html .= "<input type='date' name='end-date' class='spc-n' value='".$row["deadline"]."' required><br><br>";
             $html .= "<label>Change Importance Level</label><br>";

@@ -1040,7 +1040,7 @@ a {
   transition: all .2s;
 }
 .cid-s6teCrATvk .navbar-dropdown {
-  padding: .5rem 1rem;
+  /*padding: .5rem 1rem;*/
   position: fixed;
 }
 .cid-s6teCrATvk a.nav-link {

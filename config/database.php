@@ -1,12 +1,5 @@
 <?php
     class Database {
-        /* For development
-        private $server = "localhost";
-        private $db = "lhapps";
-        private $user = "root";
-        private $pass = "mysql";
-        */
-        
         public function getConnection(){
 	        $db_params = parse_ini_file(dirname(__FILE__).'/db_params.ini', false);
             $curs = new mysqli($db_params["host"], $db_params["user"], $db_params["password"], $db_params["dbname"]);

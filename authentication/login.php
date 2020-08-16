@@ -10,6 +10,17 @@
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
+    <nav class="topnav" id="myTopnav">
+    <div class="index-nav parent-nav">
+        <ul>
+            <li>
+                <!-- Team Steep vs. Team Stoop -->
+                <a href="../index.html" class="active">Swoop.Team</a>
+                <i class="fa fa-wifi"></i>
+            </li>
+        </ul>
+    </div>
+    </nav>
     <div class="todo-bg">
         <form action="../controllers/auth_user.php" method="post" class="spc-pt">
             <div class="form-container">

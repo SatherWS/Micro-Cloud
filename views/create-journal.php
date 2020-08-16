@@ -50,7 +50,7 @@
                 <label class="container">
                     <input type="checkbox" name="omit">
                     <span class="checkmark"></span>
-                    Make Private
+                    Allow others to edit
                 </label>
                 <div class="sec-2">
                     <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">

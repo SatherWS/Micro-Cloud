@@ -24,13 +24,6 @@ nav {
   -webkit-text-fill-color: transparent;
 }
 
-.fa-database {
-  background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
-  background: #000;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .fa-comments-o {
   background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
   background: #000;
@@ -38,34 +31,6 @@ nav {
   -webkit-text-fill-color: transparent;
 }
 
-.fa-pencil {
-  background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
-  background: #000;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.fa-list-ol {
-  background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
-  background: #000;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.fa-bar-chart {
-  background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
-  background: #000;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.fa-line-chart {
-  border: #000;
-  background: -webkit-linear-gradient(rgb(18, 183, 216), rgb(16, 236, 42));
-  background: #000;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 /* This style is only useful when mobile nav is clicked
 ul.topnav-list {
@@ -143,6 +108,7 @@ textarea {
 
 .todo-panel textarea {
   border: solid #000 1.5px;
+  width: 95%;
 }
 
 .spc-m {
@@ -718,12 +684,16 @@ select {
   justify-content: space-evenly;
 }
 
+.full-screen {
+  width: 100%;
+}
+
 #logs-title {
   margin-left: 2rem;
 }
 
 .mr2rem {
-  margin-right: 2rem;
+  margin-right: 2rem!important;
 }
 
 .ml2rem {

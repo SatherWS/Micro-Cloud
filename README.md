@@ -5,7 +5,35 @@
 ## Project Details
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
-## Tasks before deployment
+## Change Log
+  * 8/16/2020 Fixed user invites
+  * 8/16/2020 Implemented public and private post editing
+
+### How to run locally
+1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP) **Look into using Docker instead?**
+2. Set MYSQL system environment variable in order to use MYSQL CLI
+3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
+4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
+5. Open browser to 127.0.0.1/<repo-name>
+
+### Post deployment tasks last updated 7/28/2020 
+- [X] Confirm before deleting task, post or user
+- [ ] Create admin user options (team creator)
+- [X] Analytics range selector
+- [ ] Write cron jobs to send email alerts regarding tasks
+- [ ] Add comments to tasks and posts if not private
+- [ ] Reset forgotten passwords via email
+- [ ] Implement user options
+  - [ ] add and remove user to team
+  - [ ] delete account
+  - [ ] quit team
+    
+### Access restriction tasks
+- [ ] Restrict access for users to only view posts and tasks by their teams or themselves
+  - [ ] Use random number references in each post/task
+  - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
+
+### Old Completed Tasks
 - [X] Adjust note editing textarea for mobile viewing
 - [X] Fix file path errors in bonus apps
 - [X] Move mood rating system to bonus apps
@@ -18,40 +46,14 @@ This GitHub repository contains source code for project management software. It'
 - [X] Fix drop down hover nav
 - [X] Implement user teams
 - [X] Assign tasks to users
-- [ ] Remove bonus apps and shared_drives.php, uploads.php, upload_multi.php, upload_single.php and project.mobirise (do last)
+- [X] Remove bonus apps and shared_drives.php, uploads.php, upload_multi.php, upload_single.php and project.mobirise (do last)
 - [X] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
 - [X] Login error messages
-- [X] Fix edit task bugs (does not allow modifications)
-  - [X] Possibly remove deadline time input and database column
 - [X] Signup error messages (team dne, team cannot be created, user already exists)
 - [X] Fix bug: only able to post when private checkbox is clicked
 - [X] Fix bug: journal category creates a new team (really bad)
 - [X] Fix bug: minor display issue when posts are selected in dashboard
 - [X] Improve dashboard and create task UI on mobile
 - [X] Make activity items clickable in dash
-
-### Post deployment tasks last updated 7/28/2020 
-- [X] Confirm before deleting task, post or user
-- [ ] Create admin user options (team creator)
-- [X] Analytics range selector
-- [ ] Write cron jobs to send email alerts regarding tasks
-- [ ] Add comments to tasks and posts if not private
-- [ ] Email forgotten passwords
-- [ ] Implement user options
-  - [ ] add and remove user to team
-  - [ ] delete account
-  - [ ] quit team
-    
-### Access restriction tasks
-- [ ] Restrict access for users to only view posts and tasks by their teams or themselves
-  - [ ] Use random number references in each post/task
-  - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
-
-### How to run locally
-1. Install lamp stack server emulator, I used ampps 
-2. Set mysql system environment variable in order to use mysql cli
-3. Clone repo into ampps `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
-4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
-5. Open browser to 127.0.0.1/<repo-name>
-   
+  

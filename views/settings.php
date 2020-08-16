@@ -44,6 +44,28 @@ $results3 = $stmnt3->get_result();
     <div class="todo-bg-test">
         <div class="settings-space">
             <div class="settings-panel">
+                <div class="settings-flex r-cols">
+                    <div>
+                        <h2>Current User Info</h2>
+                        <?php 
+                            // for invite teammate form
+                            if (isset($_GET["error"])) {
+                                echo "<div><p>".$_GET["error"]."</p></div>";
+                            }
+                            echo "<p>Username: ".$_SESSION["user"]."</p>";
+                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                            echo "<p>Team: ".$_SESSION["team"]."</p>";
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                            echo "<h2>Members of ".$_SESSION['team']."</h2>";
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                echo "<p>".$row["email"]."</p>";
+                            }
+                        ?>
+                    </div>
+                </div>
                 <div class="add-worker">
                     <form method="post" action="../controllers/auth_user.php">
                         <h1>Add New Team Member</h1>
@@ -85,28 +107,6 @@ $results3 = $stmnt3->get_result();
                     ?>
                     </table>
                     </form>
-                </div>
-                <div class="settings-flex r-cols">
-                    <div>
-                        <?php
-                            // for add teammate form
-                            if (isset($_GET["error"])) {
-                                echo "<div><p>".$_GET["error"]."</p></div>";
-                            }
-                            echo "<h2>Members of ".$_SESSION['team']."</h2>";
-                            while ($row = mysqli_fetch_assoc($results)) {
-                                echo "<p>".$row["email"]."</p>";
-                            }
-                        ?>
-                    </div>
-                    <div>
-                        <h2>Current User Info</h2>
-                        <?php 
-                            echo "<p>Username: ".$_SESSION["user"]."</p>";
-                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                            echo "<p>Team: ".$_SESSION["team"]."</p>";
-                        ?>
-                    </div>
                 </div>
                 <!-- WIP 
                 <h2>Danger Zone</h2>-->
