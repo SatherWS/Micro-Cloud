@@ -64,7 +64,7 @@ CREATE TABLE comments (
   journal_id int(11) not null,
   foreign key(journal_id) references journal(id),
   foreign key(user_email) references users(email)
-)
+);
 
 --
 -- Table structure for table todo_list

@@ -46,15 +46,7 @@
     <?php include("./components/header.php"); ?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <div class="add-btn">
-                <h3 class="ml2rem">
-                    <a href="./create-task.php">
-                        <span>Add Task</span>
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </h3>
-            </div>
-            <form method="POST" class="mr2rem">
+            <form method="POST" class="ml2rem">
                 <select class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
                     <option value="none" selected disabled hidden>Filter by Status</option>
                     <option value="SHOW ALL">SHOW ALL</option>
@@ -64,10 +56,18 @@
                     <option value="COMPLETED">COMPLETED</option>
                 </select>
             </form>
+            <div class="add-btn">
+                <h3 class="mr2rem">
+                    <a href="./create-task.php">
+                        <span>Add Task</span>
+                        <i class="fa fa-plus-circle"></i>
+                    </a>
+                </h3>
+            </div>
         </div>
     </div>
     <div class="log-container">
-        <?php echo "<h3>$total TASKS $filter</h3>";?>
+        <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
         <form action="../edit_entry.php" method="post" id="tasks">
             <table class="data task-tab">
                 <tr class="tbl-head">

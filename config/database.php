@@ -4,7 +4,7 @@
         private $hostname = "localhost";
         private $user = "root";
         private $database = "swoop_team";
-        private $password = "1m0r3_projde@th";
+        private $password = "root";
 
         public function getConnection(){
             $curs = new mysqli($this->hostname, $this->user, $this->password, $this->database);
