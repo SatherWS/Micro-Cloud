@@ -67,7 +67,7 @@
 <body>
 <?php include("./components/header.php"); ?>
 <div class="svg-bg">
-        <div class="todo-flex r-cols">
+        <div class="todo-flex">
             <?php
             if (check_permissions($curs, $_SESSION["unq_user"], $_GET["journal"])) {
                 if ($show_editor) {
@@ -93,7 +93,6 @@
                 echo "<div class='detail-topper'>";
                 echo "<div><h1 class='padb'>".$row['subject']."</h1>";
                 echo "<small>Author: ".$row['creator']."</small><br>";
-                echo "<small>Author: ".$row['is_private']."</small><br>";
                 echo "<small>Posted: ".$row['date_created']."</small><br>";
                 echo "<small>Category: ".$row['category']."</small>";
                 echo "<p class='message-p'>".nl2br($row['message'])."</p>";
