@@ -3,22 +3,25 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    include("../config/database.php");
     include("./components/task-editor.php");
-    $database = new Database();
-    $curs = $database->getConnection();
     $editor = new TaskEditor();
 
-    if ($_GET['task']) {
+    // TODO: MOVE BELOW THIS TO CONTROLLERS v
+    include("../config/database.php");
+    $database = new Database();
+    $curs = $database->getConnection();
+
+    if (isset($_GET['task'])) {
         $id = $_GET['task'];
         $sql = "select * from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
+        $show_editor = true;
     }
 
-    if ($_POST['edit']) {
+    if (isset($_POST['edit'])) {
         $id = $_POST['edit'];
         $sql = "select *, date(date_created) from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -26,6 +29,7 @@
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         $row = mysqli_fetch_assoc($results);
+        $show_editor = false;
     }
 
     if ($_POST['delete']) {
@@ -36,6 +40,7 @@
         $stmnt -> execute();
         header("Location: ./show-tasks.php");
     }
+    // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,16 +57,16 @@
     <?php include("./components/header.php"); ?>
     <div class="svg-bg">
         <div class="todo-flex btn-spcing">    
-            <form action="./task-details.php" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
-                <button class="add-btn" type='submit' name='delete' value="<?php echo $_GET['task']; ?>"><i class='fa fa-close'></i>Delete Task</button>
-            </form>
-            <form action="./task-details.php" method="post">
-                <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
-            </form>
+            <?php
+                if ($show_editor)
+                    include("./components/task-headers/edit_task.php");
+                else
+                    include("./components/task-headers/save_task.php");
+            ?>
         </div>
     </div>
     <div class="task-panel">
-        <form action="../controllers/edit_entry.php" method="post" class="task-auto">
+        <form action="../controllers/edit_entry.php" method="post" class="task-auto" id="editor2">
             <div class="inner-task-panel">
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
@@ -74,7 +79,6 @@
                         echo "<p><b>Importance:</b> ".$row['importance']."</p>";
                     }
                 }
-
                 // Task editting view render
                 if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                     echo $editor->create_editor($row);
@@ -83,6 +87,11 @@
             </div>
         </form>
     </div>
+    <script>
+    function triggerForm2() {
+        document.getElementById("editor2").submit();
+    }
+    </script>
     <script src="../static/main.js"></script>
 </body>
 </html>

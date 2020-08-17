@@ -135,7 +135,7 @@
     <link rel="shortcut icon" href="../favicon.png">
     <title>Swoop | Dashboard</title>
 </head>
-<body>
+<body class="todo-bg-test">
     <?php include("./components/header.php");?>
 
     <div class="todo-bg-test">

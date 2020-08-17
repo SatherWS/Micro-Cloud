@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap);
-
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 .unused-selector {
   margin:100px;
 }
@@ -7,8 +6,10 @@
 html, body {
     margin:0;
     padding: 0;
-    font-family: 'Jost', sans-serif;
-    /*font-family: baskerville, serif;*/
+}
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
 }
   
 a {
@@ -477,6 +478,8 @@ ul {
 .todo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-column-gap: 50px;
+  align-items: self-end;
 }
 
 .flex-end {
@@ -570,7 +573,9 @@ element {
   width: 80%;
   margin: 1rem auto;
   padding: 1.5rem;
+  /*
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  */
 }
 
 .task-panel select {
@@ -604,14 +609,14 @@ element {
   justify-content: space-between;
 }
 
+/*
 .add-worker {
   width: 60%;
   text-align: center;
   margin: 0 auto;
-}
-
-.add-worker input {
-  text-align: center;
+}*/
+.settings-btn {
+  font-size: 14pt!important;
 }
 
 .accept-btn {
@@ -1220,9 +1225,11 @@ tr:hover {background-color:#f5f5f5;}
     .task-panel {
       width: 80%;
     }
+    /*
     .opt-desc {
       display: none;
     }
+    */
     .log-details {
       width: 540px;
       margin: 0;

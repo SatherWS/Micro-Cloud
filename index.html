@@ -11,6 +11,7 @@
   
   
   <title>Swoop Team</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -23,7 +24,14 @@
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
+  <style>
+      .fa-wifi {
+        /*background: -webkit-linear-gradient(rgb(0, 210, 251), rgb(0, 218, 25));*/
+        background: -webkit-linear-gradient(blue, red);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        }
+  </style>
   
   
   
@@ -33,30 +41,28 @@
   <section class="menu menu2 cid-s6teCrATvk" once="menu" id="menu2-1">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-brand">
-                
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="#">Swoop.Team</a></span>
+        <div class="navbar-brand">
+            <a href="../index.html" class="active">Swoop.Team</a>
+            <i class="fa fa-wifi"></i>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#content3-6">
-                            About us</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#features4-4">
-                            Features</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#form3-a">Contact</a>
-                    </li></ul>
-                
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-info display-4" href="./authentication/login.php">
-                        Login Here</a></div>
-            </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#content3-6">
+                        About us</a></li>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#features4-4">
+                        Features</a></li>
+                <li class="nav-item"><a class="nav-link link text-black display-4" href="index.html#form3-a">Contact</a>
+                </li></ul>
+            
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-info display-4" href="./authentication/login.php">
+                    Login Here</a></div>
         </div>
     </nav>
 </section>

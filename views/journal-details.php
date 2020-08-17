@@ -3,26 +3,10 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    // TODO: MOVE THIS TO CONTROLLERS v
+    // TODO: MOVE ALL BELOW THIS TO CONTROLLERS v
     include_once('../config/database.php');
     $database = new Database();
     $curs = $database->getConnection();
-    $show_editor = true;
-
-    function check_permissions($curs, $user, $id) {
-        $sql = "select is_private, creator from journal where id = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("s", $id);
-        $stmnt->execute();
-        $result = $stmnt->get_result();
-        $row = mysqli_fetch_assoc($result);
-        if ($user != $row["creator"] && $row["is_private"] == "private") {
-            return false;
-        }
-        if ($user == $row["creator"] || $row["is_private"] == "public") {
-            return true;
-        }
-    }
 
     if (isset($_GET['journal'])) {
         $id = $_GET['journal'];
@@ -31,7 +15,13 @@
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
-        $show_editor = false;
+        $row = mysqli_fetch_assoc($results);
+        if ($row["creator"] == $_SESSION["unq_user"]) {
+            $show_editor = true;
+            $read_only = false;
+        }
+        else
+            $read_only = true;
     }
 
     if (isset($_POST['edit'])) {
@@ -41,6 +31,7 @@
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
+        $show_editor = false;
     }
 
     if (isset($_POST['delete'])) {
@@ -51,7 +42,7 @@
         $stmnt -> execute();
         header("Location: ./logs.php");
     }
-    // TODO: MOVE THIS TO CONTROLLERS ^
+    // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,17 +60,12 @@
 <div class="svg-bg">
         <div class="todo-flex">
             <?php
-            if (check_permissions($curs, $_SESSION["unq_user"], $_GET["journal"])) {
-                if ($show_editor) {
-                    include("./components/note-headers/save_post.php");
-                }
-                else {
+                if ($show_editor)
                     include("./components/note-headers/edit_post.php");
-                }
-            }
-            else {
-                echo "<div class='svg-bg'><h3 id='logs-title' class='full-screen'>READ ONLY</h3></div>";
-            }
+                else if (!$show_editor && !$read_only)    
+                    include("./components/note-headers/save_post.php");
+                else if (!$show_editor && $read_only)
+                    echo "<h4 class='ml2rem'></h4>";
             ?>
         </div>    
 </div>
@@ -87,17 +73,15 @@
     <?php
     // display journal entry in plain text or inside a textarea
     // raw data is stored in lhapps database and decoded with nl2br() function
-        if ($_GET['journal'] && mysqli_num_rows($results) > 0) {
-            while($row = mysqli_fetch_assoc($results)) {
-                echo "<div class='log-details'>";
-                echo "<div class='detail-topper'>";
-                echo "<div><h1 class='padb'>".$row['subject']."</h1>";
-                echo "<small>Author: ".$row['creator']."</small><br>";
-                echo "<small>Posted: ".$row['date_created']."</small><br>";
-                echo "<small>Category: ".$row['category']."</small>";
-                echo "<p class='message-p'>".nl2br($row['message'])."</p>";
-                echo "</div>";
-            }
+        if (isset($row)) {
+            echo "<div class='log-details'>";
+            echo "<div class='detail-topper'>";
+            echo "<div><h1 class='padb'>".$row['subject']."</h1>";
+            echo "<small>Author: ".$row['creator']."</small><br>";
+            echo "<small>Posted: ".$row['date_created']."</small><br>";
+            echo "<small>Category: ".$row['category']."</small>";
+            echo "<p class='message-p'>".nl2br($row['message'])."</p>";
+            echo "</div>";
         }
 
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) {

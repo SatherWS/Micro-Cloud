@@ -7,10 +7,15 @@ This GitHub repository contains source code for project management software. It'
 
 ## Change Log
   * 8/16/2020 Fixed user invites
-  * 8/16/2020 Implemented public and private post editing
+  * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
+  * 8/17/2020 Only the creator of the post is allowed to edit (duh)
+  * 8/17/2020 Improved task editing UI
 
-### How to run locally
-1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP) **Look into using Docker instead?**
+### How to run locally w/ Docker
+1.
+
+### How to run locally w/o Docker
+1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
 2. Set MYSQL system environment variable in order to use MYSQL CLI
 3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
@@ -23,8 +28,9 @@ This GitHub repository contains source code for project management software. It'
 - [ ] Write cron jobs to send email alerts regarding tasks
 - [ ] Add comments to tasks and posts if not private
 - [ ] Reset forgotten passwords via email
-- [ ] Implement user options
-  - [ ] add and remove user to team
+- [ ] Implement more user options
+  - [X] add user to team
+  - [ ] remove user to team
   - [ ] delete account
   - [ ] quit team
     
@@ -33,7 +39,7 @@ This GitHub repository contains source code for project management software. It'
   - [ ] Use random number references in each post/task
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
 
-### Old Completed Tasks
+### Previously completed tasks
 - [X] Adjust note editing textarea for mobile viewing
 - [X] Fix file path errors in bonus apps
 - [X] Move mood rating system to bonus apps

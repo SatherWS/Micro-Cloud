@@ -58,10 +58,10 @@ CREATE TABLE journal (
 -- NEW TABLE `comments`, ref journal 08/22/2020
 -- NOT IMPLEMENTED
 CREATE TABLE comments (
-  id int(11) primary key not null,
-  comment varchar not null,
-  user_email varchar not null,
-  journal_id int(11) not null,
+  id int(11) primary key auto_increment,
+  comment varchar(150) not null,
+  user_email varchar(75) not null,
+  journal_id int(11),
   foreign key(journal_id) references journal(id),
   foreign key(user_email) references users(email)
 );

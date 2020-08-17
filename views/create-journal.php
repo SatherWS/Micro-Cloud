@@ -46,12 +46,14 @@
                 </div>
                 <br>
                 <textarea rows="7" placeholder="Text area for creating a post..." name="note"></textarea>
-                <br><br>
+                <!-- TODO: change to share with all of Swoop instead of team only
                 <label class="container">
                     <input type="checkbox" name="omit">
                     <span class="checkmark"></span>
                     Allow others to edit
                 </label>
+                -->
+                <br><br>
                 <div class="sec-2">
                     <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
                 </div>

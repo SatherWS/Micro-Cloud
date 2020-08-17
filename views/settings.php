@@ -39,14 +39,14 @@ $results3 = $stmnt3->get_result();
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
-<body>
+<body class="todo-bg-test">
     <?php include("./components/header.php");?>
     <div class="todo-bg-test">
         <div class="settings-space">
             <div class="settings-panel">
                 <div class="settings-flex r-cols">
                     <div>
-                        <h2>Current User Info</h2>
+                        <h2>User Information</h2>
                         <?php 
                             // for invite teammate form
                             if (isset($_GET["error"])) {
@@ -66,47 +66,48 @@ $results3 = $stmnt3->get_result();
                         ?>
                     </div>
                 </div>
+                <div class="invites">
+                    <h2>Invite History</h2>
+                    <form action="../controllers/auth_user.php" method="post">
+                        <table class="data journal-tab">
+                        <?php
+                        if (mysqli_num_rows($results3) > 0) {
+                            include ("./components/settings-table.php");
+                            while ($row=mysqli_fetch_assoc($results3)) {
+                                $id = $row["team_name"];
+                                if ($row["status"] != "pending") {
+                                    echo "<tr><td></td>";
+                                }
+                                else if ($_SESSION["unq_user"] == $row["receiver"]) {
+                                    echo "<tr><td><button class='accept-btn' type='submit' name='accept' value='$id'>Accept</button>";
+                                    echo "<button class='deny-btn' type='submit' name='deny' value='$id'>Deny</button></td>";
+                                }
+                                else {
+                                    echo "<tr><td></td>";
+                                }
+                                echo "<td>".$row["team_name"]."</td>";
+                                echo "<td>".$row["receiver"]."</td>";
+                                echo "<td>".$row["sender"]."</td>";
+                                echo "<td>".$row["status"]."</td>";
+                                echo "<td>".$row["date_created"]."</td>";
+                            }
+                        }
+                        else {
+                            echo "<h4>No invites have beed processed yet...</h4>";
+                        }
+                        ?>
+                        </table>
+                    </form>
+                </div>
                 <div class="add-worker">
                     <form method="post" action="../controllers/auth_user.php">
-                        <h1>Add New Team Member</h1>
-                        <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
-                        <br><br>
-                        <input type="submit" name="invite_user" value="Invite User" id="form-control2">
+                        <h2>Add New Team Member</h2>
+                        <div class="todo-flex r-cols">
+                            <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
+                            <input type="submit" name="invite_user" value="Invite User" id="form-control2" class="settings-btn">
+                        </div>
                     </form>
                     <?php echo "<h4>".$_GET["msg"]."</h4>";?>
-                </div>
-                <div class="invites">
-                    <h2>My Invite History</h2>
-                    <form action="../controllers/auth_user.php" method="post">
-                    <table class="data journal-tab">
-                    <?php
-                    if (mysqli_num_rows($results3) > 0) {
-                        include ("./components/settings-table.php");
-                        while ($row=mysqli_fetch_assoc($results3)) {
-                            $id = $row["team_name"];
-                            if ($row["status"] != "Pending") {
-                                echo "<tr><td></td>";
-                            }
-                            else if ($_SESSION["unq_user"] == $row["receiver"]) {
-                                echo "<tr><td><button class='accept-btn' type='submit' name='accept' value='$id'>Accept</button>";
-                                echo "<button class='deny-btn' type='submit' name='deny' value='$id'>Deny</button></td>";
-                            }
-                            else {
-                                echo "<tr><td></td>";
-                            }
-                            echo "<td>".$row["team_name"]."</td>";
-                            echo "<td>".$row["sender"]."</td>";
-                            echo "<td>".$row["receiver"]."</td>";
-                            echo "<td>".$row["status"]."</td>";
-                            echo "<td>".$row["date_created"]."</td>";
-                        }
-                    }
-                    else {
-                        echo "<h4>No invites have beed processed yet...</h4>";
-                    }
-                    ?>
-                    </table>
-                    </form>
                 </div>
                 <!-- WIP 
                 <h2>Danger Zone</h2>-->
