@@ -12,7 +12,7 @@ This GitHub repository contains source code for project management software. It'
   * 8/17/2020 Improved task editing UI
 
 ### How to run locally w/ Docker
-1.
+1. Learn how to do this
 
 ### How to run locally w/o Docker
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
