@@ -48,11 +48,10 @@ This GitHub repository contains source code for project management software. It'
 - [X] Improve analytics UI
 - [X] Remove repeat task option
 - [X] Change index.php to dashboard.php
-- [X] Delete imgs dir
 - [X] Fix drop down hover nav
 - [X] Implement user teams
 - [X] Assign tasks to users
-- [X] Remove bonus apps and shared_drives.php, uploads.php, upload_multi.php, upload_single.php and project.mobirise (do last)
+- [X] Remove bonus apps and shared_drives.php, and upload scripts
 - [X] Design landing page (mobirise)
 - [X] Create authentication dir change login and signup to php scripts
 - [X] Login error messages
