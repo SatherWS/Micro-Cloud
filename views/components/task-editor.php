@@ -12,7 +12,7 @@
             $html .= "<input type='date' name='end-date' class='spc-n' value='".$row["deadline"]."' required><br><br>";
             $html .= "<label>Change Importance Level</label><br>";
             $html .= "<select name='importance' class='spc-n' required>";
-            $html .= "<option value='none' selected value='".$row["importance"]."'>".$row["importance"]."</option>";
+            $html .= "<option value='".$row["importance"]."' selected>".$row["importance"]."</option>";
             $html .= "<option value='Low'>Low Importance</option>";
             $html .= "<option value='Medium'>Medium Importance</option>";
             $html .= "<option value='High'>High Importance</option></select><br><br>";
