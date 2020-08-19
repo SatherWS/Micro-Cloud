@@ -3,15 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+-- Database: swoop_team
 -- Generation Time: Apr 05, 2020 at 12:59 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
-
---
--- Database on inspiron machine: note_web
--- Database on main machine: lhapps
--- Database should be called grooper or something
---
 
 create table teams (
   id int primary key auto_increment,
@@ -24,9 +19,18 @@ create table users (
   email varchar(75) not null unique,
   username varchar(75) not null,
   pswd varchar(300) not null,
-  team varchar(50),
-  date_created datetime default current_timestamp,
-  foreign key (team) references teams(team_name)
+  --team varchar(50),
+  date_created datetime default current_timestamp
+  --foreign key (team) references teams(team_name)
+);
+
+create table members (
+  id int primary key auto_increment,
+  email varchar(75) not null,
+  team_name varchar(50) not null,
+  join_date datetime default current_timestamp,
+  foreign key(email) references users(email),
+  foreign key(team_name) references teams(team_name)
 );
 
 create table invites (
@@ -55,7 +59,7 @@ CREATE TABLE journal (
   foreign key (team_name) references teams(team_name)
 );
 
--- NEW TABLE `comments`, ref journal 08/22/2020
+-- NEW TABLE `comments`, ref journal
 -- NOT IMPLEMENTED
 CREATE TABLE comments (
   id int(11) primary key auto_increment,

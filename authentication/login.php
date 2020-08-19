@@ -29,7 +29,7 @@
                         <p>Welcome back, if you wish to return to the home page <a href="../index.html">click here.</a></p>
                         <div class="flex-subs">
                             <label>Email:</label><br>
-                            <input type="text" name="email" placeholder="Enter your Email address" class="spc-n login-comp" required>
+                            <input type="text" name="email" placeholder="Enter your email address" class="spc-n login-comp" required>
                             <br><br>
                             <label>Password:</label><br>
                             <input type="password" name="pswd" placeholder="Enter your password" class="spc-n login-comp" required>

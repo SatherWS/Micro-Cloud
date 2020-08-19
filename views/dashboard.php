@@ -142,20 +142,33 @@
     <div class="todo-bg-test">
     <div class="svg-bg">
         <div class="todo-flex">
-            <p class="welcome">Team: <?php echo $_SESSION["team"];?></p>
+            <h4 class="ml2rem add-btn">
+                <a href="./create-journal.php">
+                    <span>Hide Projects</span><i class="fa fa-chevron-circle-left"></i>
+                </a>
+            </h4>
             <p class="welcome">User: <?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
     <div class="dash-grid r-col">
         <section class="side-bar">
-            <form action="" method="post">
-                <br>
-                <div class="add-btn">
-                    <h3>
-                    <a href="./create-journal.php"><span>Add Project</span><i class="fa fa-plus-circle"></i></a>
-                    </h3>
-                </div>
-            </form>
+            <br>
+            <div class="add-btn">
+                <h3>
+                    <a href="#">
+                        <span>Add Project</span><i class="fa fa-plus-circle"></i>
+                    </a>
+                </h3>
+            </div>
+            <br>
+            <h3>
+                <a href="../controllers/change_team.php?switched=project 1">Some Project with a long name</a>
+            </h3>
+            <h3>
+                <a href="../controllers/change_team.php?switched=project 1">Some other project with a long name</a>
+            </h3>
+            <br>
+            <?php echo "<p>Current Team: ".$_SESSION["team"]."</p>";?>
         </section>
         <main>
             <div class="grid-container">
