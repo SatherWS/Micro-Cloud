@@ -52,35 +52,46 @@
             </div>
         </div>
     </div>
-    <div class="log-container">
-        <form id="notes" action="./journal-details.php" method="post">
-            <table class="data journal-tab">
-                <tr class="tbl-head">
-                    <th>CATEGORY</th>
-                    <th>SUBJECT</th>
-                    <th>PREVIEW</th>
-                    <th>CREATOR</th>
-                    <th>TEAM</th>
-                    <th>DATE & TIME CREATED</th>
-                </tr>
-                <?php
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["category"]. "</td>";
-                        echo "<td>". $row["subject"]. "</td>";
-                        echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
-                        echo "<td>".$row["creator"]."</td>";
-                        echo "<td>".$row["team_name"]."</td>";
-                        echo "<td>".$row["date_created"]."</td></tr>";
-                    }
-                    /*
-                    else {
-                        echo "<p>0 results</p>";
-                    }
-                    */
-                ?>
-            </table>
-        </form>
+    <div class="dash-grid r-cols">
+        <section class="side-bar">
+            <form action="" method="post">
+                <div class="add-btn">
+                    <h3>
+                    <a href="./create-journal.php"><span>Add Project</span><i class="fa fa-plus-circle"></i></a>
+                    </h3>
+                </div>
+            </form>
+        </section>
+        <div class="log-container">
+            <form id="notes" action="./journal-details.php" method="post">
+                <table class="data journal-tab">
+                    <tr class="tbl-head">
+                        <th>CATEGORY</th>
+                        <th>SUBJECT</th>
+                        <th>PREVIEW</th>
+                        <th>CREATOR</th>
+                        <th>TEAM</th>
+                        <th>DATE & TIME CREATED</th>
+                    </tr>
+                    <?php
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $id = $row['id'];
+                            echo "<tr onclick='myFunction($id)' name='btn-submit' value='".$row["id"]."'> <td>". $row["category"]. "</td>";
+                            echo "<td>". $row["subject"]. "</td>";
+                            echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
+                            echo "<td>".$row["creator"]."</td>";
+                            echo "<td>".$row["team_name"]."</td>";
+                            echo "<td>".$row["date_created"]."</td></tr>";
+                        }
+                        /*
+                        else {
+                            echo "<p>0 results</p>";
+                        }
+                        */
+                    ?>
+                </table>
+            </form>
+        </div>
     </div>
     <script>
     function myFunction(id) {

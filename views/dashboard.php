@@ -145,52 +145,66 @@
             <p class="welcome">User: <?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
-    <main>
-        <div class="grid-container">
-            <div>
-                <a class="dash-item" href="./create-task.php">
-                    <i class="fa fa-list-ol spc-1"></i>
-                    <br>
-                   <span class="sup-text">Create Task</span> 
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./create-journal.php">
-                    <i class="fa  fa-pencil spc-1"></i>
-                    <br>
-                    <span class="sup-text">Create Post</span>
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./analytics.php">
-                    <i class="fa fa-line-chart spc-1"></i>
-                    <br>
-                   <span class="sup-text">Analytics</span> 
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./settings.php">
-                    <i class="fa fa-gear spc-1"></i>
-                    <br>
-                   <span class="sup-text">Settings</span> 
-                </a>
-            </div>   
-        </div>
-        <div class="todo-flex r-cols">
-            <h1 class="intro-header">My Team's Activity</h1>
-            <form method="POST">
-                <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
-                    <option value="none" selected disabled hi   dden>Activity Filter</option>
-                    <option value="all_tasks">All Tasks</option>
-                    <option value="all_posts">All Posts</option>
-                    <option value="created_posts">Posts Created</option>
-                    <option value="my_tasks">Assigned Tasks</option>
-                    <option value="created_tasks">Tasks Created</option>
-                </select>
+    <div class="dash-grid r-col">
+        <section class="side-bar">
+            <form action="" method="post">
+                <br>
+                <div class="add-btn">
+                    <h3>
+                    <a href="./create-journal.php"><span>Add Project</span><i class="fa fa-plus-circle"></i></a>
+                    </h3>
+                </div>
             </form>
-        </div>
-        <?php echo $html;?>
-    </main>
+        </section>
+        <main>
+            <div class="grid-container">
+                <div>
+                    <a class="dash-item" href="./create-task.php">
+                        <i class="fa fa-list-ol spc-1"></i>
+                        <br>
+                    <span class="sup-text">Create Task</span> 
+                    </a>
+                </div>
+                <div>
+                    <a class="dash-item" href="./create-journal.php">
+                        <i class="fa  fa-pencil spc-1"></i>
+                        <br>
+                        <span class="sup-text">Create Post</span>
+                    </a>
+                </div>
+                <div>
+                    <a class="dash-item" href="./analytics.php">
+                        <i class="fa fa-line-chart spc-1"></i>
+                        <br>
+                    <span class="sup-text">Analytics</span> 
+                    </a>
+                </div>
+                <div>
+                    <a class="dash-item" href="./settings.php">
+                        <i class="fa fa-gear spc-1"></i>
+                        <br>
+                    <span class="sup-text">Settings</span> 
+                    </a>
+                </div>   
+            </div>
+            <div class="todo-flex r-cols">
+                <h1 class="intro-header">Project Activity</h1>
+                <form method="POST">
+                    <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
+                        <option value="none" selected disabled hi   dden>Activity Filter</option>
+                        <option value="all_tasks">All Tasks</option>
+                        <option value="all_posts">All Posts</option>
+                        <option value="created_posts">Posts Created</option>
+                        <option value="my_tasks">Assigned Tasks</option>
+                        <option value="created_tasks">Tasks Created</option>
+                    </select>
+                </form>
+            </div>
+            <?php echo $html;?>
+        </main>
+    </div>
+
+    
     </div>
     <script>
         function panelLinkP(id) {

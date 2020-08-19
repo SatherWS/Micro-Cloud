@@ -4,7 +4,6 @@
         private $hostname = "localhost";
         private $user = "root";
         private $database = "swoop_team";
-        //private $password = "root";
         private $password = "mysql";
 
         public function getConnection(){

@@ -1,6 +1,6 @@
 <?php
 include_once("../config/database.php");
-include("../models/settings.php");
+//include("../models/settings.php");
 
 session_start();
 if (!isset($_SESSION["unq_user"]))
