@@ -160,7 +160,12 @@
                     <a href="../controllers/change_team.php?switched=project 1">Some other project with a long name</a>
                 </h3>
                 <br>
-                <?php echo "<p>Current Project: ".$_SESSION["team"]."</p>";?>
+                <?php
+                    if (!isset($_SESSION["team"]))
+                        echo "<p>Current Project: None</p>";
+                    else
+                        echo "<p>Current Project: ".$_SESSION["team"]."</p>";
+                ?>
 
                 <div class="add-btn">
                     <h3>
