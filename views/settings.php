@@ -86,9 +86,9 @@ $results3 = $stmnt3->get_result();
                                     echo "<tr><td></td>";
                                 }
                                 echo "<td>".$row["team_name"]."</td>";
+                                echo "<td>".$row["status"]."</td>";
                                 echo "<td>".$row["receiver"]."</td>";
                                 echo "<td>".$row["sender"]."</td>";
-                                echo "<td>".$row["status"]."</td>";
                                 echo "<td>".$row["date_created"]."</td>";
                             }
                         }

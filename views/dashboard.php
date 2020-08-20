@@ -147,27 +147,28 @@
                     <span>Hide Projects</span><i class="fa fa-chevron-circle-left"></i>
                 </a>
             </h4>
-            <p class="welcome">User: <?php echo $_SESSION["unq_user"];?></p>
+            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
     <div class="dash-grid r-col">
         <section class="side-bar">
-            <br>
-            <h3>
-                <a href="../controllers/change_team.php?switched=project 1">Some Project with a long name</a>
-            </h3>
-            <h3>
-                <a href="../controllers/change_team.php?switched=project 1">Some other project with a long name</a>
-            </h3>
-            <br>
-            <?php echo "<p>Current Project: ".$_SESSION["team"]."</p>";?>
-
-            <div class="add-btn">
-                <h3>
-                    <a href="#">
-                        <span>Add Project</span><i class="fa fa-plus-circle"></i>
-                    </a>
+            <div class="fixed-content">
+                <br><h3>
+                    <a href="../controllers/change_team.php?switched=project 1">Some Project with a long name</a>
                 </h3>
+                <h3>
+                    <a href="../controllers/change_team.php?switched=project 1">Some other project with a long name</a>
+                </h3>
+                <br>
+                <?php echo "<p>Current Project: ".$_SESSION["team"]."</p>";?>
+
+                <div class="add-btn">
+                    <h3>
+                        <a href="#">
+                            <span>Add Project</span><i class="fa fa-plus-circle"></i>
+                        </a>
+                    </h3>
+                </div>
             </div>
         </section>
         <main>
@@ -176,7 +177,7 @@
                     <a class="dash-item" href="./create-task.php">
                         <i class="fa fa-list-ol spc-1"></i>
                         <br>
-                    <span class="sup-text">Create Task</span> 
+                        <span class="sup-text">Create Task</span> 
                     </a>
                 </div>
                 <div>

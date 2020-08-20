@@ -28,20 +28,8 @@
                     <div class="inner-panel">
 						<div class="text-center form-intro">
 							<h1>Sign Up Form</h1>
-							<p>To create an account enter the name of an existing team or create a new team. Team names must be unique.</p>
+							<p>Account creation is free! Only one account per email address is allowed.</p>
 						</div>
-                        <label>Team Name</label><br>
-                        <input type="text" placeholder="New or existing team" name="team" class="spc-n login-comp" required>
-                        <div class="todo-flex r-cols">
-                            <label class="container">Join Team
-                                <input type="radio" checked="checked" name="radio" value="join">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">Create Team
-                                <input type="radio" name="radio" value="create">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
                         <label>Email</label><br>
                         <input type="email" name="email" placeholder="Enter a valid email address" class="spc-n login-comp" required>
                         <br><br>

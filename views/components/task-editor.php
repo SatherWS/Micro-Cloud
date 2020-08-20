@@ -3,7 +3,7 @@
         function create_editor($row) {
             $id = $row["id"];
             $html = "<div class='r-cols todo-grid'>";
-            $html .= "<div><h2>Editing: ".$row['title']."</h2>";
+            $html .= "<div><h2>Editing Task: ".$row['title']."</h2>";
             $html .= "<lable>Edit Title</lable><br>";
             $html .= "<input class='spc-n' name='title' value='".$row['title']."' required><br><br>";
             $html .= "<lable>Edit Description</lable><br>";

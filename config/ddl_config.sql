@@ -8,23 +8,21 @@
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
-create table teams (
+CREATE TABLE teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
   date_created datetime default current_timestamp
 );
 
-create table users (
+CREATE TABLE users (
   id int primary key auto_increment,
   email varchar(75) not null unique,
   username varchar(75) not null,
   pswd varchar(300) not null,
-  --team varchar(50),
   date_created datetime default current_timestamp
-  --foreign key (team) references teams(team_name)
 );
 
-create table members (
+CREATE TABLE members (
   id int primary key auto_increment,
   email varchar(75) not null,
   team_name varchar(50) not null,
@@ -33,7 +31,7 @@ create table members (
   foreign key(team_name) references teams(team_name)
 );
 
-create table invites (
+CREATE TABLE invites (
   id int primary key auto_increment,
   sender varchar(75) not null,
   receiver varchar(75) not null,
@@ -76,7 +74,7 @@ CREATE TABLE comments (
 
 CREATE TABLE todo_list (
 	id int primary key auto_increment,
-	title varchar(45) NOT NULL,
+	title varchar(60) NOT NULL,
   description varchar(100),
   status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,

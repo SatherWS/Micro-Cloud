@@ -25,8 +25,8 @@
             <div class="form-container">
                 <div class="todo-panel">
                     <div class="inner-panel">
-                        <h1>Login Here</h1>
-                        <p>Welcome back, if you wish to return to the home page <a href="../index.html">click here.</a></p>
+                        <h1>Login Form</h1>
+                        <h3 class="sub-heading">Welcome back</h3>
                         <div class="flex-subs">
                             <label>Email:</label><br>
                             <input type="text" name="email" placeholder="Enter your email address" class="spc-n login-comp" required>
@@ -34,7 +34,7 @@
                             <label>Password:</label><br>
                             <input type="password" name="pswd" placeholder="Enter your password" class="spc-n login-comp" required>
                         </div>
-                        <p>Don't have an account? <a href="./signup.php">Sign up here.</a></p>
+                        <p>Don't have an account? <a href="./register.php">Sign up here.</a></p>
                         <br>
                         <input name="auth_user" class="spc-n" type="submit" id="form-control2">
                         <?php

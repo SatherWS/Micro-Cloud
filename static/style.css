@@ -1,4 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+/*
+* Ripped from  cousin's site
+@import url(https://fonts.googleapis.com/css?family=Poppins:lighter,normal,bold|Poppins:lighter,normal,bold);
+@import url(https://cdn2.hubspot.net/hubfs/273774/fontawesome/v5/latest.css);
+@import url(https://cdn2.hubspot.net/hubfs/273774/mp/act2/css/act21.updates.min.css);/*! * normalize.css v7.0.0 * MIT License * github.com/necolas/normalize.css * modified 
+
+body {
+  color: #2b2b2b;
+  font-family: Poppins,sans-serif;
+  line-height: 1.7;
+}
+*/
 .unused-selector {
   margin:100px;
 }
@@ -10,6 +23,7 @@ html, body {
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
+  line-height: 1.5;
 }
   
 a {
@@ -68,6 +82,10 @@ ul.topnav-list {
 /* login form */
 .login-comp {
   width: 60%;
+}
+
+.sub-heading {
+  color: #5c5c5c;
 }
 
 .error-msg {
@@ -276,15 +294,17 @@ textarea {
 *-------------------------------------------------------*/
 .dash-grid {
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 3fr 10fr;
   height: 100vh;
 }
 .side-bar {
   padding: 0 2rem;
   background: #fff;
 }
-
-
+.fixed-content {
+  top: 0;
+  position:sticky;
+}
 
 .welcome {
   margin: 0!important;
@@ -311,7 +331,7 @@ main {
   width: auto;
   margin: 0 auto;
   margin-bottom: 1rem;
-  width: 80%;
+  width: 90%;
 }
 
 .dash-footer {
@@ -361,13 +381,14 @@ main {
 }
 .grid-container div:hover {
   box-shadow: 0px 0px 7px 2px rgba(174,238,219,1);
-  color: rgba(43,211,235,1);
+  background: #2a5470;
+  color: #fff;
 }
 .grid-container a:hover {
-  color: rgba(43,211,235,1);
+  color: #fff;
 }
 .grid-container i:hover {
-  color: rgba(43,211,235,1);
+  color: #fff;
 }
 .activity {
   background: #fff;
@@ -729,7 +750,7 @@ select {
 }
 
 .ml2rem {
-  margin-left: 2rem;
+  margin-left: 2rem!important;
 }
 
 #options {
@@ -865,6 +886,9 @@ button {
   font-size: 16pt;
 }
 .fa-save:before {
+  padding-right: 8px;
+}
+.fa-link:before {
   padding-right: 8px;
 }
 
@@ -1220,29 +1244,16 @@ tr:hover {background-color:#f5f5f5;}
     /*
     Labeling mobile tables: Task Section
     */
-    .task-tab td:nth-of-type(1):before { content: "Team"; }
-    .task-tab td:nth-of-type(2):before { content: "Title"; }
-    .task-tab td:nth-of-type(3):before { content: "Status"; }
-    .task-tab td:nth-of-type(4):before { content: "Due Date"; }  
-    .task-tab td:nth-of-type(5):before { content: "Time Due"; }
-    .task-tab td:nth-of-type(6):before { content: "Assigned To"; }
-    .task-tab td:nth-of-type(7):before { content: "Assigned By"}
-    .task-tab td:nth-of-type(8):before { content: "Priority"; }
-    .task-tab td:nth-of-type(9):before { content: "Date Posted"; }
+  .task-tab td:nth-of-type(1):before { content: "Team"; }
+  .task-tab td:nth-of-type(2):before { content: "Title"; }
+  .task-tab td:nth-of-type(3):before { content: "Status"; }
+  .task-tab td:nth-of-type(4):before { content: "Due Date"; }  
+  .task-tab td:nth-of-type(5):before { content: "Time Due"; }
+  .task-tab td:nth-of-type(6):before { content: "Assigned To"; }
+  .task-tab td:nth-of-type(7):before { content: "Assigned By"}
+  .task-tab td:nth-of-type(8):before { content: "Priority"; }
+  .task-tab td:nth-of-type(9):before { content: "Date Posted"; }
 
-    /*
-    Labeling mobile tables: Voting Section
-    */
-    .poll-tab td:nth-of-type(1):before { content: "Poll ID"; }
-    .poll-tab td:nth-of-type(2):before { content: "Topic"; }
-    .poll-tab td:nth-of-type(3):before { content: "Result"; }
-    .poll-tab td:nth-of-type(4):before { content: "Creator"; }  
-    .poll-tab td:nth-of-type(5):before { content: "Yes Count"; }
-    .poll-tab td:nth-of-type(6):before { content: "No Count"; }
-    .poll-tab td:nth-of-type(7):before { content: "Maybe Count"; }
-    .poll-tab td:nth-of-type(8):before { content: "Date Created"; }
-  }
-  
   @media screen and (max-width: 700px) {
     .topnav-list li {
       display: none;
@@ -1314,7 +1325,6 @@ tr:hover {background-color:#f5f5f5;}
       display: block;
       text-align: left;
     }
-
     /* login mobile views */
     .login-comp {
       width: 95%;
@@ -1469,4 +1479,4 @@ tr:hover {background-color:#f5f5f5;}
       width: 100%;
     }
   }
-
+  }

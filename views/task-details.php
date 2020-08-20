@@ -71,12 +71,14 @@
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
+                        echo "<div class='todo-flex r-cols'><div>";
                         echo "<h2>Task: ".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
                         echo "<p><b>Status:</b> ".$row['status']."</p>";
                         echo "<p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Created:</b> ".$row['date_created']."</p>";
-                        echo "<p><b>Deadline:</b> ".$row['deadline']."</p>";
+                        echo "<p><b>Deadline:</b> ".$row['deadline']."</p></div>";
+                        echo "<div><h3><a href='#' class='add-btn'>Create Sub Task</a></h3></div></div>";
                     }
                 }
                 // Task editting view render
