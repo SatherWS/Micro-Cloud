@@ -59,11 +59,6 @@
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required>
                     <br><br>
-                    <!--
-                    <label>Time Due</label><br>
-                    <input type="time" name="time-due" class="todo-item spc-n" required>
-                    <br><br>
-                    -->
                     <label>Importance Rating</label><br>
                     <select name="importance" class="spc-n rep-item" required>
                         <option value="none" selected disabled hidden> 

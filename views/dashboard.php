@@ -14,10 +14,11 @@
     $stmnt2->bind_param("s", $_SESSION["unq_user"]);
     $stmnt2->execute();
     $results2 = $stmnt2 -> get_result();
-    $row = mysqli_fetch_assoc($results2);
     $project = "";
-    if (isset($row)) {
-        $_SESSION["team"] = $row["team_name"];
+    while ($row = mysqli_fetch_assoc($results2)) {
+        if (!isset($_SESSION["team"]))
+            $_SESSION["team"] = $row["team_name"];
+        $team = $row["team_name"];
         $project .= "<h3><a href='../controllers/change_team.php?switched=".$row["team_name"]."'>";
         $project .= $row["team_name"]."</a></h3>";
     }
@@ -140,39 +141,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <title>Swoop | Dashboard</title>
 </head>
 <body class="todo-bg-test">
     <?php include("./components/header.php");?>
+    <?php include("./components/modal.php");?>
 
     <div class="todo-bg-test">
     <div class="svg-bg">
         <div class="todo-flex">
-            <h4 class="ml2rem add-btn">
-                <a href="./create-journal.php">
-                    <span>Hide Projects</span><i class="fa fa-chevron-circle-left"></i>
-                </a>
-            </h4>
+            <p class="welcome"><?php echo $_SESSION["team"];?></p>
             <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
     <div class="dash-grid r-col">
         <section class="side-bar">
             <div class="fixed-content">
-                <br><?php
-                    echo $project;
-                    if (!isset($_SESSION["team"]))
-                        echo "<p>Selected Project: None</p>";
-                    else
-                        echo "<p>Selected Project: ".$_SESSION["team"]."</p>";
-                ?>
-                <div class="add-btn">
-                    <h4><a href="#">
-                        <span>Add Project</span><i class="fa fa-plus-circle"></i>
-                    </a></h4>
+                <div class="fixed-content-items">
+                    <div>
+                        <h3>Active Projects</h3>
+                        <?php
+                            echo $project;
+                            if (!isset($_SESSION["team"]))
+                                echo "<p>This user doesn't have any projects</p>";
+                        ?>
+                    </div>
+                    <div>
+                        <h4 class="dash-btn"><a href="#myModal" id="myBtn">
+                            <span>Add Project</span>
+                            <i class="fa fa-plus-circle"></i>
+                        </a></h4>
+                        <h4 class="dash-btn"><a href="./create-journal.php" class="todo-flex">
+                            <span>Hide Projects</span>
+                            <i class="fa fa-chevron-circle-left"></i>
+                        </a></h4>
+                    </div>
                 </div>
             </div>
         </section>
@@ -235,5 +243,6 @@
         }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>

@@ -7,11 +7,20 @@
 -- Generation Time: Apr 05, 2020 at 12:59 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
+DROP TABLE comments;
+DROP TABLE todo_list;
+DROP TABLE journal;
+DROP TABLE members;
+DROP TABLE invites;
+DROP TABLE users;
+DROP TABLE team;
 
 CREATE TABLE teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
-  date_created datetime default current_timestamp
+  admin varchar(75) not null,
+  date_created datetime default current_timestamp,
+  foreign key(admin) references users(email)
 );
 
 CREATE TABLE users (

@@ -47,5 +47,41 @@ if (isset($_POST['add-task'])) {
     $stmnt -> execute();
     header("Location: ../views/show-tasks.php");
 }
+
+// helper functions for create/join projects
+function projectCheck($curs, $project) {
+    $sql = "select team_name from teams where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->prepare("s", $project);
+    if ($stmnt->execute())
+        return true;
+    else
+        return false;
+}
+
+// join or create project
+if (isset($_POST["send-project"])) {
+    if ($_POST["radio"] == "create") {
+        $sql = "insert into teams(team_name, admin) values (?, ?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+        $stmnt->execute();
+        $sql = "insert into members(team_name, email) values (?, ?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+        if ($stmnt->execute()) {
+            $_SESSION["team"] = $_POST["teamname"];
+            header("Location: ../views/dashboard.php");
+        }
+    }
+    else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"])) {
+        $sql = "insert into members(team_name, email) values (?, ?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+        if ($stmnt->execute()) {
+            $_SESSION["team"] = $_POST["teamname"];
+        }
+    }
+}
 $curs -> close();
 ?>

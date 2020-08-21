@@ -40,15 +40,15 @@
     <div class="svg-bg">
         <div class="todo-flex">
             <div class="review">
-                <h3 id="logs-title"><?php echo $total;?> Posts</h3>
+                <h4 id="logs-title"><?php echo $total;?> Posts</h4>
             </div>    
             <div class="add-btn">
-                <h3 class="mr2rem">
+                <h4 class="mr2rem">
                     <a href="./create-journal.php">
                         <span>Add Entry</span>
                         <i class="fa fa-plus-circle"></i>
                     </a>
-                </h3>
+                </h4>
             </div>
         </div>
     </div>
@@ -56,9 +56,9 @@
         <section class="side-bar">
             <form action="" method="post">
                 <div class="add-btn">
-                    <h3>
+                    <h4>
                     <a href="./create-journal.php"><span>Add Project</span><i class="fa fa-plus-circle"></i></a>
-                    </h3>
+                    </h4>
                 </div>
             </form>
         </section>

@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journal App</title>
+    <title>Swoop | Create Post</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,7 +33,7 @@
                 <h1>Create New Note</h1>
                 <div class="flex-subs">
                     <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n j-title-field" required>
-                    <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list">
+                    <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
                     <datalist id="categoryList">
                     <?php
                         if (mysqli_num_rows($result) > 0) {
@@ -50,7 +50,7 @@
                 <label class="container">
                     <input type="checkbox" name="omit">
                     <span class="checkmark"></span>
-                    Allow others to edit
+                    Make Public
                 </label>
                 -->
                 <br><br>

@@ -6,6 +6,7 @@
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
 ## Change Log
+  * 8/21/2020 Implemented add project modal, currently only creates projects
   * 8/20/2020 Refactoring dashboard.php currently struggling, code is not very manageable 
   * 8/17/2020 Only the creator of the post is allowed to edit (duh)
   * 8/17/2020 Improved task editing UI
