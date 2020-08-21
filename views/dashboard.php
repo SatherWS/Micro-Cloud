@@ -8,6 +8,20 @@
     $curs = $db -> getConnection();
     $html = "";
 
+    // USED IN TEAM SELECTOR SIDE BAR (wow this code is complete garbage)
+    $sql2 = "select team_name from members where email = ?";
+    $stmnt2 = mysqli_prepare($curs, $sql2);
+    $stmnt2->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt2->execute();
+    $results2 = $stmnt2 -> get_result();
+    $row = mysqli_fetch_assoc($results2);
+    $project = "";
+    if (isset($row)) {
+        $_SESSION["team"] = $row["team_name"];
+        $project .= "<h3><a href='../controllers/change_team.php?switched=".$row["team_name"]."'>";
+        $project .= $row["team_name"]."</a></h3>";
+    }
+
     // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
     // select all tasks by team
     if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
@@ -46,8 +60,6 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                // TODO: close p tag if substring contains an iframe tag (video, img etc)
-                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
                 $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
                 
             }
@@ -70,8 +82,6 @@
                 $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                // TODO: close p tag if substring contains an iframe tag (video, img etc)
-                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
                 $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
             }
         }
@@ -124,7 +134,6 @@
     }
     // TODO: MOVE ABOVE TO MODELS SINCE ITS DATA RELATED
 ?>
-<!-- git testing remove comment later -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,26 +162,17 @@
     <div class="dash-grid r-col">
         <section class="side-bar">
             <div class="fixed-content">
-                <br><h3>
-                    <a href="../controllers/change_team.php?switched=project 1">Some Project with a long name</a>
-                </h3>
-                <h3>
-                    <a href="../controllers/change_team.php?switched=project 1">Some other project with a long name</a>
-                </h3>
-                <br>
-                <?php
+                <br><?php
+                    echo $project;
                     if (!isset($_SESSION["team"]))
-                        echo "<p>Current Project: None</p>";
+                        echo "<p>Selected Project: None</p>";
                     else
-                        echo "<p>Current Project: ".$_SESSION["team"]."</p>";
+                        echo "<p>Selected Project: ".$_SESSION["team"]."</p>";
                 ?>
-
                 <div class="add-btn">
-                    <h3>
-                        <a href="#">
-                            <span>Add Project</span><i class="fa fa-plus-circle"></i>
-                        </a>
-                    </h3>
+                    <h4><a href="#">
+                        <span>Add Project</span><i class="fa fa-plus-circle"></i>
+                    </a></h4>
                 </div>
             </div>
         </section>

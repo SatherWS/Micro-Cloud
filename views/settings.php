@@ -8,12 +8,13 @@ if (!isset($_SESSION["unq_user"]))
 
 $db = new Database();
 $curs = $db -> getConnection();
-$sql = "select email from users where team = ?";
-$stmnt = mysqli_prepare($curs, $sql);
-$stmnt -> bind_param("s", $_SESSION["team"]);
-$stmnt -> execute();
-$results = $stmnt -> get_result();
-
+if (isset($_SESSION["team"])) {
+    $sql = "select email from members where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $results = $stmnt -> get_result();
+}
 /*
 $sql2 = "select * from invites where team_name = ?";
 $stmnt2 = mysqli_prepare($curs, $sql2);
@@ -21,12 +22,13 @@ $stmnt2->bind_param("s", $_SESSION["team"]);
 $stmnt2->execute();
 $results2 = $stmnt2->get_result();
 */
-
-$sql3 = "select * from invites where receiver = ? or sender = ?";
-$stmnt3 = mysqli_prepare($curs, $sql3);
-$stmnt3->bind_param("ss", $_SESSION["unq_user"], $_SESSION["unq_user"]);
-$stmnt3->execute();
-$results3 = $stmnt3->get_result();
+if (isset($_SESSION["team"])) {
+    $sql3 = "select * from invites where receiver = ? or sender = ?";
+    $stmnt3 = mysqli_prepare($curs, $sql3);
+    $stmnt3->bind_param("ss", $_SESSION["unq_user"], $_SESSION["unq_user"]);
+    $stmnt3->execute();
+    $results3 = $stmnt3->get_result();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

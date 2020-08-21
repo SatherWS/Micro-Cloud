@@ -130,6 +130,8 @@ textarea {
 .todo-panel textarea {
   border: solid #c6c6c6 1.5px;
   width: 95%;
+  height: 125px;
+  font-size: 16pt;
 }
 
 .spc-m {

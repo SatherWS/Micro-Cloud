@@ -45,7 +45,7 @@
                     </datalist>
                 </div>
                 <br>
-                <textarea rows="7" placeholder="Text area for creating a post..." name="note"></textarea>
+                <textarea rows="7" placeholder="Write your post here..." name="note"></textarea>
                 <!-- TODO: change to share with all of Swoop instead of team only
                 <label class="container">
                     <input type="checkbox" name="omit">

@@ -6,10 +6,11 @@
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
 ## Change Log
-  * 8/16/2020 Fixed user invites
-  * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
+  * 8/20/2020 Refactoring dashboard.php currently struggling, code is not very manageable 
   * 8/17/2020 Only the creator of the post is allowed to edit (duh)
   * 8/17/2020 Improved task editing UI
+  * 8/16/2020 Fixed user invites
+  * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
 ### How to run locally w/ Docker
 1. Learn how to do this

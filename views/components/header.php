@@ -23,7 +23,7 @@
                 <a href="javascript:void(0)" class="dropbtn">Tasks</a>
                 <div class="dropdown-content">
                     <a href="./create-task.php">Create Task</a>
-                    <a href="./show-tasks.php">Manage Tasks</a>
+                    <a href="./show-tasks.php">View Tasks</a>
                 </div>
             </li>
             <li>

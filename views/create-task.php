@@ -8,11 +8,13 @@
 
     $db = new Database();
     $curs = $db -> getConnection();
-    $sql = "select email from users where team = ?";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $_SESSION["team"]);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
+    if (isset($_SESSION["team"])) {
+        $sql = "select email from members where team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +45,7 @@
                         <option value="none" selected disabled hidden> 
                             Select Team Member
                         </option>
-                        <option value="None">None</option>
+                        <option value="">None</option>
                         <option value="<?php echo $_SESSION["unq_user"]?>">Self</option>
                         <?php
                             while ($row = mysqli_fetch_assoc($results)) {
@@ -53,7 +55,7 @@
                     </select>
                     <br><br>
                     <textarea name="descript" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
-                    <br><br>
+                    <br>
                     <label>Date Due</label><br>
                     <input type="date" name="end-date" class="todo-item spc-n" required>
                     <br><br>

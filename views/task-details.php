@@ -75,6 +75,7 @@
                         echo "<h2>Task: ".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
                         echo "<p><b>Status:</b> ".$row['status']."</p>";
+                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
                         echo "<p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Created:</b> ".$row['date_created']."</p>";
                         echo "<p><b>Deadline:</b> ".$row['deadline']."</p></div>";

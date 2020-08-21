@@ -57,8 +57,7 @@ CREATE TABLE journal (
   foreign key (team_name) references teams(team_name)
 );
 
--- NEW TABLE `comments`, ref journal
--- NOT IMPLEMENTED
+-- NOT IMPLEMENTED, but would be cool
 CREATE TABLE comments (
   id int(11) primary key auto_increment,
   comment varchar(150) not null,
@@ -84,7 +83,6 @@ CREATE TABLE todo_list (
   creator varchar(50) NOT NULL,
   team_name varchar(50),
 	date_created datetime DEFAULT CURRENT_TIMESTAMP,
-  foreign key (assignee) references users(email),
   foreign key (creator) references users(email),
   foreign key (team_name) references teams(team_name)
 );
