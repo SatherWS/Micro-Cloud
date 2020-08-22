@@ -4,15 +4,6 @@
 
 ## Project Details
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
-
-## Change Log
-  * 8/21/2020 Implemented add project modal, currently only creates projects
-  * 8/20/2020 Refactoring dashboard.php currently struggling, code is not very manageable 
-  * 8/17/2020 Only the creator of the post is allowed to edit (duh)
-  * 8/17/2020 Improved task editing UI
-  * 8/16/2020 Fixed user invites
-  * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
-
 ### How to run locally w/ Docker
 1. Learn how to do this
 
@@ -22,11 +13,23 @@ This GitHub repository contains source code for project management software. It'
 3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
 5. Open browser to 127.0.0.1/<repo-name>
+   
+## Change Log
+  * 8/21/2020 Made sidebar component, Need
+  * 8/21/2020 Implemented add project modal, currently only creates projects
+  * 8/20/2020 Refactoring dashboard.php currently struggling, code is not very manageable 
+  * 8/17/2020 Only the creator of the post is allowed to edit (duh)
+  * 8/17/2020 Improved task editing UI
+  * 8/16/2020 Fixed user invites
+  * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
-### Post deployment tasks last updated 7/28/2020 
+### TODO 8/21/2020 
 - [X] Confirm before deleting task, post or user
-- [ ] Create admin user options (team creator)
+- [X] Create admin user options (team creator)
 - [X] Analytics range selector
+- [ ] Fix bugs in invites section
+- [ ] Implement join team modal checkbox
+- [ ] Allow admins to accept or deny requests to join a project
 - [ ] Write cron jobs to send email alerts regarding tasks
 - [ ] Add comments to tasks and posts if not private
 - [ ] Reset forgotten passwords via email

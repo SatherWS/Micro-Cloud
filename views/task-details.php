@@ -48,13 +48,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
     <title>Task Details</title>
 </head>
 <body>
-    <?php include("./components/header.php"); ?>
+    <?php include("./components/header.php");?>
+    <?php include("./components/subtask_modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex btn-spcing">    
             <?php
@@ -71,7 +73,7 @@
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
-                        echo "<div class='todo-flex r-cols'><div>";
+                        echo "<div class='todo-flex align-initial r-cols'><div>";
                         echo "<h2>Task: ".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
                         echo "<p><b>Status:</b> ".$row['status']."</p>";
@@ -79,12 +81,30 @@
                         echo "<p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Created:</b> ".$row['date_created']."</p>";
                         echo "<p><b>Deadline:</b> ".$row['deadline']."</p></div>";
-                        echo "<div><h3><a href='#' class='add-btn'>Create Sub Task</a></h3></div></div>";
+                        echo "<div><h3><a href='#' class='add-btn'>Create Sub Task <i class='fa fa-plus-circle'></i></a></h3></div></div>";
                     }
                 }
                 // Task editting view render
+                function create_selector($curs, $team) {
+                    $selector = "<br><br><label>Change Assignee</label>";
+                    $selector .= "<br><select name='change-assignee' class='spc-n' required>";
+                    $sql = "select assignee from todo_list where team_name = ?";
+                    $stmnt = mysqli_prepare($curs, $sql);
+                    $stmnt->bind_param("s", $team);
+                    $stmnt->execute();
+                    $result = $stmnt->get_result();
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $selector .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option";
+                    }
+                    $selector .= "</select>";
+                    return $selector;
+                }
+                $form = "";
                 if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
-                    echo $editor->create_editor($row);
+                    $form .= $editor->create_editor($row);
+                    $form .= create_selector($curs, $_SESSION["team"]);
+                    $form .= "</div></div>";
+                    echo $form;
                 }
             ?>
             </div>
@@ -96,5 +116,6 @@
     }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>

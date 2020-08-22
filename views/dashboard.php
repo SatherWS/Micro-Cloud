@@ -8,21 +8,6 @@
     $curs = $db -> getConnection();
     $html = "";
 
-    // USED IN TEAM SELECTOR SIDE BAR (wow this code is complete garbage)
-    $sql2 = "select team_name from members where email = ?";
-    $stmnt2 = mysqli_prepare($curs, $sql2);
-    $stmnt2->bind_param("s", $_SESSION["unq_user"]);
-    $stmnt2->execute();
-    $results2 = $stmnt2 -> get_result();
-    $project = "";
-    while ($row = mysqli_fetch_assoc($results2)) {
-        if (!isset($_SESSION["team"]))
-            $_SESSION["team"] = $row["team_name"];
-        $team = $row["team_name"];
-        $project .= "<h3><a href='../controllers/change_team.php?switched=".$row["team_name"]."'>";
-        $project .= $row["team_name"]."</a></h3>";
-    }
-
     // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
     // select all tasks by team
     if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
@@ -160,44 +145,21 @@
         </div>
     </div>
     <div class="dash-grid r-col">
-        <section class="side-bar">
-            <div class="fixed-content">
-                <div class="fixed-content-items">
-                    <div>
-                        <h3>Active Projects</h3>
-                        <?php
-                            echo $project;
-                            if (!isset($_SESSION["team"]))
-                                echo "<p>This user doesn't have any projects</p>";
-                        ?>
-                    </div>
-                    <div>
-                        <h4 class="dash-btn"><a href="#myModal" id="myBtn">
-                            <span>Add Project</span>
-                            <i class="fa fa-plus-circle"></i>
-                        </a></h4>
-                        <h4 class="dash-btn"><a href="./create-journal.php" class="todo-flex">
-                            <span>Hide Projects</span>
-                            <i class="fa fa-chevron-circle-left"></i>
-                        </a></h4>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php include("./components/sidebar.php");?>
         <main>
             <div class="grid-container">
+                <div>
+                    <a class="dash-item" href="./create-journal.php">
+                        <i class="fa fa-pencil spc-1"></i>
+                        <br>
+                        <span class="sup-text">Create Post</span>
+                    </a>
+                </div>
                 <div>
                     <a class="dash-item" href="./create-task.php">
                         <i class="fa fa-list-ol spc-1"></i>
                         <br>
                         <span class="sup-text">Create Task</span> 
-                    </a>
-                </div>
-                <div>
-                    <a class="dash-item" href="./create-journal.php">
-                        <i class="fa  fa-pencil spc-1"></i>
-                        <br>
-                        <span class="sup-text">Create Post</span>
                     </a>
                 </div>
                 <div>

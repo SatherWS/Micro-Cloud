@@ -42,12 +42,12 @@ CREATE TABLE members (
 
 CREATE TABLE invites (
   id int primary key auto_increment,
-  sender varchar(75) not null,
+  sender varchar(75),
   receiver varchar(75) not null,
   team_name varchar(50) not null,
   status varchar(20) default 'pending' not null,
   date_created datetime default current_timestamp,
-  foreign key(sender) references users(email),
+  --foreign key(sender) references users(email),
   foreign key(receiver) references users(email),
   foreign key(team_name) references teams(team_name)
 );
@@ -82,7 +82,7 @@ CREATE TABLE comments (
 
 CREATE TABLE todo_list (
 	id int primary key auto_increment,
-	title varchar(60) NOT NULL,
+	title varchar(75) NOT NULL,
   description varchar(100),
   status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,
@@ -96,3 +96,22 @@ CREATE TABLE todo_list (
   foreign key (team_name) references teams(team_name)
 );
 
+--
+-- Table structure for table sub_tasks
+--
+
+CREATE TABLE sub_tasks (
+	id int primary key auto_increment,
+	title varchar(75) NOT NULL,
+  description varchar(100),
+  status varchar(30) DEFAULT "Not Started",
+	deadline date NOT NULL,
+  task_repeat varchar(10) NULL,
+	importance varchar(10) NOT NULL,
+  assignee varchar(50),
+  creator varchar(50) NOT NULL,
+  team_name varchar(50),
+  task_id int not null,
+	date_created datetime DEFAULT CURRENT_TIMESTAMP,
+  foreign key (task_id) references todo_list(id)
+);

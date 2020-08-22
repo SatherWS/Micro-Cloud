@@ -75,7 +75,7 @@ if (isset($_POST["send-project"])) {
         }
     }
     else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"])) {
-        $sql = "insert into members(team_name, email) values (?, ?)";
+        $sql = "insert into invites(team_name, email) values (?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
         if ($stmnt->execute()) {

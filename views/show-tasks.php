@@ -38,12 +38,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Tasks</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body>
-    <?php include("./components/header.php"); ?>
+    <?php include("./components/header.php");?>
+    <?php include("./components/modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex">
             <form method="POST" class="ml2rem">
@@ -66,40 +69,39 @@
             </div>
         </div>
     </div>
-    <div class="log-container">
-        <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
-        <form action="../edit_entry.php" method="post" id="tasks">
-            <table class="data task-tab">
-                <tr class="tbl-head">
-                    <th>TITLE</th>
-                    <th>STATUS</th>
-                    <th>ASSIGNED TO</th>
-                    <th>TEAM</th>
-                    <th>IMPORTANCE</th>
-                    <th>DATE CREATED</th>
-                    <th>DUE DATE</th>
-                </tr>
-                <?php
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            $id = $row["id"];
-                            echo "<tr onclick='getTask($id)'><td>".$row["title"]."</td>";
-                            echo "<td>".$row["status"]."</td>";
-                            echo "<td>".$row["assignee"]."</td>";
-                            echo "<td>".$row["team_name"]."</td>";
-                            echo "<td>".$row["importance"]."</td>";
-                            echo "<td>".$row["date_created"]."</td>";
-                            echo "<td>".$row["deadline"]."</td>";
-                            echo "<td>".$row["time_due"]."</td></tr>";
+    <div class="dash-grid r-cols">
+        <?php include("./components/sidebar.php");?>
+        <div class="log-container">
+            <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
+            <form action="../edit_entry.php" method="post" id="tasks">
+                <table class="data task-tab">
+                    <tr class="tbl-head">
+                        <th>TITLE</th>
+                        <th>STATUS</th>
+                        <th>ASSIGNED TO</th>
+                        <th>TEAM</th>
+                        <th>IMPORTANCE</th>
+                        <th>DATE CREATED</th>
+                        <th>DUE DATE</th>
+                    </tr>
+                    <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                                $id = $row["id"];
+                                echo "<tr onclick='getTask($id)'><td>".$row["title"]."</td>";
+                                echo "<td>".$row["status"]."</td>";
+                                echo "<td>".$row["assignee"]."</td>";
+                                echo "<td>".$row["team_name"]."</td>";
+                                echo "<td>".$row["importance"]."</td>";
+                                echo "<td>".$row["date_created"]."</td>";
+                                echo "<td>".$row["deadline"]."</td>";
+                                echo "<td>".$row["time_due"]."</td></tr>";
+                            }
                         }
-                    }
-                    else {
-                        echo "<p>0 Results</p>";
-                    }
-                    $curs->close();
-                ?>
-            </table>
-        </form>
+                    ?>
+                </table>
+            </form>
+        </div>        
     </div>
     <script>
         function getTask(id) {
@@ -107,5 +109,6 @@
         }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>
