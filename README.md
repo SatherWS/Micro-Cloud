@@ -6,7 +6,7 @@
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
 ### How to run locally w/ Docker
-1. Learn how to do this
+1. Learn how to do this soon
 
 ### How to run locally using web server emulation software
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
