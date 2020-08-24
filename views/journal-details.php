@@ -57,7 +57,7 @@
 </head>
 <body>
 <?php include("./components/header.php"); ?>
-<div class="svg-bg jedits">
+<div class="svg-bg sticky">
         <div class="todo-flex">
             <?php
                 if ($show_editor)

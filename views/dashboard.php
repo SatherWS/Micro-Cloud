@@ -47,7 +47,6 @@
                 $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
                 $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
                 $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
-                
             }
         }
     }
@@ -148,34 +147,26 @@
         <?php include("./components/sidebar.php");?>
         <main>
             <div class="grid-container">
-                <div>
-                    <a class="dash-item" href="./create-journal.php">
-                        <i class="fa fa-pencil spc-1"></i>
-                        <br>
-                        <span class="sup-text">Create Post</span>
-                    </a>
-                </div>
-                <div>
-                    <a class="dash-item" href="./create-task.php">
-                        <i class="fa fa-list-ol spc-1"></i>
-                        <br>
-                        <span class="sup-text">Create Task</span> 
-                    </a>
-                </div>
-                <div>
-                    <a class="dash-item" href="./analytics.php">
-                        <i class="fa fa-line-chart spc-1"></i>
-                        <br>
-                    <span class="sup-text">Analytics</span> 
-                    </a>
-                </div>
-                <div>
-                    <a class="dash-item" href="./settings.php">
-                        <i class="fa fa-gear spc-1"></i>
-                        <br>
-                    <span class="sup-text">Settings</span> 
-                    </a>
-                </div>   
+                <a class="dash-item" href="./create-journal.php">
+                    <i class="fa fa-pencil spc-1"></i>
+                    <br>
+                    <span class="sup-text">Create Post</span>
+                </a>
+                <a class="dash-item" href="./create-task.php">
+                    <i class="fa fa-list-ol spc-1"></i>
+                    <br>
+                    <span class="sup-text">Create Task</span> 
+                </a>
+                <a class="dash-item" href="./analytics.php">
+                    <i class="fa fa-line-chart spc-1"></i>
+                    <br>
+                <span class="sup-text">Analytics</span> 
+                </a>
+                <a class="dash-item" href="./settings.php">
+                    <i class="fa fa-gear spc-1"></i>
+                    <br>
+                <span class="sup-text">Settings</span> 
+                </a>
             </div>
             <div class="todo-flex r-cols">
                 <h1 class="intro-header">Project Activity</h1>

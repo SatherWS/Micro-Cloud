@@ -41,6 +41,26 @@
         header("Location: ./show-tasks.php");
     }
     // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
+    // Creator and assignee selector elements
+    function create_selector($curs, $team) {
+        $selector = "<label>Change Assignee</label><br>";
+        $selector .= "<select name='change-assignee' class='spc-n' required>";
+        $selector2 = "<label>Change Creator</label><br>";
+        $selector2 .= "<select name='change-creator' class='spc-n' required>";
+        $sql = "select assignee, creator from todo_list where team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt->bind_param("s", $team);
+        $stmnt->execute();
+        $result = $stmnt->get_result();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $selector .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option>";
+            $selector2 .= "<option value='".$row["creator"]."'>".$row["creator"]."</option>";
+        }
+        $selector .= "</select><br><br>";
+        $selector2 .= "</select>";
+        $selectors = $selector.=$selector2;
+        return $selectors;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +77,7 @@
 <body>
     <?php include("./components/header.php");?>
     <?php include("./components/subtask_modal.php");?>
-    <div class="svg-bg">
+    <div class="svg-bg sticky">
         <div class="todo-flex btn-spcing">    
             <?php
                 if ($show_editor)
@@ -73,42 +93,34 @@
             <?php
                 if ($_GET['task'] && mysqli_num_rows($results) > 0) {
                     while($row = mysqli_fetch_assoc($results)) {
-                        echo "<div class='todo-flex align-initial r-cols'><div>";
-                        echo "<h2>Task: ".$row['title']."</h2>";
+                        echo "<h2>Main Task: ".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
-                        echo "<p><b>Status:</b> ".$row['status']."</p>";
-                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
-                        echo "<p><b>Importance:</b> ".$row['importance']."</p>";
+                        echo "<div class='todo-flex align-initial r-cols'>";
+                        echo "<div><p><b>Status:</b> ".$row['status']."</p>";
                         echo "<p><b>Created:</b> ".$row['date_created']."</p>";
                         echo "<p><b>Deadline:</b> ".$row['deadline']."</p></div>";
-                        echo "<div><h3><a href='#' class='add-btn'>Create Sub Task <i class='fa fa-plus-circle'></i></a></h3></div></div>";
+                        
+                        echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
+                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
+                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
                     }
                 }
                 // Task editting view render
-                function create_selector($curs, $team) {
-                    $selector = "<br><br><label>Change Assignee</label>";
-                    $selector .= "<br><select name='change-assignee' class='spc-n' required>";
-                    $sql = "select assignee from todo_list where team_name = ?";
-                    $stmnt = mysqli_prepare($curs, $sql);
-                    $stmnt->bind_param("s", $team);
-                    $stmnt->execute();
-                    $result = $stmnt->get_result();
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $selector .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option";
-                    }
-                    $selector .= "</select>";
-                    return $selector;
-                }
                 $form = "";
                 if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
                     $form .= $editor->create_editor($row);
                     $form .= create_selector($curs, $_SESSION["team"]);
                     $form .= "</div></div>";
+                    $form .= $editor->additionals($row);
                     echo $form;
                 }
             ?>
+                <h3><a href='#' class='add-btn'>
+                    Create Sub Task <i class='fa fa-plus-circle'></i></a>
+                </h3>
             </div>
         </form>
+
     </div>
     <script>
     function triggerForm2() {

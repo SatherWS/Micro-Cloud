@@ -52,34 +52,47 @@ if (isset($_POST['add-task'])) {
 function projectCheck($curs, $project) {
     $sql = "select team_name from teams where team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt->prepare("s", $project);
+    $stmnt->bind_param("s", $project);
     if ($stmnt->execute())
         return true;
     else
         return false;
 }
-
+function getAdmin($curs, $project) {
+    $sql = "select admin from teams where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("s", $project);
+    $stmnt->execute();
+    $result = $stmnt->get_result();
+    $set = mysqli_fetch_assoc($result);
+    return $set["admin"];
+}
 // join or create project
 if (isset($_POST["send-project"])) {
     if ($_POST["radio"] == "create") {
         $sql = "insert into teams(team_name, admin) values (?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
-        $stmnt->execute();
-        $sql = "insert into members(team_name, email) values (?, ?)";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
         if ($stmnt->execute()) {
-            $_SESSION["team"] = $_POST["teamname"];
-            header("Location: ../views/dashboard.php");
+            $sql = "insert into members(team_name, email) values (?, ?)";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+            if ($stmnt->execute()) {
+                $_SESSION["team"] = $_POST["teamname"];
+                header("Location: ../views/dashboard.php");
+            }
+        }
+        else {
+            header("Location: ../views/dashboard.php?error=unable to add user to project");
         }
     }
     else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"])) {
-        $sql = "insert into invites(team_name, email) values (?, ?)";
+        $admin = getAdmin($curs, $_POST["teamname"]);
+        $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+        $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
         if ($stmnt->execute()) {
-            $_SESSION["team"] = $_POST["teamname"];
+            header("Location: ../views/dashboard.php");
         }
     }
 }

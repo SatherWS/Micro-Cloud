@@ -23,7 +23,7 @@ $stmnt2->execute();
 $results2 = $stmnt2->get_result();
 */
 if (isset($_SESSION["team"])) {
-    $sql3 = "select * from invites where receiver = ? or sender = ?";
+    $sql3 = "select * from invites where receiver = ? or sender = ? order by date_created desc";
     $stmnt3 = mysqli_prepare($curs, $sql3);
     $stmnt3->bind_param("ss", $_SESSION["unq_user"], $_SESSION["unq_user"]);
     $stmnt3->execute();
@@ -81,9 +81,9 @@ if (isset($_SESSION["team"])) {
                     </div>
                     <div class="add-worker">
                         <form method="post" action="../controllers/auth_user.php">
-                            <h2>Invite Another User</h2>
+                            <h3>Invite a new user</h3>
                             <div class="todo-flex r-cols">
-                                <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
+                                <input type="text" name="user_email" placeholder="search member by email address" class="spc-n mr2rem" required>
                                 <input type="submit" name="invite_user" value="Invite User" id="form-control2" class="settings-btn">
                             </div>
                         </form>
@@ -96,7 +96,7 @@ if (isset($_SESSION["team"])) {
                             <?php
                             if (mysqli_num_rows($results3) > 0) {
                                 include ("./components/settings-table.php");
-                                while ($row=mysqli_fetch_assoc($results3)) {
+                                while ($row = mysqli_fetch_assoc($results3)) {
                                     $id = $row["team_name"];
                                     if ($row["status"] != "pending") {
                                         echo "<tr><td></td>";
@@ -109,9 +109,9 @@ if (isset($_SESSION["team"])) {
                                         echo "<tr><td></td>";
                                     }
                                     echo "<td>".$row["team_name"]."</td>";
-                                    echo "<td>".$row["status"]."</td>";
                                     echo "<td>".$row["receiver"]."</td>";
                                     echo "<td>".$row["sender"]."</td>";
+                                    echo "<td>".$row["status"]."</td>";
                                     echo "<td>".$row["date_created"]."</td>";
                                 }
                             }

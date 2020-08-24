@@ -9,7 +9,7 @@
         </ul>
         <ul class="topnav-list">
             <li>
-                <a href="./analytics.php">Explore</a>
+                <a href="./dashboard.php">Explore</a>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Posts</a>

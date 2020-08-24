@@ -37,10 +37,10 @@
 
     if (isset($_POST['mod-task'])) {
         $id = $_POST['mod-task'];
-        $sql = "update todo_list set title=?, description=?, deadline=?, importance=?, status=? where id=?";
+        $sql = "update todo_list set title=?, description=?, date_created=?, deadline=?, importance=?, status=?, assignee=?, creator=? where id=?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ssssss", $_POST["title"], $_POST["description"], $_POST["end-date"], $_POST["importance"], $_POST['change-status'], $id);
+        $stmnt -> bind_param("sssssssss", $_POST["title"], $_POST["description"], $_POST["start-date"], $_POST["end-date"], $_POST["importance"], $_POST['change-status'], $_POST["change-assignee"], $_POST["change-creator"], $id);
         $stmnt -> execute();
         header("Location: ../views/task-details.php?task=".$id);
     }

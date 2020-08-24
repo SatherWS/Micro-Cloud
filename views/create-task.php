@@ -41,15 +41,17 @@
                     <label>Task Description</label><br>
                     <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
                     <br><br>
-                    <select name="assignee" class="spc-n rep-item" required>
+                    <select name="assignee" class="spc-n rep-item">
                         <option value="none" selected disabled hidden> 
                             Select Team Member
                         </option>
                         <option value="">None</option>
-                        <option value="<?php echo $_SESSION["unq_user"]?>">Self</option>
                         <?php
                             while ($row = mysqli_fetch_assoc($results)) {
-                                echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
+                                if ($row["email"] == $_SESSION["unq_user"])
+                                    echo "<option value='".$row["email"]."'>Self</option>";
+                                else
+                                    echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
                             }
                         ?>
                     </select>
