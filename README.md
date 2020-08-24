@@ -35,6 +35,7 @@ This GitHub repository contains source code for project management software. It'
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name
 
 ### TODO (Version 2.0.0)
+- [ ] Create sub tasks modal and allow sub task editting
 - [ ] Allow admins to accept requests to join a team
 - [ ] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
