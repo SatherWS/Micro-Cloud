@@ -1,6 +1,7 @@
 <?php
 /*
-*   This script controls how users are created and authenticated
+*   This script controls how users are created and authenticated.
+*   Starting at line 58 is controller logic that processes join requests.
 *   Author: Colin Sather
 */
 session_start();
@@ -37,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["auth_user"])) {
 /*
 *   User and Team creation section (Signup form)
 */
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
     $sql = "insert into users(email, username, pswd) values(?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_user"])) {
 /*
 *   Invite user to team via settings.php [POSSIBLY MOVE THIS TO A NEW CONTROLLER]
 */
-// send invite to user if user exists and if invite is already sent
+// Send invite to a user if user exists and invite is not already sent
 function check_invites($curs, $user, $team) {
     $sql = "select receiver, team_name from invites where receiver = ? and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
@@ -69,16 +69,18 @@ function check_invites($curs, $user, $team) {
     else
         return true;
 }
+// When an admin accepts an invite, change status of the sender
 function get_admin($curs, $user, $team) {
     $sql = "select admin from teams where admin = ? and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt = $stmnt->bind_param("ss", $user, $team);
-    $stmnt->execute();
-    $result = $stmnt->get_result();
-    $admin = mysqli_fetch_assoc($result);
-    return $admin["admin"];
+    $stmnt->bind_param("ss", $user, $team);
+    if ($stmnt->execute())
+        return true;
+    else
+        return false;
 }
 
+/*  Do not include in version 2.0
 if (isset($_POST["invite_user"]) && !check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
     $sql = "insert into invites(receiver, sender, team_name) values (?,?,?)";
     $stmnt = mysqli_prepare($curs, $sql);
@@ -91,28 +93,34 @@ if (isset($_POST["invite_user"]) && !check_invites($curs, $_POST["user_email"], 
 else if (isset($_POST["invite_user"]) && check_invites($curs, $_POST["user_email"], $_SESSION["team"])) {
     header("Location: ../views/settings.php?msg=Error: invitation already sent or user DNE.");
 }
+*/
 
 // Receiever of the invite can either accept or deny the request
 if (isset($_POST["accept"])) {
-    $sql = "update members set team_name = ? where email = ?";
+    $sql = "insert into members(email, team_name) values(?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt->bind_param("ss", $_POST["accept"], $_SESSION["unq_user"]);
+    $stmnt->bind_param("ss", $_POST["accept"], $_SESSION["team"]);
     $stmnt->execute();
-    if (get_admin($curs, $_SESSION["unq_user"], $_POST["accept"]) == $_SESSION["unq_user"])
-        $sql = "update invites set status = 'accepted' where sender = ?";
-    else
-        $sql = "update invites set status = 'accepted' where receiver = ?";
+    $sql = "update invites set status='accepted' where sender = ? and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt->bind_param("ss", $_POST["accept"], $_SESSION["team"]);
     $stmnt->execute();
-    $_SESSION["team"] = $_POST["accept"];
     header("Location: ../views/settings.php");
 }
 if (isset($_POST["deny"])) {
-    $sql = "delete from invites where receiver = ?";
+    $sql = "delete from invites where sender = ? and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt->bind_param("ss", $_POST["deny"], $_SESSION["team"]);
     $stmnt->execute();
     header("Location: ../views/settings.php");
 }
+/* TODO: decide to delete accepted invites manually or automatically
+if (isset($_POST["del"])) {
+    $sql = "delete from invites where sender = ? and team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("ss", $_POST["del"], $_SESSION["team"]);
+    $stmnt->execute();
+    header("Location: ../views/settings.php");
+}
+*/
 ?>

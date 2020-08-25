@@ -15,15 +15,20 @@
         return $project;
     }
 ?>
-<section class="side-bar">
+<section class="side-bar" id="side-bar">
     <div class="fixed-content">
         <div class="fixed-content-items">
             <div>
                 <h3>Project List</h3>
                 <?php
-                    echo get_projects($curs);
+                    if (isset($_GET["error"])) 
+                        echo "<p class='error-msg'><b>Error:</b> ".$_GET["error"]."</p>";
+                    else if (isset($_GET["msg"])) 
+                        echo "<p class='success-msg'><b>Success:</b> ".$_GET["msg"]."</p>";
                     if (!isset($_SESSION["team"]))
                         echo "<p>This user doesn't have any projects.</p>";
+                    else 
+                        echo get_projects($curs);   
                 ?>
             </div>
             <div>
@@ -31,11 +36,17 @@
                     <span>Add Project</span>
                     <i class="fa fa-plus-circle"></i>
                 </a></h4>
-                <h4 class="dash-btn"><a href="./create-journal.php" class="todo-flex">
+                <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="todo-flex">
                     <span>Hide Projects</span>
                     <i class="fa fa-chevron-circle-left"></i>
                 </a></h4>
             </div>
         </div>
     </div>
+</section>
+<section class="show-sidebar" id="mini-btn">
+    <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="todo-flex">
+        <span>Show Projects</span>
+        <i class="fa fa-chevron-circle-left"></i>
+    </a></h4>
 </section>

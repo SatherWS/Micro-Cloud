@@ -97,8 +97,8 @@
                         echo "<p>".$row["description"]."</p>";
                         echo "<div class='todo-flex align-initial r-cols'>";
                         echo "<div><p><b>Status:</b> ".$row['status']."</p>";
-                        echo "<p><b>Created:</b> ".$row['date_created']."</p>";
-                        echo "<p><b>Deadline:</b> ".$row['deadline']."</p></div>";
+                        echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
+                        echo "<p><b>End Date:</b> ".$row['deadline']."</p></div>";
                         
                         echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";

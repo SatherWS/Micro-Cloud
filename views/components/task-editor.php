@@ -26,9 +26,9 @@
             $html .= "<option value='STUCK'>STUCK</option>";
             $html .= "<option value='DISTRACTED'>DISTRACTED</option></select><br><br>";
             $html .= "<lable>Change Start Date</lable><br>";
-            $html .= "<input type='date' name='end-date' class='spc-n' value='".$row["deadline"]."' required><br><br>";
+            $html .= "<input type='date' name='start-date' class='spc-n' value='".$row["date_created"]."' required><br><br>";
             $html .= "<lable>Change Deadline</lable><br>";
-            $html .= "<input type='date' name='start-date' class='spc-n' value='".$row["date_created"]."' required></div>";
+            $html .= "<input type='date' name='end-date' class='spc-n' value='".$row["deadline"]."' required></div>";
             $html .= "<div><label>Change Importance Level</label><br>";
             $html .= "<select name='importance' class='spc-n' required>";
             $html .= "<option value='".$row["importance"]."' selected>".$row["importance"]."</option>";

@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="dash-grid r-cols">
+    <div class="dash-grid r-cols" id="main">
         <?php include("./components/sidebar.php");?>
         <div class="log-container">
                 <form id="notes" action="./journal-details.php" method="post">

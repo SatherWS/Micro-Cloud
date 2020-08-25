@@ -91,7 +91,9 @@ ul.topnav-list {
 .error-msg {
   color: red;
 }
-
+.success-msg {
+  color: green;
+}
 .spc-pt {
   padding-top: 2rem;
 }
@@ -302,6 +304,20 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
+/* mobile sidebar */
+.hidden-sidebar {
+  display: block!important;
+}
+.show-sidebar {
+  display: none;
+  position: fixed;
+  bottom:0;
+  margin-left: 1rem;
+}
+
+.sup-text {
+  margin-left: 10px;
+}
 .dash-grid {
   display: grid;
   grid-template-columns: 2fr 10fr;
@@ -619,6 +635,7 @@ element {
 }
 .task-panel textarea {
   font-size: 16pt;
+  width: 99%;
   height: 125px;
   border: solid #c6c6c6 1.5px;
 }
@@ -632,8 +649,12 @@ element {
   margin: 0 auto;
 }
 
+.invites {
+  padding: 1rem 0;
+}
+
 .settings-space {
-  padding-top: 2rem;
+  padding-top: 1rem;
   margin-bottom: 1rem;
 }
 

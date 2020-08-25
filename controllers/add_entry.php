@@ -91,9 +91,10 @@ if (isset($_POST["send-project"])) {
         $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
-        if ($stmnt->execute()) {
-            header("Location: ../views/dashboard.php");
-        }
+        if ($stmnt->execute()) 
+            header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_POST["teamname"]);
+        else 
+            header("Location: ../views/dashboard.php?error=Request did not send to ".$_POST["teamname"]);
     }
 }
 $curs -> close();

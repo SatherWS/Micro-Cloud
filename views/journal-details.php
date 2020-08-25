@@ -87,9 +87,6 @@
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
             while($row = mysqli_fetch_assoc($results)) {
                 echo "<div class='log-container editor'>";
-                //echo "<button class='badge'>Add Link</button>";
-                //echo "<button class='badge'>Add Table</button>";
-                //echo "<button class='badge'>Insert Media</button>";
                 echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }

@@ -7,6 +7,7 @@
 -- Generation Time: Apr 05, 2020 at 12:59 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
+
 DROP TABLE comments;
 DROP TABLE sub_tasks;
 DROP TABLE todo_list;
@@ -85,10 +86,10 @@ CREATE TABLE todo_list (
 	deadline date NOT NULL,
   task_repeat varchar(10) NULL,
 	importance varchar(10) NOT NULL,
-  assignee varchar(50) defailt "None",
+  assignee varchar(50) default "None",
   creator varchar(50) NOT NULL,
   team_name varchar(50),
-	date_created datetime DEFAULT CURRENT_TIMESTAMP,
+	date_created date DEFAULT (CURRENT_DATE),
   foreign key (creator) references users(email),
   foreign key (team_name) references teams(team_name)
 );

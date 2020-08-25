@@ -4,7 +4,6 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-
     $database = new Database();
     $curs = $database->getConnection();
     $sql = "select * from todo_list where team_name = ? order by date_created desc";
@@ -69,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="dash-grid r-cols">
+    <div class="dash-grid r-cols" id="main">
         <?php include("./components/sidebar.php");?>
         <div class="log-container">
             <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>

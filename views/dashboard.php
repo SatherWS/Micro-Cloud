@@ -143,7 +143,7 @@
             <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
-    <div class="dash-grid r-col">
+    <div class="dash-grid r-col" id="main">
         <?php include("./components/sidebar.php");?>
         <main>
             <div class="grid-container">

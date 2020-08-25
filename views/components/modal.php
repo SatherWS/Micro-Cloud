@@ -4,7 +4,6 @@
             <span class="close">&times;</span>
             <h2>Project Selector</h2>
             <p>Create a new project or search for an existing project to send an application.</p>
-            <input type="text" class="spc-n" name="teamname" placeholder="Enter the project's name" required>
             <div class="todo-flex r-cols">
                 <label class="container">Create Project
                     <input type="radio" checked="checked" name="radio" value="create">
@@ -15,6 +14,8 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
+            <input type="text" class="spc-n" name="teamname" placeholder="Enter the project's name" required>
+            <br>
             <br>
             <input type="submit" name="send-project" value="Submit">
         </div>
