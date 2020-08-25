@@ -7,7 +7,6 @@ This GitHub repository contains source code for project management software. It'
 
 ### How to run locally w/ Docker
 1. Learn how to do this soon
-2. Testing test
 
 ### How to run locally using web server emulation software
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
