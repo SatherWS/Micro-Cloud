@@ -5,9 +5,9 @@
 ## Project Details
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
-*Note: in VSCode select `push to -> origin` to push to latest_features branch*
-
-Otherwise if you simply select push a new branch called `Features2` is created for some reason.
+*Note to self (git related) 08/24/2020*
+In VSCode select `push to -> origin` to push to latest_features branch.
+Otherwise if you simply select `push` a new branch called `Features2` is created for some reason.
 
 ### How to run locally w/ Docker
 1. Learn how to do this soon
@@ -17,7 +17,7 @@ Otherwise if you simply select push a new branch called `Features2` is created f
 2. Set MYSQL system environment variable in order to use MYSQL CLI
 3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
-5. Open browser to 127.0.0.1/<repo-name>
+5. Open browser to 127.0.0.1/swoop.team
    
 ## Change Log
   * 8/24/2020 Changed date_created field to current_date instead of datetime, allows for easier editing
@@ -45,7 +45,7 @@ Otherwise if you simply select push a new branch called `Features2` is created f
 - [ ] URL Link to current page instead of dashboard after team is changed
 - [ ] Create sub tasks modal and allow sub task editing
 - [ ] Create URL input modal for embedding links in posts
-- [ ] Allow admins to accept requests to join a team
+- [X] Allow admins to accept requests to join a team
 - [ ] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
 - [ ] Implement more user options
