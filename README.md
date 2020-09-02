@@ -11,10 +11,7 @@ This GitHub repository contains source code for project management software. It'
   * 8/17/2020 Only the creator of the post is allowed to edit (duh)
   * 8/17/2020 Improved task editing UI
 
-### How to run locally w/ Docker
-1. Learn how to do this
-
-### How to run locally w/o Docker
+### How to run locally w/AMPPS
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
 2. Set MYSQL system environment variable in order to use MYSQL CLI
 3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
