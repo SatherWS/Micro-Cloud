@@ -70,6 +70,7 @@
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
     <title>Task Details</title>
@@ -115,7 +116,7 @@
                     echo $form;
                 }
             ?>
-                <h3><a href='#' class='add-btn'>
+                <h3><a href='#subModal' class='add-btn' id='myBtn'>
                     Create Sub Task <i class='fa fa-plus-circle'></i></a>
                 </h3>
             </div>

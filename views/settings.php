@@ -125,7 +125,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                 <div class="invites">
                     <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
                     <form action="../controllers/auth_user.php" method="post">
-                        <table class="data journal-tab">
+                        <table class="data settings-tab">
                         <tr class="tbl-head">
                             <th>STATUS</th>
                             <th>PROJECT</th>

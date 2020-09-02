@@ -1,6 +1,6 @@
 <?php
     function get_projects($curs) {
-        // USED IN TEAM SELECTOR SIDE BAR COMPONENT
+        // SHOW USER PROJECTS SELECTOR SIDE BAR COMPONENT
         $sql2 = "select team_name from members where email = ?";
         $stmnt2 = mysqli_prepare($curs, $sql2);
         $stmnt2->bind_param("s", $_SESSION["unq_user"]);

@@ -21,10 +21,9 @@
             $html .= "<div><label>Change Status</label><br>";
             $html .= "<select name='change-status' class='spc-n' required>";
             $html .= "<option value='".$row["status"]."' selected>".$row["status"]."</option>";
-            $html .= "<option value='COMPLETED'>COMPLETED</option>";
             $html .= "<option value='IN PROGRESS'>IN PROGRESS</option>";
-            $html .= "<option value='STUCK'>STUCK</option>";
-            $html .= "<option value='DISTRACTED'>DISTRACTED</option></select><br><br>";
+            $html .= "<option value='COMPLETED'>COMPLETED</option>";
+            $html .= "<option value='STUCK'>STUCK</option></select><br><br>";
             $html .= "<lable>Change Start Date</lable><br>";
             $html .= "<input type='date' name='start-date' class='spc-n' value='".$row["date_created"]."' required><br><br>";
             $html .= "<lable>Change Deadline</lable><br>";

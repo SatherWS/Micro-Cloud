@@ -150,7 +150,7 @@
                 <a class="dash-item" href="./create-journal.php">
                     <i class="fa fa-pencil spc-1"></i>
                     <br>
-                    <span class="sup-text">Create Post</span>
+                    <span class="sup-text">Write Document</span>
                 </a>
                 <a class="dash-item" href="./create-task.php">
                     <i class="fa fa-list-ol spc-1"></i>
@@ -182,10 +182,12 @@
                 </form>
             </div>
             <?php echo $html;?>
+            <section>
+                <!-- extra spacing -->
+                <br><br><br><br><br><br>
+            </section>
         </main>
     </div>
-
-    
     </div>
     <script>
         function panelLinkP(id) {

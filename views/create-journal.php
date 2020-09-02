@@ -29,8 +29,8 @@
     <?php include("./components/header.php");?>
     <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
         <div class="form-container">
-            <div class="todo-panel">
-                <h1>Post Writer</h1>
+            <div class="create-doc todo-panel">
+                <h1>Document Writer</h1>
                 <div class="flex-subs">
                     <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n j-title-field" required>
                     <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>

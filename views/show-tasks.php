@@ -93,8 +93,7 @@
                                 echo "<td>".$row["team_name"]."</td>";
                                 echo "<td>".$row["importance"]."</td>";
                                 echo "<td>".$row["date_created"]."</td>";
-                                echo "<td>".$row["deadline"]."</td>";
-                                echo "<td>".$row["time_due"]."</td></tr>";
+                                echo "<td>".$row["deadline"]."</td></tr>";
                             }
                         }
                     ?>
