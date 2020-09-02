@@ -2,7 +2,7 @@
     class TaskEditor {
         function create_editor($row) {
             $id = $row["id"];
-            $html = "<div class='todo-grid r-cols'>";
+            $html = "<div class='r-cols todo-grid'>";
             $html .= "<div><h2>Editing: ".$row['title']."</h2>";
             $html .= "<lable>Edit Title</lable><br>";
             $html .= "<input class='spc-n' name='title' value='".$row['title']."' required><br><br>";

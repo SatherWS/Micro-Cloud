@@ -518,8 +518,10 @@ ul {
   background: -webkit-linear-gradient(to right, #5298b7, #207b9a, #194f65);
   background: linear-gradient(to right, #5298b7, #207b9a, #194f65);
   */
-  height: 60vh;
+  height: 100vh;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../assets/images/test-landing.png);
 /* Possibly change to this gradient colors
   background: #485563;  
   background: -webkit-linear-gradient(to right, #29323c, #485563);
@@ -1291,6 +1293,9 @@ tr:hover {background-color:#f5f5f5;}
       width: 95%;
     }
     .r-cols.todo-flex{
+      display: block;
+    }
+    .r-cols.todo-grid{
       display: block;
     }
     .r-cols.cat-grid {

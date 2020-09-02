@@ -25,9 +25,9 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
-<body>
+<body class="todo-bg">
 <?php include("./components/header.php");?>
-<div class="todo-bg">
+<div>
 <!-- TODO: seperate the form from the task view -->
 <form action="../controllers/add_entry.php" method="post" class="app">
     <div class="form-container">
