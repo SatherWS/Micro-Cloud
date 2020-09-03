@@ -1,6 +1,8 @@
 <?php
 /*
 *   This controller script handles the creation of tasks and user posts.
+*   TODO: Split this script into controller modules.
+*   post_subtask.php -> 
 *   Author: Colin Sather
 */
 session_start();
@@ -16,12 +18,11 @@ if ($curs->connect_error) {
 }
 
 // create journal entry
-if ($_POST['add-journal']) {
+if (isset($_POST['add-journal'])) {
     $subject = $_POST["jsubject"];
     $category = $_POST["category"];
     $msg = $_POST["note"];
     $priv = "public";
-    
     // check if check box is posted, if true mark journal as private
     if (isset($_POST['omit'])) {
         $sql = "insert into journal(subject, message, category, creator, team_name, is_private) values (?, ?, ?, ?, ?, ?)";
@@ -67,7 +68,7 @@ function getAdmin($curs, $project) {
     $set = mysqli_fetch_assoc($result);
     return $set["admin"];
 }
-// join or create project
+// join or create project (move to auth_user?)
 if (isset($_POST["send-project"])) {
     if ($_POST["radio"] == "create") {
         $sql = "insert into teams(team_name, admin) values (?, ?)";

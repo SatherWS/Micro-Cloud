@@ -11,13 +11,21 @@
     $database = new Database();
     $curs = $database->getConnection();
 
+    // csather TODO: optimize this piece, may not be necessary to always run join command
     if (isset($_GET['task'])) {
         $id = $_GET['task'];
-        $sql = "select * from todo_list where id = ?";
+        $sql = "select todo_list.*, sub_tasks.* from todo_list inner join sub_tasks on todo_list.id=sub_tasks.task_id where todo_list.id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
+        if (mysqli_num_rows($results) == 0) {
+            $sql = "select * from todo_list where id = ?";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("s", $id);
+            $stmnt -> execute();
+            $results = $stmnt -> get_result();
+        }
         $show_editor = true;
     }
 
@@ -32,7 +40,7 @@
         $show_editor = false;
     }
 
-    if ($_POST['delete']) {
+    if (isset($_POST['delete'])) {
         $sql = "delete from todo_list where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
@@ -104,11 +112,26 @@
                         echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
                         echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
+                        if (isset($row["st_title"])) {
+                            echo "<br><h3>Sub Task: ".$row["st_title"]."</h3>";
+                            echo "<p>".$row["st_descript"]."</p>";
+                            echo "<div class='todo-flex align-initial r-cols'>";
+                            echo "<div><p><b>Status:</b> ".$row['st_status']."</p>";
+                            echo "<p><b>Start Date:</b> ".$row['st_date_created']."</p>";
+                            echo "<p><b>End Date:</b> ".$row['st_deadline']."</p></div>";
+                            echo "<div><p><b>Importance:</b> ".$row['st_importance']."</p>";
+                            echo "<p><b>Assigned To:</b> ".$row['st_assignee']."</p>";
+                            echo "<p><b>Created By:</b> ".$row['st_creator']."</p></div></div>";
+                        }
+                        echo "<h3 class='text-right'><a href='#subModal' id='myBtn'>";
+                        echo "Add Sub Task <i class='fa fa-plus-circle'></i></a>";
+                        echo "</h3>";
+
                     }
                 }
                 // Task editting view render
                 $form = "";
-                if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
+                if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
                     $form .= $editor->create_editor($row);
                     $form .= create_selector($curs, $_SESSION["team"]);
                     $form .= "</div></div>";
@@ -116,9 +139,6 @@
                     echo $form;
                 }
             ?>
-                <h3><a href='#subModal' class='add-btn' id='myBtn'>
-                    Create Sub Task <i class='fa fa-plus-circle'></i></a>
-                </h3>
             </div>
         </form>
 

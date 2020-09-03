@@ -9,8 +9,8 @@ This GitHub repository contains source code for project management software. It'
 In VSCode select `push to -> origin` to push to latest_features branch.
 Otherwise if you simply select `push` a new branch called `Features2` is created for some reason.
 
-### How to run locally w/ Docker
-1. Learn how to do this soon
+### How to run with WSL
+Using WSL is beneficial because it is a local development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
 
 ### How to run locally using web server emulation software
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
@@ -20,6 +20,7 @@ Otherwise if you simply select `push` a new branch called `Features2` is created
 5. Open browser to 127.0.0.1/swoop.team
    
 ## Change Log
+  * 9/2/2020 Implemented subtasks and set up local dev environment to match prod
   * 8/24/2020 Changed date_created field to current_date instead of datetime, allows for easier editing
   * 8/24/2020 Implemented basic side nav show/hide toggle
   * 8/24/2020 Decided only admins can permit or deny new members in their projects
@@ -35,18 +36,20 @@ Otherwise if you simply select `push` a new branch called `Features2` is created
 ### Bugs
   - [ ] Display issue: cannot accept or deny invites on mobile devices 8/23/2020
   - [ ] ' character in project names creates problems 8/23/2020
+  - [ ] After 2 subtasks are created the main task renders twice.
+    - Look into select distinct from main tasks and non distinct from subtasks.  
   
 ### Access restriction tasks
-- [ ] Restrict access for users to only view posts and tasks by their teams or themselves
+- [X] Restrict access for users to only view posts and tasks by their teams or themselves
   - [ ] Use random number references in each post/task
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name/project
 
 ### TODO (Version 2.0.0)
 - [ ] URL Link to current page instead of dashboard after team is changed
-- [ ] Create sub tasks modal and allow sub task editing
+- [ ] Allow sub task editing
 - [ ] Create URL input modal for embedding links in posts
 - [X] Allow admins to accept requests to join a team
-- [ ] Add sub tasks modal
+- [X] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
 - [ ] Implement more user options
   - [X] add user to team

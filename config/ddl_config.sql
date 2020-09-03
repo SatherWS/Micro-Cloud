@@ -81,7 +81,7 @@ CREATE TABLE comments (
 CREATE TABLE todo_list (
 	id int primary key auto_increment,
 	title varchar(75) NOT NULL,
-  description varchar(100),
+  description varchar(250),
   status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,
   task_repeat varchar(10) NULL,
@@ -96,16 +96,16 @@ CREATE TABLE todo_list (
 
 CREATE TABLE sub_tasks (
 	id int primary key auto_increment,
-	title varchar(75) NOT NULL,
-  description varchar(100),
-  status varchar(30) DEFAULT "Not Started",
-	deadline date NOT NULL,
-  task_repeat varchar(10) NULL,
-	importance varchar(10) NOT NULL,
-  assignee varchar(50),
-  creator varchar(50) NOT NULL,
-  team_name varchar(50),
+	st_title varchar(75) NOT NULL,
+  st_descript varchar(100),
+  st_status varchar(30) DEFAULT "Not Started",
+	st_deadline date NOT NULL,
+  st_task_repeat varchar(10) NULL,
+	st_importance varchar(10) NOT NULL,
+  st_assignee varchar(50),
+  st_creator varchar(50) NOT NULL,
+  st_team_name varchar(50),
   task_id int not null,
-	date_created datetime DEFAULT CURRENT_TIMESTAMP,
+	st_date_created datetime DEFAULT CURRENT_TIMESTAMP,
   foreign key (task_id) references todo_list(id)
 );

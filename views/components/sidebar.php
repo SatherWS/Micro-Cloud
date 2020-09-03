@@ -32,11 +32,11 @@
                 ?>
             </div>
             <div>
-                <h4 class="dash-btn"><a href="#myModal" id="myBtn">
+                <h4 class="dash-btn"><a href="#myModal" id="myBtn" class="spc-flex">
                     <span>Add Project</span>
                     <i class="fa fa-plus-circle"></i>
                 </a></h4>
-                <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="todo-flex">
+                <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
                     <span>Hide Projects</span>
                     <i class="fa fa-chevron-circle-left"></i>
                 </a></h4>
