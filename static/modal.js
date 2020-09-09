@@ -17,13 +17,6 @@
     modal.style.display = "none";
   }
 
-  // Close when the user clicks add attachment button
-  span.onclick = function() {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-
   // close window on click outside of modal
   window.onclick = function(event) {
     if (event.target == modal) {

@@ -67,7 +67,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
 </head>
 <body class="todo-bg-test">
 <?php include("./components/header.php");?>
-<?php include("./components/modal.php");?>
+<?php include("./components/modals/modal.php");?>
 <div class="todo-bg-test">
     <div class="svg-bg">
         <div class="todo-flex">
@@ -81,17 +81,6 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
             <div class="settings-panel">
                 <div class="settings-flex r-cols">
                     <div>
-                        <h2>User Information</h2>
-                        <?php 
-                            if (isset($_GET["error"])) {
-                                echo "<div><p>".$_GET["error"]."</p></div>";
-                            }
-                            echo "<p>Username: ".$_SESSION["user"]."</p>";
-                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                            echo "<p>Team: ".$_SESSION["team"]."</p>";
-                        ?>
-                    </div>
-                    <div>
                         <?php
                             if (isset($results)) {
                                 echo "<h2>Members of ".$_SESSION['team']."</h2>";
@@ -101,6 +90,17 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             }
                             else
                                 echo "<p>This user does not belong to a project</p>";
+                        ?>
+                    </div>
+                    <div>
+                        <h2>User Information</h2>
+                        <?php 
+                            if (isset($_GET["error"])) {
+                                echo "<div><p>".$_GET["error"]."</p></div>";
+                            }
+                            echo "<p>Username: ".$_SESSION["user"]."</p>";
+                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                            echo "<p>Team: ".$_SESSION["team"]."</p>";
                         ?>
                     </div>
                 </div>
@@ -119,36 +119,23 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                 -->
                 <?php
                     if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-                        include("./components/requests-table.php");
+                        echo "<h3>Requests to join project: ".$_SESSION["team"]."</h3>";
+                        if (invite_count($curs, $_SESSION["team"]) > 0)
+                            include("./components/requests-table.php");
+                        else
+                            echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
                     }
                 ?>
                 <div class="invites">
                     <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
-                    <form action="../controllers/auth_user.php" method="post">
-                        <table class="data settings-tab">
-                        <tr class="tbl-head">
-                            <th>STATUS</th>
-                            <th>PROJECT</th>
-                            <th>RECEIVER</th>
-                            <th>SENDER</th>
-                            <th>DATE SUBMITTED</th>
-                        </tr>
-                        <?php
+                    <?php
                         if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
-                            while ($row = mysqli_fetch_assoc($results2)) {
-                                echo "<td>".$row["status"]."</td>";
-                                echo "<td>".$row["team_name"]."</td>";
-                                echo "<td>".$row["receiver"]."</td>";
-                                echo "<td>".$row["sender"]."</td>";
-                                echo "<td>".$row["date_created"]."</td>";
-                            }
+                            include("./components/sender-table.php");
                         }
                         else {
-                            echo "<h4>No requests have been made yet...</h4>";
+                            echo "<h4 class='stng-msg'>No requests have been sent yet...</h4>";
                         }
-                        ?>
-                        </table>
-                    </form>
+                    ?>
                 </div>
                 <!-- WIP 
                 <h2>Danger Zone</h2>-->

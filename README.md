@@ -5,11 +5,7 @@
 ## Project Details
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
-*Note to self (git related) 08/24/2020*
-In VSCode select `push to -> origin` to push to latest_features branch.
-Otherwise if you simply select `push` a new branch called `Features2` is created for some reason.
-
-### How to run with WSL
+### How to run it in Windows Subsystem for Linux
 Using WSL is beneficial because it is a local development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
 
 ### How to run locally using web server emulation software
@@ -20,7 +16,8 @@ Using WSL is beneficial because it is a local development environment that is pr
 5. Open browser to 127.0.0.1/swoop.team
    
 ## Change Log
-  * 9/2/2020 Implemented subtasks and set up local dev environment to match prod
+  * 9/9/2020 Worked on standardizing the UI
+  * 9/2/2020 Implemented subtasks and set up local WSL dev environment to match prod
   * 8/24/2020 Changed date_created field to current_date instead of datetime, allows for easier editing
   * 8/24/2020 Implemented basic side nav show/hide toggle
   * 8/24/2020 Decided only admins can permit or deny new members in their projects
@@ -36,21 +33,17 @@ Using WSL is beneficial because it is a local development environment that is pr
 ### Bugs
   - [ ] Display issue: cannot accept or deny invites on mobile devices 8/23/2020
   - [ ] ' character in project names creates problems 8/23/2020
-  - [ ] After 2 subtasks are created the main task renders twice.
-    - Look into select distinct from main tasks and non distinct from subtasks.  
+  - [X] After 2 subtasks are created the main task renders twice.
+  - [ ] Cannot add assignee to tasks if initially null 
   
 ### Access restriction tasks
 - [X] Restrict access for users to only view posts and tasks by their teams or themselves
   - [ ] Use random number references in each post/task
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name/project
 
-### TODO (Version 2.0.0)
-- [ ] URL Link to current page instead of dashboard after team is changed
-- [ ] Allow sub task editing
-- [ ] Create URL input modal for embedding links in posts
-- [X] Allow admins to accept requests to join a team
-- [X] Add sub tasks modal
-- [ ] Reset forgotten passwords via email
+### TODO XX/XX/XXXX (Version 2.1.0)
+- [ ] Write cron jobs to send email alerts regarding tasks
+- [ ] Add comments to tasks and posts if not private
 - [ ] Implement more user options
   - [X] add user to team
   - [ ] remove user from team
@@ -58,11 +51,16 @@ Using WSL is beneficial because it is a local development environment that is pr
   - [ ] quit team
   - [ ] delete team
 
-### TODO (Version 2.1.0)
-- [ ] Write cron jobs to send email alerts regarding tasks
-- [ ] Add comments to tasks and posts if not private
+### TODO 09/02/2020 (Version 2.0.0)
+- [X] URL Link to current page instead of dashboard after team is changed
+- [ ] Allow sub task editing
+- [ ] Disable prompt for resubmitting the dash selector form
+- [ ] Create URL input modal for embedding links and images in posts
+- [X] Allow admins to accept requests to join a team
+- [X] Add sub tasks modal
+- [ ] Reset forgotten passwords via email
   
-### Version 1.2.1 completed tasks
+### Version 1.2.1 Completed Tasks
 - [X] Confirm before deleting task, post or user
 - [X] Create admin user options (team creator)
 - [X] Analytics range selector

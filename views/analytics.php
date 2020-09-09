@@ -93,86 +93,92 @@
 <body>
 <?php include("./components/header.php");?>
 <div class="svg-bg">
-    <form action="./analytics.php" method="POST" class="log-container">
-    <div class="todo-flex">    
-        <div class="spc-container">
-            <label>Start Date</label><br>
-            <input type="date" name="start-date" class="simple-input"><br>
-        </div>
-        <div class="todo-flex flex-end spc-container">
-            <div>
-                <label>End Date</label><br>
-                <input type="date" name="end-date" class="simple-input"> 
-            </div>
-            <div>
-                <input type="submit" value="Set Range" name="range" class="date-btn">
-            </div>
-        </div>
+    <div class="todo-flex">
+        <p class="welcome"><?php echo $_SESSION["team"];?></p>
+        <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
     </div>
-    </form>
 </div>
-<article class="main-page">
-    <!-- Gantt chart div -->
-    <div class="text-center">
+
+<div class="dash-grid r-col" id="main">
+    <?php include("./components/sidebar.php");?>
+    <article class="main-page">
+        <div class="text-center todo-flex r-col">
         <?php
             echo "<h1>".$_SESSION["team"]." Task Analytics</h1>";
             if (isset($_POST["start-date"]) || isset($_POST["end-date"]))
                 echo "<p>From ".$_POST["start-date"]." to ".$_POST["end-date"]."</p>";
             else
-                echo "<p>All tasks accounted for.</p>";
+                echo "<p>Showing All Tasks</p>";
         ?>
-    </div>
-    
-    <div id="chart_div"></div>
-
-    <!-- Pie chart data tables section -->
-    <div class="pie-box">
-        <div class="pie-data">
-            <div id="piechart"></div>
-            <br><br>
-            <div class="text-center">
-            <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-            <a href="./create-task.php" class="date-btn">Create Task</a>
+        </div>
+        <form action="./analytics.php" method="POST">
+        <div class="todo-flex">    
+            <div class="spc-container">
+                <label>Start Date</label><br>
+                <input type="date" name="start-date" class="simple-input"><br>
+            </div>
+            <div class="todo-flex flex-end spc-container">
+                <div>
+                    <label>End Date</label><br>
+                    <input type="date" name="end-date" class="simple-input"> 
+                </div>
+                <div>
+                    <input type="submit" value="Set Range" name="range" class="date-btn">
+                </div>
             </div>
         </div>
-        <div class="pie-data">
-            <h2>Task List Summary</h2>
-            <table class="data journal-tab">
-                <tr class="tbl-head">
-                    <th>Status</th>
-                    <th>Count</th>
-                </tr>
-                <?php
-                    $result2 = $obj->team_data($curs, $_SESSION["team"]);
-                    while ($row = mysqli_fetch_assoc($result2)) {
-                        echo "<tr><td>".$row["status"]."</td>";
-                        echo "<td>".$row["count(*)"]."</td></tr>";
-                    }
-                ?>
-            </table>
+        </form>
+        <!-- Gantt chart div -->
+        <div id="chart_div"></div>
+        <!-- Pie chart data tables section -->
+        <div class="pie-box">
+            <div class="pie-data">
+                <div id="piechart"></div>
+                <br><br>
+                <div class="text-center">
+                <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+                <a href="./create-task.php" class="date-btn">Create Task</a>
+                </div>
+            </div>
+            <div class="pie-data">
+                <h2>Task List Summary</h2>
+                <table class="data journal-tab">
+                    <tr class="tbl-head">
+                        <th>Status</th>
+                        <th>Count</th>
+                    </tr>
+                    <?php
+                        $result2 = $obj->team_data($curs, $_SESSION["team"]);
+                        while ($row = mysqli_fetch_assoc($result2)) {
+                            echo "<tr><td>".$row["status"]."</td>";
+                            echo "<td>".$row["count(*)"]."</td></tr>";
+                        }
+                    ?>
+                </table>
+            </div>
+            <div class="pie-data">
+                <h2>Task Summary by User</h2>
+                <table class="data journal-tab">
+                    
+                    <tr class="tbl-head">
+                        <th>Team Mate</th>
+                        <th>Staus</th>
+                        <th>Count</th>
+                    </tr>
+                    <?php
+                        $result3 = $obj->user_summaries($curs, $_SESSION["team"]);
+                        while ($row = mysqli_fetch_assoc($result3)) {
+                            echo "<tr><td>".$row["assignee"]."</td>";
+                            echo "<td>".$row["status"]."</td>";
+                            echo "<td>".$row["count(*)"]."</td></tr>";
+                        }
+                    ?>
+                </table>
+                <br><br>
+            </div>
         </div>
-        <div class="pie-data">
-            <h2>Task Summary by User</h2>
-            <table class="data journal-tab">
-                
-                <tr class="tbl-head">
-                    <th>Team Mate</th>
-                    <th>Staus</th>
-                    <th>Count</th>
-                </tr>
-                <?php
-                    $result3 = $obj->user_summaries($curs, $_SESSION["team"]);
-                    while ($row = mysqli_fetch_assoc($result3)) {
-                        echo "<tr><td>".$row["assignee"]."</td>";
-                        echo "<td>".$row["status"]."</td>";
-                        echo "<td>".$row["count(*)"]."</td></tr>";
-                    }
-                ?>
-            </table>
-            <br><br>
-        </div>
-    </div>
-</article>
+    </article>
+</div>
 
 <!-- google pie chart script =========================================-->
 <script type="text/javascript">

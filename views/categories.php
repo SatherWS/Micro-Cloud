@@ -19,7 +19,7 @@
 <body class="todo-bg">
     <?php
         include("./components/header.php");
-        //include("./components/modal.php");
+        //include("./components/modals/modal.php");
         include("../controllers/edit_entry.php");
         include_once("../config/database.php");
 

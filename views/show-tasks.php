@@ -45,33 +45,39 @@
 </head>
 <body>
     <?php include("./components/header.php");?>
-    <?php include("./components/modal.php");?>
+    <?php include("./components/modals/modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <form method="POST" class="ml2rem">
-                <select class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
-                    <option value="none" selected disabled hidden>Filter by Status</option>
-                    <option value="SHOW ALL">SHOW ALL</option>
-                    <option value="NOT STARTED">NOT STARTED</option>
-                    <option value="IN PROGRESS">IN PROGRESS</option>
-                    <option value="STUCK">STUCK</option>
-                    <option value="COMPLETED">COMPLETED</option>
-                </select>
-            </form>
-            <div class="add-btn">
-                <h3 class="mr2rem">
-                    <a href="./create-task.php">
-                        <span>Add Task</span>
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </h3>
-            </div>
+            <p class="welcome"><?php echo $_SESSION["team"];?></p>
+            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">
         <?php include("./components/sidebar.php");?>
         <div class="log-container">
-            <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
+            <div class="todo-flex">
+                <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
+                <section class="todo-flex">
+                    <form method="POST">
+                        <select class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
+                            <option value="none" selected disabled hidden>Search by Status</option>
+                            <option value="SHOW ALL">SHOW ALL</option>
+                            <option value="NOT STARTED">NOT STARTED</option>
+                            <option value="IN PROGRESS">IN PROGRESS</option>
+                            <option value="STUCK">STUCK</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                        </select>
+                    </form>
+                    <div class="add-btn">
+                        <h3>
+                            <a href="./create-task.php">
+                                <span>Add Task</span>
+                                <i class="fa fa-plus-circle"></i>
+                            </a>
+                        </h3>
+                    </div>
+                </section>
+            </div>
             <form action="../edit_entry.php" method="post" id="tasks">
                 <table class="data task-tab">
                     <tr class="tbl-head">

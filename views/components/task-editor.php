@@ -1,9 +1,9 @@
 <?php
     class TaskEditor {
-        function create_selector($curs, $team) {
+        function create_selector($row) {
             $selector = "<select name='change-assignee' class='spc-n' required>";
             $selector .= "<option value=''>None</option>";
-            $sql = "select assignee from todo_list where team_name = ?";
+            $sql = "select distinct assignee from todo_list where team_name = ?";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt->bind_param("s", $team);
             $stmnt->execute();
@@ -35,6 +35,18 @@
             $html .= "<option value='Medium'>Medium Importance</option>";
             $html .= "<option value='High'>High Importance</option></select><br><br>";
             $html .= "<input type='hidden' name='mod-task' value='$id'>";
+            $html .= "<label>Change Assignee</label><br>";
+            $html .= "<select name='change-assignee' class='spc-n' required>";
+            $html .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option>";
+            // insert team mate options here then close select tag
+
+            $html .= "</select><br><br>";
+            $html .= "<label>Change Creator</label><br>";
+            $html .= "<select name='change-creator' class='spc-n' required>";
+            $html .= "<option value='".$row["creator"]."'>".$row["creator"]."</option>";
+            // insert team mate options here then close select tag
+
+            $html .= "</select>";
             return $html;
         }
         function additionals($row) {

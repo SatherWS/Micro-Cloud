@@ -17,7 +17,7 @@ if ($curs->connect_error) {
 }
 
 if (isset($_POST["add-subtask"])) {
-    $sql = "insert into sub_tasks(st_title, st_descript, st_deadline, st_importance, st_assignee, st_creator, st_team_name, task_id) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "insert into sub_tasks(title, descript, deadline, importance, assignee, creator, team_name, task_id) values (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("ssssssss", $_POST["st-title"], $_POST["st-desc"], 
                         $_POST["end-date"], $_POST["importance"], 

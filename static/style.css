@@ -340,6 +340,13 @@ textarea {
   position:sticky;
   height: 100vh;
 }
+.fixed-content-items h3 a {
+  color: #000;
+}
+.selected a {
+  color: #4c4177!important;
+  text-decoration: underline;
+}
 .fixed-content-items {
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -388,7 +395,6 @@ main {
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  padding-top: 1rem;
   grid-gap: 10px;
   margin: 1rem 0;
 }
@@ -620,6 +626,10 @@ element {
   margin: 0 auto;
 }
 
+.uline {
+  border-bottom: solid #ddd;
+}
+
 .inner-task-panel {
   width: 80%;
   margin: 0 auto;
@@ -654,10 +664,13 @@ element {
 }
 
 /* settings section **/
+.stng-msg {
+  color: rgb(110, 110, 110);
+}
 .settings-panel {
   background: #fff;
   border-radius: 5px;
-  width: 80%;
+  width: 90%;
   padding: 1.5rem;
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
   margin: 0 auto;
@@ -743,7 +756,7 @@ element {
 }
 
 #logs-title {
-  margin-left: 2rem;
+  margin-left: 8px;
 }
 
 .mr2rem {
@@ -942,7 +955,7 @@ tr:hover {background-color:#f5f5f5;}
     border: none;
   }
   .main-page {
-    margin: 2rem;
+    margin: 0 2rem;
   }
   .avgs {
     display: flex;
@@ -1040,6 +1053,12 @@ tr:hover {background-color:#f5f5f5;}
   }
 
   /* use in chat-details.php */
+  .add-btn-2 {
+    background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+  }
   .add-btn a {
     color: #000;
     background: #fff;

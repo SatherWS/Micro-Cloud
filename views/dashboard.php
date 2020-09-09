@@ -134,7 +134,7 @@
 </head>
 <body class="todo-bg-test">
     <?php include("./components/header.php");?>
-    <?php include("./components/modal.php");?>
+    <?php include("./components/modals/modal.php");?>
 
     <div class="todo-bg-test">
     <div class="svg-bg">

@@ -14,35 +14,48 @@
     // csather TODO: optimize this piece, may not be necessary to always run join command
     if (isset($_GET['task'])) {
         $id = $_GET['task'];
-        $sql = "select todo_list.*, sub_tasks.* from todo_list inner join sub_tasks on todo_list.id=sub_tasks.task_id where todo_list.id = ?";
+        //$sql = "select todo_list.*, sub_tasks.* from todo_list right join sub_tasks on todo_list.id=sub_tasks.task_id where todo_list.id = ?";
+        $sql = "select * from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
-        if (mysqli_num_rows($results) == 0) {
-            $sql = "select * from todo_list where id = ?";
-            $stmnt = mysqli_prepare($curs, $sql);
-            $stmnt -> bind_param("s", $id);
-            $stmnt -> execute();
-            $results = $stmnt -> get_result();
-        }
         $show_editor = true;
+        $sql = "select * from sub_tasks where task_id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $id);
+        if ($stmnt -> execute())
+            $results2 = $stmnt -> get_result();
     }
 
     if (isset($_POST['edit'])) {
         $id = $_POST['edit'];
+        // edit main task
         $sql = "select *, date(date_created) from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         $row = mysqli_fetch_assoc($results);
+        // edit sub tasks
+        /*
+        $sql = "select * from sub_tasks where task_id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $id);
+        if ($stmnt -> execute()) {
+            $results = $stmnt -> get_result();
+            $row2 = $stmnt->get_result();
+        }
+        */
         $show_editor = false;
     }
 
     if (isset($_POST['delete'])) {
+        $sql = "delete from sub_tasks where task_id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt-> bind_param("s", $_POST['delete']);
+        $stmnt->execute();
         $sql = "delete from todo_list where id = ?";
-        mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST['delete']);
         $stmnt -> execute();
@@ -50,12 +63,16 @@
     }
     // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
     // Creator and assignee selector elements
-    function create_selector($curs, $team) {
+    function team_mates($curs, $team) {
         $selector = "<label>Change Assignee</label><br>";
         $selector .= "<select name='change-assignee' class='spc-n' required>";
         $selector2 = "<label>Change Creator</label><br>";
         $selector2 .= "<select name='change-creator' class='spc-n' required>";
-        $sql = "select assignee, creator from todo_list where team_name = ?";
+
+        // TODO: Set value of assignee and creator to current assignee/creator.
+        //       Let the values of the other options be each member of the team.
+
+        $sql = "select distinct assignee, creator from todo_list where team_name = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("s", $team);
         $stmnt->execute();
@@ -85,7 +102,7 @@
 </head>
 <body>
     <?php include("./components/header.php");?>
-    <?php include("./components/subtask_modal.php");?>
+    <?php include("./components/modals/subtask_modal.php");?>
     <div class="svg-bg sticky">
         <div class="todo-flex btn-spcing">    
             <?php
@@ -108,34 +125,39 @@
                         echo "<div><p><b>Status:</b> ".$row['status']."</p>";
                         echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
                         echo "<p><b>End Date:</b> ".$row['deadline']."</p></div>";
-                        
                         echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
                         echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
-                        if (isset($row["st_title"])) {
-                            echo "<br><h3>Sub Task: ".$row["st_title"]."</h3>";
-                            echo "<p>".$row["st_descript"]."</p>";
-                            echo "<div class='todo-flex align-initial r-cols'>";
-                            echo "<div><p><b>Status:</b> ".$row['st_status']."</p>";
-                            echo "<p><b>Start Date:</b> ".$row['st_date_created']."</p>";
-                            echo "<p><b>End Date:</b> ".$row['st_deadline']."</p></div>";
-                            echo "<div><p><b>Importance:</b> ".$row['st_importance']."</p>";
-                            echo "<p><b>Assigned To:</b> ".$row['st_assignee']."</p>";
-                            echo "<p><b>Created By:</b> ".$row['st_creator']."</p></div></div>";
-                        }
-                        echo "<h3 class='text-right'><a href='#subModal' id='myBtn'>";
-                        echo "Add Sub Task <i class='fa fa-plus-circle'></i></a>";
-                        echo "</h3>";
-
+                        echo "<br><h5 class='text-right'><a href='#subModal' class='add-btn-2' id='myBtn'>";
+                        echo "Add Sub Task</a>";
+                        echo "</h5>";
+                    }
+                }
+                if (isset($results2)) {
+                    while ($row = mysqli_fetch_assoc($results2)) {
+                        echo "<br><div class='uline'></div>";
+                        echo "<br><h3>Sub Task: ".$row["title"]."</h3>";
+                        echo "<p>".$row["descript"]."</p>";
+                        echo "<div class='todo-flex align-initial r-cols'>";
+                        echo "<div><p><b>Status:</b> ".$row['status']."</p>";
+                        echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
+                        echo "<p><b>End Date:</b> ".$row['deadline']."</p></div>";
+                        echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
+                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
+                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
                     }
                 }
                 // Task editting view render
                 $form = "";
                 if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
                     $form .= $editor->create_editor($row);
-                    $form .= create_selector($curs, $_SESSION["team"]);
+                    //$form .= create_selector($curs, $_SESSION["team"]);
                     $form .= "</div></div>";
                     $form .= $editor->additionals($row);
+                    /*
+                    if (isset($row2))
+                        $form .= $editor->create_editor($row2);
+                    */
                     echo $form;
                 }
             ?>

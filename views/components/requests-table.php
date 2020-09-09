@@ -1,6 +1,5 @@
 
 <div class="invites">
-    <h3>Requests to join project: <?php echo $_SESSION["team"];?></h3>
     <form action="../controllers/auth_user.php" method="post">
         <table class="data journal-tab">
         <tr class="tbl-head">

@@ -8,7 +8,7 @@
     $curs = $database->getConnection();
     
     if (isset($_GET["category"])) {
-        $sql = "select id, subject, creator, category, team_name, substring(message,1, 55) as preview, date_created from journal where category = ? and team_name = ? order by date_created desc";
+        $sql = "select id, subject, creator, category, team_name, substring(message,1, 55) as preview, date(date_created) from journal where category = ? and team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_GET["category"], $_SESSION["team"]);
         $stmnt -> execute();
@@ -16,7 +16,7 @@
         $total = mysqli_num_rows($result);
     }
     else {
-        $sql = "select id, subject, creator, team_name, category, substring(message,1, 55) as preview, date_created from journal where team_name = ? order by date_created desc";
+        $sql = "select id, subject, creator, team_name, category, substring(message,1, 55) as preview, date(date_created) from journal where team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
@@ -39,25 +39,29 @@
 </head>
 <body class="log-bg">
     <?php include("./components/header.php");?>
-    <?php include("./components/modal.php");?>
+    <?php include("./components/modals/modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <div class="review">
-                <h4 id="logs-title"><?php echo $total;?> Posts</h4>
-            </div>    
-            <div class="add-btn">
-                <h4 class="mr2rem">
-                    <a href="./create-journal.php">
-                        <span>Add Entry</span>
-                        <i class="fa fa-plus-circle"></i>
-                    </a>
-                </h4>
-            </div>
+            <p class="welcome"><?php echo $_SESSION["team"];?></p>
+            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">
         <?php include("./components/sidebar.php");?>
         <div class="log-container">
+            <div class="todo-flex">
+                <div class="review">
+                    <h4 id="logs-title"><?php echo $total;?> Posts</h4>
+                </div>    
+                <div class="add-btn">
+                    <h4>
+                        <a href="./create-journal.php">
+                            <span>Add Entry</span>
+                            <i class="fa fa-plus-circle"></i>
+                        </a>
+                    </h4>
+                </div>
+            </div>
                 <form id="notes" action="./journal-details.php" method="post">
                     <table class="data journal-tab">
                         <tr class="tbl-head">
@@ -76,7 +80,7 @@
                                 echo "<td>". $row["subject"]. "</td>";
                                 echo "<td>".strip_tags($row["preview"], '<br><b><i>'). "...</td>";
                                 echo "<td>".$row["creator"]."</td>";
-                                echo "<td>".$row["date_created"]."</td></tr>";
+                                echo "<td>".$row["date(date_created)"]."</td></tr>";
                             }
                         ?>
                     </table>
