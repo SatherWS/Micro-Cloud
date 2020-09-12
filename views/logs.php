@@ -70,7 +70,7 @@
                             <th>SUBJECT</th>
                             <th>PREVIEW</th>
                             <th>CREATOR</th>
-                            <th>DATE & TIME CREATED</th>
+                            <th>DATE CREATED</th>
                         </tr>
                         <?php
                             while($row = mysqli_fetch_assoc($result)) {

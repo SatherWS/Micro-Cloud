@@ -16,7 +16,8 @@ Using WSL is beneficial because it is a local development environment that is pr
 5. Open browser to 127.0.0.1/swoop.team
    
 ## Change Log
-  * 9/9/2020 Worked on standardizing the UI
+  * 9/11/2020 Worked on sub task section and began implementing the new landing page
+  * 9/9/2020 Worked on standardizing the UI and implement assignee selector for sub tasks
   * 9/2/2020 Implemented subtasks and set up local WSL dev environment to match prod
   * 8/24/2020 Changed date_created field to current_date instead of datetime, allows for easier editing
   * 8/24/2020 Implemented basic side nav show/hide toggle
@@ -50,15 +51,18 @@ Using WSL is beneficial because it is a local development environment that is pr
   - [ ] delete account 
   - [ ] quit team
   - [ ] delete team
+- [ ] Make it easy for user to embed links, images and more (possibly use md)
+- [ ] Disable confirmation prompt for resubmitting the dash selector form
 
 ### TODO 09/02/2020 (Version 2.0.0)
 - [X] URL Link to current page instead of dashboard after team is changed
-- [ ] Allow sub task editing
-- [ ] Disable prompt for resubmitting the dash selector form
-- [ ] Create URL input modal for embedding links and images in posts
+- [X] Allow sub task editing
+- [X] Make delete sub task button
 - [X] Allow admins to accept requests to join a team
 - [X] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
+- [ ] Implement upvote downvote system
+- [ ] Make non logged in / logged in user sidebars
   
 ### Version 1.2.1 Completed Tasks
 - [X] Confirm before deleting task, post or user
@@ -67,7 +71,7 @@ Using WSL is beneficial because it is a local development environment that is pr
 - [X] Fix bugs in invites section
 - [X] Implement join team modal checkbox
 - [X] Allow admins to accept or deny requests to join a project
-- [X] Adjust note editing textarea for mobile viewing
+- [X] Adjust note editing text area for mobile viewing
 - [X] Fix file path errors in bonus apps
 - [X] Move mood rating system to bonus apps
 - [X] Implement user authentication

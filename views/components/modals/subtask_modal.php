@@ -1,3 +1,10 @@
+<?php
+    $sql = "select email from members where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("s", $_SESSION["team"]);
+    $stmnt->execute();
+    $result = $stmnt->get_result();
+?>
 <form action="../controllers/add_subtask.php" method="post">
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -11,14 +18,12 @@
                 </option>
                 <option value="">None</option>
                 <?php
-                    /*
-                    while ($row = mysqli_fetch_assoc($results)) {
+                    while ($row = mysqli_fetch_assoc($result)) {
                         if ($row["email"] == $_SESSION["unq_user"])
                             echo "<option value='".$row["email"]."'>Self</option>";
                         else
                             echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
                     }
-                    */
                 ?>
             </select>
             <br><br>

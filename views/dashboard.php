@@ -183,8 +183,8 @@
             </div>
             <?php echo $html;?>
             <section>
-                <!-- extra spacing -->
-                <br><br><br><br><br><br>
+            <!-- extra spacing -->
+            <br><br><br><br><br><br>
             </section>
         </main>
     </div>

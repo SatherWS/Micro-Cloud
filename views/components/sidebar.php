@@ -40,7 +40,7 @@
                     <i class="fa fa-plus-circle"></i>
                 </a></h4>
                 <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
-                    <span>Hide Projects</span>
+                    <span>Hide</span>
                     <i class="fa fa-chevron-circle-left"></i>
                 </a></h4>
             </div>

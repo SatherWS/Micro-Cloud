@@ -11,10 +11,8 @@
     $database = new Database();
     $curs = $database->getConnection();
 
-    // csather TODO: optimize this piece, may not be necessary to always run join command
     if (isset($_GET['task'])) {
         $id = $_GET['task'];
-        //$sql = "select todo_list.*, sub_tasks.* from todo_list right join sub_tasks on todo_list.id=sub_tasks.task_id where todo_list.id = ?";
         $sql = "select * from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
@@ -29,24 +27,14 @@
     }
 
     if (isset($_POST['edit'])) {
-        $id = $_POST['edit'];
         // edit main task
+        $id = $_POST['edit'];
         $sql = "select *, date(date_created) from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
-        $row = mysqli_fetch_assoc($results);
-        // edit sub tasks
-        /*
-        $sql = "select * from sub_tasks where task_id = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $id);
-        if ($stmnt -> execute()) {
-            $results = $stmnt -> get_result();
-            $row2 = $stmnt->get_result();
-        }
-        */
+        $data = mysqli_fetch_assoc($results);
         $show_editor = false;
     }
 
@@ -60,6 +48,13 @@
         $stmnt -> bind_param("s", $_POST['delete']);
         $stmnt -> execute();
         header("Location: ./show-tasks.php");
+    }
+    if (isset($_POST["delete-sub"])) {
+        $sql = "delete from sub_tasks where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_POST["delete-sub"]);
+        $stmnt -> execute();
+        header("Location: ./task-details.php?task=".$_GET["task"]);
     }
     // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
     // Creator and assignee selector elements
@@ -133,27 +128,14 @@
                         echo "</h5>";
                     }
                 }
-                if (isset($results2)) {
-                    while ($row = mysqli_fetch_assoc($results2)) {
-                        echo "<br><div class='uline'></div>";
-                        echo "<br><h3>Sub Task: ".$row["title"]."</h3>";
-                        echo "<p>".$row["descript"]."</p>";
-                        echo "<div class='todo-flex align-initial r-cols'>";
-                        echo "<div><p><b>Status:</b> ".$row['status']."</p>";
-                        echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
-                        echo "<p><b>End Date:</b> ".$row['deadline']."</p></div>";
-                        echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
-                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
-                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
-                    }
-                }
+
                 // Task editting view render
                 $form = "";
                 if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
-                    $form .= $editor->create_editor($row);
+                    $form .= $editor->create_editor($data);
                     //$form .= create_selector($curs, $_SESSION["team"]);
                     $form .= "</div></div>";
-                    $form .= $editor->additionals($row);
+                    $form .= $editor->additionals($data);
                     /*
                     if (isset($row2))
                         $form .= $editor->create_editor($row2);
@@ -163,12 +145,34 @@
             ?>
             </div>
         </form>
-
+        <div class="inner-task-panel">
+        <?php
+            if (isset($results2)) {
+                while ($row2 = mysqli_fetch_assoc($results2)) {
+                    echo "<br><div class='uline'></div><br>";
+                    echo "<div class='todo-flex r-cols'>";
+                    echo "<h3>Sub Task: ".$row2["title"]."</h3>";
+                    echo "<form method='post'>";
+                    $id = $row2['id'];
+                    echo "<button class='add-btn' type='submit' name='delete-sub' value='$id'><i class='fa fa-close'></i>Delete Sub Task</button>";
+                    echo "</form></div>";
+                    echo "<p>".$row2["descript"]."</p>";
+                    echo "<div class='todo-flex align-initial r-cols'>";
+                    echo "<div><p><b>Status:</b> ".$row2['status']."</p>";
+                    echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
+                    echo "<p><b>End Date:</b> ".$row2['deadline']."</p></div>";
+                    echo "<div><p><b>Importance:</b> ".$row2['importance']."</p>";
+                    echo "<p><b>Assigned To:</b> ".$row2['assignee']."</p>";
+                    echo "<p><b>Created By:</b> ".$row2['creator']."</p></div></div>";
+                }
+            }
+        ?>
+        </div>
     </div>
     <script>
-    function triggerForm2() {
-        document.getElementById("editor2").submit();
-    }
+        function triggerForm2() {
+            document.getElementById("editor2").submit();
+        }
     </script>
     <script src="../static/main.js"></script>
     <script src="../static/modal.js"></script>

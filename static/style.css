@@ -1,17 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 /*
-* Ripped from  cousin's site
-@import url(https://fonts.googleapis.com/css?family=Poppins:lighter,normal,bold|Poppins:lighter,normal,bold);
-@import url(https://cdn2.hubspot.net/hubfs/273774/fontawesome/v5/latest.css);
-@import url(https://cdn2.hubspot.net/hubfs/273774/mp/act2/css/act21.updates.min.css);/*! * normalize.css v7.0.0 * MIT License * github.com/necolas/normalize.css * modified 
-
-body {
-  color: #2b2b2b;
-  font-family: Poppins,sans-serif;
-  line-height: 1.7;
-}
+*   index.php styles
 */
+.cta-header {
+  margin-block-start: 0!important;
+  margin-block-end: 0!important;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.preview-img {
+  width: 185px;
+}
+
+.proj-feed {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.index-spc {
+  padding: 1rem;
+}
+
+/* Up vote / Down vote controls */
+.vote-control {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr min-content;
+}
+.vote, .vote2{
+  display: inline-block;
+  overflow: hidden;
+  width: 40px;
+  height: 25px;
+  cursor: pointer;
+  background: url('http://i.stack.imgur.com/iqN2k.png');
+  background-position: 0 -25px;
+} 
+.vote2 {
+  transform: rotate(180deg);
+}
+.vote.on {
+  background-position: 0 2px;
+}
+.vote2.on {
+  background-position: 0 2px;
+}
+/* end index.php */
 .unused-selector {
   margin:100px;
 }
@@ -48,7 +84,6 @@ nav {
   -webkit-text-fill-color: transparent;
 }
 
-
 /* This style is only useful when mobile nav is clicked
 ul.topnav-list {
   margin-right: 2.2rem;
@@ -56,13 +91,14 @@ ul.topnav-list {
 */
 
 .parent-nav {
-    padding: 0 1rem;
-    background: #fff;
-    display: flex;
-    justify-content: space-between;
+  padding: 0 1rem;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
 }
+
 .app {
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 /*-------------------------------------------------------*
@@ -334,6 +370,7 @@ textarea {
 .side-bar {
   padding: 0 2rem;
   background: #fff;
+  border-right: solid #ddd;
 }
 .fixed-content {
   top: 0;
@@ -579,7 +616,7 @@ ul {
 .scroll-item {
   border-bottom: 2px solid #f1f1f1;
   padding: 1rem;
-  /*width: 400px;*/
+  width: 400px;
 }
 .scroll-item:hover {
   background: #f1f1f1;
@@ -596,10 +633,12 @@ ul {
 /* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
   background: #f1f1f1;
+  /*
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(../assets/images/test-landing.png);
+  */
 }
 
 .todo-bg-test {
@@ -616,7 +655,7 @@ element {
 .todo-panel {
   background: #fff;
   border-radius: 5px;
-  width: 60%;
+  width: 90%;
   padding: 1.5rem;
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
 }

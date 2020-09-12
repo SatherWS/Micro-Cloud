@@ -39,13 +39,11 @@
             $html .= "<select name='change-assignee' class='spc-n' required>";
             $html .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option>";
             // insert team mate options here then close select tag
-
             $html .= "</select><br><br>";
             $html .= "<label>Change Creator</label><br>";
             $html .= "<select name='change-creator' class='spc-n' required>";
             $html .= "<option value='".$row["creator"]."'>".$row["creator"]."</option>";
             // insert team mate options here then close select tag
-
             $html .= "</select>";
             return $html;
         }

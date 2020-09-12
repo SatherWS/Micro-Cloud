@@ -27,39 +27,47 @@
 <body>
     <div class="todo-bg">
     <?php include("./components/header.php");?>
-    <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
-        <div class="form-container">
-            <div class="create-doc todo-panel">
-                <h1>Document Writer</h1>
-                <div class="flex-subs">
-                    <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n j-title-field" required>
-                    <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
-                    <datalist id="categoryList">
-                    <?php
-                        if (mysqli_num_rows($result) > 0) {
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='".$row["category"]."'>";
+    <div class="svg-bg">
+        <div class="todo-flex">
+            <p class="welcome"><?php echo $_SESSION["team"];?></p>
+            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
+        </div>
+    </div>
+    <div class="dash-grid r-col" id="main">
+        <?php include("./components/sidebar.php");?>
+
+        <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
+            <div class="form-container">
+                <div class="create-doc todo-panel">
+                    <div class="flex-subs">
+                        <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n j-title-field" required>
+                        <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
+                        <datalist id="categoryList">
+                        <?php
+                            if (mysqli_num_rows($result) > 0) {
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='".$row["category"]."'>";
+                                }
                             }
-                        }
-                    ?>
-                    </datalist>
-                </div>
-                <br>
-                <textarea rows="7" placeholder="Write your post here..." name="note"></textarea>
-                <!-- TODO: change to share with all of Swoop instead of team only
-                <label class="container">
-                    <input type="checkbox" name="omit">
-                    <span class="checkmark"></span>
-                    Make Public
-                </label>
-                -->
-                <br><br>
-                <div class="sec-2">
-                    <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
+                        ?>
+                        </datalist>
+                    </div>
+                    <br>
+                    <textarea rows="7" placeholder="Write your post here..." name="note"></textarea>
+                    <!-- TODO: change to share with all of Swoop instead of team only
+                    <label class="container">
+                        <input type="checkbox" name="omit">
+                        <span class="checkmark"></span>
+                        Make Public
+                    </label>
+                    -->
+                    <br><br>
+                    <div class="sec-2">
+                        <input name="add-journal" class="spc-n spc-m" type="submit" id="form-control2">
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
     <script src="../static/main.js"></script>
 </body>

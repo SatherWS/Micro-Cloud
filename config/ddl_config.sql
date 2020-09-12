@@ -28,9 +28,18 @@ CREATE TABLE users (
 CREATE TABLE teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
+  logo varchar(200),
   admin varchar(75) not null,
   date_created datetime default current_timestamp,
   foreign key(admin) references users(email)
+);
+
+CREATE TABLE ratings (
+  id int primary key auto_increment,
+  remote_ip varchar(95) not null,
+  team_name varchar(50) not null,
+  date_submitted datetime default current_timestamp,
+  foreign key(team_name) references teams(team_name)
 );
 
 CREATE TABLE members (
@@ -85,6 +94,21 @@ CREATE TABLE todo_list (
   status varchar(30) DEFAULT "Not Started",
 	deadline date NOT NULL,
   task_repeat varchar(10) NULL,
+	importance varchar(10) NOT NULL,
+  assignee varchar(50) default "None",
+  creator varchar(50) NOT NULL,
+  team_name varchar(50),
+	date_created date DEFAULT (CURRENT_DATE),
+  foreign key (creator) references users(email),
+  foreign key (team_name) references teams(team_name)
+);
+
+CREATE TABLE sub_tasks (
+	id int primary key auto_increment,
+	title varchar(75) NOT NULL,
+  description varchar(250),
+  status varchar(30) DEFAULT "Not Started",
+	deadline date NOT NULL,
 	importance varchar(10) NOT NULL,
   assignee varchar(50) default "None",
   creator varchar(50) NOT NULL,

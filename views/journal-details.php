@@ -60,16 +60,16 @@
 <?php include("./components/header.php");?>
 <?php include("./components/modals/url_modal.php");?>
 <div class="svg-bg sticky">
-        <div class="todo-flex">
-            <?php
-                if ($show_editor)
-                    include("./components/note-headers/edit_post.php");
-                else if (!$show_editor && !$read_only)    
-                    include("./components/note-headers/save_post.php");
-                else if (!$show_editor && $read_only)
-                    echo "<h4 class='ml2rem'></h4>";
-            ?>
-        </div>    
+    <div class="todo-flex">
+        <?php
+            if ($show_editor)
+                include("./components/note-headers/edit_post.php");
+            else if (!$show_editor && !$read_only)    
+                include("./components/note-headers/save_post.php");
+            else if (!$show_editor && $read_only)
+                echo "<h4 class='ml2rem'></h4>";
+        ?>
+    </div>    
 </div>
 <form action="../controllers/edit_entry.php" method="post" id="editor">
     <?php
@@ -77,8 +77,7 @@
     // raw data is stored in lhapps database and decoded with nl2br() function
         if (isset($row)) {
             echo "<div class='log-details'>";
-            echo "<div class='detail-topper'>";
-            echo "<div><h1 class='padb'>".$row['subject']."</h1>";
+            echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
             echo "<small>Category: ".$row['category']."</small>";
@@ -95,6 +94,14 @@
         }
     ?>
 </form>
+<br>
+<form action="../controllers/add_comment.php">
+    <div class="log-details">
+        <textarea name="comment" cols="30" rows="10"></textarea>
+        <input type="submit" value="Send Comment">
+    </div>
+</form>
+
 <script>
     function triggerForm() {
         document.getElementById("editor").submit();
