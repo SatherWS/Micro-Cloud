@@ -44,7 +44,7 @@ Using WSL is beneficial because it is a local development environment that is pr
 
 ### TODO XX/XX/XXXX (Version 2.1.0)
 - [ ] Write cron jobs to send email alerts regarding tasks
-- [ ] Add comments to tasks and posts if not private
+- [ ] Add comments to tasks if not private
 - [ ] Implement more user options
   - [X] add user to team
   - [ ] remove user from team
@@ -63,6 +63,7 @@ Using WSL is beneficial because it is a local development environment that is pr
 - [ ] Reset forgotten passwords via email
 - [ ] Implement upvote downvote system
 - [ ] Make non logged in / logged in user sidebars
+- [ ] Comment module on all posts
   
 ### Version 1.2.1 Completed Tasks
 - [X] Confirm before deleting task, post or user

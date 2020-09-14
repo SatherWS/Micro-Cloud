@@ -22,7 +22,6 @@
     <div class="fixed-content">
         <div class="fixed-content-items">
             <div>
-                <h3>Project List</h3>
                 <?php
                     if (isset($_GET["error"])) 
                         echo "<p class='error-msg'><b>Error:</b> ".$_GET["error"]."</p>";
@@ -35,10 +34,15 @@
                 ?>
             </div>
             <div>
-                <h4 class="dash-btn"><a href="#myModal" id="myBtn" class="spc-flex">
-                    <span>Add Project</span>
-                    <i class="fa fa-plus-circle"></i>
-                </a></h4>
+                <?php
+                    if (isset($_SESSION["unq_user"])) {
+                        echo "<h4 class='dash-btn'><a href='#myModal' id='myBtn' class='spc-flex'>";
+                        echo "<span>Add Project</span>";
+                        echo "<i class='fa fa-plus-circle'></i>";
+                        echo "</a></h4>";
+                    }
+                ?>
+                
                 <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
                     <span>Hide</span>
                     <i class="fa fa-chevron-circle-left"></i>
@@ -49,7 +53,7 @@
 </section>
 <section class="show-sidebar" id="mini-btn">
     <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="todo-flex">
-        <span>Show Projects</span>
-        <i class="fa fa-chevron-circle-left"></i>
+        <span>Show</span>
+        <i class="fa fa-chevron-circle-right"></i>
     </a></h4>
 </section>

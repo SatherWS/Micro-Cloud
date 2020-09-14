@@ -8,8 +8,12 @@
             </li>
         </ul>
         <ul class="topnav-list">
-            <li>
-                <a href="./dashboard.php">Explore</a>
+            <li class="dropdown">
+                <a href="javascript:void(0)">Explore</a>
+                <div class="dropdown-content">
+                    <a href="./dashboard.php">Dashboard</a>
+                    <a href="../index.php">All Projects</a>
+                </div>
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Tasks</a>

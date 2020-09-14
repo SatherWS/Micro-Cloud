@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once("./config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
@@ -54,29 +55,14 @@
     <title>Swoop.Team</title>
 </head>
 <body>
-    <nav class="topnav" id="myTopnav">
-        <div class="index-nav parent-nav">
-            <ul>
-                <li>
-                    <a href="#" class="active">Swoop.Team</a>
-                    <i class="fa fa-wifi"></i>
-                </li>
-            </ul>
-            <ul class="topnav-list">
-                <li>
-                    <a href="./authentication/login.php">Login</a>
-                </li>
-                <li>
-                    <a href="./authentication/signup.php">Register</a>
-                </li>
-                <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </ul>
-        </div>
-    </nav>
+    <?php 
+        if (isset($_SESSION["unq_user"]))
+            include("./views/components/index-headers/user_nav.php");
+        else
+            include("./views/components/index-headers/nonuser_nav.php");
+    ?>
     <article class="svg-bg">
-        <h2 class="cta-header text-center">A free collaboration platform that values privacy.</h2>
+        <h2 class="cta-header ml2rem">A free project collaboration platform</h2>
     </article>
     <div class="dash-grid">
         <?php include("./views/components/sidebar.php");?>
