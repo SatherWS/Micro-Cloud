@@ -14,6 +14,7 @@ DROP TABLE todo_list;
 DROP TABLE journal;
 DROP TABLE members;
 DROP TABLE invites;
+--DROP TABLE ratings;
 DROP TABLE teams;
 DROP TABLE users;
 
@@ -28,12 +29,13 @@ CREATE TABLE users (
 CREATE TABLE teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
-  logo varchar(200),
+  rating int default 0, 
   admin varchar(75) not null,
   date_created datetime default current_timestamp,
   foreign key(admin) references users(email)
 );
 
+/*
 CREATE TABLE ratings (
   id int primary key auto_increment,
   remote_ip varchar(95) not null,
@@ -41,6 +43,7 @@ CREATE TABLE ratings (
   date_submitted datetime default current_timestamp,
   foreign key(team_name) references teams(team_name)
 );
+*/
 
 CREATE TABLE members (
   id int primary key auto_increment,

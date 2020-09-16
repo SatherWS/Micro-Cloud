@@ -25,13 +25,13 @@
 
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
-        $html .= "<form method='post'>";
+        $html .= "<form action='./controllers/join_team.php' method='post'>";
         $html .= "<div class='index-spc todo-flex r-cols'>";
         $html .= "<div><h1>".$row["team_name"]."</h1>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
         $html .= "<p>Date Created: ".$row["date_created"]."</p><br>";
-        $html .= "<h4><a href='./controllers/join_team.php' class='add-btn-2'>Join Project</a></h4></div>";
+        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></div>";
         $html .= "<div class='vote-control'>";
         $html .= "<button type='submit' name='upvote' value='$id'>";
         $html .= "  <span class='vote'> </span>";
