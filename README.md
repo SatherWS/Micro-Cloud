@@ -65,6 +65,7 @@ Using WSL is beneficial because it is a local development environment that is pr
 - [ ] Make non logged in / logged in user sidebars (In Progress 9/15)
 - [ ] Comment module on all posts
 - [ ] Create search bar in home page
+- [ ] Either drop the ratings table or rating column from teams table
   
 ### Version 1.2.1 Completed Tasks
 - [X] Confirm before deleting task, post or user
