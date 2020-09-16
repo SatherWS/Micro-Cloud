@@ -26,9 +26,8 @@
             <div class="form-container">
                 <div class="todo-panel">
                     <div class="inner-panel">
-						<div class="text-center form-intro">
-							<h1>Sign Up Form</h1>
-							<p>Account creation is free! Only one account per email address is allowed.</p>
+						<div class="text-center">
+							<h1>Join Our Community</h1>
 						</div>
                         <label>Email</label><br>
                         <input type="email" name="email" placeholder="Enter a valid email address" class="spc-n login-comp" required>

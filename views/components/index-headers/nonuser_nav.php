@@ -11,7 +11,7 @@
                 <a href="./authentication/login.php">Login</a>
             </li>
             <li>
-                <a href="./authentication/signup.php">Register</a>
+                <a href="./authentication/register.php">Register</a>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>

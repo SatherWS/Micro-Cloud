@@ -18,10 +18,10 @@
         $results = $stmnt -> get_result();
         while ($row = mysqli_fetch_assoc($results)) {
             $id = $row["id"];
-            $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
-            $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-            $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-            $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
+            $html .= "<div onclick='panelLinkTD($id)' class='activity'><h2>Task: ".$row["title"]."</h2>";
+            $html .= "<div class='todo-flex r-cols'>";
+            $html .= "<div><p><b>Posted:</b> ".$row["date_created"]."</p>";
+            $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p></div>";
             $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
             $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
@@ -84,8 +84,8 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p>";
+                $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -107,8 +107,8 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p>";
+                $html .= "<p><b>Deadline:</b>".$row["deadline"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -150,7 +150,7 @@
                 <a class="dash-item" href="./create-journal.php">
                     <i class="fa fa-pencil spc-1"></i>
                     <br>
-                    <span class="sup-text">Write Document</span>
+                    <span class="sup-text">Write Post</span>
                 </a>
                 <a class="dash-item" href="./create-task.php">
                     <i class="fa fa-list-ol spc-1"></i>

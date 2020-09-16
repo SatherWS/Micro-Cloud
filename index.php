@@ -15,7 +15,7 @@
         header("Location: ./index.php");
     }
     // TODO: Fix downvote issue and remove ratings table
-    if (isset($POST["downvote"])) {
+    if (isset($_POST["downvote"])) {
         $vote = "update teams set rating = rating - 1 where team_name = ?";
         $stmnt = mysqli_prepare($curs, $vote);
         $stmnt->bind_param("s", $_POST["downvote"]);
@@ -28,16 +28,17 @@
         $html .= "<form method='post'>";
         $html .= "<div class='index-spc todo-flex r-cols'>";
         $html .= "<div><h1>".$row["team_name"]."</h1>";
+        $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
-        $html .= "<p>Date Created: ".$row["date_created"]."</p>";
-        $html .= "<br><h4><a href='#' class='add-btn-2'>Join Project</a></h4></div>";
+        $html .= "<p>Date Created: ".$row["date_created"]."</p><br>";
+        $html .= "<h4><a href='./controllers/join_team.php' class='add-btn-2'>Join Project</a></h4></div>";
         $html .= "<div class='vote-control'>";
         $html .= "<button type='submit' name='upvote' value='$id'>";
         $html .= "  <span class='vote'> </span>";
         $html .= "</button>";
         $html .= "<p class='text-center'>".$row["rating"]."</p>";
         $html .= "<button type='submit' name='downvote' value='$id'>";
-        $html .= "<span class='vote2'> </span>";
+        $html .= "  <span class='vote2'> </span>";
         $html .= "</button></div></div>";
         $html .= "<div class='uline'></div>";
         $html .= "</form>";

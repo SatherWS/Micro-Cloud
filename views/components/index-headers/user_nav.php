@@ -37,7 +37,7 @@
                 <a href="./views/settings.php">Settings</a>
             </li>
             <li>
-                <a href="../views/controllers/logout.php">Logout</a>
+                <a href="./controllers/logout.php">Logout</a>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>

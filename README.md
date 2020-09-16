@@ -61,9 +61,10 @@ Using WSL is beneficial because it is a local development environment that is pr
 - [X] Allow admins to accept requests to join a team
 - [X] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
-- [ ] Implement upvote downvote system
-- [ ] Make non logged in / logged in user sidebars
+- [X] Implement upvote downvote system
+- [ ] Make non logged in / logged in user sidebars (In Progress 9/15)
 - [ ] Comment module on all posts
+- [ ] Create search bar in home page
   
 ### Version 1.2.1 Completed Tasks
 - [X] Confirm before deleting task, post or user

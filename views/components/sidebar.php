@@ -25,10 +25,15 @@
                 <?php
                     if (isset($_GET["error"])) 
                         echo "<p class='error-msg'><b>Error:</b> ".$_GET["error"]."</p>";
+                        
                     else if (isset($_GET["msg"])) 
                         echo "<p class='success-msg'><b>Success:</b> ".$_GET["msg"]."</p>";
-                    if (!isset($_SESSION["team"]))
+
+                    if (!isset($_SESSION["team"]) && isset($_SESSION["unq_user"]))
                         echo "<p>This user doesn't have any projects.</p>";
+
+                    else if (!isset($_SESSION["team"]) && !isset($_SESSION["unq_user"]))
+                        echo "<p>You must be logged in order to join or create projects.</p>";
                     else 
                         echo get_projects($curs);   
                 ?>
