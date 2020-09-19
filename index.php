@@ -31,7 +31,10 @@
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
         $html .= "<p>Date Created: ".$row["date_created"]."</p><br>";
-        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></div>";
+        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></div></form>";
+        
+        // vote control
+        $html .= "<form method='post'>";
         $html .= "<div class='vote-control'>";
         $html .= "<button type='submit' name='upvote' value='$id'>";
         $html .= "  <span class='vote'> </span>";

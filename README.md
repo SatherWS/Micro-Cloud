@@ -6,7 +6,7 @@
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
 ### How to run it in Windows Subsystem for Linux
-Using WSL is beneficial because it is a local development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
+Using WSL is beneficial because one can set up a local LAMP development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
 
 ### How to run locally using web server emulation software
 1. Install LAMP stack server emulator (AMPPS, MAMP, XAMPP)
@@ -33,6 +33,7 @@ error_reporting(E_ALL);
 [Range slider front end design by Brandon McConnell](https://codepen.io/brandonmcconnell/pen/oJBVQW)
    
 ## Change Log
+  * 9/18/2020 Had to re clone the code base and lost some work...
   * 9/11/2020 Worked on sub task section and began implementing the new landing page
   * 9/9/2020 Worked on standardizing the UI and implement assignee selector for sub tasks
   * 9/2/2020 Implemented subtasks and set up local WSL dev environment to match prod
@@ -49,7 +50,7 @@ error_reporting(E_ALL);
   * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
 ### Bugs
-  - [ ] Journal details doesn't display data (high)
+  - [X] Journal details doesn't display data (high)
   - [ ] Display issue: cannot accept or deny invites on mobile devices (high)
   - [ ] ' character in project names creates problems (low)
   - [X] After 2 subtasks are created the main task renders twice (high)
@@ -80,7 +81,7 @@ error_reporting(E_ALL);
 - [X] Add sub tasks modal
 - [ ] Reset forgotten passwords via email
 - [X] Implement upvote downvote system
-- [ ] Make non logged in / logged in user sidebars (In Progress 9/15)
+- [X] Make non logged in / logged in user sidebars (In Progress 9/15)
 - [ ] Comment module on all posts
 - [ ] Create search bar in home page
 - [ ] Either drop the ratings table or rating column from teams table
