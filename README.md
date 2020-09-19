@@ -14,6 +14,23 @@ Using WSL is beneficial because it is a local development environment that is pr
 3. Clone repo into /www or /htdocs `cd C://Program Files/Ampps/www/` then run `git clone <repo url>`
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
 5. Open browser to 127.0.0.1/swoop.team
+
+## CSather Notes
+Compile SASS code 
+`sass --watch infile.scss:outfile.css`
+
+Backup MYSQL Database
+`mysqldump --add-drop-table -u root -p swoop > swoop-test.sql`
+
+Enable PHP Error Messages, Do Not Use in Prod
+```
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+```
+
+### Honorable Mentions
+[Range slider front end design by Brandon McConnell](https://codepen.io/brandonmcconnell/pen/oJBVQW)
    
 ## Change Log
   * 9/11/2020 Worked on sub task section and began implementing the new landing page
@@ -32,10 +49,11 @@ Using WSL is beneficial because it is a local development environment that is pr
   * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
 ### Bugs
-  - [ ] Display issue: cannot accept or deny invites on mobile devices 8/23/2020
-  - [ ] ' character in project names creates problems 8/23/2020
-  - [X] After 2 subtasks are created the main task renders twice.
-  - [ ] Cannot add assignee to tasks if initially null 
+  - [ ] Journal details doesn't display data (high)
+  - [ ] Display issue: cannot accept or deny invites on mobile devices (high)
+  - [ ] ' character in project names creates problems (low)
+  - [X] After 2 subtasks are created the main task renders twice (high)
+  - [ ] Cannot add assignee to tasks if initially null (med)
   
 ### Access restriction tasks
 - [X] Restrict access for users to only view posts and tasks by their teams or themselves

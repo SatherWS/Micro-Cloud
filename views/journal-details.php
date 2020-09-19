@@ -58,7 +58,7 @@
 </head>
 <body>
 <?php include("./components/header.php");?>
-<?php include("./components/modals/url_modal.php");?>
+<?php //include("./components/modals/url_modal.php");?>
 <div class="svg-bg sticky">
     <div class="todo-flex">
         <?php
