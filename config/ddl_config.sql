@@ -29,10 +29,18 @@ CREATE TABLE users (
 CREATE TABLE teams (
   id int primary key auto_increment,
   team_name varchar(50) not null unique,
-  rating int default 0, 
+  rating int default 0,
+  description varchar(150), 
   admin varchar(75) not null,
   date_created datetime default current_timestamp,
   foreign key(admin) references users(email)
+);
+
+CREATE TABLE categories (
+  id int primary key auto_increment,
+  cat_name varchar(50) not null unique,
+  team_name varchar(50) not null,
+  foreign key (team_name) references teams(team_name)
 );
 
 /*
@@ -70,7 +78,8 @@ CREATE TABLE journal (
   id int(11) primary key auto_increment,
   subject varchar(45) NOT NULL,
   message varchar(10000) NOT NULL,
-  category varchar(45) NOT NULL,
+  -- move to seperate table referenced by teams table
+  --category varchar(45) NOT NULL,
   creator varchar(50) NOT NULL,
   is_public varchar(20) default "not_public" not null,
   date_created datetime DEFAULT CURRENT_TIMESTAMP,

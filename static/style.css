@@ -665,6 +665,11 @@ element {
   margin: 0 auto;
 }
 
+.img-type img {
+  width: 250px;
+  padding-bottom: 1rem;
+}
+
 .uline {
   border-bottom: solid #ddd;
 }
@@ -672,6 +677,10 @@ element {
 .inner-task-panel {
   width: 80%;
   margin: 0 auto;
+}
+
+.inner-task-panel h2 {
+  margin-block-start: 0;
 }
 
 .btn-spcing {

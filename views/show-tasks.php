@@ -6,7 +6,7 @@
     }
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select * from todo_list where team_name = ? order by date_created desc";
+    $sql = "select *,  date_format(date_created, '%m-%d-%Y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by date_created desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
@@ -14,14 +14,14 @@
     $filter = $_POST['s-status'];
 
     if (isset($_POST['s-status'])) {
-        $sql = "select * from todo_list where status = ? and team_name = ? order by date_created desc";
+        $sql = "select *,  date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where status = ? and team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['s-status'], $_SESSION["team"]);
         $stmnt -> execute();
         $result = $stmnt -> get_result();
 
         if ($_POST["s-status"] == 'SHOW ALL') {
-            $sql = "select * from todo_list where team_name = ? order by deadline desc";
+            $sql = "select *, date_format(deadline, '%m-%d-%y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where team_name = ? order by deadline desc";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $_SESSION["team"]);
             $stmnt -> execute();
@@ -81,25 +81,25 @@
             <form action="../edit_entry.php" method="post" id="tasks">
                 <table class="data task-tab">
                     <tr class="tbl-head">
+                        <th>DEADLINE</th>
                         <th>TITLE</th>
                         <th>STATUS</th>
                         <th>ASSIGNED TO</th>
-                        <th>TEAM</th>
+                        <!--<th>TEAM</th>-->
                         <th>IMPORTANCE</th>
                         <th>DATE CREATED</th>
-                        <th>DUE DATE</th>
                     </tr>
                     <?php
                         if (mysqli_num_rows($result) > 0) {
                             while($row = mysqli_fetch_assoc($result)) {
                                 $id = $row["id"];
-                                echo "<tr onclick='getTask($id)'><td>".$row["title"]."</td>";
+                                echo "<tr onclick='getTask($id)'><td>".$row["dt"]."</td>";
+                                echo "<td>".$row["title"]."</td>";
                                 echo "<td>".$row["status"]."</td>";
                                 echo "<td>".$row["assignee"]."</td>";
-                                echo "<td>".$row["team_name"]."</td>";
+                                // echo "<td>".$row["team_name"]."</td>";
                                 echo "<td>".$row["importance"]."</td>";
-                                echo "<td>".$row["date_created"]."</td>";
-                                echo "<td>".$row["deadline"]."</td></tr>";
+                                echo "<td>".$row["st"]."</td></tr>";
                             }
                         }
                     ?>

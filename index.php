@@ -26,7 +26,7 @@
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
         $html .= "<form action='./controllers/join_team.php' method='post'>";
-        $html .= "<div class='index-spc todo-flex r-cols'>";
+        $html .= "<div class='todo-flex r-cols'>";
         $html .= "<div><h1>".$row["team_name"]."</h1>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
@@ -43,8 +43,15 @@
         $html .= "<button type='submit' name='downvote' value='$id'>";
         $html .= "  <span class='vote2'> </span>";
         $html .= "</button></div></div>";
-        $html .= "<div class='uline'></div>";
         $html .= "</form>";
+
+        $html .= "<div class='settings-flex r-cols'>";
+        $html .= "<p><b>Project Tags</b></p>";
+        $html .= "<div class='img-type'>";
+        $html .= "<img src='https://38.media.tumblr.com/587f48c6548e640f943b7c8c6e3f40de/tumblr_mz8yzmi1XJ1ru39xmo1_500.gif'>";
+        $html .= "</div>";
+        $html .= "</div>";
+        $html .= "<div class='uline'></div>";
     }
 ?>
 <html lang="en">

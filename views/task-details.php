@@ -168,12 +168,16 @@
                 }
             }
         ?>
-            <p><b>Percent Completed</b></p>
-            <input type='range' value="0">
-            <div id='h4-container'><div id='h4-subcontainer'><h4>0<span></span></h4></div></div>
+	<div class="todo-flex">
+	    <div>
+	        <!--<p><b>Percent Completed</b></p>-->
+            	<input type='range' value="0">
+	        <div id='h4-container'><div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
+	    </div>
             <h5 class='text-right'>
                 <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
             </h5>
+	</div>
         </div>
     </div>
     <script>
@@ -183,6 +187,6 @@
     </script>
     <script src="../static/main.js"></script>
     <script src="../static/modal.js"></script>
-    <script src="../static/slider.js"></script>
+    <!--<script src="../static/slider.js"></script>-->
 </body>
 </html>

@@ -15,7 +15,10 @@ Using WSL is beneficial because one can set up a local LAMP development environm
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
 5. Open browser to 127.0.0.1/swoop.team
 
-## CSather Notes
+## CSather Notes 09/21/2020
+**Version 2 Deployment**
+Move post categories to project categories and include a few image classifiers.
+
 Compile SASS code 
 `sass --watch infile.scss:outfile.css`
 
@@ -29,8 +32,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ```
 
-### Honorable Mentions
+### Credits
 [Range slider front end design by Brandon McConnell](https://codepen.io/brandonmcconnell/pen/oJBVQW)
+[Coding Project Gif  by: ](https://www.google.com/url?sa=i&url=http%3A%2F%2Frebloggy.com%2Fpost%2Fgif-creative-processing-programming-coding%2F72988591119&psig=AOvVaw2wWvfehfyEIdLq4mIYBjOo&ust=1600805046300000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjD79KF--sCFQAAAAAdAAAAABAa)
    
 ## Change Log
   * 9/18/2020 Had to re clone the code base and lost some work...
@@ -50,6 +54,7 @@ error_reporting(E_ALL);
   * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
 ### Bugs
+  - [ ] Index hide button screws up the view (high)
   - [X] Journal details doesn't display data (high)
   - [ ] Display issue: cannot accept or deny invites on mobile devices (high)
   - [ ] ' character in project names creates problems (low)
@@ -61,7 +66,8 @@ error_reporting(E_ALL);
   - [ ] Use random number references in each post/task
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name/project
 
-### TODO XX/XX/XXXX (Version 2.1.0)
+### TODO (Version 2.1.0)
+- [ ] Make usernames unique to prevent email spamming
 - [ ] Write cron jobs to send email alerts regarding tasks
 - [ ] Add comments to tasks if not private
 - [ ] Implement more user options
@@ -73,7 +79,7 @@ error_reporting(E_ALL);
 - [ ] Make it easy for user to embed links, images and more (possibly use md)
 - [ ] Disable confirmation prompt for resubmitting the dash selector form
 
-### TODO 09/02/2020 (Version 2.0.0)
+### TODO (Version 2.0.0)
 - [X] URL Link to current page instead of dashboard after team is changed
 - [X] Allow sub task editing
 - [X] Make delete sub task button
@@ -86,7 +92,7 @@ error_reporting(E_ALL);
 - [ ] Create search bar in home page
 - [ ] Either drop the ratings table or rating column from teams table
   
-### Version 1.2.1 Completed Tasks
+### TODO Version 1.2.1
 - [X] Confirm before deleting task, post or user
 - [X] Create admin user options (team creator)
 - [X] Analytics range selector
