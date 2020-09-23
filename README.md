@@ -54,7 +54,7 @@ error_reporting(E_ALL);
   * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
 ### Bugs
-  - [ ] Index hide button screws up the view (high)
+  - [X] Index hide button screws up the view (high)
   - [X] Journal details doesn't display data (high)
   - [ ] Display issue: cannot accept or deny invites on mobile devices (high)
   - [ ] ' character in project names creates problems (low)
@@ -76,7 +76,7 @@ error_reporting(E_ALL);
   - [ ] delete account 
   - [ ] quit team
   - [ ] delete team
-- [ ] Make it easy for user to embed links, images and more (possibly use md)
+- [ ] Make it easier for user to embed links, images and more (possibly use md)
 - [ ] Disable confirmation prompt for resubmitting the dash selector form
 
 ### TODO (Version 2.0.0)
@@ -90,7 +90,7 @@ error_reporting(E_ALL);
 - [X] Make non logged in / logged in user sidebars (In Progress 9/15)
 - [ ] Comment module on all posts
 - [ ] Create search bar in home page
-- [ ] Either drop the ratings table or rating column from teams table
+- [X] Either drop the ratings table or rating column from teams table
   
 ### TODO Version 1.2.1
 - [X] Confirm before deleting task, post or user

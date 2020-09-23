@@ -33,9 +33,11 @@
     else {
         // format data from gantt model
         while ($row = mysqli_fetch_assoc($data)) {
+            $m1 = $row["month(date_created)"] - 1;
+            $m2 = $row["month(deadline)"] -1;
             $js .= "['".$row["id"]."','".$row["title"]."','".$row["status"]."',";
-            $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$row["month(date_created)"].",".$row["day(date_created)"]."),";
-            $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$row["month(deadline)"].",".$row["day(deadline)"]."),";
+            $js .= "new Date(".$row["date_format(date_created, '%Y')"].",".$m1.",".$row["day(date_created)"]."),";
+            $js .= "new Date(".$row["date_format(deadline, '%Y')"].",".$m2.",".$row["day(deadline)"]."),";
             $js .= "null, null, null],";
         }
     }

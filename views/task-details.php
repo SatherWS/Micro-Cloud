@@ -147,6 +147,16 @@
             </div>
         </form>
         <div class="inner-task-panel">
+            <div class="todo-flex r-cols">
+                <div>
+                    <!--<p><b>Percent Completed</b></p>-->
+                    <input type='range' value="0">
+                    <div id='h4-container'>Percent Complete: <div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
+                </div>
+                <h5>
+                    <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
+                </h5>
+            </div>
         <?php
             if (isset($results2)) {
                 while ($row2 = mysqli_fetch_assoc($results2)) {
@@ -160,7 +170,7 @@
                     echo "<p>".$row2["descript"]."</p>";
                     echo "<div class='todo-flex align-initial r-cols'>";
                     echo "<div><p><b>Status:</b> ".$row2['status']."</p>";
-                    echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
+                    echo "<p><b>Start Date:</b> ".$row2['date_created']."</p>";
                     echo "<p><b>End Date:</b> ".$row2['deadline']."</p></div>";
                     echo "<div><p><b>Importance:</b> ".$row2['importance']."</p>";
                     echo "<p><b>Assigned To:</b> ".$row2['assignee']."</p>";
@@ -168,17 +178,6 @@
                 }
             }
         ?>
-	<div class="todo-flex">
-	    <div>
-	        <!--<p><b>Percent Completed</b></p>-->
-            	<input type='range' value="0">
-	        <div id='h4-container'><div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
-	    </div>
-            <h5 class='text-right'>
-                <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
-            </h5>
-	</div>
-        </div>
     </div>
     <script>
         function triggerForm2() {

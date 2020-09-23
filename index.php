@@ -26,7 +26,7 @@
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
         $html .= "<form action='./controllers/join_team.php' method='post'>";
-        $html .= "<div class='todo-flex r-cols'>";
+        $html .= "<div class='todo-flex'>";
         $html .= "<div><h1>".$row["team_name"]."</h1>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
@@ -59,6 +59,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/style.css">
+    <link rel="stylesheet" href="./static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./favicon.png">
@@ -67,6 +68,7 @@
 </head>
 <body>
     <?php 
+        include("./views/components/modals/modal.php");
         if (isset($_SESSION["unq_user"]))
             include("./views/components/index-headers/user_nav.php");
         else
@@ -75,7 +77,7 @@
     <article class="svg-bg">
         <h2 class="cta-header ml2rem">A free project collaboration platform</h2>
     </article>
-    <div class="dash-grid">
+    <div class="dash-grid r-col" id="main">
         <?php include("./views/components/sidebar.php");?>
         <section class="proj-feed">
             <?php echo $html;?>
@@ -83,6 +85,7 @@
     </div>
 
     <script src="./static/main.js"></script>
+    <script src="./static/modal.js"></script>
     <script>
         for (const btn of document.querySelectorAll('.vote')) {
             btn.addEventListener('click', event => {

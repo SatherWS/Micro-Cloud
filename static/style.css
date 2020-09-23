@@ -441,9 +441,6 @@ main {
   margin: 1rem 3rem;
   padding: 0 1rem;
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
 }
 
@@ -666,7 +663,7 @@ element {
 }
 
 .img-type img {
-  width: 250px;
+  width: 130px;
   padding-bottom: 1rem;
 }
 
@@ -690,7 +687,7 @@ element {
 .task-panel {
   font-size: 16pt;
   background: #fff;
-  padding: 1.5rem;
+  padding: 1rem 2rem;
 }
 
 .task-panel select {
@@ -1317,7 +1314,13 @@ tr:hover {background-color:#f5f5f5;}
       display: block;
     }
     .task-panel {
+      /*
       width: 80%;
+      */
+      margin: 0;
+    }
+    .inner-task-panel {
+      margin: 0;
     }
     /*
     .opt-desc {
@@ -1451,7 +1454,7 @@ tr:hover {background-color:#f5f5f5;}
     
     .dropdown-content {
       top: 10px;
-      right: 162px;
+      right: 140px;
       min-height: 255px;
     }
     /* Notes Section & Task list */

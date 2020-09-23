@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Database: swoop_team
+-- Database: swoop
 -- Generation Time: Apr 05, 2020 at 12:59 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
@@ -14,7 +14,6 @@ DROP TABLE todo_list;
 DROP TABLE journal;
 DROP TABLE members;
 DROP TABLE invites;
---DROP TABLE ratings;
 DROP TABLE teams;
 DROP TABLE users;
 
@@ -36,22 +35,12 @@ CREATE TABLE teams (
   foreign key(admin) references users(email)
 );
 
-CREATE TABLE categories (
+CREATE TABLE team_categories (
   id int primary key auto_increment,
   cat_name varchar(50) not null unique,
   team_name varchar(50) not null,
   foreign key (team_name) references teams(team_name)
 );
-
-/*
-CREATE TABLE ratings (
-  id int primary key auto_increment,
-  remote_ip varchar(95) not null,
-  team_name varchar(50) not null,
-  date_submitted datetime default current_timestamp,
-  foreign key(team_name) references teams(team_name)
-);
-*/
 
 CREATE TABLE members (
   id int primary key auto_increment,

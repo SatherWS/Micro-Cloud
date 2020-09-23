@@ -13,6 +13,7 @@
                 <div class="dropdown-content">
                     <a href="./dashboard.php">Dashboard</a>
                     <a href="../index.php">All Projects</a>
+                    <a href="../authentication/categories.php">Temp Tags</a>
                 </div>
             </li>
             <li class="dropdown">
