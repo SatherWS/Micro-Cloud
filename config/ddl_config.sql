@@ -35,7 +35,7 @@ CREATE TABLE teams (
   foreign key(admin) references users(email)
 );
 
-CREATE TABLE team_categories (
+CREATE TABLE categories (
   id int primary key auto_increment,
   cat_name varchar(50) not null unique,
   team_name varchar(50) not null,

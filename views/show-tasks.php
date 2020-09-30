@@ -6,7 +6,7 @@
     }
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select *,  date_format(date_created, '%m-%d-%Y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by date_created desc";
+    $sql = "select *,  date_format(date_created, '%m-%d-%y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by date_created desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
@@ -21,7 +21,7 @@
         $result = $stmnt -> get_result();
 
         if ($_POST["s-status"] == 'SHOW ALL') {
-            $sql = "select *, date_format(deadline, '%m-%d-%y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where team_name = ? order by deadline desc";
+            $sql = "select *, date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where team_name = ? order by deadline desc";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $_SESSION["team"]);
             $stmnt -> execute();
@@ -85,8 +85,7 @@
                         <th>TITLE</th>
                         <th>STATUS</th>
                         <th>ASSIGNED TO</th>
-                        <!--<th>TEAM</th>-->
-                        <th>IMPORTANCE</th>
+                        <th class="text-center">IMPORTANCE</th>
                         <th>DATE CREATED</th>
                     </tr>
                     <?php
@@ -97,8 +96,7 @@
                                 echo "<td>".$row["title"]."</td>";
                                 echo "<td>".$row["status"]."</td>";
                                 echo "<td>".$row["assignee"]."</td>";
-                                // echo "<td>".$row["team_name"]."</td>";
-                                echo "<td>".$row["importance"]."</td>";
+                                echo "<td class='text-center'>".$row["importance"]."</td>";
                                 echo "<td>".$row["st"]."</td></tr>";
                             }
                         }

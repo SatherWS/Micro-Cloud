@@ -25,13 +25,11 @@
 
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
-        $html .= "<form action='./controllers/join_team.php' method='post'>";
         $html .= "<div class='todo-flex'>";
         $html .= "<div><h1>".$row["team_name"]."</h1>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
-        $html .= "<p>Date Created: ".$row["date_created"]."</p><br>";
-        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></div></form>";
+        $html .= "<p>Date Created: ".$row["date_created"]."</p><br></div>";
         
         // vote control
         $html .= "<form method='post'>";
@@ -46,10 +44,13 @@
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols'>";
+        
         $html .= "<p><b>Project Tags</b></p>";
-        $html .= "<div class='img-type'>";
-        $html .= "<img src='https://38.media.tumblr.com/587f48c6548e640f943b7c8c6e3f40de/tumblr_mz8yzmi1XJ1ru39xmo1_500.gif'>";
-        $html .= "</div>";
+        $html .= "<form action='./controllers/join_team.php' method='post'>";
+        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></form>";
+        //$html .= "<div class='img-type'>";
+        //$html .= "<img src='https://38.media.tumblr.com/587f48c6548e640f943b7c8c6e3f40de/tumblr_mz8yzmi1XJ1ru39xmo1_500.gif'>";
+        //$html .= "</div>";
         $html .= "</div>";
         $html .= "<div class='uline'></div>";
     }
@@ -75,11 +76,15 @@
             include("./views/components/index-headers/nonuser_nav.php");
     ?>
     <article class="svg-bg">
-        <h2 class="cta-header ml2rem">A free project collaboration platform</h2>
+        <div class="srch-section">
+            <input type="text" placeholder="Search all projects" class="search-field">
+            <input type="submit" value="Search" class="add-btn">
+        </div>
     </article>
     <div class="dash-grid r-col" id="main">
         <?php include("./views/components/sidebar.php");?>
         <section class="proj-feed">
+
             <?php echo $html;?>
         </section>
     </div>

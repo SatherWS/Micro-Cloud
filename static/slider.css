@@ -42,7 +42,6 @@ input[type="range"] {
 #h4-container {
   width: 400px;
   max-width: 100%;
-  padding: 0 20px;
   box-sizing: border-box;
   position: relative; }
   #h4-container #h4-subcontainer {

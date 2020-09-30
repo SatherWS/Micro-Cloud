@@ -3,6 +3,27 @@
 /*
 *   index.php styles
 */
+.srch-section {
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 2px -2px rgba(0,0,0,.2);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  padding-bottom: 10px;
+}
+.search-field {
+  margin-top: 10px;
+  border: solid 1px rgb(122, 122, 122);
+  width: 100%;
+  padding: 10px;
+}
+.search-field:focus {
+  outline: none;
+}
+input.add-btn {
+  height: 38px;
+  margin-top: 10px;
+}
 .cta-header {
   margin-block-start: 0!important;
   margin-block-end: 0!important;
@@ -109,8 +130,9 @@ ul.topnav-list {
   opacity: 1;
 }
 .main-selector {
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
   border: none;
+  border: solid #ddd 2px;
   padding: .5rem 1rem;
   border-radius: 8px;
   font-size: 14pt;
@@ -312,11 +334,13 @@ textarea {
 .svg-bg {
   display: block;
   background-color: #000000;
-  color: #fff;
   background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
-  /* new is below */
+  background-repeat: no-repeat;
+  background-image: linear-gradient(90deg, rgba(174,238,219,1) 0%, rgba(43,211,235,1) 100%);
   background-color: #4c4177;
   background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+  color:#fff
+
 }
 
 .sticky {
@@ -409,6 +433,7 @@ textarea {
   color: #000;
   text-decoration: none;
   font-weight: bold;
+  border: solid #ddd 2px;
 }
 
 main {
@@ -439,7 +464,7 @@ main {
 .cat-panel {
   background: #fff;
   margin: 1rem 3rem;
-  padding: 0 1rem;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
 }
@@ -457,7 +482,7 @@ main {
   align-items: center;
   border-radius: 8px;
   background-repeat: no-repeat;
-  box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);
+  /*box-shadow: 3px 5px 5px -2px rgba(0,0,0,.2);*/
   background: #fff;
 }
 .grid-container a:hover {
@@ -467,10 +492,11 @@ main {
 }
 .activity {
   background: #fff;
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
   border-radius: 8px;
   padding: 1rem;
   margin-top: 10px;
+  border: solid #ddd 2px;
 }
 .activity:hover {
   box-shadow: 0px 0px 7px 2px rgba(43,211,235,1);
@@ -1109,7 +1135,8 @@ tr:hover {background-color:#f5f5f5;}
     background: #fff;
     border-radius: 8px;
     padding: .5rem 1rem;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+    border: solid #ddd 2px;
+    /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
   }
   .dash-btn {
     color: #000;
@@ -1233,6 +1260,9 @@ tr:hover {background-color:#f5f5f5;}
   /* Responsive Tables */
   @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px)  {
+    .scroll-item {
+      width: 250px;
+    }
     /* dashboard adjustments */
     main {
       width: auto;

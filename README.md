@@ -23,7 +23,7 @@ Compile SASS code
 `sass --watch infile.scss:outfile.css`
 
 Backup MYSQL Database
-`mysqldump --add-drop-table -u root -p swoop > swoop-test.sql`
+`mysqldump --add-drop-table -u root -p swoop > swoop-pi-version.sql`
 
 Enable PHP Error Messages, Do Not Use in Prod
 ```

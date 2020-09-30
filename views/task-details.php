@@ -147,11 +147,11 @@
             </div>
         </form>
         <div class="inner-task-panel">
-            <div class="todo-flex r-cols">
+            <div class="todo-flex r-cols" id="subranger">
                 <div>
                     <!--<p><b>Percent Completed</b></p>-->
+                    <div id='h4-container'><b>Percent Complete:</b> <div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
                     <input type='range' value="0">
-                    <div id='h4-container'>Percent Complete: <div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
                 </div>
                 <h5>
                     <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
@@ -182,6 +182,9 @@
     <script>
         function triggerForm2() {
             document.getElementById("editor2").submit();
+        }
+        function hideSubRanger() {
+            document.getElementById("subranger").style.display = "none";
         }
     </script>
     <script src="../static/main.js"></script>

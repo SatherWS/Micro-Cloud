@@ -33,7 +33,7 @@
     ?>
     <form method="post">
         <div class="cat-panel">
-            <h2>Categories Created by: <?php echo $_SESSION["team"];?></h2>
+            <h2 class="text-center">Categories Created by: <?php echo $_SESSION["team"];?></h2>
             <!--
             <div>
                 <a href="" class="date-btn">File View</a>
