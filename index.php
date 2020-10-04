@@ -75,7 +75,8 @@
         else
             include("./views/components/index-headers/nonuser_nav.php");
     ?>
-    <article class="svg-bg">
+    <article class="svg-bg todo-flex r-cols">
+	<h2 class="ml2rem">A free project collaboration platform.</h2>
         <div class="srch-section">
             <input type="text" placeholder="Search all projects" class="search-field">
             <input type="submit" value="Search" class="add-btn">

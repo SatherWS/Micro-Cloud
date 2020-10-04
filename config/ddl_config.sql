@@ -35,7 +35,7 @@ CREATE TABLE teams (
   foreign key(admin) references users(email)
 );
 
-CREATE TABLE categories (
+ACREATE TABLE categories (
   id int primary key auto_increment,
   cat_name varchar(50) not null unique,
   team_name varchar(50) not null,
@@ -92,7 +92,7 @@ CREATE TABLE todo_list (
 	id int primary key auto_increment,
 	title varchar(75) NOT NULL,
   description varchar(250),
-  status varchar(30) DEFAULT "Not Started",
+  status varchar(30) DEFAULT "NOT STARTED",
 	deadline date NOT NULL,
   task_repeat varchar(10) NULL,
 	importance varchar(10) NOT NULL,
