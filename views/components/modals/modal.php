@@ -5,11 +5,11 @@
             <h2>Create or Join a Project</h2>
             <p>Create a new project with a unique name or search for an existing project to send an application to the project admin.</p>
             <div class="todo-flex r-cols">
-                <label class="container">Create Project
+                <label class="container" onclick="validateTextarea()">Create Project
                     <input type="radio" checked="checked" name="radio" value="create" class="pro-op">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container" onclick="disableTextarea()">Join Project
+                <label class="container" onclick="validateTextarea()">Join Project
                     <input type="radio" name="radio" value="join" class="pro-op">
                     <span class="checkmark"></span>
                 </label>
@@ -25,13 +25,12 @@
     </div>
 </form>
 <script>
-function disableTextarea() {
+function validateTextarea() {
     var x = document.getElementById("txt-area");
-    if (x.value == "")
-    x.style.display = "None";
-    /*
-    x.disabled = true;
-    x.placeholder = "This input is disabled";
-    */
+    var y = document.getElementsByName("radio");
+    if (y[0].checked)
+        x.style.display = "block";
+    else if (y[1].checked)
+        x.style.display = "None";
 }
 </script>
