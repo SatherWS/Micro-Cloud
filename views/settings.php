@@ -77,6 +77,8 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
     </div>
     <div class="dash-grid r-cols" id="main">
         <?php include("./components/sidebar.php");?>
+	<div>
+	<h2 class="ml2rem mbs10">Team Member Settings</h2>
         <div class="settings-space">
             <div class="settings-panel">
                 <div class="settings-flex r-cols">
@@ -141,6 +143,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                 <h2>Danger Zone</h2>-->
             </div>
         </div>
+	</div>
     </div>
 </div>
 <script src="../static/main.js"></script>

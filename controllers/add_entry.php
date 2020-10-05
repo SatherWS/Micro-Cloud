@@ -19,11 +19,11 @@ if ($curs->connect_error) {
 
 // create journal entry
 if (isset($_POST['add-journal'])) {
-    $subject = $_POST["jsubject"];
-    $category = $_POST["category"];
-    $msg = $_POST["note"];
-    $priv = "public";
-    // check if check box is posted, if true mark journal as private
+    //$category = $_POST["category"];
+    //$priv = "public";
+
+    // check if check box is posted, if true mark journal as private (Not in use)
+    /*
     if (isset($_POST['omit'])) {
         $sql = "insert into journal(subject, message, category, creator, team_name, is_private) values (?, ?, ?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -31,13 +31,17 @@ if (isset($_POST['add-journal'])) {
         $stmnt -> execute();
     }
     else {
-        // set journal to public
-        $sql = "insert into journal(subject, message, category, creator, team_name) values (?, ?, ?, ?, ?)";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("sssss", $subject, $msg, $category, $_SESSION["unq_user"], $_SESSION["team"]);
-        $stmnt -> execute();
+	// set journal to public
     }
-    header("Location: ../views/logs.php");        
+    */
+    $subject = $_POST["jsubject"];
+    $msg = $_POST["note"];
+
+    $sql = "insert into journal(subject, message, creator, team_name) values (?, ?, ?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("ssss", $subject, $msg, $_SESSION["unq_user"], $_SESSION["team"]);
+    $stmnt -> execute();
+    header("Location: ../views/logs.php");
 }
 
 // add task to todo list
@@ -80,7 +84,10 @@ if (isset($_POST["send-project"])) {
             $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
             if ($stmnt->execute()) {
                 $_SESSION["team"] = $_POST["teamname"];
-                header("Location: ../views/dashboard.php");
+                //header("Location: ../views/dashboard.php");
+
+                // TODO: send created project name to categories and add entry to categories table
+                header("Location: ../views/categories.php");
             }
         }
         else {
@@ -92,8 +99,9 @@ if (isset($_POST["send-project"])) {
         $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
-        if ($stmnt->execute()) 
+        if ($stmnt->execute()) {
             header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_POST["teamname"]);
+        }
         else 
             header("Location: ../views/dashboard.php?error=Request did not send to ".$_POST["teamname"]);
     }

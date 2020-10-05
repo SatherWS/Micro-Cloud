@@ -172,6 +172,10 @@ textarea {
   justify-content: space-around;
 }
 
+#new-form-control {
+  width: 97%;
+}
+
 #form-control {
   width: 50%;
 }
@@ -737,6 +741,9 @@ element {
 }
 
 /* settings section **/
+.mbs10 {
+  margin-block-start: 10px;
+}
 .stng-msg {
   color: rgb(110, 110, 110);
 }

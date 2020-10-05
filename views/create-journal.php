@@ -3,6 +3,7 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
+    /*
     include_once("../config/database.php");
     $database = new Database();
     $curs = $database->getConnection();
@@ -11,6 +12,7 @@
     $stmnt->bind_param("s", $_SESSION["team"]);
     $stmnt->execute();
     $result = $stmnt->get_result();
+   */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,20 +41,25 @@
         <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
             <div class="form-container">
                 <div class="create-doc todo-panel">
+
+                   <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="new-form-control" class="spc-n j-title-field" required>
+		    <!--
                     <div class="flex-subs">
-                        <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="form-control" class="spc-n j-title-field" required>
                         <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
                         <datalist id="categoryList">
                         <?php
+			/*
                             if (mysqli_num_rows($result) > 0) {
                                 while($row = mysqli_fetch_assoc($result)) {
                                     echo "<option value='".$row["category"]."'>";
                                 }
                             }
+			*/
                         ?>
                         </datalist>
                     </div>
-                    <br>
+		    -->
+                    <br><br>
                     <textarea rows="7" placeholder="Write your post here..." name="note"></textarea>
                     <!-- TODO: change to share with all of Swoop instead of team only
                     <label class="container">
