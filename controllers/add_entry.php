@@ -75,19 +75,17 @@ function getAdmin($curs, $project) {
 // join or create project (move to auth_user?)
 if (isset($_POST["send-project"])) {
     if ($_POST["radio"] == "create") {
-        $sql = "insert into teams(team_name, admin) values (?, ?)";
+        $sql = "insert into teams(team_name, description, admin) values (?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+        $stmnt->bind_param("sss", $_POST["teamname"], $_POST["description"], $_SESSION["unq_user"]);
         if ($stmnt->execute()) {
             $sql = "insert into members(team_name, email) values (?, ?)";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
             if ($stmnt->execute()) {
                 $_SESSION["team"] = $_POST["teamname"];
-                //header("Location: ../views/dashboard.php");
-
                 // TODO: send created project name to categories and add entry to categories table
-                header("Location: ../views/categories.php");
+                header("Location: ../authentication/categories.php");
             }
         }
         else {

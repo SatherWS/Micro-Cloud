@@ -1,9 +1,9 @@
-CREATE PROCEDURE yourinsert (vseri VARCHAR(8), vklasor INT)
+-- Use a stored proc to delete projects 
+CREATE PROCEDURE delete_project (proj VARCHAR(8), vklasor INT)
 BEGIN
- DECLARE i INT;
- SELECT COUNT(*) INTO i FROM yourtable WHERE seri=vseri AND klasor=vklasor;
-
- IF i=0 THEN
-  INSERT INTO yourtable (seri,klasor) VALUES (vseri, vklasor);
- END IF;
+    DELETE FROM journal WHERE team_name = proj;
+    DELETE FROM sub_tasks WHERE team_name = proj;
+    DELETE FROM todo_list WHERE team_name = proj;
+    DELETE FROM members WHERE team_name = proj;
+    DELETE FROM teams WHERE team_name = proj;
 END;

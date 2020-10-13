@@ -20,8 +20,8 @@
             $id = $row["id"];
             $html .= "<div onclick='panelLinkTD($id)' class='activity'><h2>Task: ".$row["title"]."</h2>";
             $html .= "<div class='todo-flex r-cols'>";
-            $html .= "<div><p><b>Posted:</b> ".$row["date_created"]."</p>";
-            $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p></div>";
+            $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p>";
+            $html .= "<div><p><b>Posted:</b> ".$row["date_created"]."</p></div>";
             $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
             $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
             $html .= "<div class='todo-flex r-cols'>";
@@ -84,8 +84,8 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p>";
-                $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p></div>";
+                $html .= "<p><b>Deadline:</b> ".$row["deadline"]."</p>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -107,8 +107,8 @@
                 $id = $row["id"];
                 $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
                 $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p>";
-                $html .= "<p><b>Deadline:</b>".$row["deadline"]."</p></div>";
+                $html .= "<p><b>Deadline:</b>".$row["deadline"]."</p>";
+                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
                 $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
                 $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
                 $html .= "<div class='todo-flex r-cols'>";
@@ -169,7 +169,7 @@
                 </a>
             </div>
             <div class="todo-flex r-cols">
-                <h1 class="intro-header">Project Activity</h1>
+                <h1 class="intro-header">Project Wiki Page</h1>
                 <form method="POST">
                     <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
                         <option value="none" selected disabled hi   dden>Activity Filter</option>

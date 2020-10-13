@@ -3,7 +3,7 @@
     include_once("./config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
-    $sql = "select * from teams";
+    $sql = "select * from teams order by date_created desc";
     $result = mysqli_query($curs, $sql);
     $html = "";
 
@@ -26,7 +26,8 @@
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
         $html .= "<div class='todo-flex'>";
-        $html .= "<div><h1>".$row["team_name"]."</h1>";
+        $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
+        $html .= "<p>".$row["description"]."</p>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p>";
         $html .= "<p>Date Created: ".$row["date_created"]."</p><br></div>";
@@ -105,6 +106,29 @@
                 event.target.classList.toggle('on');
             });
         }
+    </script>
+    <script>
+    // copy pasta from w3schools customize for h1 tags inside div#proj-container
+    function myFunction() 
+    {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("mySearch");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myMenu");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) 
+        {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) 
+            {
+                li[i].style.display = "";
+            } 
+            else 
+            {
+                li[i].style.display = "none";
+            }
+        }
+    }
     </script>
 </body>
 </html>

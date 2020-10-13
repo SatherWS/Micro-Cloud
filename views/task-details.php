@@ -127,6 +127,7 @@
                         echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
                         echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
+                        echo "<br><a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>";
                     }
                 }
 
@@ -147,16 +148,17 @@
             </div>
         </form>
         <div class="inner-task-panel">
+            <!--
             <div class="todo-flex r-cols" id="subranger">
                 <div>
-                    <!--<p><b>Percent Completed</b></p>-->
-                    <div id='h4-container'><b>Percent Complete:</b> <div id='h4-subcontainer'><!--<h4>0<span></span></h4>--></div></div>
+                    <div id='h4-container'><b>Percent Complete:</b> <div id='h4-subcontainer'></div></div>
                     <input type='range' value="0">
                 </div>
                 <h5>
                     <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
                 </h5>
             </div>
+            -->
         <?php
             if (isset($results2)) {
                 while ($row2 = mysqli_fetch_assoc($results2)) {

@@ -11,9 +11,9 @@
   padding-bottom: 10px;
 }
 .search-field {
-  margin-top: 10px;
+  margin-block-start: 1em;
   border: solid 1px rgb(122, 122, 122);
-  width: 100%;
+  width: 450px;
   padding: 10px;
 }
 .search-field:focus {
@@ -24,7 +24,7 @@
 }
 input.add-btn {
   height: 38px;
-  margin-top: 10px;
+  margin-block-start: 1em;
 }
 .cta-header {
   margin-block-start: 0!important;
@@ -377,6 +377,16 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
+#txt-area {
+  height: 130px;
+  width: 97%;
+  border: solid #c6c6c6 1.5px;
+}
+#pounds {
+  height: 130px;
+  width: 97%;
+  border: solid #c6c6c6 1.5px;
+}
 /* mobile sidebar */
 .hidden-sidebar {
   display: block!important;
@@ -939,10 +949,9 @@ button {
 /* Categories Section *************************/
 .cat-grid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
-  margin: 2rem 3rem;
-  text-align: center;
+  margin: 2rem 0;
 }
 
 .cat-grid div {
@@ -1029,158 +1038,158 @@ tr:hover {background-color:#f5f5f5;}
     Analytics Section                 |
   -----------------------------------*/
 /*********************************************************/
-  .simple-input {
-    padding: 7.7px;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-    border: none;
-  }
-  .main-page {
-    margin: 0 2rem;
-  }
-  .avgs {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 1rem;
-  }
+.simple-input {
+  padding: 7.7px;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  border: none;
+}
+.main-page {
+  margin: 0 2rem;
+}
+.avgs {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+}
 
-  .date-btn {
-    background: #333;
-    color: #fff;
-    padding: 6px;
-    border: none;
-    height: 36px;
-  }
+.date-btn {
+  background: #333;
+  color: #fff;
+  padding: 6px;
+  border: none;
+  height: 36px;
+}
 
-  .spacer {
-    width: 600px;
-  }
+.spacer {
+  width: 600px;
+}
 
-  .pie-box {
-    display: grid;
-    grid-auto-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 10px
-  }
+.pie-box {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px
+}
 
-  #piechart {
-    width: 100%; 
-    /*min-height: 450px;*/
-    display: block;
-    margin: 0 auto
-  }
-  .pie-data {
-    background: #fff;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-top: 10px;
-  }
-  
-  /* ---------------------------------+
-    Chatroom Section                  |
-  -----------------------------------*/
-  .fixed-bottom {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 2rem;
-    background: #f1f1f1;
-    margin-bottom: 0;
-  }
+#piechart {
+  width: 100%; 
+  /*min-height: 450px;*/
+  display: block;
+  margin: 0 auto
+}
+.pie-data {
+  background: #fff;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 10px;
+}
 
-  .form-control {
-    width: 80%;
-    padding: 1rem;
-    border: none;
-  }
+/* ---------------------------------+
+  Chatroom Section                  |
+-----------------------------------*/
+.fixed-bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 2rem;
+  background: #f1f1f1;
+  margin-bottom: 0;
+}
 
-  /* ---------------------------------+
-    Voting App Section (REMOVE)       |
-  -----------------------------------*/
-  .feature-panel {
-    margin: 1rem 0;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    background-image: 
-    linear-gradient(
-      to bottom,
-      rgba(0, 199, 255, 0.68), rgba(0, 199, 255, 0.68)),
-      url(../imgs/test3.jpg);
-    background-position-y: -180px;
-  }
-  
-  .vote-btn {
-    font-weight: bold;
-    border: solid #000 2px;
-    border-radius: 10px;
-    padding: 10px;
-  }
+.form-control {
+  width: 80%;
+  padding: 1rem;
+  border: none;
+}
 
-  .feature-btns {
-    text-align: right;
-  }
+/* ---------------------------------+
+  Voting App Section (REMOVE)       |
+-----------------------------------*/
+.feature-panel {
+  margin: 1rem 0;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  background-image: 
+  linear-gradient(
+    to bottom,
+    rgba(0, 199, 255, 0.68), rgba(0, 199, 255, 0.68)),
+    url(../imgs/test3.jpg);
+  background-position-y: -180px;
+}
 
-  .feature-btns input {
-    margin-top:1rem;
-    padding: .5rem 1rem;
-    width: 150px;
-  }
-  .rad-5 {
-    border-radius: 5px;
-  }
+.vote-btn {
+  font-weight: bold;
+  border: solid #000 2px;
+  border-radius: 10px;
+  padding: 10px;
+}
 
-  /* use in chat-details.php */
-  .add-btn-2 {
-    background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
-    color: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-  }
-  .add-btn a {
-    color: #000;
-    background: #fff;
-    border-radius: 8px;
-    padding: .5rem 1rem;
-    border: solid #ddd 2px;
-    /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
-  }
-  .dash-btn {
-    color: #000;
-    background: #fff;
-    border-radius: 8px;
-    width: 80%;
-    padding: .5rem 1rem;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-  }
-  .spc-flex {
-    display: flex;
-    justify-content: space-between;
-  }
+.feature-btns {
+  text-align: right;
+}
 
-  button.add-btn {
-    color: #000;
-    background: #fff;
-    border-radius: 8px;
-    padding: .5rem 1rem;
-    margin: 10px 0;
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-  }
+.feature-btns input {
+  margin-top:1rem;
+  padding: .5rem 1rem;
+  width: 150px;
+}
+.rad-5 {
+  border-radius: 5px;
+}
 
-  .polls-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-  }
-  #polls-title {
-    margin-block-start: 0!important;
-    margin-block-end: 0em!important;
-  }
-  .poll-topic {
-    text-align: center;
-  }
+/* use in chat-details.php */
+.add-btn-2 {
+  background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.add-btn a {
+  color: #000;
+  background: #fff;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  border: solid #ddd 2px;
+  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
+}
+.dash-btn {
+  color: #000;
+  background: #fff;
+  border-radius: 8px;
+  width: 80%;
+  padding: .5rem 1rem;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+}
+.spc-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+button.add-btn {
+  color: #000;
+  background: #fff;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  margin: 10px 0;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+}
+
+.polls-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+#polls-title {
+  margin-block-start: 0!important;
+  margin-block-end: 0em!important;
+}
+.poll-topic {
+  text-align: center;
+}
 
 /* ---------------------------------+
   Responsive Section                |

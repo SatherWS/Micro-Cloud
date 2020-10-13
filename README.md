@@ -5,7 +5,7 @@
 ## Project Details
 This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
 
-### How to run it in Windows Subsystem for Linux
+### How to run ST in Windows Subsystem for Linux
 Using WSL is beneficial because one can set up a local LAMP development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
 
 ### How to run locally using web server emulation software
@@ -15,22 +15,9 @@ Using WSL is beneficial because one can set up a local LAMP development environm
 4. In MYSQL shell run `source /path/to/repo/config/ddl_config.sql` to create the database schema
 5. Open browser to 127.0.0.1/swoop.team
 
-## CSather Notes 09/21/2020
-**Version 2 Deployment**
-Move post categories to project categories and include a few image classifiers.
-
-Compile SASS code 
-`sass --watch infile.scss:outfile.css`
-
-Backup MYSQL Database
-`mysqldump --add-drop-table -u root -p swoop > swoop-pi-version.sql`
-
-Enable PHP Error Messages, Do Not Use in Prod
-```
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-```
+### Other Documents
+[TODO List and Bugs](./docs/todo.md)
+[Misc. Notes](./notes/notes.md)
 
 ### Credits
 [Range slider front end design by Brandon McConnell](https://codepen.io/brandonmcconnell/pen/oJBVQW)
@@ -53,71 +40,3 @@ error_reporting(E_ALL);
   * 8/16/2020 Fixed user invites
   * 8/16/2020 Almost implemented public and private post editing (re-plan approach)
 
-### Bugs
-  - [X] Index hide button screws up the view (high)
-  - [X] Journal details doesn't display data (high)
-  - [ ] Display issue: cannot accept or deny invites on mobile devices (high)
-  - [ ] ' character in project names creates problems (low)
-  - [X] After 2 subtasks are created the main task renders twice (high)
-  - [ ] Cannot add assignee to tasks if initially null (med)
-  
-### Access restriction tasks
-- [X] Restrict access for users to only view posts and tasks by their teams or themselves
-  - [ ] Use random number references in each post/task
-  - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name/project
-
-### TODO (Version 2.1.0)
-- [ ] Make usernames unique to prevent email spamming
-- [ ] Write cron jobs to send email alerts regarding tasks
-- [ ] Add comments to tasks if not private
-- [ ] Implement more user options
-  - [X] add user to team
-  - [ ] remove user from team
-  - [ ] delete account 
-  - [ ] quit team
-  - [ ] delete team
-- [ ] Make it easier for user to embed links, images and more (possibly use md)
-- [ ] Disable confirmation prompt for resubmitting the dash selector form
-
-### TODO (Version 2.0.0)
-- [X] URL Link to current page instead of dashboard after team is changed
-- [X] Allow sub task editing
-- [X] Make delete sub task button
-- [X] Allow admins to accept requests to join a team
-- [X] Add sub tasks modal
-- [ ] Reset forgotten passwords via email
-- [X] Implement upvote downvote system
-- [X] Make non logged in / logged in user sidebars (In Progress 9/15)
-- [ ] Comment module on all posts
-- [ ] Create search bar in home page
-- [X] Either drop the ratings table or rating column from teams table
-  
-### TODO Version 1.2.1
-- [X] Confirm before deleting task, post or user
-- [X] Create admin user options (team creator)
-- [X] Analytics range selector
-- [X] Fix bugs in invites section
-- [X] Implement join team modal checkbox
-- [X] Allow admins to accept or deny requests to join a project
-- [X] Adjust note editing text area for mobile viewing
-- [X] Fix file path errors in bonus apps
-- [X] Move mood rating system to bonus apps
-- [X] Implement user authentication
-- [X] Integrate data into gantt chart 
-- [X] Improve analytics UI
-- [X] Remove repeat task option
-- [X] Change index.php to dashboard.php
-- [X] Fix drop down hover nav
-- [X] Implement user teams
-- [X] Assign tasks to users
-- [X] Remove bonus apps and shared_drives.php, and upload scripts
-- [X] Design landing page (mobirise)
-- [X] Create authentication dir change login and signup to php scripts
-- [X] Login error messages
-- [X] Signup error messages (team dne, team cannot be created, user already exists)
-- [X] Fix bug: only able to post when private checkbox is clicked
-- [X] Fix bug: journal category creates a new team (really bad)
-- [X] Fix bug: minor display issue when posts are selected in dashboard
-- [X] Improve dashboard and create task UI on mobile
-- [X] Make activity items clickable in dash
-  

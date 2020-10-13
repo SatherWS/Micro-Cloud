@@ -20,6 +20,8 @@
             <textarea name="description" id="txt-area" placeholder="Enter a description of the project."></textarea>
             <br>
             <br>
+            <textarea name="tags" id="pounds" placeholder="Categorize your project by adding related #tags."></textarea>
+            <br><br>
             <input type="submit" name="send-project" value="Submit">
         </div>
     </div>
@@ -28,9 +30,14 @@
 function validateTextarea() {
     var x = document.getElementById("txt-area");
     var y = document.getElementsByName("radio");
-    if (y[0].checked)
+    var z = document.getElementById("pounds");
+    if (y[0].checked) {
         x.style.display = "block";
-    else if (y[1].checked)
+        z.style.display = "block";
+    }
+    else if (y[1].checked) {
         x.style.display = "None";
+        z.style.display = "None";
+    }
 }
 </script>

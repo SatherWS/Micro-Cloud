@@ -3,10 +3,10 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    /*
     include_once("../config/database.php");
     $database = new Database();
     $curs = $database->getConnection();
+    /*
     $sql = "select distinct category from journal where category is not null and team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("s", $_SESSION["team"]);

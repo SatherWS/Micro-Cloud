@@ -6,7 +6,7 @@
     }
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select *,  date_format(date_created, '%m-%d-%y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by date_created desc";
+    $sql = "select *,  date_format(date_created, '%m-%d-%y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by deadline desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
@@ -14,7 +14,7 @@
     $filter = $_POST['s-status'];
 
     if (isset($_POST['s-status'])) {
-        $sql = "select *,  date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where status = ? and team_name = ? order by date_created desc";
+        $sql = "select *,  date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where status = ? and team_name = ? order by deadline desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['s-status'], $_SESSION["team"]);
         $stmnt -> execute();
