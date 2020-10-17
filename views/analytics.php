@@ -16,7 +16,7 @@
 
     // data for gantt chart w/ range
     if ($_POST["range"]) {
-        $sql = "select id, title, status, date_format(date_created, '%Y'), month(date_created), day(date_created), date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where (date_created between ? and ?) and team_name = ?";
+        $sql = "select id, title, status, date_format(date_created, '%Y'), month(date_created), day(date_created), date_format(deadline, '%Y'), month(deadline), day(deadline) from todo_list where (date_created between ? and ?) and team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("sss", $_POST["start-date"], $_POST["end-date"], $_SESSION["team"]);
         $stmnt -> execute();

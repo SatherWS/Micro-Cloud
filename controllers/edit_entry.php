@@ -12,12 +12,12 @@ if ($curs->connect_error) {
 */
 
 if (isset($_POST['edit'])) {
-    $sql = "update journal set message = ? where id = ?";
+    $sql = "update journal set message = ?, subject = ? where id = ?";
     mysqli_query($curs, $sql);
     $stmnt = mysqli_prepare($curs, $sql);
     //$journal_edit = str_replace("\'" , "'", $journal_edit);
     $journal_edit = $_POST['edited'];
-    $stmnt -> bind_param("ss", $journal_edit, $_POST['edit']);
+    $stmnt -> bind_param("sss", $journal_edit, $_POST['jsubs'], $_POST['edit']);
     $stmnt -> execute();
     header("Location: ../views/journal-details.php?journal=".$_POST['edit']);
 }

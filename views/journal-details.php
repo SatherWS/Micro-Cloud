@@ -80,7 +80,6 @@
             echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
-            echo "<small>Category: ".$row['category']."</small>";
             echo "<p class='message-p'>".nl2br($row['message'])."</p>";
             echo "</div>";
         }
@@ -88,6 +87,7 @@
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
             while($row = mysqli_fetch_assoc($results)) {
                 echo "<div class='log-container editor'>";
+		echo "<input type='text' value='".$row["subject"]."' name='jsubs'><br>";
                 echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }

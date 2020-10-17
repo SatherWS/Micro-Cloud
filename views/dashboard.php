@@ -10,6 +10,7 @@
 
     // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
     // select all tasks by team
+    /*
     if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
         $sql = "select * from todo_list where team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -117,6 +118,7 @@
             }
         }
     }
+    */
     // TODO: MOVE ABOVE TO MODELS SINCE ITS DATA RELATED
 ?>
 <!DOCTYPE html>
@@ -181,7 +183,8 @@
                     </select>
                 </form>
             </div>
-            <?php echo $html;?>
+            <?php //echo $html;
+	    ?>
             <section>
             <!-- extra spacing -->
             <br><br><br><br><br><br>
