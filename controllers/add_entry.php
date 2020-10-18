@@ -2,7 +2,6 @@
 /*
 *   This controller script handles the creation of tasks and user posts.
 *   TODO: Split this script into controller modules.
-*   post_subtask.php -> 
 *   Author: Colin Sather
 */
 session_start();

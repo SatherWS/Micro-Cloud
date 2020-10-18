@@ -75,7 +75,8 @@
     <?php
     // display journal entry in plain text or inside a textarea
     // raw data is stored in lhapps database and decoded with nl2br() function
-        if (isset($row)) {
+        if (isset($row)) 
+        {
             echo "<div class='log-details'>";
             echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
@@ -84,16 +85,19 @@
             echo "</div>";
         }
 
-        if ($_POST['edit'] && mysqli_num_rows($results) > 0) {
-            while($row = mysqli_fetch_assoc($results)) {
+        if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
+        {
+            while($row = mysqli_fetch_assoc($results)) 
+            {
                 echo "<div class='log-container editor'>";
-		echo "<input type='text' value='".$row["subject"]."' name='jsubs'><br>";
+		        echo "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
                 echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
         }
     ?>
 </form>
+<!--
 <br>
 <form action="../controllers/add_comment.php">
     <div class="log-details">
@@ -101,7 +105,7 @@
         <input type="submit" value="Send Comment">
     </div>
 </form>
-
+-->
 <script>
     function triggerForm() {
         document.getElementById("editor").submit();

@@ -35,7 +35,15 @@ CREATE TABLE teams (
   foreign key(admin) references users(email)
 );
 
-ACREATE TABLE categories (
+CREATE TABLE wikis (
+  id int primary key auto_increment,
+  content varchar(10000),
+  team_name varchar(50) not null,
+  last_edited datetime default current_timestamp,
+  foreign key(team_name) references teams(team_name)
+);
+
+CREATE TABLE categories (
   id int primary key auto_increment,
   cat_name varchar(50) not null unique,
   team_name varchar(50) not null,

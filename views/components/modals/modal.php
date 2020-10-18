@@ -26,18 +26,3 @@
         </div>
     </div>
 </form>
-<script>
-function validateTextarea() {
-    var x = document.getElementById("txt-area");
-    var y = document.getElementsByName("radio");
-    var z = document.getElementById("pounds");
-    if (y[0].checked) {
-        x.style.display = "block";
-        z.style.display = "block";
-    }
-    else if (y[1].checked) {
-        x.style.display = "None";
-        z.style.display = "None";
-    }
-}
-</script>

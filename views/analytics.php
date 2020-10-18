@@ -79,7 +79,8 @@
       ]);
 
       var options = {
-        height: 400,
+	// set height of gantt chart
+        height: 1000,
         gantt: {
           trackHeight: 50,
           barHeight: 35,

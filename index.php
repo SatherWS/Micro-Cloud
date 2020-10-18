@@ -88,7 +88,6 @@
     <div class="dash-grid r-col" id="main">
         <?php include("./views/components/sidebar.php");?>
         <section class="proj-feed">
-
             <?php echo $html;?>
         </section>
     </div>
@@ -96,7 +95,8 @@
     <script src="./static/main.js"></script>
     <script src="./static/modal.js"></script>
     <script>
-        for (const btn of document.querySelectorAll('.vote')) {
+        for (const btn of document.querySelectorAll('.vote')) 
+        {
             btn.addEventListener('click', event => {
                 event.target.classList.toggle('on');
             });

@@ -230,6 +230,15 @@ textarea {
 /*-------------------------------------------------------*
 * JOURNAL SECTION                                        |
 *-------------------------------------------------------*/
+.edit-subs {
+    width: 98.5%;
+    background: #fff;
+    box-shadow: 0px 0px 18px 7px rgba(0,0,0,.2);
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    border: solid 1px #333;
+    font-size: 16pt;
+}
 
 .cat-list {
   margin-left: 1rem;
@@ -312,7 +321,7 @@ textarea {
   background-color: #2196F3;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
+/* Create the checkmark indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
@@ -324,7 +333,7 @@ textarea {
   display: block;
 }
 
-/* Style the checkmark/indicator */
+/* Style the checkmark indicator */
 .container .checkmark:after {
   left: 9px;
   top: 5px;
@@ -377,6 +386,9 @@ textarea {
 /*-------------------------------------------------------*
 * DASHBOARD SECTION                                      |
 *-------------------------------------------------------*/
+#save-btn {
+  display: none;
+}
 #txt-area {
   height: 130px;
   width: 97%;
@@ -979,6 +991,9 @@ button {
 .fa-save:before {
   padding-right: 8px;
 }
+.fa-file-o:before {
+	padding-right: 8px;
+}
 .fa-link:before {
   padding-right: 8px;
 }
@@ -1162,7 +1177,8 @@ tr:hover {background-color:#f5f5f5;}
   border-radius: 8px;
   width: 80%;
   padding: .5rem 1rem;
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+	border: solid #ddd 2px;
+ /* box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
 }
 .spc-flex {
   display: flex;
@@ -1385,6 +1401,7 @@ button.add-btn {
       padding: 0 1rem;
       text-align: left;
     }
+
     .edit-field {
       margin-top: .5rem;
     }
