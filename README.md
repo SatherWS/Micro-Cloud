@@ -3,7 +3,7 @@
 </p>
 
 ## Project Details
-This GitHub repository contains source code for project management software. It's a intranet web application to be used for task delegation, task management, general note taking and more. This project is currently a work in progress, in the future this site may be publicly hosted.
+This GitHub repository contains source code for project management software. Swoop.Team is a web based project management tool that is able to perform task delegation, task management and wiki page development. The live version of this site is currently running version 1.1.0 version 2.0 will be released soon.
 
 ### How to run ST in Windows Subsystem for Linux
 Using WSL is beneficial because one can set up a local LAMP development environment that is practically identical to the production environment. [Read more about this WSL configuration here.](https://syllasource.com/wsl-lamp-stack-for-local-development.html)
@@ -16,14 +16,12 @@ Using WSL is beneficial because one can set up a local LAMP development environm
 5. Open browser to 127.0.0.1/swoop.team
 
 ### Other Documents
-[TODO List and Bugs](./docs/todo.md)
-[Misc. Notes](./notes/notes.md)
+  * [TODO List and Bugs](./docs/todo.md)
+  * [Misc. Notes](./notes/notes.md)
 
 ### Credits
-[Range slider front end design by Brandon McConnell](https://codepen.io/brandonmcconnell/pen/oJBVQW)
-[Coding Project Gif  by: ](https://www.google.com/url?sa=i&url=http%3A%2F%2Frebloggy.com%2Fpost%2Fgif-creative-processing-programming-coding%2F72988591119&psig=AOvVaw2wWvfehfyEIdLq4mIYBjOo&ust=1600805046300000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKjD79KF--sCFQAAAAAdAAAAABAa)
    
-## Change Log
+## Change Log (rewrite/delete this)
   * 9/18/2020 Had to re clone the code base and lost some work...
   * 9/11/2020 Worked on sub task section and began implementing the new landing page
   * 9/9/2020 Worked on standardizing the UI and implement assignee selector for sub tasks
