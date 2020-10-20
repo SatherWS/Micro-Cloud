@@ -12,28 +12,27 @@
   - [ ] Check if $_SESSION["unq_user"] is in post/task's team_name/project
 
 ### TODO (Version 2.1.0)
+- [ ] Reset forgotten passwords via email
 - [ ] Make usernames unique to prevent email spamming
 - [ ] Write cron jobs to send email alerts regarding tasks
-- [ ] Add comments to tasks if not private
 - [ ] Make it easier for user to embed links, images and more
 - [ ] Activate and implement task percentage slider
 - [ ] Comment module on all posts
 - [ ] Implement more user options
   - [X] add user to team
   - [ ] remove user from team
-  - [ ] delete account 
+  - [ ] delete account (WIP)
   - [ ] quit team
-  - [ ] delete team
+  - [ ] delete team (WIP)
 
 
 ### TODO (Version 2.0.0)
-My goal is to deploy this version by 10/14/2020
+My goal is to deploy this version soon.
 
-- [ ] Implement search bar
-- [ ] Implement hashtags
-- [ ] Remove post categories page and dashboard selector
+- [ ] Implement search bar (create separate page w/ search result. UI tab toggles results to tags, projects or users)
+- [ ] Implement hashtags (in progress)
+- [ ] Remove post categories page and dashboard selector (in progress)
 - [ ] Implement wiki page editor in the dashboard
-- [ ] Reset forgotten passwords via email
 - [X] Disable task percentage slider
 - [X] URL Link to current page instead of dashboard after team is changed
 - [X] Allow sub task editing

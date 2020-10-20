@@ -36,13 +36,11 @@
         </div>
     </div>
     <div class="dash-grid r-col" id="main">
-        <?php include("./components/sidebar.php");?>
-
         <form action="../controllers/add_entry.php" method="post" class="app"  id="post-journal">
             <div class="form-container">
                 <div class="create-doc todo-panel">
 
-                   <input type="text" name="jsubject" placeholder="Type Subject of Entry" id="new-form-control" class="spc-n j-title-field" required>
+                   <input type="text" name="jsubject" placeholder="Type the subject of your post here" id="new-form-control" class="spc-n j-title-field" required>
 		    <!--
                     <div class="flex-subs">
                         <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
@@ -75,6 +73,7 @@
                 </div>
             </div>
         </form>
+        <?php include("./components/sidebar.php");?>
     </div>
     <script src="../static/main.js"></script>
 </body>

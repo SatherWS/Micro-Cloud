@@ -416,13 +416,13 @@ textarea {
 }
 .dash-grid {
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 10fr 2fr;
   height: 100vh;
 }
 .side-bar {
   padding: 0 2rem;
   background: #fff;
-  border-right: solid #ddd;
+  border-left: solid #ddd;
 }
 .fixed-content {
   top: 0;

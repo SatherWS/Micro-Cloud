@@ -53,7 +53,6 @@
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">
-        <?php include("./components/sidebar.php");?>
         <div class="log-container">
             <div class="todo-flex">
                 <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
@@ -104,6 +103,7 @@
                 </table>
             </form>
         </div>        
+        <?php include("./components/sidebar.php");?>
     </div>
     <script>
         function getTask(id) {

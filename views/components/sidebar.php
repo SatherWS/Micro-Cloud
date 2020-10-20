@@ -50,7 +50,7 @@
                 
                 <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
                     <span>Hide</span>
-                    <i class="fa fa-chevron-circle-left"></i>
+                    <i class="fa fa-chevron-circle-right"></i>
                 </a></h4>
             </div>
         </div>

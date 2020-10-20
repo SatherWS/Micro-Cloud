@@ -36,7 +36,6 @@
     </div>
 </div>
 <div class="dash-grid r-col" id="main">
-    <?php include("./components/sidebar.php");?>
     <form action="../controllers/add_entry.php" method="post" class="app">
         <div class="form-container">
             <div class="todo-panel">
@@ -93,6 +92,7 @@
             </div>
         </div>
     </form>
+    <?php include("./components/sidebar.php");?>
 </div>
 <script src="../static/main.js"></script>
 <script>

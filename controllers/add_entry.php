@@ -53,7 +53,8 @@ if (isset($_POST['add-task'])) {
 }
 
 // helper functions for create/join projects
-function projectCheck($curs, $project) {
+function projectCheck($curs, $project) 
+{
     $sql = "select team_name from teams where team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("s", $project);
@@ -62,7 +63,9 @@ function projectCheck($curs, $project) {
     else
         return false;
 }
-function getAdmin($curs, $project) {
+
+function getAdmin($curs, $project) 
+{
     $sql = "select admin from teams where team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt->bind_param("s", $project);
@@ -71,21 +74,67 @@ function getAdmin($curs, $project) {
     $set = mysqli_fetch_assoc($result);
     return $set["admin"];
 }
+
+function associateMember($curs, $team, $user)
+{
+    $sql = "insert into members(team_name, email) values (?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    //$stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
+    $stmnt->bind_param("ss", $team, $user);
+    if ($stmnt->execute())
+        return true;
+    else
+        return false;
+}
+
+function addTags($curs, $team, $category)
+{
+    $sql = "insert into categories cat_name, team_name values (?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("ss", $category, $team_name);
+    $stmnt -> execute();
+}
+
 // join or create project (move to auth_user?)
-if (isset($_POST["send-project"])) {
-    if ($_POST["radio"] == "create") {
+if (isset($_POST["send-project"])) 
+{
+    if ($_POST["radio"] == "create") 
+    {
         $sql = "insert into teams(team_name, description, admin) values (?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("sss", $_POST["teamname"], $_POST["description"], $_SESSION["unq_user"]);
-        if ($stmnt->execute()) {
+        if ($stmnt->execute()) 
+        {
+            associateMember($curs, $_POST["teamname"], $_SESSION["unq_user"]);
+            $_SESSION["team"] = $_POST["teamname"];
+            if (isset($_POST["tags"])) 
+            {
+                // check if char 0 starts with # for every string in the textarea
+                $tags = explode(" ", $_POST["tags"]);
+                foreach ($tags as $t) 
+                {
+                    if (substr($t, 0, 1) == "#")
+                        echo $t."<br>";
+                    else
+                        echo $t." is not a valid #tag<br>";
+                }
+                
+            }
+            //header("Location: ../index.php");
+            
+            
+            // below this line is the code before associate member was created 
+            /*
             $sql = "insert into members(team_name, email) values (?, ?)";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
-            if ($stmnt->execute()) {
+            if ($stmnt->execute()) 
+            {
                 $_SESSION["team"] = $_POST["teamname"];
-                // TODO: send created project name to categories and add entry to categories table
-                header("Location: ../authentication/categories.php");
+                //header("Location: ../index.php");
+                // keep above commented header
             }
+            */
         }
         else {
             header("Location: ../views/dashboard.php?error=unable to add user to project");

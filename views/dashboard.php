@@ -52,7 +52,6 @@
             </div>
         </div>
         <div class="dash-grid r-col" id="main">
-            <?php include("./components/sidebar.php");?>
             <main>
                 <div class="grid-container">
                     <a class="dash-item" href="./create-journal.php">
@@ -88,6 +87,7 @@
                 <br><br><br><br><br><br>
                 </section>
             </main>
+            <?php include("./components/sidebar.php");?>
         </div>
     </div>
     <script>

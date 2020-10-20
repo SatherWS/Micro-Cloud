@@ -86,10 +86,10 @@
         </div>
     </article>
     <div class="dash-grid r-col" id="main">
-        <?php include("./views/components/sidebar.php");?>
         <section class="proj-feed">
             <?php echo $html;?>
         </section>
+        <?php include("./views/components/sidebar.php");?>
     </div>
 
     <script src="./static/main.js"></script>

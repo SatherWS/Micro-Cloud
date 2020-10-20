@@ -76,74 +76,82 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">
-        <?php include("./components/sidebar.php");?>
-	<div>
-	<h2 class="ml2rem mbs10">Team Member Settings</h2>
-        <div class="settings-space">
-            <div class="settings-panel">
-                <div class="settings-flex r-cols">
-                    <div>
-                        <?php
-                            if (isset($results)) {
-                                echo "<h2>Members of ".$_SESSION['team']."</h2>";
-                                while ($row = mysqli_fetch_assoc($results)) {
-                                    echo "<p>".$row["email"]."</p>";
+        <div>
+            <h1 class="ml2rem">Team Member Settings</h1>
+            <div class="settings-space">
+                <div class="settings-panel">
+                    <div class="settings-flex r-cols">
+                        <div>
+                            <?php
+                                if (isset($results)) {
+                                    echo "<h2>Members of ".$_SESSION['team']."</h2>";
+                                    while ($row = mysqli_fetch_assoc($results)) {
+                                        echo "<p>".$row["email"]."</p>";
+                                    }
                                 }
-                            }
-                            else
-                                echo "<p>This user does not belong to a project</p>";
-                        ?>
-                    </div>
-                    <div>
-                        <h2>User Information</h2>
-                        <?php 
-                            if (isset($_GET["error"])) {
-                                echo "<div><p>".$_GET["error"]."</p></div>";
-                            }
-                            echo "<p>Username: ".$_SESSION["user"]."</p>";
-                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                            echo "<p>Team: ".$_SESSION["team"]."</p>";
-                        ?>
-                    </div>
-                </div>
-
-                <!-- Do not include in version 2.0
-                <div class="add-worker">
-                    <form method="post" action="../controllers/auth_user.php">
-                        <h3>Invite a new user to project: <?php //echo $_SESSION["team"];?></h3>
-                        <div class="todo-flex r-cols">
-                            <input type="text" name="user_email" placeholder="search member by email address" class="spc-n mr2rem" required>
-                            <input type="submit" name="invite_user" value="Invite User" id="form-control2" class="settings-btn">
+                                else
+                                    echo "<p>This user does not belong to a project</p>";
+                            ?>
                         </div>
-                    </form>
-                    <?php //echo "<h4>".$_GET["msg"]."</h4>";?>
-                </div>
-                -->
-                <?php
-                    if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-                        echo "<h3>Requests to join project: ".$_SESSION["team"]."</h3>";
-                        if (invite_count($curs, $_SESSION["team"]) > 0)
-                            include("./components/requests-table.php");
-                        else
-                            echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
-                    }
-                ?>
-                <div class="invites">
-                    <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
+                        <div>
+                            <h2>User Information</h2>
+                            <?php 
+                                if (isset($_GET["error"])) {
+                                    echo "<div><p>".$_GET["error"]."</p></div>";
+                                }
+                                echo "<p>Username: ".$_SESSION["user"]."</p>";
+                                echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                                echo "<p>Team: ".$_SESSION["team"]."</p>";
+                            ?>
+                        </div>
+                    </div>
+
                     <?php
-                        if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
-                            include("./components/sender-table.php");
-                        }
-                        else {
-                            echo "<h4 class='stng-msg'>No requests have been sent yet...</h4>";
+                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
+                            echo "<h3>Requests to join project: ".$_SESSION["team"]."</h3>";
+                            if (invite_count($curs, $_SESSION["team"]) > 0)
+                                include("./components/requests-table.php");
+                            else
+                                echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
                         }
                     ?>
+                    <div class="invites">
+                        <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
+                        <?php
+                            if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
+                                include("./components/sender-table.php");
+                            }
+                            else {
+                                echo "<h4 class='stng-msg'>No requests have been sent yet...</h4>";
+                            }
+                        ?>
+                    </div>
                 </div>
-                <!-- WIP 
-                <h2>Danger Zone</h2>-->
+                <h1 class="ml2rem">Danger Zone</h1>
+                <div class="settings-space">
+                    <div class="settings-panel">
+                        <div class="settings-flex r-cols">
+                            <div>
+                                <!-- Not attempted 10/20/2020 -->
+                                <h3>Edit User Account</h3>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
+                                    <input type="submit" value="EDIT ACCOUNT" onlick="alert('WIP')">
+                                </form>
+                            </div>
+                            <div>
+                                <h3>Delete Project: <?php echo $_SESSION["team"];?></h3>
+                                <form action="../controllers/delete_project.php" method="post">
+                                    <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
+                                    <input type="submit" value="DELETE PROJECT">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-	</div>
+        <?php include("./components/sidebar.php");?>
     </div>
 </div>
 <script src="../static/main.js"></script>
