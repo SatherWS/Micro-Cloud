@@ -10,13 +10,14 @@
 
     $curs = $db -> getConnection();
     $html = "";
+    $wiki = "";
 
     if (isset($_POST["edit-wiki"]))
     {
         $html .= "<button class='add-btn' type='submit' name='save-wiki' value='".$_SESSION["team"]."'>";
         $html .= "<h3><i class='fa fa-save'></i>Save Edit</h3>";
         $html .= "</button>";
-        //$wiki -> setWiki($_POST["edit-wiki"]);
+        $wiki .= "<br><textarea id='wiki-txt-area'></textarea>";
     }
     else {
         $html = "";
@@ -53,6 +54,7 @@
         </div>
         <div class="dash-grid r-col" id="main">
             <main>
+
                 <div class="grid-container">
                     <a class="dash-item" href="./create-journal.php">
                         <i class="fa fa-pencil spc-1"></i>
@@ -81,7 +83,10 @@
                         <?php echo $html;?>
                     </form>
                 </div>
-                <?php echo $wiki ?>
+                <div>
+                    <?php echo $wiki ?>
+                    <!--<textarea name="wiki-text" id="wiki-txt-area" cols="30" rows="10"></textarea>-->
+                </div>
                 <section>
                 <!-- extra spacing -->
                 <br><br><br><br><br><br>
@@ -91,10 +96,11 @@
         </div>
     </div>
     <script>
+        // this needs to be included in every page that has the side bar
         function validateTextarea() {
             var x = document.getElementById("txt-area");
             var y = document.getElementsByName("radio");
-            var z = document.getElementById("pounds");
+            //var z = document.getElementById("pounds");
             if (y[0].checked) 
             {
                 x.style.display = "block";

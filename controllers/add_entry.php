@@ -109,13 +109,16 @@ if (isset($_POST["send-project"]))
             $_SESSION["team"] = $_POST["teamname"];
             if (isset($_POST["tags"])) 
             {
+                // skip tag creation
+                // if ($_POST["tags"] == "")
+
                 // check if char 0 starts with # for every string in the textarea
                 $tags = explode(" ", $_POST["tags"]);
                 foreach ($tags as $t) 
                 {
                     if (substr($t, 0, 1) == "#")
                         echo $t."<br>";
-                    else
+                    else 
                         echo $t." is not a valid #tag<br>";
                 }
                 

@@ -7,8 +7,10 @@
     $sql = "call delete_project(?)";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $proj);
-    if ($stmnt -> execute())
+    if ($stmnt -> execute()) {
+        // TODO: change session variable...
         header("Location: ../views/settings.php?msg= $proj has been deleted.");
+    }
     else
         header("Location: ../views/settings.php?error= $proj has not been deleted.");
 ?>

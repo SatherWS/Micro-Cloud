@@ -23,7 +23,9 @@
   - [ ] remove user from team
   - [ ] delete account (WIP)
   - [ ] quit team
-  - [ ] delete team (WIP)
+  - [X] delete team
+- [ ] Confirm from user before deleting a project, account or team member(team)
+- [ ] Organize static directory
 
 
 ### TODO (Version 2.0.0)
