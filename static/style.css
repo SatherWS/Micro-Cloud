@@ -11,7 +11,7 @@
   padding-bottom: 10px;
 }
 .search-field {
-  margin-block-start: 1em;
+  margin-block-start: 2em;
   border: solid 1px rgb(122, 122, 122);
   width: 450px;
   padding: 10px;
@@ -24,7 +24,7 @@
 }
 input.add-btn {
   height: 38px;
-  margin-block-start: 1em;
+  margin-block-start: 2em;
 }
 .cta-header {
   margin-block-start: 0!important;

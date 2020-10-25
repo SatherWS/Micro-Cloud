@@ -103,7 +103,6 @@
 </div>
 
 <div class="dash-grid r-col" id="main">
-    <?php include("./components/sidebar.php");?>
     <article class="main-page">
         <div class="text-center todo-flex r-col">
         <?php
@@ -139,8 +138,8 @@
                 <div id="piechart"></div>
                 <br><br>
                 <div class="text-center">
-                <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-                <a href="./create-task.php" class="date-btn">Create Task</a>
+                    <a href="./show-tasks.php" class="date-btn">View Tasks</a>
+                    <a href="./create-task.php" class="date-btn">Create Task</a>
                 </div>
             </div>
             <div class="pie-data">
@@ -181,6 +180,7 @@
             </div>
         </div>
     </article>
+    <?php include("./components/sidebar.php");?>
 </div>
 
 <!-- google pie chart script =========================================-->

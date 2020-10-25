@@ -105,10 +105,14 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             ?>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="settings-space">
+                <h1 class="ml2rem">Invitation Settings</h1>
+                <div class="settings-panel">
+                    <h3>Requests to join <?php echo $_SESSION["team"];?></h3>
                     <?php
                         if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-                            echo "<h3>Requests to join project: ".$_SESSION["team"]."</h3>";
                             if (invite_count($curs, $_SESSION["team"]) > 0)
                                 include("./components/requests-table.php");
                             else
@@ -143,13 +147,14 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                                 <h3>Delete Project: <?php echo $_SESSION["team"];?></h3>
                                 <form action="../controllers/delete_project.php" method="post">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
-                                    <input type="submit" value="DELETE PROJECT">
+                                    <input type="submit" name="delete_proj" value="DELETE PROJECT">
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br><br><br><br>
         </div>
         <?php include("./components/sidebar.php");?>
     </div>
