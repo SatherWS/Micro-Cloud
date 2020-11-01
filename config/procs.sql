@@ -10,7 +10,21 @@ BEGIN
     DELETE FROM todo_list WHERE team_name = proj;
     DELETE FROM members WHERE team_name = proj;
     DELETE FROM categories WHERE team_name = proj;
+    DELETE FROM wikis WHERE team_name = proj;
     DELETE FROM teams WHERE team_name = proj;
+END //
+DELIMITER ;
+
+-- stored proc that alters logged in user
+DELIMITER //
+CREATE PROCEDURE alter_account (IN email VARCHAR(75), IN user VARCHAR(75))
+BEGIN
+	-- TODO: set creator and or assignee of given task and sub to email var
+	UPDATE teams SET email = email WHERE email = user;
+	UPDATE journal SET creator = email WHERE email = user;
+	UPDATE teams SET email = email WHERE email = user;
+	UPDATE members SET email = email WHERE email = user;
+	UPDATE users SET email = email WHERE email = user;
 END //
 DELIMITER ;
 

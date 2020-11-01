@@ -54,7 +54,7 @@
     </div>
     <div class="dash-grid r-cols" id="main">
         <div class="log-container">
-            <div class="todo-flex">
+            <div class="todo-flex r-cols">
                 <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
                 <section class="todo-flex">
                     <form method="POST">
@@ -81,21 +81,23 @@
                 <table class="data task-tab">
                     <tr class="tbl-head">
                         <th>DEADLINE</th>
-                        <th>TITLE</th>
+                        <th>DESCRIPTION</th>
                         <th>STATUS</th>
                         <th>ASSIGNED TO</th>
-                        <th class="text-center">IMPORTANCE</th>
+                        <th>IMPORTANCE</th>
                         <th>DATE CREATED</th>
                     </tr>
                     <?php
-                        if (mysqli_num_rows($result) > 0) {
-                            while($row = mysqli_fetch_assoc($result)) {
+                        if (mysqli_num_rows($result) > 0) 
+                        {
+                            while($row = mysqli_fetch_assoc($result)) 
+                            {
                                 $id = $row["id"];
                                 echo "<tr onclick='getTask($id)'><td>".$row["dt"]."</td>";
                                 echo "<td>".$row["title"]."</td>";
                                 echo "<td>".$row["status"]."</td>";
                                 echo "<td>".$row["assignee"]."</td>";
-                                echo "<td class='text-center'>".$row["importance"]."</td>";
+                                echo "<td>".$row["importance"]."</td>";
                                 echo "<td>".$row["st"]."</td></tr>";
                             }
                         }

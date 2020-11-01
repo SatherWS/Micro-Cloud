@@ -32,6 +32,19 @@
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         $show_editor = false;
+
+        $html = "";
+        if (mysqli_num_rows($results) > 0) 
+        {
+            while($row = mysqli_fetch_assoc($results)) 
+            {
+
+                $html .= "<div class='log-container editor'>";
+		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
+                $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
+                $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
+            }
+        }
     }
 
     if (isset($_POST['delete'])) {
@@ -87,13 +100,7 @@
 
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
         {
-            while($row = mysqli_fetch_assoc($results)) 
-            {
-                echo "<div class='log-container editor'>";
-		        echo "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                echo "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
-                echo "<input type='hidden' name='edit' value='".$row['id']."'></div>";
-            }
+            echo $html;
         }
     ?>
 </form>

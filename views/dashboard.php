@@ -12,21 +12,30 @@
     $html = "";
     $wiki = "";
 
+    function updateWiki($curs, $team, $content)
+    {
+        $sql = "update wikis set content = ? where team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("ss", $content, $team);
+        $stmnt -> execute();
+    }
     if (isset($_POST["edit-wiki"]))
     {
-        $html .= "<button class='add-btn' type='submit' name='save-wiki' value='".$_SESSION["team"]."'>";
+        $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='save-wiki' value='".$_SESSION["team"]."'>";
         $html .= "<h3><i class='fa fa-save'></i>Save Edit</h3>";
         $html .= "</button>";
-        $wiki .= "<br><textarea id='wiki-txt-area'></textarea>";
-    }
+        $wiki .= "<br><textarea name='content' id='wiki-txt-area'></textarea>";
+    } 
     else {
         $html = "";
-        $html .= "<button class='add-btn' type='submit' name='edit-wiki' value='".$_SESSION["team"]."'>";
+        $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='edit-wiki' value='".$_SESSION["team"]."'>";
         $html .= "<h3><i class='fa fa-edit'></i>Edit Wiki</h3>";
         $html .= "</button>";
+        #$html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
         $wiki = $wk -> getWiki($curs, $_SESSION["team"]);
     }
-    
+    if (isset($_POST["save-wiki"]))
+        updateWiki($curs, $_SESSION["team"], $_POST["content"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +63,6 @@
         </div>
         <div class="dash-grid r-col" id="main">
             <main>
-
                 <div class="grid-container">
                     <a class="dash-item" href="./create-journal.php">
                         <i class="fa fa-pencil spc-1"></i>
@@ -79,13 +87,12 @@
                 </div>
                 <div class="todo-flex r-cols">
                     <h1 class="intro-header"><?php echo $_SESSION["team"];?> Wiki Page</h1>
-                    <form method="post">
-                        <?php echo $html;?>
-                    </form>
+                    <?php echo $html;?>
                 </div>
                 <div>
-                    <?php echo $wiki ?>
-                    <!--<textarea name="wiki-text" id="wiki-txt-area" cols="30" rows="10"></textarea>-->
+                    <form method="post" id="wiki-editor">
+                        <?php echo $wiki;?>
+                    </form>
                 </div>
                 <section>
                 <!-- extra spacing -->
@@ -96,7 +103,11 @@
         </div>
     </div>
     <script>
-        // this needs to be included in every page that has the side bar
+        function triggerForm() {
+            document.getElementById("wiki-editor").submit();
+        }
+
+        // this needs to be included in every page that has the side bar team modal
         function validateTextarea() {
             var x = document.getElementById("txt-area");
             var y = document.getElementsByName("radio");

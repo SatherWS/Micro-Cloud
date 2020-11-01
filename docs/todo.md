@@ -18,23 +18,22 @@
 - [ ] Make it easier for user to embed links, images and more
 - [ ] Activate and implement task percentage slider
 - [ ] Comment module on all posts
-- [ ] Implement more user options
-  - [X] add user to team
-  - [ ] remove user from team
-  - [ ] delete account (WIP)
-  - [ ] quit team
-  - [X] delete team
+- [X] add user to team
+- [ ] remove user from team
+- [ ] delete account (WIP)
+- [ ] quit team
+- [X] delete team
+- [ ] edit team (name, admin, etc.)
 - [ ] Confirm from user before deleting a project, account or team member(team)
 - [ ] Organize static directory
-
+- [ ] Implement search bar (create separate page w/ search result. UI tab toggles results to tags, projects or users)
+- [ ] Implement hashtags (in progress)
 
 ### TODO (Version 2.0.0)
 My goal is to deploy this version soon.
 
-- [ ] Implement search bar (create separate page w/ search result. UI tab toggles results to tags, projects or users)
-- [ ] Implement hashtags (in progress)
-- [ ] Remove post categories page and dashboard selector (in progress)
-- [ ] Implement wiki page editor in the dashboard
+- [ ] Remove post categories page
+- [ ] Implement wiki page editor in the dashboard (in progress)
 - [X] Disable task percentage slider
 - [X] URL Link to current page instead of dashboard after team is changed
 - [X] Allow sub task editing

@@ -399,6 +399,9 @@ textarea {
   width: 97%;
   /*border: solid #c6c6c6 1.5px;*/
 }
+.modal-txt {
+  height: 90px!important;
+}
 #pounds {
   height: 130px;
   width: 97%;
@@ -918,7 +921,7 @@ element {
 }
 
 .log-details {
-  width: 700px;
+  width: 900px;
   margin: 0 auto;
 }
 

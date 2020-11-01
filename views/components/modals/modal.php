@@ -17,9 +17,11 @@
             <input type="text" class="spc-n" name="teamname" placeholder="Enter the project's name" required>
             <div id="txt-area">
                 <br><br>
-                <textarea name="description" placeholder="Enter a description of the project."></textarea>
+                <textarea class="modal-txt" name="description" placeholder="Enter a description of the project."></textarea>
+                <!--
                 <br><br>
-                <textarea name="tags" placeholder="Categorize your project by adding related #tags."></textarea>
+                <textarea class="modal-txt" name="tags" placeholder="Categorize your project by adding related #tags."></textarea>
+                -->
             </div>
             <br><br>
             <input type="submit" name="send-project" value="Submit">

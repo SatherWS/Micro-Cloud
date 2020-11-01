@@ -23,7 +23,8 @@ function navToggle() {
       x.className = "topnav";
     }
 }
-// hide the side navbar
+
+// hide the side navbar on media query
 var vis = true;
 function check_mediaq(x) {
   // NOTE: not sure if matches is a js property

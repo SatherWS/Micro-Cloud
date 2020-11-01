@@ -83,25 +83,24 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                     <div class="settings-flex r-cols">
                         <div>
                             <?php
-                                if (isset($results)) {
-                                    echo "<h2>Members of ".$_SESSION['team']."</h2>";
-                                    while ($row = mysqli_fetch_assoc($results)) {
-                                        echo "<p>".$row["email"]."</p>";
-                                    }
-                                }
-                                else
-                                    echo "<p>This user does not belong to a project</p>";
+                            if (isset($results)) 
+                            {
+                                echo "<h2>Members of ".$_SESSION['team']."</h2>";
+                                while ($row = mysqli_fetch_assoc($results))
+                                    echo "<p>".$row["email"]."</p>";
+                            }
+                            else
+                                echo "<p>This user does not belong to a project</p>";
                             ?>
                         </div>
                         <div>
                             <h2>User Information</h2>
                             <?php 
-                                if (isset($_GET["error"])) {
-                                    echo "<div><p>".$_GET["error"]."</p></div>";
-                                }
-                                echo "<p>Username: ".$_SESSION["user"]."</p>";
-                                echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
-                                echo "<p>Team: ".$_SESSION["team"]."</p>";
+                            if (isset($_GET["error"])) 
+                                echo "<div><p>".$_GET["error"]."</p></div>";
+                            echo "<p>Username: ".$_SESSION["user"]."</p>";
+                            echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
+                            echo "<p>Team: ".$_SESSION["team"]."</p>";
                             ?>
                         </div>
                     </div>
@@ -137,15 +136,15 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                         <div class="settings-flex r-cols">
                             <div>
                                 <!-- Not attempted 10/20/2020 -->
-                                <h3>Edit User Account</h3>
+                                <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
                                 <form action="#" method="post">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
-                                    <input type="submit" value="EDIT ACCOUNT" onlick="alert('WIP')">
+                                    <input type="submit" value="EDIT PROJECT" onlick="alert('WIP')">
                                 </form>
                             </div>
                             <div>
                                 <h3>Delete Project: <?php echo $_SESSION["team"];?></h3>
-                                <form action="../controllers/delete_project.php" method="post">
+                                <form action="../controllers/delete_project.php" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
                                     <input type="submit" name="delete_proj" value="DELETE PROJECT">
                                 </form>

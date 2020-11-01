@@ -36,7 +36,7 @@
         $html .= "<form method='post'>";
         $html .= "<div class='vote-control'>";
         $html .= "<button type='submit' name='upvote' value='$id'>";
-        $html .= "  <span class='vote'> </span>";
+        $html .= "<span class='vote'> </span>";
         $html .= "</button>";
         $html .= "<p class='text-center'>".$row["rating"]."</p>";
         $html .= "<button type='submit' name='downvote' value='$id'>";
@@ -45,8 +45,8 @@
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols'>";
-        
-        $html .= "<p><b>Project Tags</b></p>";
+        $html .= "<div></div>";
+        #$html .= "<p><b>Project Tags</b></p>";
         $html .= "<div class='todo-flex'>";
         $html .= "<h4><button><a href='#' class='add-btn-2'>Read Wiki Page</a></button></h4>";
         $html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
