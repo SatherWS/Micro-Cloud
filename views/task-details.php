@@ -116,18 +116,38 @@
         <form action="../controllers/edit_entry.php" method="post" class="task-auto" id="editor2">
             <div class="inner-task-panel">
             <?php
-                if ($_GET['task'] && mysqli_num_rows($results) > 0) {
-                    while($row = mysqli_fetch_assoc($results)) {
-                        echo "<h2>Main Task: ".$row['title']."</h2>";
-                        echo "<p>".$row["description"]."</p>";
-                        echo "<div class='todo-flex align-initial r-cols'>";
+                if ($_GET['task'] && mysqli_num_rows($results) > 0) 
+                {
+                    while($row = mysqli_fetch_assoc($results)) 
+                    {
+                        echo "<div class='todo-flex r-cols'>";
+                        echo "<div><h2>Main Task: ".$row['title']."</h2>";
+                        echo "<p>".$row["description"]."</p></div>";
+                        echo "<a href='#subModal' id='myBtn'>Add Sub Task</a></div>";
+
+                        echo "<div class='todo-flex r-cols'>";
                         echo "<div><p><b>Status:</b> ".$row['status']."</p>";
+                        echo "<p><b>Deadline:</b> ".$row['deadline']."</p>";
                         echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
-                        echo "<p><b>End Date:</b> ".$row['deadline']."</p></div>";
-                        echo "<div><p><b>Importance:</b> ".$row['importance']."</p>";
+                        echo "<p><b>Importance:</b> ".$row['importance']."</p>";
                         echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
-                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div></div>";
-                        echo "<br><a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>";
+                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div>";
+                        
+                        echo "<div>";
+                        echo "<label class='container'>";
+                        echo "<input type='checkbox' checked='checked' name='remind' value='temp' class='pro-op'>";
+                        echo "<span class='checkmark'></span>Send Email Reminders</label>";
+                        echo "<br><select name='repeat' class='repeat-selector'>";
+                        echo "<option type='disabled'>Repitition Pattern</option>";
+                        echo "<option>Daily</option>";
+                        echo "<option>Weekly</option>";
+                        echo "<option>Monthly</option></select>";
+
+                        echo "<br></br>";
+                        echo "<input type='number' min='1' name='repeat-count' placeholder='Enter Repitition Amount'/>";
+                        echo "<br></br>";
+                        echo "<input type='submit' name='send-emails' value='Apply Settings' class='add-btn-2'/>";
+                        echo "</div></div>";
                     }
                 }
 
@@ -148,20 +168,12 @@
             </div>
         </form>
         <div class="inner-task-panel">
-            <!--
-            <div class="todo-flex r-cols" id="subranger">
-                <div>
-                    <div id='h4-container'><b>Percent Complete:</b> <div id='h4-subcontainer'></div></div>
-                    <input type='range' value="0">
-                </div>
-                <h5>
-                    <a href='#subModal' class='add-btn-2' id='myBtn'>Add Sub Task</a>
-                </h5>
-            </div>
-            -->
         <?php
-            if (isset($results2)) {
-                while ($row2 = mysqli_fetch_assoc($results2)) {
+            // sub tasks component
+            if (isset($results2)) 
+            {
+                while ($row2 = mysqli_fetch_assoc($results2)) 
+                {
                     echo "<br><div class='uline'></div><br>";
                     echo "<div class='todo-flex r-cols'>";
                     echo "<h3>Sub Task: ".$row2["title"]."</h3>";

@@ -26,6 +26,12 @@ input.add-btn {
   height: 38px;
   margin-block-start: 2em;
 }
+.add-btn-2 {
+  background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
 .cta-header {
   margin-block-start: 0!important;
   margin-block-end: 0!important;
@@ -237,7 +243,7 @@ textarea {
     padding: .5rem 1rem;
     margin-top: 1rem;
     border: solid 1px #333;
-    font-size: 16pt;
+    font-size: 21pt;
 }
 
 .cat-list {
@@ -689,15 +695,8 @@ ul {
   border-radius: 5px;
 }
 
-/* used for gradient bgs in dashboard and creating posts and tasks */
 .todo-bg {
   background: #f1f1f1;
-  /*
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(../assets/images/test-landing.png);
-  */
 }
 
 .todo-bg-test {
@@ -925,6 +924,10 @@ element {
   margin: 0 auto;
 }
 
+.log-details small {
+	font-size: 16px;
+}
+
 .padb {
   margin-bottom: .5rem;
   font-size: 25pt;
@@ -990,7 +993,9 @@ button {
   font-size: 25px;
 }
 /* Todo & Journal Icons ***********************/
-
+.repeat-selector {
+  width: 100%;
+}
 .todo-txt-area {
   width: 100%!important;
   height: 125px!important;
@@ -1009,6 +1014,9 @@ button {
 .fa-edit:before, .fa-pencil-square-o:before {
   content: "\f044";
   padding-right: 8px;
+}
+.fa-arrow-circle-o-left {
+	padding-right: 8px;
 }
 
 .fa-remove:before, .fa-close:before, .fa-times:before {
@@ -1039,28 +1047,27 @@ th, td {
 tr:hover {background-color:#f5f5f5;}
 .tbl-head:hover {background: #fff;}
 
-  .fa { 
-    font-size: 14pt!important;
-  }
+.fa { 
+  font-size: 14pt!important;
+}
 
-  .spc-1 {
-    font-size: 28pt!important;
-    
-  }
+.spc-1 {
+  font-size: 28pt!important;
+  
+}
 
-  .fa.fa-plus-circle {
-    font-size: 16pt!important;
-    margin-left:10px;
-  }
-  .fa.fa-chevron-circle-left {
-    font-size: 16pt!important;
-    margin-left:10px;
-  }
+.fa.fa-plus-circle {
+  font-size: 16pt!important;
+  margin-left:10px;
+}
+.fa.fa-chevron-circle-left {
+  font-size: 16pt!important;
+  margin-left:10px;
+}
 
-  /* ---------------------------------+
-    Analytics Section                 |
-  -----------------------------------*/
-/*********************************************************/
+/* ---------------------------------+
+  Analytics Section                 |
+-----------------------------------*/
 .simple-input {
   padding: 7.7px;
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
@@ -1127,50 +1134,6 @@ tr:hover {background-color:#f5f5f5;}
   border: none;
 }
 
-/* ---------------------------------+
-  Voting App Section (REMOVE)       |
------------------------------------*/
-.feature-panel {
-  margin: 1rem 0;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  background-image: 
-  linear-gradient(
-    to bottom,
-    rgba(0, 199, 255, 0.68), rgba(0, 199, 255, 0.68)),
-    url(../imgs/test3.jpg);
-  background-position-y: -180px;
-}
-
-.vote-btn {
-  font-weight: bold;
-  border: solid #000 2px;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.feature-btns {
-  text-align: right;
-}
-
-.feature-btns input {
-  margin-top:1rem;
-  padding: .5rem 1rem;
-  width: 150px;
-}
-.rad-5 {
-  border-radius: 5px;
-}
-
-/* use in chat-details.php */
-.add-btn-2 {
-  background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
-  color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-}
 .add-btn a {
   color: #000;
   background: #fff;
@@ -1199,20 +1162,8 @@ button.add-btn {
   border-radius: 8px;
   padding: .5rem 1rem;
   margin: 10px 0;
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-}
-
-.polls-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-}
-#polls-title {
-  margin-block-start: 0!important;
-  margin-block-end: 0em!important;
-}
-.poll-topic {
-  text-align: center;
+  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
+  border: solid #ddd 2px;
 }
 
 /* ---------------------------------+
@@ -1220,11 +1171,13 @@ button.add-btn {
 -----------------------------------*/
 /* 1920 monitors */
 @media screen and (min-width: 1900px) {
+  /*
   .dash-grid {
     display: grid;
     grid-template-columns: 3fr 20fr;
     height: 100vh;
   }
+  */
   main {
     width: 95%;
   }

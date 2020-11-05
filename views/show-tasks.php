@@ -1,34 +1,51 @@
 <?php
     include ("../config/database.php");
     session_start();
-    if (!isset($_SESSION["unq_user"])) {
+    if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
-    }
+    
     $database = new Database();
     $curs = $database->getConnection();
-    $sql = "select *,  date_format(date_created, '%m-%d-%y') as st, date_format(deadline, '%m-%d-%y') as dt from todo_list where team_name = ? order by deadline desc";
+    $sql = "select *,  date_format(date_created, '%m/%d/%Y') as st, date_format(deadline, '%m/%d/%Y') as dt from todo_list where team_name = ? order by deadline desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt ->  bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
     $result = $stmnt -> get_result();
     $filter = $_POST['s-status'];
 
-    if (isset($_POST['s-status'])) {
-        $sql = "select *,  date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where status = ? and team_name = ? order by deadline desc";
+    if (isset($_POST['s-status'])) 
+    {
+        $sql = "select *,  date_format(deadline, '%m/%d/%Y') as dt, date_format(date_created, '%m/%d/%Y') as st from todo_list where status = ? and team_name = ? order by deadline desc";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ss", $_POST['s-status'], $_SESSION["team"]);
         $stmnt -> execute();
         $result = $stmnt -> get_result();
 
-        if ($_POST["s-status"] == 'SHOW ALL') {
-            $sql = "select *, date_format(deadline, '%m-%d-%Y') as dt, date_format(date_created, '%m-%d-%Y') as st from todo_list where team_name = ? order by deadline desc";
+        if ($_POST["s-status"] == 'SHOW ALL') 
+        {
+            $sql = "select *, date_format(deadline, '%m/%d/%Y') as dt, date_format(date_created, '%m/%d/%Y') as st from todo_list where team_name = ? order by deadline desc";
             $stmnt = mysqli_prepare($curs, $sql);
             $stmnt -> bind_param("s", $_SESSION["team"]);
             $stmnt -> execute();
             $result = $stmnt -> get_result();
         }
     }
-    $total = mysqli_num_rows($result)
+    $total = mysqli_num_rows($result);
+    $table_inner = "";
+
+    if (mysqli_num_rows($result) > 0) 
+    {
+        while($row = mysqli_fetch_assoc($result)) 
+        {
+            $id = $row["id"];
+            $table_inner .= "<tr onclick='getTask($id)'><td>".$row["dt"]."</td>";
+            $table_inner .= "<td>".$row["title"]."</td>";
+            $table_inner .= "<td>".$row["status"]."</td>";
+            $table_inner .= "<td>".$row["assignee"]."</td>";
+            $table_inner .= "<td>".$row["importance"]."</td>";
+            $table_inner .= "<td>".$row["st"]."</td></tr>";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,21 +104,7 @@
                         <th>IMPORTANCE</th>
                         <th>DATE CREATED</th>
                     </tr>
-                    <?php
-                        if (mysqli_num_rows($result) > 0) 
-                        {
-                            while($row = mysqli_fetch_assoc($result)) 
-                            {
-                                $id = $row["id"];
-                                echo "<tr onclick='getTask($id)'><td>".$row["dt"]."</td>";
-                                echo "<td>".$row["title"]."</td>";
-                                echo "<td>".$row["status"]."</td>";
-                                echo "<td>".$row["assignee"]."</td>";
-                                echo "<td>".$row["importance"]."</td>";
-                                echo "<td>".$row["st"]."</td></tr>";
-                            }
-                        }
-                    ?>
+                    <?php echo $table_inner; ?>
                 </table>
             </form>
         </div>        
