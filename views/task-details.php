@@ -120,31 +120,49 @@
                 {
                     while($row = mysqli_fetch_assoc($results)) 
                     {
+                        // Top task title, description and sub modal trigger
                         echo "<div class='todo-flex r-cols'>";
-                        echo "<div><h2>Main Task: ".$row['title']."</h2>";
+                        echo "<div><h2>".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p></div>";
                         echo "<a href='#subModal' id='myBtn'>Add Sub Task</a></div>";
 
+                        // Left detail view table
                         echo "<div class='todo-flex r-cols'>";
-                        echo "<div><p><b>Status:</b> ".$row['status']."</p>";
-                        echo "<p><b>Deadline:</b> ".$row['deadline']."</p>";
-                        echo "<p><b>Start Date:</b> ".$row['date_created']."</p>";
-                        echo "<p><b>Importance:</b> ".$row['importance']."</p>";
-                        echo "<p><b>Assigned To:</b> ".$row['assignee']."</p>";
-                        echo "<p><b>Created By:</b> ".$row['creator']."</p></div>";
-                        
-                        echo "<div>";
+                        echo "<div><table>";
+                        echo "<tr><td><p><b>Status:</b></p></td>";
+                        echo "<td><p>".$row['status']."</p></td>";
+                        echo "</tr>";
+                        echo "<tr><td><p><b>Deadline:</b></p></td>";
+                        echo "<td><p>".$row['deadline']."</p></td>";
+                        echo "</tr>";
+                        echo "<tr><td><p><b>Start Date:</b></p></td>";
+                        echo "<td><p>".$row['date_created']."</p></td>";
+                        echo "</tr>";
+                        echo "<tr><td><p><b>Importance:</b></p></td>";
+                        echo "<td><p>".$row['importance']."</p></td>";
+                        echo "</tr>";
+                        echo "<tr><td><p><b>Assignee:</b></p></td>";
+                        echo "<td><p>".$row['assignee']."</p></td>";
+                        echo "</tr>";
+                        echo "<tr><td><p><b>Creator:</b></p></td>";
+                        echo "<td><p>".$row['creator']."</p></td>";
+                        echo "</tr>";
+                        echo "</table></div>";
+
+                        // Right email automation form
+                        echo "<div class='emailer'>";
                         echo "<label class='container'>";
                         echo "<input type='checkbox' checked='checked' name='remind' value='temp' class='pro-op'>";
                         echo "<span class='checkmark'></span>Send Email Reminders</label>";
-                        echo "<br><select name='repeat' class='repeat-selector'>";
+                        echo "<br><select name='repeat' class='repeat-input eight-pxp'>";
                         echo "<option type='disabled'>Repitition Pattern</option>";
                         echo "<option>Daily</option>";
                         echo "<option>Weekly</option>";
                         echo "<option>Monthly</option></select>";
-
                         echo "<br></br>";
-                        echo "<input type='number' min='1' name='repeat-count' placeholder='Enter Repitition Amount'/>";
+                        echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
+                        echo "<br></br>";
+                        echo "<input type='number' min='1' max='4' name='repeat-count' placeholder='Enter Repitition Count' class='repeat-input'/>";
                         echo "<br></br>";
                         echo "<input type='submit' name='send-emails' value='Apply Settings' class='add-btn-2'/>";
                         echo "</div></div>";

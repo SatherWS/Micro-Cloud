@@ -993,8 +993,18 @@ button {
   font-size: 25px;
 }
 /* Todo & Journal Icons ***********************/
-.repeat-selector {
+.emailer {
+  border: solid #ddd 2px;
+  padding: 2rem;
+  border-radius: 8px;
+}
+.repeat-input {
   width: 100%;
+  -ms-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box; 
+  box-sizing:content-box;
+  padding: 8px;
 }
 .todo-txt-area {
   width: 100%!important;
