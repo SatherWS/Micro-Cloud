@@ -1,8 +1,8 @@
 <?php
     session_start();
-    if (!isset($_SESSION["unq_user"])) {
+    if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
-    }
+    
     include("./components/task-editor.php");
     $editor = new TaskEditor();
 
@@ -11,7 +11,8 @@
     $database = new Database();
     $curs = $database->getConnection();
 
-    if (isset($_GET['task'])) {
+    if (isset($_GET['task'])) 
+    {
         $id = $_GET['task'];
         $sql = "select * from todo_list where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -26,7 +27,8 @@
             $results2 = $stmnt -> get_result();
     }
 
-    if (isset($_POST['edit'])) {
+    if (isset($_POST['edit'])) 
+    {
         // edit main task
         $id = $_POST['edit'];
         $sql = "select *, date(date_created) from todo_list where id = ?";
@@ -38,7 +40,8 @@
         $show_editor = false;
     }
 
-    if (isset($_POST['delete'])) {
+    if (isset($_POST['delete'])) 
+    {
         $sql = "delete from sub_tasks where task_id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt-> bind_param("s", $_POST['delete']);
@@ -49,7 +52,8 @@
         $stmnt -> execute();
         header("Location: ./show-tasks.php");
     }
-    if (isset($_POST["delete-sub"])) {
+    if (isset($_POST["delete-sub"])) 
+    {
         $sql = "delete from sub_tasks where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST["delete-sub"]);
@@ -58,7 +62,8 @@
     }
     // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
     // Creator and assignee selector elements
-    function team_mates($curs, $team) {
+    function team_mates($curs, $team) 
+    {
         $selector = "<label>Change Assignee</label><br>";
         $selector .= "<select name='change-assignee' class='spc-n' required>";
         $selector2 = "<label>Change Creator</label><br>";
@@ -72,7 +77,8 @@
         $stmnt->bind_param("s", $team);
         $stmnt->execute();
         $result = $stmnt->get_result();
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) 
+        {
             $selector .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option>";
             $selector2 .= "<option value='".$row["creator"]."'>".$row["creator"]."</option>";
         }

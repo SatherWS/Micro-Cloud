@@ -1,5 +1,7 @@
 -- used for development
 DROP PROCEDURE delete_project;
+DROP PROCEDURE alter_team;
+DROP PROCEDURE alter_account;
 
 -- stored proc that deletes projects 
 DELIMITER //
@@ -15,14 +17,28 @@ BEGIN
 END //
 DELIMITER ;
 
--- stored proc that alters logged in user
+-- proc changes the team name
+DELIMITER //
+CREATE PROCEDURE alter_team (IN old_name varchar(50), IN new_name varchar(50))
+BEGIN
+    update journal set team_name = new_name where team_name = old_name;
+    update sub_tasks set team_name = new_name where team_name = old_name;
+    update todo_list set team_name = new_name where team_name = old_name;
+    update members set team_name = new_name where team_name = old_name;
+    update categories set team_name = new_name where team_name = old_name;
+    update wikis set team_name = new_name where team_name = old_name;
+    update teams set team_name = new_name where team_name = old_name;
+END //
+DELIMITER ;
+
+-- stored proc that alters logged in user d/n work
 DELIMITER //
 CREATE PROCEDURE alter_account (IN email VARCHAR(75), IN user VARCHAR(75))
 BEGIN
 	-- TODO: set creator and or assignee of given task and sub to email var
-	UPDATE teams SET email = email WHERE email = user;
+	UPDATE teams SET email = email WHERE admin = user;
 	UPDATE journal SET creator = email WHERE email = user;
-	UPDATE teams SET email = email WHERE email = user;
+	UPDATE todo_list SET email = email WHERE email = user;
 	UPDATE members SET email = email WHERE email = user;
 	UPDATE users SET email = email WHERE email = user;
 END //

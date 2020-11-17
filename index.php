@@ -29,8 +29,7 @@
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
         $html .= "<p>".$row["description"]."</p>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
-        $html .= "<p>Admin: ".$row["admin"]."</p>";
-        $html .= "<p>Date Created: ".$row["date_created"]."</p><br></div>";
+        $html .= "<p>Admin: ".$row["admin"]."</p></div>";
         
         // vote control
         $html .= "<form method='post'>";
@@ -45,7 +44,7 @@
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols'>";
-        $html .= "<div></div>";
+        $html .= "<p>Date Created: ".$row["date_created"]."</p>";
         #$html .= "<p><b>Project Tags</b></p>";
         $html .= "<div class='todo-flex'>";
         $html .= "<h4><button><a href='#' class='add-btn-2'>Read Wiki Page</a></button></h4>";
@@ -79,7 +78,7 @@
             include("./views/components/index-headers/nonuser_nav.php");
     ?>
     <article class="svg-bg todo-flex r-cols">
-	<h2 class="ml2rem">A free project collaboration platform.</h2>
+	<!--<h2 class="ml2rem">A free project collaboration platform.</h2>-->
         <div class="srch-section">
             <input type="text" placeholder="Search all projects" class="search-field">
             <input type="submit" value="Search" class="add-btn">

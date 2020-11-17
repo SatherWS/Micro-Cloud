@@ -14,6 +14,7 @@
                     <span class="checkmark"></span>
                 </label>
             </div>
+	    <br>
             <input type="text" class="spc-n" name="teamname" placeholder="Enter the project's name" required>
             <div id="txt-area">
                 <br><br>

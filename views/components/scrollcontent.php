@@ -9,14 +9,16 @@
             $result = $stmnt -> get_result();
             $html = "";
 
-            while($row = mysqli_fetch_assoc($result)) {
+            while($row = mysqli_fetch_assoc($result)) 
+	    {
                 $id = $row["id"];
                 $html .= "<div class='scroll-item' onclick='getTask($id)'>";
                 $html .= "<h3>".$row["title"]."</h3>";
                 $html .= "<h4>Deadline is ".$row["d"]."</h4>";
-                $html .= "<h4>Created on ".$row["date_created"]."</h4>";
+                $html .= "<h4>Status: ".$row["status"]."</h4>";
                 $html .= "<p>Importance: ".$row["importance"]."</p>";
-                $html .= "<p>".$row["description"]."</p></div>";
+                $html .= "<p>".$row["description"]."</p>";
+                $html .= "<small>Created on ".$row["date_created"]."</small></div>";
             }
             echo $html;
         }
