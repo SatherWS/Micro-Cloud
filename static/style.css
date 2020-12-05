@@ -9,7 +9,9 @@
   justify-content: space-between;
   padding: 0 2rem;
   padding-bottom: 10px;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 1rem;	
 }
 .search-field {
   margin-block-start: 2em;
@@ -432,7 +434,6 @@ textarea {
 .dash-grid {
   display: grid;
   grid-template-columns: 10fr 2fr;
-  height: 100vh;
 }
 .side-bar {
   padding: 0 2rem;

@@ -77,15 +77,19 @@
         else
             include("./views/components/index-headers/nonuser_nav.php");
     ?>
-    <article class="svg-bg todo-flex r-cols">
-	<!--<h2 class="ml2rem">A free project collaboration platform.</h2>-->
+    <article class="svg-bg dash-grid r-cols">
         <div class="srch-section">
             <input type="text" placeholder="Search all projects" class="search-field">
             <input type="submit" value="Search" class="add-btn">
         </div>
+        <div></div>
     </article>
     <div class="dash-grid r-col" id="main">
         <section class="proj-feed">
+	    <h1>Swoop is a content management system for all your side projects</h1>
+	    <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
+	    <h2>Popular Projects Hosted on Swoop</h2>
+	    <div class="uline"></div>
             <?php echo $html;?>
         </section>
         <?php include("./views/components/sidebar.php");?>
