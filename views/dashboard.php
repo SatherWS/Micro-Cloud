@@ -25,13 +25,13 @@
         $html .= "<h3><i class='fa fa-save'></i>Save Edit</h3>";
         $html .= "</button>";
         $wiki .= "<br><textarea name='content' id='wiki-txt-area'></textarea>";
-    } 
+    }
     else {
         $html = "";
         $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='edit-wiki' value='".$_SESSION["team"]."'>";
         $html .= "<h3><i class='fa fa-edit'></i>Edit Wiki</h3>";
         $html .= "</button>";
-        #$html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
+        $html .= "<input type='hidden' name='edit-wiki' value='".$row['id']."'>";
         $wiki = $wk -> getWiki($curs, $_SESSION["team"]);
     }
     if (isset($_POST["save-wiki"]))

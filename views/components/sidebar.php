@@ -13,7 +13,7 @@
                 $project .= "<h3 class='selected'><a href='../controllers/change_team.php?switched=".$row["team_name"]."&location=".$_SERVER['REQUEST_URI']."'>"; 
             else
                 $project .= "<h3><a href='../controllers/change_team.php?switched=".$row["team_name"]."&location=".$_SERVER['REQUEST_URI']."'>";
-            $project .= $row["team_name"]."</a></h3>";
+            	$project .= $row["team_name"]."</a></h3>";
         }
         return $project;
     }
@@ -46,9 +46,14 @@
                         echo "<i class='fa fa-plus-circle'></i>";
                         echo "</a></h4>";
                     }
-                ?>
                 
-                <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
+                    if (!isset($_SESSION["unq_user"])) {
+                	echo "<h4 class='dash-btn'><a href='./authentication/register.php' class='spc-flex'>";
+			echo	"<span>Sign Up Today!</span>";
+			echo "</a></h4>";
+		    }
+		?>
+		<h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="spc-flex">
                     <span>Hide</span>
                     <i class="fa fa-chevron-circle-right"></i>
                 </a></h4>

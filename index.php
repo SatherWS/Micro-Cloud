@@ -25,7 +25,7 @@
 
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row["team_name"];
-        $html .= "<div class='todo-flex'>";
+        $html .= "<section class='project-entry'><div class='todo-flex'>";
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
         $html .= "<p>".$row["description"]."</p>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
@@ -53,7 +53,7 @@
         //$html .= "<div class='img-type'>";
         //$html .= "<img src='https://38.media.tumblr.com/587f48c6548e640f943b7c8c6e3f40de/tumblr_mz8yzmi1XJ1ru39xmo1_500.gif'>";
         //$html .= "</div>";
-        $html .= "</div>";
+        $html .= "</div></section>";
         $html .= "<div class='uline'></div>";
     }
 ?>
@@ -88,6 +88,7 @@
         <section class="proj-feed">
 	    <h1>Swoop is a content management system for all your side projects</h1>
 	    <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
+  	    <br></br>
 	    <h2>Popular Projects Hosted on Swoop</h2>
 	    <div class="uline"></div>
             <?php echo $html;?>
