@@ -19,7 +19,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swoop | Create Post</title>
+    <title>Swoop | Create Article</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,7 +40,7 @@
             <div class="form-container">
                 <div class="create-doc todo-panel">
 
-                   <input type="text" name="jsubject" placeholder="Type the subject of your post here" id="new-form-control" class="spc-n j-title-field" required>
+                   <input type="text" name="jsubject" placeholder="Type the subject of your article here" id="new-form-control" class="spc-n j-title-field" required>
 		    <!--
                     <div class="flex-subs">
                         <input type="text" name="category" placeholder="Enter Subject's Category" list="categoryList" class="spc-n cat-list" required>
@@ -58,7 +58,7 @@
                     </div>
 		    -->
                     <br><br>
-                    <textarea rows="7" placeholder="Write your post here..." name="note"></textarea>
+                    <textarea rows="7" placeholder="Write your article here..." name="note"></textarea>
                     <!-- TODO: change to share with all of Swoop instead of team only
                     <label class="container">
                         <input type="checkbox" name="omit">

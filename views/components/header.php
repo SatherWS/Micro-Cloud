@@ -11,8 +11,8 @@
             <li class="dropdown">
                 <a href="javascript:void(0)">Explore</a>
                 <div class="dropdown-content">
+                    <a href="../index.php">Home Page</a>
                     <a href="./dashboard.php">Dashboard</a>
-                    <a href="../index.php">All Projects</a>
                     <a href="../authentication/categories.php">Temp Tags</a>
                 </div>
             </li>
@@ -24,10 +24,10 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">Posts</a>
+                <a href="javascript:void(0)" class="dropbtn">Articles</a>
                 <div class="dropdown-content">
-                    <a href="./create-journal.php">Create Post</a>
-                    <a href="./logs.php">View Posts</a>
+                    <a href="./create-journal.php">New Article</a>
+                    <a href="./logs.php">View Articles</a>
                     <a href="./categories.php">Categories</a>
                 </div>
             </li>

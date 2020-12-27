@@ -47,7 +47,8 @@
         $html .= "<p>Date Created: ".$row["date_created"]."</p>";
         #$html .= "<p><b>Project Tags</b></p>";
         $html .= "<div class='todo-flex'>";
-        $html .= "<h4><button><a href='#' class='add-btn-2'>Read Wiki Page</a></button></h4>";
+        $html .= "<h4><button><a href='#' class='add-btn-2'>Read Articles</a></button></h4>";
+        $html .= "<h4><button><a href='#' class='add-btn-2'>View Tasks</a></button></h4>";
         $html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
         $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></form></div>";
         //$html .= "<div class='img-type'>";
@@ -86,10 +87,10 @@
     </article>
     <div class="dash-grid r-col" id="main">
         <section class="proj-feed">
-	    <h1>Swoop is a content management system for all your side projects</h1>
+	    <h1>Swoop CMS</h1>
 	    <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
   	    <br></br>
-	    <h2>Popular Projects Hosted on Swoop</h2>
+	    <h2>Projects Hosted on Swoop</h2>
 	    <div class="uline"></div>
             <?php echo $html;?>
         </section>

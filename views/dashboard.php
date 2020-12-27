@@ -10,8 +10,30 @@
 
     $curs = $db -> getConnection();
     $html = "";
-    $wiki = "";
+    $articles = "";
 
+    $sql = "select * from journal where team_name = ? order by date_created desc";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $results = $stmnt -> get_result();
+    if (mysqli_num_rows($results) > 0) {
+        while ($row = mysqli_fetch_assoc($results)) {
+            $id = $row["id"];
+            $articles .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
+            $articles .= "<div><h2>Post: ".$row["subject"]."</h2>";
+            $articles .= "<p><b>Category: </b>".$row["category"]."</p>";
+            $articles .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
+            $articles .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
+            $articles .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
+            // TODO: close p tag if substring contains an iframe tag (video, img etc)
+            //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
+            $articles .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
+            
+        }
+    }
+
+    // old code, currently scraping wiki page 12/26/20
     function updateWiki($curs, $team, $content)
     {
         $sql = "update wikis set content = ? where team_name = ?";
@@ -24,7 +46,7 @@
         $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='save-wiki' value='".$_SESSION["team"]."'>";
         $html .= "<h3><i class='fa fa-save'></i>Save Edit</h3>";
         $html .= "</button>";
-        $wiki .= "<br><textarea name='content' id='wiki-txt-area'></textarea>";
+        //$articles .= "<br><textarea name='content' id='wiki-txt-area'></textarea>";
     }
     else {
         $html = "";
@@ -32,7 +54,7 @@
         $html .= "<h3><i class='fa fa-edit'></i>Edit Wiki</h3>";
         $html .= "</button>";
         $html .= "<input type='hidden' name='edit-wiki' value='".$row['id']."'>";
-        $wiki = $wk -> getWiki($curs, $_SESSION["team"]);
+        //$articles = $wk -> getWiki($curs, $_SESSION["team"]);
     }
     if (isset($_POST["save-wiki"]))
         updateWiki($curs, $_SESSION["team"], $_POST["content"]);
@@ -67,7 +89,7 @@
                     <a class="dash-item" href="./create-journal.php">
                         <i class="fa fa-pencil spc-1"></i>
                         <br>
-                        <span class="sup-text">Write Post</span>
+                        <span class="sup-text">New Article</span>
                     </a>
                     <a class="dash-item" href="./create-task.php">
                         <i class="fa fa-list-ol spc-1"></i>
@@ -90,9 +112,7 @@
                     <?php echo $html;?>
                 </div>
                 <div>
-                    <form method="post" id="wiki-editor">
-                        <?php echo $wiki;?>
-                    </form>
+                    <?php echo $articles;?>
                 </div>
                 <section>
                 <!-- extra spacing -->
