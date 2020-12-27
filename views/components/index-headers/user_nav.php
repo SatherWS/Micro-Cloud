@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <!-- Team Steep vs. Team Stoop -->
-                <a href="../views/views/dashboard.php" class="active">Swoop.Team</a>
+                <a href="#" class="active">Swoop.Team</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>
