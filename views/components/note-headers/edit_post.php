@@ -1,6 +1,6 @@
 <!-- Go back to the list page -->
-<div class="ml2rem add-btn">
-	<button>
+<div class="ml2rem">
+	<button class="add-btn">
 	    <a href="./logs.php">
 		 <i class='fa fa-arrow-circle-o-left'></i>Go Back
 	    </a>

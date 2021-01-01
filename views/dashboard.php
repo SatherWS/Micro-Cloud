@@ -21,20 +21,20 @@
     if (mysqli_num_rows($results) > 0) {
         while ($row = mysqli_fetch_assoc($results)) {
             $id = $row["id"];
-            $articles .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
-            $articles .= "<div><h2>Post: ".$row["subject"]."</h2>";
-            $articles .= "<p><b>Category: </b>".$row["category"]."</p>";
-            $articles .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
-            $articles .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
-            $articles .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-            $articles .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
+            $articles .= "<div onclick='openArticle($id)' class='activity'>";
+            $articles .= "<h2>".$row["subject"]."</h2>";
+            $articles .= "<div class='todo-flex r-cols'>";
+            $articles .= "<div><p><b>Creator: </b>".$row["creator"]."</p></div>";
+            $articles .= "<div><p><b>Date Created: </b>".$row["date_created"]."</p>";
+            $articles .= "</div></div>";
+            $articles .= "</div>";
         }
     }
 
     // task view mode
-    // TODO: implement this
+    // TODO: implement a button that shows task panels instead of article panels and viceversa
 
-    // old code, currently scraping wiki page 12/26/20
+    // old code, currently scraping wiki pages 12/26/20
     function updateWiki($curs, $team, $content)
     {
         $sql = "update wikis set content = ? where team_name = ?";
@@ -56,8 +56,10 @@
         $html .= "<h3>View Tasks</h3>";
         $html .= "</button></form>";
     }
-    if (isset($_POST["save-wiki"]))
+    if (isset($_POST["save-wiki"])) {
         updateWiki($curs, $_SESSION["team"], $_POST["content"]);
+    }        
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +110,7 @@
                     </a>
                 </div>
                 <div class="todo-flex r-cols">
-                    <h1 class="intro-header"><?php echo $_SESSION["team"];?> Wiki Page</h1>
+                    <h1 class="intro-header"><?php echo $_SESSION["team"];?> Articles</h1>
                     <?php echo $html;?>
                 </div>
                 <div>
@@ -123,10 +125,9 @@
         </div>
     </div>
     <script>
-        function triggerForm() {
-            document.getElementById("wiki-editor").submit();
+        function openArticle(id) {
+            window.location='./journal-details.php?journal='+id;
         }
-
         // this needs to be included in every page that has the side bar team modal
         function validateTextarea() {
             var x = document.getElementById("txt-area");

@@ -38,9 +38,11 @@
         {
             while($row = mysqli_fetch_assoc($results)) 
             {
-
                 $html .= "<div class='log-container editor'>";
 		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
+                $html .= "<div class='text-left'><button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-image'></i>Upload Image</button>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-file-o'></i>Attach A File</button>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-info-circle'></i>Markdown Help</button></div>";
                 $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }

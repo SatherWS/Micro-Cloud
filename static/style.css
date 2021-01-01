@@ -248,6 +248,7 @@ textarea {
     box-shadow: 0px 0px 18px 7px rgba(0,0,0,.2);
     padding: .5rem 1rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     border: solid 1px #333;
     font-size: 21pt;
 }
@@ -546,7 +547,7 @@ main {
   border: solid #ddd 2px;
 }
 .activity:hover {
-  box-shadow: 0px 0px 7px 2px rgba(43,211,235,1);
+  border-color: #4c4177;
 }
 
 .activity-item {
@@ -830,10 +831,13 @@ element {
 }
 
 .text-center {
-  text-align: center;
+  text-align: center!important;
 }
 .text-right {
-  text-align: right;
+  text-align: right!important;
+}
+.text-left {
+  text-align: left!important;
 }
 .form-intro {
 	width: 85%;
@@ -918,7 +922,7 @@ element {
 
 .edit-field {
   height: 80vh!important;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   font-size: 21pt;
   box-shadow: 0px 0px 18px 7px rgba(0,0,0,.2);;
   background: #fff;
@@ -1022,6 +1026,12 @@ button {
 .fa-file-o:before {
 	padding-right: 8px;
 }
+.fa-image:before {
+	padding-right: 8px;
+}
+.fa-info-circle:before {
+	padding-right: 8px;
+}
 .fa-link:before {
   padding-right: 8px;
 }
@@ -1085,8 +1095,10 @@ tr:hover {background-color:#f5f5f5;}
 -----------------------------------*/
 .simple-input {
   padding: 7.7px;
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
-  border: none;
+  border: solid #ddd 2px;
+}
+.remove-right-border {
+  border-right: none;
 }
 .main-page {
   margin: 0 2rem;
@@ -1102,7 +1114,7 @@ tr:hover {background-color:#f5f5f5;}
   color: #fff;
   padding: 6px;
   border: none;
-  height: 36px;
+  height: 39px;
 }
 
 .spacer {
@@ -1157,6 +1169,14 @@ tr:hover {background-color:#f5f5f5;}
   border: solid #ddd 2px;
   /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
 }
+
+.art-ops {
+  background: #fff;
+  text-align: right!important;
+  border: solid 1px #333;
+  box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+}
+
 .dash-btn {
   color: #000;
   background: #fff;

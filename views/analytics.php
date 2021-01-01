@@ -107,10 +107,12 @@
         <div class="text-center todo-flex r-col">
         <?php
             echo "<h1>".$_SESSION["team"]." Task Analytics</h1>";
-            if (isset($_POST["start-date"]) || isset($_POST["end-date"]))
+            if (isset($_POST["start-date"]) || isset($_POST["end-date"])) {
                 echo "<p>From ".$_POST["start-date"]." to ".$_POST["end-date"]."</p>";
-            else
+            }
+            else {
                 echo "<p>Showing All Tasks</p>";
+            }
         ?>
         </div>
         <form action="./analytics.php" method="POST">
@@ -122,7 +124,7 @@
             <div class="todo-flex flex-end spc-container">
                 <div>
                     <label>End Date</label><br>
-                    <input type="date" name="end-date" class="simple-input"> 
+                    <input type="date" name="end-date" class="simple-input remove-right-border"> 
                 </div>
                 <div>
                     <input type="submit" value="Set Range" name="range" class="date-btn">
