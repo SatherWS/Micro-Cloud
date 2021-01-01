@@ -7,10 +7,10 @@
     $database = new Database();
     $curs = $database->getConnection();
     
-    if (isset($_GET["category"])) {
-        //$sql = "select id, subject, creator, team_name, substring(message,1, 55) as preview, date_format(date_created, %M/%D/%Y) from journal where category = ? and team_name = ? order by date_created desc";
+    if (isset($_GET["project"])) {
+        $sql = "select id, subject, creator, team_name, substring(message,1, 55) as preview, date_format(date_created, '%m/%d/%Y') as dt from journal where team_name = ? order by date_created desc";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $_GET["category"], $_SESSION["team"]);
+        $stmnt -> bind_param("s", $_GET["project"]);
         $stmnt -> execute();
         $result = $stmnt -> get_result();
         $total = mysqli_num_rows($result);

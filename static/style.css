@@ -1175,6 +1175,7 @@ tr:hover {background-color:#f5f5f5;}
   text-align: right!important;
   border: solid 1px #333;
   box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+  margin-left: 1rem!important;
 }
 
 .dash-btn {
@@ -1197,8 +1198,7 @@ button.add-btn {
   border-radius: 8px;
   padding: .5rem 1rem;
   margin: 10px 0;
-  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
-  border: solid #ddd 2px;
+  border: solid #ddd 3px;
 }
 
 /* ---------------------------------+
@@ -1206,13 +1206,6 @@ button.add-btn {
 -----------------------------------*/
 /* 1920 monitors */
 @media screen and (min-width: 1900px) {
-  /*
-  .dash-grid {
-    display: grid;
-    grid-template-columns: 3fr 20fr;
-    height: 100vh;
-  }
-  */
   main {
     width: 95%;
   }

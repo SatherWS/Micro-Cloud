@@ -8,18 +8,29 @@ if ($curs->connect_error) {
 }
 
 /* 
-*   Posts Editing Section 
+*   Article editing section 
 */
 
+// TODO: Change below post name to something other than `edit`
+// update an article according to the changes made in the details form
 if (isset($_POST['edit'])) {
     $sql = "update journal set message = ?, subject = ? where id = ?";
     mysqli_query($curs, $sql);
     $stmnt = mysqli_prepare($curs, $sql);
-    //$journal_edit = str_replace("\'" , "'", $journal_edit);
     $journal_edit = $_POST['edited'];
     $stmnt -> bind_param("sss", $journal_edit, $_POST['jsubs'], $_POST['edit']);
     $stmnt -> execute();
     header("Location: ../views/journal-details.php?journal=".$_POST['edit']);
+}
+
+if (isset($_POST["img-upload"])) {
+    $msg = "Image upload was clicked";
+    header("Location: ./test.php?msg=$msg");
+}
+
+if (isset($_POST["file-upload"])) {
+    $msg = "File upload was clicked";
+    header("Location: ./test.php?msg=$msg");
 }
 
 if (isset($_POST['delete'])) {
@@ -34,6 +45,7 @@ if (isset($_POST['delete'])) {
 /* 
 *   Main Tasks & Sub Task Editing Section 
 */
+
 if (isset($_POST['mod-task'])) {
     $id = $_POST['mod-task'];
     $sql = "update todo_list set title=?, description=?, date_created=?, deadline=?, importance=?, status=?, assignee=?, creator=? where id=?";

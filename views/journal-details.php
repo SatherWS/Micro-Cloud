@@ -40,9 +40,9 @@
             {
                 $html .= "<div class='log-container editor'>";
 		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $html .= "<div class='text-left'><button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-image'></i>Upload Image</button>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-file-o'></i>Attach A File</button>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='". $_GET['journal']. "'><i class='fa fa-info-circle'></i>Markdown Help</button></div>";
+                $html .= "<div class='text-left todo-flex'><div><button class='add-btn art-ops' type='submit' name='img-upload' value='".$row['id']. "'><i class='fa fa-image'></i>Upload Image</button>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='file-upload' value='".$row['id']. "'><i class='fa fa-file-o'></i>Attach A File</button></div>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='".$row['id']. "'><i class='fa fa-info-circle'></i>Markdown Help</button></div>";
                 $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
@@ -73,7 +73,6 @@
 </head>
 <body>
 <?php include("./components/header.php");?>
-<?php //include("./components/modals/url_modal.php");?>
 <div class="svg-bg sticky">
     <div class="todo-flex">
         <?php
@@ -86,10 +85,10 @@
         ?>
     </div>    
 </div>
-<form action="../controllers/edit_entry.php" method="post" id="editor">
+<form action="../controllers/edit_entry.php" method="post" id="editor" enctype="multipart/form-data">
     <?php
-    // display journal entry in plain text or inside a textarea
-    // raw data is stored in lhapps database and decoded with nl2br() function
+    // display article in plain text or inside a textarea depending on button click
+    // raw data is stored in the database and decoded with nl2br function
         if (isset($row)) 
         {
             echo "<div class='log-details'>";

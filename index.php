@@ -31,7 +31,7 @@
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
         $html .= "<p>Admin: ".$row["admin"]."</p></div>";
         
-        // vote control
+        // vote control buttons
         $html .= "<form method='post'>";
         $html .= "<div class='vote-control'>";
         $html .= "<button type='submit' name='upvote' value='$id'>";
@@ -39,18 +39,16 @@
         $html .= "</button>";
         $html .= "<p class='text-center'>".$row["rating"]."</p>";
         $html .= "<button type='submit' name='downvote' value='$id'>";
-        $html .= "  <span class='vote2'> </span>";
+        $html .= "<span class='vote2'> </span>";
         $html .= "</button></div></div>";
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols'>";
         $html .= "<p>Date Created: ".$row["date_created"]."</p>";
         $html .= "<div class='todo-flex'>";
-        
 
-        $temp = "Stockton Homework"; // can be vunerable to sqli
-
-        $html .= "<h4><button><a href='./views/logs.php?project=".$temp."'class='add-btn-2'>Read Articles</a></button></h4>";
+        // project links
+        $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
         $html .= "<h4><button><a href='#' class='add-btn-2'>View Tasks</a></button></h4>";
         $html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
         $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></form></div>";
