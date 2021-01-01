@@ -45,15 +45,15 @@
 
         $html .= "<div class='settings-flex r-cols'>";
         $html .= "<p>Date Created: ".$row["date_created"]."</p>";
-        #$html .= "<p><b>Project Tags</b></p>";
         $html .= "<div class='todo-flex'>";
-        $html .= "<h4><button><a href='#' class='add-btn-2'>Read Articles</a></button></h4>";
+        
+
+        $temp = "Stockton Homework"; // can be vunerable to sqli
+
+        $html .= "<h4><button><a href='./views/logs.php?project=".$temp."'class='add-btn-2'>Read Articles</a></button></h4>";
         $html .= "<h4><button><a href='#' class='add-btn-2'>View Tasks</a></button></h4>";
         $html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
         $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></form></div>";
-        //$html .= "<div class='img-type'>";
-        //$html .= "<img src='https://38.media.tumblr.com/587f48c6548e640f943b7c8c6e3f40de/tumblr_mz8yzmi1XJ1ru39xmo1_500.gif'>";
-        //$html .= "</div>";
         $html .= "</div></section>";
         $html .= "<div class='uline'></div>";
     }

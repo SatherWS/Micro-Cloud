@@ -10,8 +10,9 @@
 
     $curs = $db -> getConnection();
     $html = "";
-    $articles = "";
 
+    // article view mode
+    $articles = "";
     $sql = "select * from journal where team_name = ? order by date_created desc";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $_SESSION["team"]);
@@ -26,12 +27,12 @@
             $articles .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
             $articles .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
             $articles .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-            // TODO: close p tag if substring contains an iframe tag (video, img etc)
-            //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
             $articles .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
-            
         }
     }
+
+    // task view mode
+    // TODO: implement this
 
     // old code, currently scraping wiki page 12/26/20
     function updateWiki($curs, $team, $content)
@@ -41,20 +42,19 @@
         $stmnt -> bind_param("ss", $content, $team);
         $stmnt -> execute();
     }
-    if (isset($_POST["edit-wiki"]))
+    if (isset($_POST["task-view"]))
     {
-        $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='save-wiki' value='".$_SESSION["team"]."'>";
-        $html .= "<h3><i class='fa fa-save'></i>Save Edit</h3>";
-        $html .= "</button>";
-        //$articles .= "<br><textarea name='content' id='wiki-txt-area'></textarea>";
+        $html .= "<form method='post'>";
+        $html .= "<button class='add-btn' type='submit' value='".$_SESSION["team"]."'>";
+        $html .= "<h3>View Articles</h3>";
+        $html .= "</button></form>";
     }
     else {
         $html = "";
-        $html .= "<button onclick='triggerForm()' class='add-btn' type='submit' name='edit-wiki' value='".$_SESSION["team"]."'>";
-        $html .= "<h3><i class='fa fa-edit'></i>Edit Wiki</h3>";
-        $html .= "</button>";
-        $html .= "<input type='hidden' name='edit-wiki' value='".$row['id']."'>";
-        //$articles = $wk -> getWiki($curs, $_SESSION["team"]);
+        $html .= "<form method='post'>";
+        $html .= "<button class='add-btn' type='submit' name='task-view' value='".$_SESSION["team"]."'>";
+        $html .= "<h3>View Tasks</h3>";
+        $html .= "</button></form>";
     }
     if (isset($_POST["save-wiki"]))
         updateWiki($curs, $_SESSION["team"], $_POST["content"]);
