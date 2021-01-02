@@ -90,6 +90,12 @@
         ?>
     </div>    
 </div>
+<form action="../controllers/uploader.php" method="post" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  <input type="submit" value="Upload Image" name="submit">
+</form>
+
 <form action="../controllers/edit_entry.php" method="post" id="editor" enctype="multipart/form-data">
     <?php
     // display article in plain text or inside a textarea depending on button click
