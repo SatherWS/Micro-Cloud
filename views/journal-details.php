@@ -42,12 +42,6 @@
             {
                 $html .= "<div class='log-container editor'>";
 		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $html .= "<div class='text-left todo-flex'><div>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='img-upload' value='".$row['id']. "'><i class='fa fa-image'></i>Upload Image</button>";
-                $html .= "<input type='file' name='fileToUpload' id='fileToUpload'>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='file-upload' value='".$row['id']."'><i class='fa fa-file-o'></i>Attach A File</button></div>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='".$row['id']. "'>";
-                $html .= "<i class='fa fa-info-circle'></i>Markdown Help</button></div>";
                 $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
@@ -90,11 +84,6 @@
         ?>
     </div>    
 </div>
-<form action="../controllers/uploader.php" method="post" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
-</form>
 
 <form action="../controllers/edit_entry.php" method="post" id="editor" enctype="multipart/form-data">
     <?php
@@ -102,10 +91,17 @@
     // raw data is stored in the database and decoded with nl2br function
         if (isset($row)) 
         {
+            $id = $row['id'];
             echo "<div class='log-details'>";
             echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
+            if (!$read_only) {
+                echo "Select an image to upload to the article:<br>";
+                echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+                echo "<input type='hidden' value='$id' name='article_assoc'>";
+                echo "<input type='submit' value='Upload Image' name='img-upload'>";
+            }
             echo "<p class='message-p'>".nl2br($row['message'])."</p>";
             echo "</div>";
         }

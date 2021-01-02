@@ -971,8 +971,8 @@ element {
 }
 
 button {
-    background: transparent;
-    border: none;
+  background: transparent;
+  border: none;
 }
 
 .message-p {
@@ -1001,7 +1001,6 @@ button {
 .cat-grid div button {
   font-size: 25px;
 }
-/* Todo & Journal Icons ***********************/
 .emailer {
   border: solid #ddd 2px;
   padding: 2rem;
@@ -1020,6 +1019,9 @@ button {
   height: 125px!important;
   font-size: 16pt;
 }
+/* ---------------------------------+
+  Todo & Journal Icons              |
+-----------------------------------*/
 .fa-save:before {
   padding-right: 8px;
 }
@@ -1167,7 +1169,6 @@ tr:hover {background-color:#f5f5f5;}
   border-radius: 8px;
   padding: .5rem 1rem;
   border: solid #ddd 2px;
-  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
 }
 
 .art-ops {
@@ -1185,7 +1186,6 @@ tr:hover {background-color:#f5f5f5;}
   width: 80%;
   padding: .5rem 1rem;
 	border: solid #ddd 2px;
- /* box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
 }
 .spc-flex {
   display: flex;
@@ -1199,6 +1199,9 @@ button.add-btn {
   padding: .5rem 1rem;
   margin: 10px 0;
   border: solid #ddd 3px;
+}
+.add-btn:hover {
+  border-color: #4c4177;
 }
 
 /* ---------------------------------+

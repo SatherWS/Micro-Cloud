@@ -9,11 +9,12 @@
         $project = "";
         while ($row = mysqli_fetch_assoc($results2)) {
             $team = $row["team_name"];
-            if ($team == $_SESSION["team"])
+            if ($team == $_SESSION["team"] && !isset($_GET["project"]))
                 $project .= "<h3 class='selected'><a href='../controllers/change_team.php?switched=".$row["team_name"]."&location=".$_SERVER['REQUEST_URI']."'>"; 
-            else
+            else {
                 $project .= "<h3><a href='../controllers/change_team.php?switched=".$row["team_name"]."&location=".$_SERVER['REQUEST_URI']."'>";
-            	$project .= $row["team_name"]."</a></h3>";
+                $project .= $row["team_name"]."</a></h3>";
+            }
         }
         return $project;
     }
