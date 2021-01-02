@@ -1,4 +1,6 @@
 <?php
+    // Not in use
+
     include_once("./config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
@@ -7,7 +9,7 @@
 
     function show_projects($r) {
         $html = "";
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($r)) {
             $html .= $row["team_name"]."<br>";
         }
         return $html;

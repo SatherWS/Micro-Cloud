@@ -43,15 +43,24 @@
     <?php include("./components/modals/modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <p class="welcome"><?php echo $_SESSION["team"];?></p>
-            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
+        <?php
+            if (isset($_GET["project"]))
+                echo "<p class='welcome'>". $_GET["project"]. "</p>";
+            else
+                echo "<p class='welcome'>". $_SESSION["team"]. "</p>";
+            
+            if (isset($_SESSION["unq_user"]))
+                echo "<p class='welcome'>". $_SESSION["unq_user"]. "</p>";
+            else
+                echo "<p class='welcome'>Guest</p>";
+        ?>
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">
         <div class="log-container">
             <div class="todo-flex">
                 <div class="review">
-                    <h4 id="logs-title"><?php echo $total;?> Posts</h4>
+                    <h4 id="logs-title"><?php echo $total;?> Articles</h4>
                 </div>
                 <div class="add-btn">
                     <h4>

@@ -1,14 +1,15 @@
 <?php 
+    include_once('../config/database.php');
     session_start();
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    // TODO: MOVE ALL BELOW THIS TO CONTROLLERS v
-    include_once('../config/database.php');
+    // TODO: MOVE PHP ELEMENT TO CONTROLLERS v
     $database = new Database();
     $curs = $database->getConnection();
 
-    if (isset($_GET['journal'])) {
+    if (isset($_GET['journal'])) 
+    {
         $id = $_GET['journal'];
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -24,7 +25,8 @@
             $read_only = true;
     }
 
-    if (isset($_POST['edit'])) {
+    if (isset($_POST['edit'])) 
+    {
         $id = $_POST['edit'];
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -40,9 +42,12 @@
             {
                 $html .= "<div class='log-container editor'>";
 		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $html .= "<div class='text-left todo-flex'><div><button class='add-btn art-ops' type='submit' name='img-upload' value='".$row['id']. "'><i class='fa fa-image'></i>Upload Image</button>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='file-upload' value='".$row['id']. "'><i class='fa fa-file-o'></i>Attach A File</button></div>";
-                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='".$row['id']. "'><i class='fa fa-info-circle'></i>Markdown Help</button></div>";
+                $html .= "<div class='text-left todo-flex'><div>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='img-upload' value='".$row['id']. "'><i class='fa fa-image'></i>Upload Image</button>";
+                $html .= "<input type='file' name='fileToUpload' id='fileToUpload'>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='file-upload' value='".$row['id']."'><i class='fa fa-file-o'></i>Attach A File</button></div>";
+                $html .= "<button class='add-btn art-ops' type='submit' name='edit' value='".$row['id']. "'>";
+                $html .= "<i class='fa fa-info-circle'></i>Markdown Help</button></div>";
                 $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
@@ -100,9 +105,7 @@
         }
 
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
-        {
             echo $html;
-        }
     ?>
 </form>
 <!--

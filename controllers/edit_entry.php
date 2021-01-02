@@ -1,5 +1,6 @@
 <?php
 include_once '../config/database.php';
+include '../controllers/uploader.php';
 $database = new Database();
 $curs = $database->getConnection();
 
@@ -11,7 +12,6 @@ if ($curs->connect_error) {
 *   Article editing section 
 */
 
-// TODO: Change below post name to something other than `edit`
 // update an article according to the changes made in the details form
 if (isset($_POST['edit'])) {
     $sql = "update journal set message = ?, subject = ? where id = ?";
@@ -23,9 +23,26 @@ if (isset($_POST['edit'])) {
     header("Location: ../views/journal-details.php?journal=".$_POST['edit']);
 }
 
+// send image to server
 if (isset($_POST["img-upload"])) {
-    $msg = "Image upload was clicked";
-    header("Location: ./test.php?msg=$msg");
+    $target_dir = "/uploads/images/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+    // Check if image file is a actual image or fake image
+    if (isset($_POST["img-upload"])) {
+      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+      if ($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+      } 
+      else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+      }
+    }
+    header("Location: ../$uploadOk+$target_dir+$target_file");
 }
 
 if (isset($_POST["file-upload"])) {

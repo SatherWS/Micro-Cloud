@@ -8,7 +8,12 @@
     $curs = $database->getConnection();
     $sql = "select *,  date_format(date_created, '%m/%d/%Y') as st, date_format(deadline, '%m/%d/%Y') as dt from todo_list where team_name = ? order by deadline desc";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt ->  bind_param("s", $_SESSION["team"]);
+
+    if (isset($_GET["project"]))
+        $stmnt ->  bind_param("s", $_GET["project"]);
+    else 
+        $stmnt ->  bind_param("s", $_SESSION["team"]);    
+
     $stmnt -> execute();
     $result = $stmnt -> get_result();
     $filter = $_POST['s-status'];
@@ -65,8 +70,17 @@
     <?php include("./components/modals/modal.php");?>
     <div class="svg-bg">
         <div class="todo-flex">
-            <p class="welcome"><?php echo $_SESSION["team"];?></p>
-            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
+            <?php
+                if (isset($_GET["project"]))
+                    echo "<p class='welcome'>". $_GET["project"]. "</p>";
+                else
+                    echo "<p class='welcome'>". $_SESSION["team"]. "</p>";
+                
+                if (isset($_SESSION["unq_user"]))
+                    echo "<p class='welcome'>". $_SESSION["unq_user"]. "</p>";
+                else
+                    echo "<p class='welcome'>Guest</p>";
+            ?>
         </div>
     </div>
     <div class="dash-grid r-cols" id="main">

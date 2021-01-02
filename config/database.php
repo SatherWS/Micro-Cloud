@@ -1,5 +1,4 @@
 <?php
-
     class Database {
         private $hostname = "localhost";
         private $user = "root";
