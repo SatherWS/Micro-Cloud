@@ -3,51 +3,41 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    require "../controllers/parse_interface.php";
+    require "../controllers/parsedown_interface.php";
     include_once "../config/database.php";
     $db = new Database();
-    $wk = new Wiki();
 
     $curs = $db -> getConnection();
     $html = "";
 
     // article view mode
-    $articles = "";
-    $sql = "select * from journal where team_name = ? order by date_created desc";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $_SESSION["team"]);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
-    if (mysqli_num_rows($results) > 0) {
-        while ($row = mysqli_fetch_assoc($results)) {
-            $id = $row["id"];
-            $articles .= "<div onclick='openArticle($id)' class='activity'>";
-            $articles .= "<h2>".$row["subject"]."</h2>";
-            $articles .= "<div class='todo-flex r-cols'>";
-            $articles .= "<div><p><b>Creator: </b>".$row["creator"]."</p></div>";
-            $articles .= "<div><p><b>Date Created: </b>".$row["date_created"]."</p>";
-            $articles .= "</div></div>";
-            $articles .= "</div>";
-        }
-    }
+    $content = "";
 
     // task view mode
-    // TODO: implement a button that shows task panels instead of article panels and viceversa
-
-    // old code, currently scraping wiki pages 12/26/20
-    function updateWiki($curs, $team, $content)
-    {
-        $sql = "update wikis set content = ? where team_name = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $content, $team);
-        $stmnt -> execute();
-    }
     if (isset($_POST["task-view"]))
     {
         $html .= "<form method='post'>";
         $html .= "<button class='add-btn' type='submit' value='".$_SESSION["team"]."'>";
         $html .= "<h3>View Articles</h3>";
         $html .= "</button></form>";
+        $sql = "select * from todo_list where team_name = ? order by date_created desc";
+
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        while ($row = mysqli_fetch_assoc($results)) {
+            $id = $row["id"];
+            $content .= "<div onclick='openTask($id)' class='activity'><div class='todo-flex r-cols'>";
+            $content .= "<div><h2>Task: ".$row["title"]."</h2>";
+            $content .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
+            $content .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
+            $content .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+            $content .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
+            $content .= "<div class='todo-flex r-cols'>";
+            $content .= "<p class='activity-item'>".$row["description"]."</p>";
+            $content .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
+        }
     }
     else {
         $html = "";
@@ -55,10 +45,26 @@
         $html .= "<button class='add-btn' type='submit' name='task-view' value='".$_SESSION["team"]."'>";
         $html .= "<h3>View Tasks</h3>";
         $html .= "</button></form>";
+        $sql = "select * from journal where team_name = ? order by date_created desc";
+
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+    
+        if (mysqli_num_rows($results) > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $id = $row["id"];
+                $content .= "<div onclick='openArticle($id)' class='activity'>";
+                $content .= "<h2>".$row["subject"]."</h2>";
+                $content .= "<div class='todo-flex r-cols'>";
+                $content .= "<div><p><b>Date Created: </b>".$row["date_created"]."</p></div>";
+                $content .= "<div><p><b>Creator: </b>".$row["creator"]."</p></div>";
+                $content .= "</div></div>";
+            }
+        }
     }
-    if (isset($_POST["save-wiki"])) {
-        updateWiki($curs, $_SESSION["team"], $_POST["content"]);
-    }        
+
 
 ?>
 <!DOCTYPE html>
@@ -114,7 +120,7 @@
                     <?php echo $html;?>
                 </div>
                 <div>
-                    <?php echo $articles;?>
+                    <?php echo $content;?>
                 </div>
                 <section>
                 <!-- extra spacing -->
@@ -127,6 +133,9 @@
     <script>
         function openArticle(id) {
             window.location='./journal-details.php?journal='+id;
+        }
+        function openTask(id) {
+            window.location='./task-details.php?task='+id;
         }
         // this needs to be included in every page that has the side bar team modal
         function validateTextarea() {
