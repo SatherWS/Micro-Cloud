@@ -53,7 +53,7 @@
         // project links
         $html .= "<div class='todo-flex r-cols index-btns'>";
         $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
-        $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>View Tasks</a></button></h4>";
+        $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></button></h4>";
         //$html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
         $html .= "<h4><button><a href='#' class='add-btn-2'>Join Project</a></button></h4>";
         $html .= "</div></div></section>";
