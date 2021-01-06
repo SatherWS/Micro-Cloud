@@ -5,7 +5,9 @@
     $curs = $db->getConnection();
     $sql = "select * from teams order by date_created desc";
     $result = mysqli_query($curs, $sql);
+
     $html = "";
+    $project_count = 0;
 
     if (isset($_POST["upvote"])) {
         $vote = "update teams set rating = rating + 1 where team_name = ?";
@@ -25,6 +27,7 @@
 
     while ($row = mysqli_fetch_assoc($result)) 
     {
+        $project_count = $row["count(*)"];
         $id = $row["team_name"];
         $html .= "<section class='project-entry'><div class='todo-flex'>";
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
@@ -48,14 +51,17 @@
         $html .= "<p>Date Created: ".$row["date_created"]."</p>";
 
         // project links
-        $html .= "<div class='todo-flex'>";
+        $html .= "<div class='todo-flex r-cols index-btns'>";
         $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
         $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>View Tasks</a></button></h4>";
-        $html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
-        $html .= "<h4><button type='submit' class='add-btn-2'>Join Project</button></h4></form></div>";
-        $html .= "</div></section>";
+        //$html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
+        $html .= "<h4><button><a href='#' class='add-btn-2'>Join Project</a></button></h4>";
+        $html .= "</div></div></section>";
         $html .= "<div class='uline'></div>";
     }
+
+    $project_count = mysqli_num_rows($result);
+    mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,18 +87,18 @@
     <article class="svg-bg dash-grid r-cols">
         <form action="" method="post">
             <div class="srch-section">
-                    <input type="text" placeholder="Search all projects" class="search-field">
-                    <input type="submit" value="Search" class="add-btn">
+                <input type="text" placeholder="Search our projects" class="search-field">
+                <input type="submit" value="Search" class="add-btn">
             </div>
         </form>
         <div></div>
     </article>
     <div class="dash-grid r-col" id="main">
         <section class="proj-feed">
-            <h1>Swoop CMS</h1>
+            <h1 class="main-title">Swoop Project Management</h1>
             <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
             <br></br>
-            <h2>Projects Hosted on Swoop</h2>
+            <h2><?php printf($project_count); ?> projects hosted on this instance</h2>
             <div class="uline"></div>
                 <?php echo $html;?>
         </section>
