@@ -97,10 +97,15 @@
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
             if (!$read_only) {
-                echo "Select an image to upload to the article:<br>";
+                echo "<br>Select an image to upload to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
                 echo "<input type='hidden' value='$id' name='article_assoc'>";
-                echo "<input type='submit' value='Upload Image' name='img-upload'>";
+                echo "<input type='submit' value='Upload Image' name='img-upload'><br>";
+
+                echo "<br>Attach a relevant file to the article:<br>";
+                echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+                echo "<input type='hidden' value='$id' name='article_assoc'>";
+                echo "<input type='submit' value='Attach Files' name='file-upload'><br>";
             }
             echo "<p class='message-p'>".nl2br($row['message'])."</p>";
             echo "</div>";
