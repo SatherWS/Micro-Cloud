@@ -68,7 +68,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
-    <title>Swoop | Post</title>
+    <title>Swoop | Viewing an article</title>
 </head>
 <body>
 <?php include("./components/header.php");?>
@@ -97,15 +97,20 @@
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
             if (!$read_only) {
+                echo "<div class='todo-flex r-cols'>";
+                echo "<section>";
                 echo "<br>Select an image to upload to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
                 echo "<input type='hidden' value='$id' name='article_assoc'>";
                 echo "<input type='submit' value='Upload Image' name='img-upload'><br>";
-
+                echo "</section>";
+                echo "<section>";
                 echo "<br>Attach a relevant file to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
                 echo "<input type='hidden' value='$id' name='article_assoc'>";
                 echo "<input type='submit' value='Attach Files' name='file-upload'><br>";
+                echo "</section>";
+                echo "</div>";
             }
             echo "<p class='message-p'>".nl2br($row['message'])."</p>";
             echo "</div>";

@@ -87,7 +87,7 @@
     <article class="svg-bg dash-grid r-cols">
         <form action="" method="post">
             <div class="srch-section">
-                <input type="text" placeholder="Search our projects" class="search-field">
+                <input type="text" placeholder="Search" class="search-field">
                 <input type="submit" value="Search" class="add-btn">
             </div>
         </form>

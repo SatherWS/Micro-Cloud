@@ -168,8 +168,6 @@
                         echo "<br></br>";
                         echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
                         echo "<br></br>";
-                        echo "<input type='number' min='1' max='4' name='repeat-count' placeholder='Enter Repitition Count' class='repeat-input'/>";
-                        echo "<br></br>";
                         echo "<input type='submit' name='send-emails' value='Apply Settings' class='add-btn-2'/>";
                         echo "</div></div>";
                     }
