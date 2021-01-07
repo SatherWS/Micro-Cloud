@@ -1,6 +1,11 @@
-<form action="./task-details.php" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
-    <button class="add-btn" type='submit' name='delete' value="<?php echo $_GET['task']; ?>"><i class='fa fa-close'></i>Delete Task</button>
-</form>
+
+<div class="add-btn">
+	<button>
+	    <a href="./show-tasks.php">
+		    <i class='fa fa-arrow-circle-o-left'></i>Go Back
+	    </a>
+	</button>
+</div>
 <form action="./task-details.php" method="post">
-    <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
+    <button onclick="hideSubRanger()" class="add-btn" type="submit" name="edit" value="<?php echo $_GET['task']; ?>"><i class="fa fa-edit"></i>Edit Task</button>
 </form>

@@ -1,6 +1,6 @@
 <?php
 include_once("../config/database.php");
-include("../models/settings.php");
+//include("../models/settings.php");
 
 session_start();
 if (!isset($_SESSION["unq_user"]))
@@ -8,25 +8,49 @@ if (!isset($_SESSION["unq_user"]))
 
 $db = new Database();
 $curs = $db -> getConnection();
-$sql = "select email from users where team = ?";
-$stmnt = mysqli_prepare($curs, $sql);
-$stmnt -> bind_param("s", $_SESSION["team"]);
-$stmnt -> execute();
-$results = $stmnt -> get_result();
 
-/*
-$sql2 = "select * from invites where team_name = ?";
-$stmnt2 = mysqli_prepare($curs, $sql2);
-$stmnt2->bind_param("s", $_SESSION["team"]);
-$stmnt2->execute();
-$results2 = $stmnt2->get_result();
-*/
+function get_admin($curs, $user, $team) {
+    $sql = "select admin from teams where admin = ? and team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("ss", $user, $team);
+    $stmnt->execute();
+    $result = $stmnt->get_result();
+    if (mysqli_num_rows($result) > 0)
+        return true;
+    else
+        return false;
+}
+function invite_count($curs, $user) {
+    $sql = "select count(*) from invites where sender = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $user);
+    $stmnt -> execute();
+    $result = $stmnt -> get_result();
+    $data = mysqli_fetch_assoc($result);
+    return $data["count(*)"];
+}
 
-$sql3 = "select * from invites where receiver = ? or sender = ?";
-$stmnt3 = mysqli_prepare($curs, $sql3);
-$stmnt3->bind_param("ss", $_SESSION["unq_user"], $_SESSION["unq_user"]);
-$stmnt3->execute();
-$results3 = $stmnt3->get_result();
+if (isset($_SESSION["team"])) {
+    $sql = "select email from members where team_name = ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $_SESSION["team"]);
+    $stmnt -> execute();
+    $results = $stmnt -> get_result();
+}
+if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
+    $sql2 = "select * from invites where sender = ? order by date_created desc";
+    $stmnt2 = mysqli_prepare($curs, $sql2);
+    $stmnt2->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt2->execute();
+    $results2 = $stmnt2->get_result();
+}
+if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
+    $sql3 = "select * from invites where receiver = ? order by date_created desc";
+    $stmnt3 = mysqli_prepare($curs, $sql3);
+    $stmnt3->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt3->execute();
+    $results3 = $stmnt3->get_result();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,85 +59,106 @@ $results3 = $stmnt3->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swoop.Team | User Settings</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="../favicon.png" >
 </head>
 <body class="todo-bg-test">
-    <?php include("./components/header.php");?>
-    <div class="todo-bg-test">
-        <div class="settings-space">
-            <div class="settings-panel">
-                <div class="settings-flex r-cols">
-                    <div>
-                        <h2>User Information</h2>
-                        <?php 
-                            // for invite teammate form
-                            if (isset($_GET["error"])) {
-                                echo "<div><p>".$_GET["error"]."</p></div>";
+<?php include("./components/header.php");?>
+<?php include("./components/modals/modal.php");?>
+<div class="todo-bg-test">
+    <div class="svg-bg">
+        <div class="todo-flex">
+            <p class="welcome"><?php echo $_SESSION["team"];?></p>
+            <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
+        </div>
+    </div>
+    <div class="dash-grid r-cols" id="main">
+        <div>
+            <h1 class="ml2rem">Team Member Settings</h1>
+            <div class="settings-space">
+                <div class="settings-panel">
+                    <div class="settings-flex r-cols">
+                        <div>
+                            <?php
+                            if (isset($results)) 
+                            {
+                                echo "<h2>Members of ".$_SESSION['team']."</h2>";
+                                while ($row = mysqli_fetch_assoc($results))
+                                    echo "<p>".$row["email"]."</p>";
                             }
+                            else
+                                echo "<p>This user does not belong to a project</p>";
+                            ?>
+                        </div>
+                        <div>
+                            <h2>User Information</h2>
+                            <?php 
+                            if (isset($_GET["error"])) 
+                                echo "<div><p>".$_GET["error"]."</p></div>";
                             echo "<p>Username: ".$_SESSION["user"]."</p>";
                             echo "<p>Email: ".$_SESSION["unq_user"]."</p>";
                             echo "<p>Team: ".$_SESSION["team"]."</p>";
-                        ?>
-                    </div>
-                    <div>
-                        <?php
-                            echo "<h2>Members of ".$_SESSION['team']."</h2>";
-                            while ($row = mysqli_fetch_assoc($results)) {
-                                echo "<p>".$row["email"]."</p>";
-                            }
-                        ?>
-                    </div>
-                </div>
-                <div class="invites">
-                    <h2>Invite History</h2>
-                    <form action="../controllers/auth_user.php" method="post">
-                        <table class="data journal-tab">
-                        <?php
-                        if (mysqli_num_rows($results3) > 0) {
-                            include ("./components/settings-table.php");
-                            while ($row=mysqli_fetch_assoc($results3)) {
-                                $id = $row["team_name"];
-                                if ($row["status"] != "pending") {
-                                    echo "<tr><td></td>";
-                                }
-                                else if ($_SESSION["unq_user"] == $row["receiver"]) {
-                                    echo "<tr><td><button class='accept-btn' type='submit' name='accept' value='$id'>Accept</button>";
-                                    echo "<button class='deny-btn' type='submit' name='deny' value='$id'>Deny</button></td>";
-                                }
-                                else {
-                                    echo "<tr><td></td>";
-                                }
-                                echo "<td>".$row["team_name"]."</td>";
-                                echo "<td>".$row["receiver"]."</td>";
-                                echo "<td>".$row["sender"]."</td>";
-                                echo "<td>".$row["status"]."</td>";
-                                echo "<td>".$row["date_created"]."</td>";
-                            }
-                        }
-                        else {
-                            echo "<h4>No invites have beed processed yet...</h4>";
-                        }
-                        ?>
-                        </table>
-                    </form>
-                </div>
-                <div class="add-worker">
-                    <form method="post" action="../controllers/auth_user.php">
-                        <h2>Add New Team Member</h2>
-                        <div class="todo-flex r-cols">
-                            <input type="text" name="user_email" placeholder="Search member by email address" class="spc-n simple-input" required>
-                            <input type="submit" name="invite_user" value="Invite User" id="form-control2" class="settings-btn">
+                            ?>
                         </div>
-                    </form>
-                    <?php echo "<h4>".$_GET["msg"]."</h4>";?>
+                    </div>
                 </div>
-                <!-- WIP 
-                <h2>Danger Zone</h2>-->
             </div>
+            <div class="settings-space">
+                <h1 class="ml2rem">Invitation Settings</h1>
+                <div class="settings-panel">
+                    <h3>Requests to join <?php echo $_SESSION["team"];?></h3>
+                    <?php
+                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
+                            if (invite_count($curs, $_SESSION["team"]) > 0)
+                                include("./components/requests-table.php");
+                            else
+                                echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
+                        }
+                    ?>
+                    <div class="invites">
+                        <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
+                        <?php
+                            if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
+                                include("./components/sender-table.php");
+                            }
+                            else {
+                                echo "<h4 class='stng-msg'>No requests have been sent yet...</h4>";
+                            }
+                        ?>
+                    </div>
+                </div>
+                <h1 class="ml2rem">Danger Zone</h1>
+                <div class="settings-space">
+                    <div class="settings-panel">
+                        <div class="settings-flex r-cols">
+                            <div>
+                                <!-- Not attempted 10/20/2020 -->
+                                <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
+                                    <input type="submit" value="EDIT PROJECT" onlick="alert('WIP')">
+                                </form>
+                            </div>
+                            <div>
+                                <h3>Delete Project: <?php echo $_SESSION["team"];?></h3>
+                                <form action="../controllers/delete_project.php" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
+                                    <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
+                                    <input type="submit" name="delete_proj" value="DELETE PROJECT">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
         </div>
+        <?php include("./components/sidebar.php");?>
     </div>
-    <script src="../static/main.js"></script>
+</div>
+<script src="../static/main.js"></script>
+<script src="../static/modal.js"></script>
 </body>
 </html>

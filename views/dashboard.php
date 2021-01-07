@@ -3,126 +3,69 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    include_once("../config/database.php");
+    require "../controllers/parsedown_interface.php";
+    include_once "../config/database.php";
     $db = new Database();
+
     $curs = $db -> getConnection();
     $html = "";
 
-    // TODO: MOVE THIS TO MODELS SINCE ITS DATA RELATED
-    // select all tasks by team
-    if ($_POST["options-a"] == "all_tasks" || $_SERVER["REQUEST_METHOD"] != "POST") {
+    // article view mode
+    $content = "";
+
+    // task view mode
+    if (isset($_POST["task-view"]))
+    {
+        $html .= "<form method='post'>";
+        $html .= "<button class='add-btn' type='submit' value='".$_SESSION["team"]."'>";
+        $html .= "<h3>View Articles</h3>";
+        $html .= "</button></form>";
         $sql = "select * from todo_list where team_name = ? order by date_created desc";
+
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         while ($row = mysqli_fetch_assoc($results)) {
             $id = $row["id"];
-            $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
-            $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-            $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-            $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
-            $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
-            $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
-            $html .= "<div class='todo-flex r-cols'>";
-            $html .= "<p class='activity-item'>".$row["description"]."</p>";
-            $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
+            $content .= "<div onclick='openTask($id)' class='activity'><div class='todo-flex r-cols'>";
+            $content .= "<div><h2>Task: ".$row["title"]."</h2>";
+            $content .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
+            $content .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
+            $content .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+            $content .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
+            $content .= "<div class='todo-flex r-cols'>";
+            $content .= "<p class='activity-item'>".$row["description"]."</p>";
+            $content .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
         }
     }
-
-    // select all posts by team
-    if ($_POST["options-a"] == "all_posts") {
+    else {
+        $html = "";
+        $html .= "<form method='post'>";
+        $html .= "<button class='add-btn' type='submit' name='task-view' value='".$_SESSION["team"]."'>";
+        $html .= "<h3>View Tasks</h3>";
+        $html .= "</button></form>";
         $sql = "select * from journal where team_name = ? order by date_created desc";
+
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
+    
         if (mysqli_num_rows($results) > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
                 $id = $row["id"];
-                $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
-                $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
-                $html .= "<p><b>Category: </b>".$row["category"]."</p>";
-                $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
-                $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
-                $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                // TODO: close p tag if substring contains an iframe tag (video, img etc)
-                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
-                $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
-                
+                $content .= "<div onclick='openArticle($id)' class='activity'>";
+                $content .= "<h2>".$row["subject"]."</h2>";
+                $content .= "<div class='todo-flex r-cols'>";
+                $content .= "<div><p><b>Date Created: </b>".$row["date_created"]."</p></div>";
+                $content .= "<div><p><b>Creator: </b>".$row["creator"]."</p></div>";
+                $content .= "</div></div>";
             }
         }
     }
 
-    // notes posted by current user
-    if ($_POST["options-a"] == "created_posts") {
-        $sql = "select * from journal where creator = ? order by date_created desc";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
-        $stmnt -> execute();
-        $results = $stmnt -> get_result();
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $id = $row["id"];
-                $html .= "<div onclick='panelLinkP($id)' class='activity'><div class='todo-flex r-cols'>";
-                $html .= "<div><h2>Post: ".$row["subject"]."</h2>";
-                $html .= "<p><b>Category: </b>".$row["category"]."</p>";
-                $html .= "<p><b>Category: </b>".$row["date_created"]."</p></div>";
-                $html .= "<div><p><b>Creator: </b>".$row["creator"]."</p>";
-                $html .= "<p><b>Status: </b>".$row["is_private"]."</p></div></div>";
-                // TODO: close p tag if substring contains an iframe tag (video, img etc)
-                //$html .= "<p class='activity-item'>".substr($row["message"], 0, 175)."</p></div>";
-                $html .= "<a href='./journal-details.php?journal=$id'>Read Post</a></div>";
-            }
-        }
-    }
 
-    // tasks assigned to current user
-    if ($_POST["options-a"] == "my_tasks") {
-        $sql = "select * from todo_list where assignee = ? order by date_created desc";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
-        $stmnt -> execute();
-        $results = $stmnt -> get_result();
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $id = $row["id"];
-                $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
-                $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
-                $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
-                $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
-                $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<p class='activity-item'>".$row["description"]."</p>";
-                $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
-            }
-        }
-    }
-
-    // tasks created by current user
-    if ($_POST["options-a"] == "created_tasks") {
-        $sql = "select * from todo_list where creator = ? order by date_created desc";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $_SESSION["unq_user"]);
-        $stmnt -> execute();
-        $results = $stmnt -> get_result();
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $id = $row["id"];
-                $html .= "<div onclick='panelLinkTD($id)' class='activity'><div class='todo-flex r-cols'>";
-                $html .= "<div><h2>Task: ".$row["title"]."</h2>";
-                $html .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
-                $html .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
-                $html .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
-                $html .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
-                $html .= "<div class='todo-flex r-cols'>";
-                $html .= "<p class='activity-item'>".$row["description"]."</p>";
-                $html .= "<div><p><b>Status:</b> ".$row["status"]."</p></div></div></div>";
-            }
-        }
-    }
-    // TODO: MOVE ABOVE TO MODELS SINCE ITS DATA RELATED
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,76 +73,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <title>Swoop | Dashboard</title>
 </head>
 <body class="todo-bg-test">
     <?php include("./components/header.php");?>
+    <?php include("./components/modals/modal.php");?>
 
     <div class="todo-bg-test">
-    <div class="svg-bg">
-        <div class="todo-flex">
-            <p class="welcome">Team: <?php echo $_SESSION["team"];?></p>
-            <p class="welcome">User: <?php echo $_SESSION["unq_user"];?></p>
-        </div>
-    </div>
-    <main>
-        <div class="grid-container">
-            <div>
-                <a class="dash-item" href="./create-task.php">
-                    <i class="fa fa-list-ol spc-1"></i>
-                    <br>
-                   <span class="sup-text">Create Task</span> 
-                </a>
+        <div class="svg-bg">
+            <div class="todo-flex">
+                <p class="welcome"><?php echo $_SESSION["team"];?></p>
+                <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
             </div>
-            <div>
-                <a class="dash-item" href="./create-journal.php">
-                    <i class="fa  fa-pencil spc-1"></i>
-                    <br>
-                    <span class="sup-text">Create Post</span>
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./analytics.php">
-                    <i class="fa fa-line-chart spc-1"></i>
-                    <br>
-                   <span class="sup-text">Analytics</span> 
-                </a>
-            </div>
-            <div>
-                <a class="dash-item" href="./settings.php">
-                    <i class="fa fa-gear spc-1"></i>
-                    <br>
-                   <span class="sup-text">Settings</span> 
-                </a>
-            </div>   
         </div>
-        <div class="todo-flex r-cols">
-            <h1 class="intro-header">My Team's Activity</h1>
-            <form method="POST">
-                <select class="main-selector" name="options-a" id="myselect" onchange="this.form.submit()">
-                    <option value="none" selected disabled hi   dden>Activity Filter</option>
-                    <option value="all_tasks">All Tasks</option>
-                    <option value="all_posts">All Posts</option>
-                    <option value="created_posts">Posts Created</option>
-                    <option value="my_tasks">Assigned Tasks</option>
-                    <option value="created_tasks">Tasks Created</option>
-                </select>
-            </form>
+        <div class="dash-grid r-col" id="main">
+            <main>
+                <div class="grid-container">
+                    <a class="dash-item" href="./create-journal.php">
+                        <i class="fa fa-pencil spc-1"></i>
+                        <br>
+                        <span class="sup-text">New Article</span>
+                    </a>
+                    <a class="dash-item" href="./create-task.php">
+                        <i class="fa fa-list-ol spc-1"></i>
+                        <br>
+                        <span class="sup-text">Create Task</span> 
+                    </a>
+                    <a class="dash-item" href="./analytics.php">
+                        <i class="fa fa-line-chart spc-1"></i>
+                        <br>
+                    <span class="sup-text">Analytics</span> 
+                    </a>
+                    <a class="dash-item" href="./settings.php">
+                        <i class="fa fa-gear spc-1"></i>
+                        <br>
+                    <span class="sup-text">Settings</span> 
+                    </a>
+                </div>
+                <div class="todo-flex r-cols">
+                    <h1 class="intro-header"><?php echo $_SESSION["team"];?> Articles</h1>
+                    <?php echo $html;?>
+                </div>
+                <div>
+                    <?php echo $content;?>
+                </div>
+                <section>
+                <!-- extra spacing -->
+                <br><br><br><br><br><br>
+                </section>
+            </main>
+            <?php include("./components/sidebar.php");?>
         </div>
-        <?php echo $html;?>
-    </main>
     </div>
     <script>
-        function panelLinkP(id) {
+        function openArticle(id) {
             window.location='./journal-details.php?journal='+id;
         }
-        function panelLinkTD(id) {
+        function openTask(id) {
             window.location='./task-details.php?task='+id;
+        }
+        // this needs to be included in every page that has the side bar team modal
+        function validateTextarea() {
+            var x = document.getElementById("txt-area");
+            var y = document.getElementsByName("radio");
+            //var z = document.getElementById("pounds");
+            if (y[0].checked) 
+            {
+                x.style.display = "block";
+                z.style.display = "block";
+            }
+            else if (y[1].checked) 
+            {
+                x.style.display = "None";
+                z.style.display = "None";
+            }
         }
     </script>
     <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
 </body>
 </html>

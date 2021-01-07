@@ -19,7 +19,7 @@
 <body class="todo-bg">
     <?php
         include("./components/header.php");
-        //include("./components/modal.php");
+        //include("./components/modals/modal.php");
         include("../controllers/edit_entry.php");
         include_once("../config/database.php");
 
@@ -33,7 +33,7 @@
     ?>
     <form method="post">
         <div class="cat-panel">
-            <h2>Categories Created by: <?php echo $_SESSION["team"];?></h2>
+            <h2 class="text-center">Categories Created by: <?php echo $_SESSION["team"];?></h2>
             <!--
             <div>
                 <a href="" class="date-btn">File View</a>

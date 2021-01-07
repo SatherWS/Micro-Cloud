@@ -8,11 +8,13 @@
 
     $db = new Database();
     $curs = $db -> getConnection();
-    $sql = "select email from users where team = ?";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $_SESSION["team"]);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
+    if (isset($_SESSION["team"])) {
+        $sql = "select email from members where team_name = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_SESSION["team"]);
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,67 +29,70 @@
 </head>
 <body class="todo-bg">
 <?php include("./components/header.php");?>
-<div>
-<!-- TODO: seperate the form from the task view -->
-<form action="../controllers/add_entry.php" method="post" class="app">
-    <div class="form-container">
-        <div class="todo-panel">
-            <div class="todo-flex r-cols">
-                <!-- Contains task submit form -->
-                <section> 
-                <div class="form-body">
-                    <label>Task Description</label><br>
-                    <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
-                    <br><br>
-                    <select name="assignee" class="spc-n rep-item" required>
-                        <option value="none" selected disabled hidden> 
-                            Select Team Member
-                        </option>
-                        <option value="None">None</option>
-                        <option value="<?php echo $_SESSION["unq_user"]?>">Self</option>
-                        <?php
-                            while ($row = mysqli_fetch_assoc($results)) {
-                                echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
-                            }
-                        ?>
-                    </select>
-                    <br><br>
-                    <textarea name="descript" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
-                    <br><br>
-                    <label>Date Due</label><br>
-                    <input type="date" name="end-date" class="todo-item spc-n" required>
-                    <br><br>
-                    <!--
-                    <label>Time Due</label><br>
-                    <input type="time" name="time-due" class="todo-item spc-n" required>
-                    <br><br>
-                    -->
-                    <label>Importance Rating</label><br>
-                    <select name="importance" class="spc-n rep-item" required>
-                        <option value="none" selected disabled hidden> 
-                            Rank Importance
-                        </option>
-                        <option value="Low">Low Importance</option>
-                        <option value="Medium">Medium Importance</option>
-                        <option value="High">High Importance</option>
-                    </select>
-                </div>
-                <br>
-                <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">
-                </section>
-                <!-- Preview submitted tasks -->
-                <section> 
-                    <div class="scroll-pane">
+<div class="svg-bg">
+    <div class="todo-flex">
+        <p class="welcome"><?php echo $_SESSION["team"];?></p>
+        <p class="welcome"><?php echo $_SESSION["unq_user"];?></p>
+    </div>
+</div>
+<div class="dash-grid r-col" id="main">
+    <form action="../controllers/add_entry.php" method="post" class="app">
+        <div class="form-container">
+            <div class="todo-panel">
+                <div class="todo-flex r-cols">
+                    <!-- Contains task submit form -->
+                    <section> 
+                    <div class="form-body">
+                        <label>Task Description</label><br>
+                        <input type="text" name="title" placeholder="Type Task Description" class="todo-item spc-n" required>
+                        <br><br>
+                        <select name="assignee" class="spc-n rep-item">
+                            <option value="none" selected disabled hidden> 
+                                Select Team Member
+                            </option>
+                            <option value="">None</option>
+                            <?php
+                                while ($row = mysqli_fetch_assoc($results)) {
+                                    if ($row["email"] == $_SESSION["unq_user"])
+                                        echo "<option value='".$row["email"]."'>Self</option>";
+                                    else
+                                        echo "<option value='".$row["email"]."'>".$row["email"]."</option>";
+                                }
+                            ?>
+                        </select>
+                        <br><br>
+                        <textarea name="descript" cols="30" rows="10" placeholder="Additional description (optional)" class="todo-txt-area"></textarea>
+                        <br>
+                        <label>Date Due</label><br>
+                        <input type="date" name="end-date" class="todo-item spc-n" required>
+                        <br><br>
+                        <label>Importance Rating</label><br>
+                        <select name="importance" class="spc-n rep-item" required>
+                            <option value="none" selected disabled hidden> 
+                                Rank Importance
+                            </option>
+                            <option value="Low">Low Importance</option>
+                            <option value="Medium">Medium Importance</option>
+                            <option value="High">High Importance</option>
+                        </select>
+                    </div>
+                    <br>
+                    <input type="submit" name="add-task" id="form-control2" class="spc-n" value="Add Task">
+                    </section>
+                    <!-- Preview submitted tasks -->
+                    <section> 
+                        <div class="scroll-pane">
                         <?php 
                             $content = new Scroll();
                             $content -> scroll_content($curs);
                         ?>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+    <?php include("./components/sidebar.php");?>
 </div>
 <script src="../static/main.js"></script>
 <script>

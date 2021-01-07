@@ -1,11 +1,15 @@
 <?php
-
     class Database {
         private $hostname = "localhost";
         private $user = "root";
+<<<<<<< HEAD
+        private $database = "swoop";
+        private $password = "toor";
+=======
         private $database = "swoop_team";
         //private $password = "root";
         private $password = "1m0r3_projde@th";
+>>>>>>> origin/master
 
         public function getConnection(){
             $curs = new mysqli($this->hostname, $this->user, $this->password, $this->database);
