@@ -47,10 +47,12 @@ if (isset($_POST['mod-task'])) {
 
 /*
 *   File upload for images in articles section
+*   TODO: move everything below this comment to a seperate file
 */
 
 // send an image to the server
 if (isset($_POST["img-upload"])) {
+
     $journalnum = $_POST["article_assoc"];
     $target_dir = "../uploads/images/$journalnum/";
 
@@ -109,17 +111,25 @@ if (isset($_POST["img-upload"])) {
     }
 }
 
-// Attach a file thats not an image [WIP]
+
+// Attach a file thats not an image 
 if (isset($_POST["file-upload"])) {
+
   $journalnum = $_POST["article_assoc"];
   $target_dir = "../uploads/files/$journalnum/";
 
   if (!is_dir($target_dir))
-      mkdir($target_dir);
-  
+    mkdir($target_dir);
+
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
   $dataFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+  $file_type = "image";
+  $sql = "insert into file_storage(file_type, file_path) values(?, ?)";
+  $stmnt = mysqli_prepare($curs, $sql);
+  $stmnt -> bind_param("ss", $file_type, $target_file);
+  $stmnt -> execute();
 
   // Check if file already exists
   if (file_exists($target_file)) {

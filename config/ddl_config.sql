@@ -16,6 +16,7 @@ DROP TABLE members;
 DROP TABLE invites;
 DROP TABLE teams;
 DROP TABLE users;
+DROP TABLE file_storage;
 
 CREATE TABLE users (
   id int primary key auto_increment,
@@ -127,3 +128,9 @@ CREATE TABLE sub_tasks (
   foreign key (team_name) references teams(team_name)
 );
 
+CREATE TABLE file_storage (
+  id int primary key auto_increment,
+  file_type varchar(10) not null,
+  file_path varchar(200) not null,
+  date_created date default(CURRENT_DATE)
+);

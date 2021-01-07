@@ -7,7 +7,24 @@
     // TODO: MOVE PHP ELEMENT TO CONTROLLERS v
     $database = new Database();
     $curs = $database->getConnection();
-
+    
+    function getAttachments($curs, $id)
+    {   
+        $ret = "";
+        $sql = "select file_type, file_path from file_storage where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $id);
+        
+        if ($stmnt -> execute())
+        {
+            $results = $stmnt -> get_result();
+            while ($row = mysqli_fetch_assoc($results)){
+                $ret .= $row["file_path"];
+            }
+        }
+        return $ret;
+    }
+    
     if (isset($_GET['journal'])) 
     {
         $id = $_GET['journal'];
@@ -96,10 +113,13 @@
             echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
+
+            echo "<p class='message-p'>".nl2br($row['message'])."</p>";
+
             if (!$read_only) {
                 echo "<div class='todo-flex r-cols'>";
                 echo "<section>";
-                echo "<br>Select an image to upload to the article:<br>";
+                echo "<br>Select an image to add to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
                 echo "<input type='hidden' value='$id' name='article_assoc'>";
                 echo "<input type='submit' value='Upload Image' name='img-upload'><br>";
@@ -112,7 +132,10 @@
                 echo "</section>";
                 echo "</div>";
             }
-            echo "<p class='message-p'>".nl2br($row['message'])."</p>";
+
+            if (isset($attached_files))
+                echo getAttachments($curs, $id);
+            
             echo "</div>";
         }
 
