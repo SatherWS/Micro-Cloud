@@ -15,10 +15,10 @@ sudo service mysql status
 cd ~
 
 # Add the -b option to backup the local mysql database.
-while [ "$1" = "backup" ]; do
-	echo "backing up mysql database..."
-	mysqldump --add-drop-table -uroot -ptoor swoop > swoop_localdata.sql
-	sudo mv swoop_localdata.sql /var/www/html/config
-	echo "back up complete."
-	shift
-done
+#while [ "$1" = "-b" ]; do
+#	echo "backing up mysql database..."
+#	mysqldump --add-drop-table -uroot -ptoor swoop > swoop_localdata.sql
+#	sudo mv swoop_localdata.sql /var/www/html/config
+#	echo "back up complete."
+#	shift
+#done
