@@ -14,19 +14,13 @@
     function getAttachments($curs, $id)
     {   
         $ret = "";
-        $sql = "select file_type, file_path from file_storage where article_id = ?";
+        $sql = "select file_name, file_path from file_storage where article_id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         
-        if ($stmnt -> execute())
-        {
-            $results = $stmnt -> get_result();
-            while ($row = mysqli_fetch_assoc($results)){
-                $ret .= $row["file_path"];
-                
-            }
-        }
-        // TODO: RETURN $row instead
+        $stmnt -> execute();
+        $results = $stmnt -> get_result();
+        $ret = mysqli_fetch_assoc($results);
         return $ret;
     }
     
@@ -35,7 +29,10 @@
     if (isset($_GET['journal'])) 
     {
         $id = $_GET['journal'];
-        $attached_files = getAttachments($curs, $id);
+        $data = getAttachments($curs, $id);
+        $attached_files .= "<a href='".$data["file_path"]."' download>";
+        $attached_files .= $data["file_name"]."</a>";
+
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
@@ -55,7 +52,6 @@
     if (isset($_POST['edit'])) 
     {
         $id = $_POST['edit'];
-        $attached_files = getAttachments($curs, $id); // causes a bug
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
@@ -70,14 +66,7 @@
             {
                 $html .= "<div class='log-container editor'>";
                 $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $img = "![image test]($attached_files)";
-
-                if ($attached_files != "")
-                {
-                    $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message'].$img."</textarea>";
-                }
-                else
-                    $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
+                $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
         }
@@ -106,7 +95,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/mininav.css">
+    <link rel="stylesheet" href="../static/mini_nav.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -139,24 +128,24 @@
             echo "<h1 class='padb'>".$row['subject']."</h1>";
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
-
-            if ($attached_files != "")
-            {
-                $row['message'] .= "![image test]($attached_files)";
+            
+            if ($attached_files != "") {
+                echo "<small>Attachments: ".$attached_files."</small>";
             }
+
             $md = $pd -> text($row['message']);
             echo $md;
 
             if (!$read_only) 
             {
-                echo "<div class='topnav'>";
-                echo "<a class='active' href='#home'>Select an image file</a>";
-                echo "<a href='#news'>Select other file</a>";
+                echo "<div class='topnav2' id='item-container'>";
+                echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
+                echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
                 echo "</div>";
                 echo "<input type='hidden' value='$id' name='article_assoc'>";
 
                 // image upload form section
-                echo "<div class='todo-flex r-cols'>";
+                echo "<div class='todo-flex r-cols upload-forms'>";
                 echo "<section>";
                 echo "<br>Select an image to add to the article:<br>";
                 echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
@@ -168,7 +157,7 @@
                 echo "</div>";
 
                 // file upload form section
-                echo "<div class='todo-flex r-cols'>";
+                echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
                 echo "<section>";
                 echo "<br>Attach a relevant file to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
@@ -201,6 +190,22 @@
 <script>
     function triggerForm() {
         document.getElementById("editor").submit();
+    }
+
+    function changeActive(selected) {
+        var choices = document.getElementsByClassName("choice");
+        var forms = document.getElementsByClassName("upload-forms");
+        
+        for (var i = 0; i < choices.length; i++) {
+            if (i != selected) {
+                choices[i].style.borderBottom = "none";
+                forms[i].style.display = "none";
+            }
+            else {
+                choices[i].style.borderBottom = "3px solid red";
+                forms[i].style.display = "flex";
+            }
+        }
     }
 </script>
 <script src="../static/main.js"></script>

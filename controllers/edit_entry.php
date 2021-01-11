@@ -63,10 +63,10 @@ if (isset($_POST["img-upload"]))
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     
-    $file_type = "image";
-    $sql = "insert into file_storage(file_type, file_path, article_id) values(?, ?, ?)";
+    $md_img = "![uploaded image]($target_file)";
+    $sql = "update journal set message = CONCAT(message, ?) where id = ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("sss", $file_type, $target_file, $journalnum);
+    $stmnt -> bind_param("ss", $md_img, $journalnum);
     $stmnt -> execute();
 
     // Check if image file is a actual image or fake image
@@ -129,12 +129,14 @@ if (isset($_POST["file-upload"]))
 
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
+  
   $dataFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  $file_name = pathinfo($target_file,PATHINFO_FILENAME);
+  $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
 
-  $file_type = "file";
-  $sql = "insert into file_storage(file_type, file_path, article_id) values(?, ?, ?)";
+  $sql = "insert into file_storage(file_name, file_type, file_path, article_id) values(?, ?, ?, ?)";
   $stmnt = mysqli_prepare($curs, $sql);
-  $stmnt -> bind_param("sss", $file_type, $target_file, $journalnum);
+  $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum);
   $stmnt -> execute();
 
   // Check if file already exists
@@ -151,7 +153,7 @@ if (isset($_POST["file-upload"]))
 
   // Allow certain file formats
   if ($dataFileType != "docx" && $dataFileType != "doc" && $dataFileType != "pdf"
-  && $dataFileType != "txt" ) {
+  && $dataFileType != "txt" && $dataFileType != "xlsx") {
     echo "Sorry, only DOCX, DOC, PDF & TXT files are allowed.";
     $uploadOk = 0;
   }
