@@ -1,17 +1,20 @@
 <?php 
     include_once('../config/database.php');
+    include("../libs/Parsedown.php");
     session_start();
-    if (!isset($_SESSION["unq_user"])) {
+    if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
-    }
+    
     // TODO: MOVE PHP ELEMENT TO CONTROLLERS v
     $database = new Database();
+    $pd = new Parsedown();
     $curs = $database->getConnection();
     
+
     function getAttachments($curs, $id)
     {   
         $ret = "";
-        $sql = "select file_type, file_path from file_storage where id = ?";
+        $sql = "select file_type, file_path from file_storage where article_id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         
@@ -20,20 +23,26 @@
             $results = $stmnt -> get_result();
             while ($row = mysqli_fetch_assoc($results)){
                 $ret .= $row["file_path"];
+                
             }
         }
+        // TODO: RETURN $row instead
         return $ret;
     }
     
+    $attached_files = "";
+
     if (isset($_GET['journal'])) 
     {
         $id = $_GET['journal'];
+        $attached_files = getAttachments($curs, $id);
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         $row = mysqli_fetch_assoc($results);
+        
         if ($row["creator"] == $_SESSION["unq_user"]) {
             $show_editor = true;
             $read_only = false;
@@ -42,9 +51,11 @@
             $read_only = true;
     }
 
+
     if (isset($_POST['edit'])) 
     {
         $id = $_POST['edit'];
+        $attached_files = getAttachments($curs, $id); // causes a bug
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
@@ -58,14 +69,28 @@
             while($row = mysqli_fetch_assoc($results)) 
             {
                 $html .= "<div class='log-container editor'>";
-		        $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
+                $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
+                $img = "![image test]($attached_files)";
+
+                if ($attached_files != "")
+                {
+                    $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message'].$img."</textarea>";
+                }
+                else
+                    $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
         }
     }
 
-    if (isset($_POST['delete'])) {
+    if (isset($_POST['delete'])) 
+    {
+        $sql = "delete from file_storage where article_id = ?";
+        mysqli_query($curs, $sql);
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $_POST['delete']);
+        $stmnt -> execute();
+
         $sql = "delete from journal where id = ?";
         mysqli_query($curs, $sql);
         $stmnt = mysqli_prepare($curs, $sql);
@@ -81,6 +106,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/mininav.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -114,27 +140,47 @@
             echo "<small>Author: ".$row['creator']."</small><br>";
             echo "<small>Posted: ".$row['date_created']."</small><br>";
 
-            echo "<p class='message-p'>".nl2br($row['message'])."</p>";
+            if ($attached_files != "")
+            {
+                $row['message'] .= "![image test]($attached_files)";
+            }
+            $md = $pd -> text($row['message']);
+            echo $md;
 
-            if (!$read_only) {
+            if (!$read_only) 
+            {
+                echo "<div class='topnav'>";
+                echo "<a class='active' href='#home'>Select an image file</a>";
+                echo "<a href='#news'>Select other file</a>";
+                echo "</div>";
+                echo "<input type='hidden' value='$id' name='article_assoc'>";
+
+                // image upload form section
                 echo "<div class='todo-flex r-cols'>";
                 echo "<section>";
                 echo "<br>Select an image to add to the article:<br>";
-                echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
-                echo "<input type='hidden' value='$id' name='article_assoc'>";
+                echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
+                echo "</section>";
+
+                echo "<section>";
                 echo "<input type='submit' value='Upload Image' name='img-upload'><br>";
                 echo "</section>";
+                echo "</div>";
+
+                // file upload form section
+                echo "<div class='todo-flex r-cols'>";
                 echo "<section>";
                 echo "<br>Attach a relevant file to the article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
-                echo "<input type='hidden' value='$id' name='article_assoc'>";
+                echo "</section>";
+
+                echo "<section>";
                 echo "<input type='submit' value='Attach Files' name='file-upload'><br>";
                 echo "</section>";
-                echo "</div>";
-            }
 
-            if (isset($attached_files))
-                echo getAttachments($curs, $id);
+                echo "</div>";
+                echo "<br><br><br>";
+            }
             
             echo "</div>";
         }

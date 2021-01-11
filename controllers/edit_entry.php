@@ -47,25 +47,31 @@ if (isset($_POST['mod-task'])) {
 
 /*
 *   File upload for images in articles section
-*   TODO: move everything below this comment to a seperate file
+*   TODO: move everything below this comment to a separate file
 */
 
 // send an image to the server
-if (isset($_POST["img-upload"])) {
-
+if (isset($_POST["img-upload"])) 
+{
     $journalnum = $_POST["article_assoc"];
     $target_dir = "../uploads/images/$journalnum/";
 
     if (!is_dir($target_dir))
         mkdir($target_dir);
     
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     
+    $file_type = "image";
+    $sql = "insert into file_storage(file_type, file_path, article_id) values(?, ?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("sss", $file_type, $target_file, $journalnum);
+    $stmnt -> execute();
+
     // Check if image file is a actual image or fake image
-    if (isset($_POST["img-upload"])) {
-      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if (isset($_POST["imageToUpload"])) {
+      $check = getimagesize($_FILES["imageToUpload"]["tmp_name"]);
       if ($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
@@ -83,7 +89,7 @@ if (isset($_POST["img-upload"])) {
     }
 
     // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 50000000) {
+    if ($_FILES["imageToUpload"]["size"] > 50000000) {
       echo "Sorry, your file is too large.";
       $uploadOk = 0;
     }
@@ -101,8 +107,8 @@ if (isset($_POST["img-upload"])) {
     // if everything is ok, try to upload file
     } 
     else {
-      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+      if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been uploaded.";
         header("Location: ../views/journal-details.php?journal=$journalnum");
       } 
       else {
@@ -113,8 +119,8 @@ if (isset($_POST["img-upload"])) {
 
 
 // Attach a file thats not an image 
-if (isset($_POST["file-upload"])) {
-
+if (isset($_POST["file-upload"])) 
+{
   $journalnum = $_POST["article_assoc"];
   $target_dir = "../uploads/files/$journalnum/";
 
@@ -125,10 +131,10 @@ if (isset($_POST["file-upload"])) {
   $uploadOk = 1;
   $dataFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-  $file_type = "image";
-  $sql = "insert into file_storage(file_type, file_path) values(?, ?)";
+  $file_type = "file";
+  $sql = "insert into file_storage(file_type, file_path, article_id) values(?, ?, ?)";
   $stmnt = mysqli_prepare($curs, $sql);
-  $stmnt -> bind_param("ss", $file_type, $target_file);
+  $stmnt -> bind_param("sss", $file_type, $target_file, $journalnum);
   $stmnt -> execute();
 
   // Check if file already exists
