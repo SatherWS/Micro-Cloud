@@ -950,6 +950,7 @@ element {
 .log-details img {
   margin: 0 auto;
   display: block;
+  max-width: 80%;
 }
 
 .log-details small {

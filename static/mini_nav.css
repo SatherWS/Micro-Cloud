@@ -1,23 +1,28 @@
 .topnav2 {
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
+  overflow: hidden;
+  background-color: #f1f1f1;
+  padding: 0 1.5rem;
+}
+
+.todo-flex.r-cols.upload-forms {
+  padding: 0 2rem;
+}
   
-  .topnav2 a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    border-bottom: 3px solid transparent;
-  }
-  
-  .topnav2 a:hover {
-    border-bottom: 3px solid #4c4177;
-  }
-  
-  .topnav2 a.active {
-    border-bottom: 3px solid #4c4177;
-  }
+.topnav2 a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+}
+
+.topnav2 a:hover {
+  border-bottom: 3px solid #4c4177;
+}
+
+.topnav2 a.active {
+  border-bottom: 3px solid #4c4177;
+}

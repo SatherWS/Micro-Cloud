@@ -101,6 +101,17 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../favicon.png" >
     <title>Swoop | Viewing an article</title>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true,
+            skipTags: ["script","noscript","style","textarea","pre","code"]
+            }
+        });
+    </script>
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
 </head>
 <body>
 <?php include("./components/header.php");?>
@@ -124,18 +135,10 @@
         if (isset($row)) 
         {
             $id = $row['id'];
-            echo "<div class='log-details'>";
-            echo "<h1 class='padb'>".$row['subject']."</h1>";
-            echo "<small>Author: ".$row['creator']."</small><br>";
-            echo "<small>Posted: ".$row['date_created']."</small><br>";
-            
-            if ($attached_files != "") {
-                echo "<small>Attachments: ".$attached_files."</small>";
-            }
 
             if (!$read_only) 
             {
-                echo "<br><br><div class='topnav2' id='item-container'>";
+                echo "<div class='topnav2' id='item-container'>";
                 echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
                 echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
                 echo "</div>";
@@ -165,6 +168,16 @@
                 echo "</section>";
 
                 echo "</div>";
+            }
+
+            // detail view that displays to all user types 
+            echo "<div class='log-details'>";
+            echo "<h1 class='padb'>".$row['subject']."</h1>";
+            echo "<small>Author: ".$row['creator']."</small><br>";
+            echo "<small>Posted: ".$row['date_created']."</small><br>";
+            
+            if ($attached_files != "") {
+                echo "<small>Attachments: ".$attached_files."</small>";
             }
         }
 
