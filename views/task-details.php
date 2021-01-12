@@ -167,8 +167,8 @@
                         echo "<option>Monthly</option></select>";
                         echo "<br></br>";
                         echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
-                        echo "<br></br>";
-                        echo "<input type='submit' name='send-emails' value='Apply Settings' class='add-btn-2'/>";
+                        //$wip = "onclick="."alert('work in progress').""";
+                        echo "<input type='button' name='send-emails' value='Apply Settings' class='add-btn'/>";
                         echo "</div></div>";
                     }
                 }
@@ -177,13 +177,8 @@
                 $form = "";
                 if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
                     $form .= $editor->create_editor($data);
-                    //$form .= create_selector($curs, $_SESSION["team"]);
                     $form .= "</div></div>";
                     $form .= $editor->additionals($data);
-                    /*
-                    if (isset($row2))
-                        $form .= $editor->create_editor($row2);
-                    */
                     echo $form;
                 }
             ?>
@@ -225,6 +220,5 @@
     </script>
     <script src="../static/main.js"></script>
     <script src="../static/modal.js"></script>
-    <!--<script src="../static/slider.js"></script>-->
 </body>
 </html>

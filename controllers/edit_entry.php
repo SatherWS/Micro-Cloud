@@ -63,7 +63,7 @@ if (isset($_POST["img-upload"]))
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     
-    $md_img = "![uploaded image]($target_file)";
+    $md_img = "<br> ![uploaded image]($target_file)";
     $sql = "update journal set message = CONCAT(message, ?) where id = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("ss", $md_img, $journalnum);

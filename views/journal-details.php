@@ -133,12 +133,9 @@
                 echo "<small>Attachments: ".$attached_files."</small>";
             }
 
-            $md = $pd -> text($row['message']);
-            echo $md;
-
             if (!$read_only) 
             {
-                echo "<div class='topnav2' id='item-container'>";
+                echo "<br><br><div class='topnav2' id='item-container'>";
                 echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
                 echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
                 echo "</div>";
@@ -159,7 +156,7 @@
                 // file upload form section
                 echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
                 echo "<section>";
-                echo "<br>Attach a relevant file to the article:<br>";
+                echo "<br>Attach a relevant file to this article:<br>";
                 echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
                 echo "</section>";
 
@@ -168,11 +165,12 @@
                 echo "</section>";
 
                 echo "</div>";
-                echo "<br><br><br>";
             }
-            
-            echo "</div>";
         }
+
+        $md = $pd -> text($row['message']);
+        echo $md;
+        echo "</div>";
 
         if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
             echo $html;
@@ -202,13 +200,12 @@
                 forms[i].style.display = "none";
             }
             else {
-                choices[i].style.borderBottom = "3px solid red";
+                choices[i].style.borderBottom = "3px solid #4c4177";
                 forms[i].style.display = "flex";
             }
         }
     }
 </script>
 <script src="../static/main.js"></script>
-<script src="../static/modal.js"></script>
 </body>
 </html>

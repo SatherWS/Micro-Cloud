@@ -936,6 +936,20 @@ element {
   margin: 0 auto;
 }
 
+.log-details p {
+  font-size: 16pt;
+}
+
+.log-details iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+.log-details img {
+  margin: 0 auto;
+  display: block;
+}
+
 .log-details small {
 	font-size: 16px;
 }
