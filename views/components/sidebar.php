@@ -67,7 +67,7 @@
 </section>
 <section class="show-sidebar" id="mini-btn">
     <h4 class="dash-btn"><a href="#" onclick="hideSideBar()" class="todo-flex">
-        <span>Show</span>
+        <span>Menu</span>
         <i class="fa fa-chevron-circle-right"></i>
     </a></h4>
 </section>

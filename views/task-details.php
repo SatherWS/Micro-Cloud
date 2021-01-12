@@ -3,12 +3,14 @@
     if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
     
-    include("./components/task-editor.php");
-    $editor = new TaskEditor();
 
     // TODO: MOVE BELOW THIS TO CONTROLLERS v
     include("../config/database.php");
+    include("./components/task-editor.php");
+
+    $editor = new TaskEditor();
     $database = new Database();
+
     $curs = $database->getConnection();
 
     if (isset($_GET['task'])) 
@@ -77,6 +79,8 @@
         $stmnt->bind_param("s", $team);
         $stmnt->execute();
         $result = $stmnt->get_result();
+
+        // WIP: display all team members in select inputs
         while ($row = mysqli_fetch_assoc($result)) 
         {
             $selector .= "<option value='".$row["assignee"]."'>".$row["assignee"]."</option>";
@@ -97,7 +101,6 @@
     <title>Task Details</title>
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/modal.css">
-    <link rel="stylesheet" href="../static/slider.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <script

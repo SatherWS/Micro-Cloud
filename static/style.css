@@ -431,6 +431,7 @@ textarea {
   display: none;
   position: fixed;
   bottom:0;
+  right: 30px;
   margin-left: 1rem;
   z-index: 10;
 }
@@ -790,7 +791,8 @@ element {
   border-radius: 5px;
   width: 90%;
   padding: 1.5rem;
-  box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);
+  /*box-shadow: 0px 0px 7px 2px rgba(0,0,0,.2);*/
+  border: solid #ddd 2px;
   margin: 0 auto;
 }
 
