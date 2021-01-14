@@ -130,10 +130,9 @@
                     while($row = mysqli_fetch_assoc($results)) 
                     {
                         // Top task title, description and sub modal trigger
-                        echo "<div class='todo-flex r-cols'>";
-                        echo "<div><h2>".$row['title']."</h2>";
-                        echo "<p>".$row["description"]."</p></div>";
-                        echo "<a href='#subModal' id='myBtn'>Add Sub Task</a></div>";
+                        echo "<h2>".$row['title']."</h2>";
+                        echo "<p>".$row["description"]."</p>";
+                        echo "<a href='#subModal' id='myBtn'>Add Sub Task</a>";
 
                         // Left detail view table
                         echo "<div class='todo-flex r-cols'>";
@@ -179,9 +178,9 @@
                 // Task editting view render
                 $form = "";
                 if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
+                    $form .= $editor->additionals($data);
                     $form .= $editor->create_editor($data);
                     $form .= "</div></div>";
-                    $form .= $editor->additionals($data);
                     echo $form;
                 }
             ?>

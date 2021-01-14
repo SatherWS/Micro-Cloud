@@ -14,7 +14,7 @@
     function getAttachments($curs, $id)
     {   
         $ret = "";
-        $sql = "select file_name, file_path from file_storage where article_id = ?";
+        $sql = "select file_name, file_type, file_path from file_storage where article_id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         
@@ -31,7 +31,7 @@
         $id = $_GET['journal'];
         $data = getAttachments($curs, $id);
         $attached_files .= "<a href='".$data["file_path"]."' download>";
-        $attached_files .= $data["file_name"]."</a>";
+        $attached_files .= $data["file_name"].".".$data["file_type"]."</a>";
 
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -152,8 +152,8 @@
                 echo "</section>";
 
                 echo "<section>";
-                echo "<input type='submit' value='Upload Image' name='img-upload'><br>";
-                echo "</section>";
+                echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
+                echo "<br></section>";
                 echo "</div>";
 
                 // file upload form section
@@ -164,8 +164,8 @@
                 echo "</section>";
 
                 echo "<section>";
-                echo "<input type='submit' value='Attach Files' name='file-upload'><br>";
-                echo "</section>";
+                echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
+                echo "<br></section>";
 
                 echo "</div>";
             }
@@ -191,7 +191,7 @@
 </form>
 <!--
 <br>
-<form action="../controllers/add_comment.php">
+<form action="">
     <div class="log-details">
         <textarea name="comment" cols="30" rows="10"></textarea>
         <input type="submit" value="Send Comment">

@@ -16,7 +16,7 @@
         }
         function create_editor($row) {
             $id = $row["id"];
-            $html = "<h2>Editing Main Task: ".$row['title']."</h2>";
+            //$html = "<h2>Editing Main Task: ".$row['title']."</h2>";
             $html .= "<div class='r-cols todo-grid'>";
             $html .= "<div><label>Change Status</label><br>";
             $html .= "<select name='change-status' class='spc-n' required>";

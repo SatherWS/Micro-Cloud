@@ -52,6 +52,11 @@ input.add-btn {
   width: 185px;
 }
 
+.intro-head {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .proj-feed {
   width: 80%;
   margin: 0 auto;
@@ -1220,6 +1225,7 @@ button.add-btn {
   margin: 10px 0;
   border: solid #ddd 3px;
 }
+
 .add-btn:hover {
   border-color: #4c4177;
 }

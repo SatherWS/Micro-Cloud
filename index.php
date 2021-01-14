@@ -94,14 +94,18 @@
         <div></div>
     </article>
     <div class="dash-grid r-col" id="main">
-        <section class="proj-feed">
-            <h1 class="main-title">Swoop Project Management</h1>
-            <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
-            <br></br>
-            <h2><?php printf($project_count); ?> projects hosted on this instance</h2>
-            <div class="uline"></div>
+        <main>
+            <div class="intro-head">
+                <h1 class="main-title">Swoop Project Management</h1>
+                <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
+                <br></br>
+            </div>
+            <section class="proj-feed">
+                <h2><?php printf($project_count); ?> projects hosted on this instance</h2>
+                <div class="uline"></div>
                 <?php echo $html;?>
-        </section>
+            </section>
+        </main>
         <?php include("./views/components/sidebar.php");?>
     </div>
 

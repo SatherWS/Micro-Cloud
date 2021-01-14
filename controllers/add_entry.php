@@ -73,25 +73,6 @@ function associateMember($curs, $team, $user)
         return false;
 }
 
-function addWiki($curs, $team)
-{
-    $sql = "insert into wikis(team_name) values (?)";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $team);
-    $stmnt -> execute();
-}
-
-/*
-function addTags($curs, $team, $category)
-{
-    # NOT IN USE
-    $sql = "insert into categories cat_name, team_name values (?, ?)";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ss", $category, $team_name);
-    $stmnt -> execute();
-}
-*/
-
 # Main execution section
 
 // join or create project (TODO: possibly move to auth_user)
@@ -111,34 +92,9 @@ if (isset($_POST["send-project"]))
         }
         else 
             header("Location: ../views/dashboard.php?error=unable to add user to project");
-
-        # TODO: implement hash tags in version 2.
-        /*
-        if (isset($_POST["tags"])) 
-        {
-            // check if char 0 starts with # for every string in the textarea
-            $tags = explode(" ", $_POST["tags"]);
-            foreach ($tags as $t) 
-            {
-                if (substr($t, 0, 1) == "#")
-                {
-                    $insert_c = "insert into categories cat_name, team_name values (?, ?)";
-                    $stmnt = mysqli_prepare($curs, $insert_c);
-                    $stmnt -> bind_param("ss", $_POST["tags"], $team_name);
-                    $stmnt -> execute();
-                    #addTags($curs, $_POST["tags"], $t);
-                    header("Location: ../views/dashboard.php");
-                } else
-                {
-                    #echo $t." is not a valid #tag<br>";
-                    header("Location: ../views/dashboard.php");
-                } 
-            }
-        }
-        */
     }
 
-    else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"])) 
+    else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"]) || isset($_POST["dash-join"])) 
     {
         $admin = getAdmin($curs, $_POST["teamname"]);
         $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
