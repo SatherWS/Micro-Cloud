@@ -30,9 +30,13 @@
     {
         $id = $_GET['journal'];
         $data = getAttachments($curs, $id);
-        $attached_files .= "<a href='".$data["file_path"]."' download>";
-        $attached_files .= $data["file_name"].".".$data["file_type"]."</a>";
-
+        
+        print_r($data);
+        foreach ($data as $elem) {
+            echo $elem;
+        $attached_files .= "<a href='".$elem["file_path"]."' download>";
+        $attached_files .= $elem["file_name"].".".$elem["file_type"]."</a>";
+        }
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
