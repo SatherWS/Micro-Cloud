@@ -31,6 +31,9 @@
                 </div>
             </li>
             <li>
+                <a href="./views/file-storage.php">Files</a>
+            </li>
+            <li>
                 <a href="./views/analytics.php">Analytics</a>
             </li>
             <li>

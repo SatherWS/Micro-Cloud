@@ -34,13 +34,6 @@
     if (isset($_GET['journal'])) 
     {
         $id = $_GET['journal'];
-        $data = getAttachments($curs, $id);
-        
-        if (getAttachments($curs, $id)) 
-        {
-            $file_link .= "<a href='./file-storage.php?article=$id'>";
-            $file_link .= "manage attached files</a>";
-        }
         
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
@@ -48,6 +41,14 @@
         $stmnt -> execute();
         $results = $stmnt -> get_result();
         $row = mysqli_fetch_assoc($results);
+
+        if (getAttachments($curs, $id)) 
+        {
+            $title = $row["subject"];
+            $file_link .= "<a href='./file-storage.php?article=$id&title=$title'>";
+            $file_link .= "manage attached files</a>";
+        }
+
         
         if ($row["creator"] == $_SESSION["unq_user"]) {
             $show_editor = true;

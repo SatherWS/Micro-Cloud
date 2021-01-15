@@ -77,7 +77,7 @@ if (isset($_POST["img-upload"]))
     // add the image path to file storage paths
     $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
+    $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
     $stmnt -> execute();
 
     // Check if image file is a actual image or fake image
@@ -148,7 +148,7 @@ if (isset($_POST["file-upload"]))
 
   $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
   $stmnt = mysqli_prepare($curs, $sql);
-  $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
+  $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
   $stmnt -> execute();
 
   // Check if file already exists
@@ -165,7 +165,7 @@ if (isset($_POST["file-upload"]))
 
   // Allow certain file formats
   if ($dataFileType != "docx" && $dataFileType != "doc" && $dataFileType != "pdf"
-  && $dataFileType != "txt" && $dataFileType != "xlsx" && $dataFileType != "xlsm") {
+  && $dataFileType != "txt" && $dataFileType != "xlsx" && $dataFileType != "xlsm" && $dataFileType != "zip") {
     echo "Sorry, only DOCX, DOC, PDF & TXT files are allowed.";
     $uploadOk = 0;
   }

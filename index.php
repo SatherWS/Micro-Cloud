@@ -48,10 +48,10 @@
         $html .= "</button></div></div>";
         $html .= "</form>";
 
-        $html .= "<div class='settings-flex r-cols'>";
+        $html .= "<div class='settings-flex r-cols align-center'>";
         $html .= "<form class='blockzero' action='./controllers/add_entry.php' method='post'>";
-        $html .= "<input type='hidden' name='teamname' value='".$row["team_name"]."'>";
-        $html .= "<button type='submit' name='index-join'>Request to Join</button>";
+        $html .= "<input class='send-req' type='hidden' name='teamname' value='".$row["team_name"]."'>";
+        $html .= "<button type='submit' name='index-join'>Request to join this project</button>";
         $html .= "</form>";
 
         // project links

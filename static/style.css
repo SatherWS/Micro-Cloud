@@ -800,7 +800,9 @@ element {
   border: solid #ddd 2px;
   margin: 0 auto;
 }
-
+.settings-panel img {
+  max-width: 300px;
+}
 .invites {
   padding-bottom: 1rem;
 }
@@ -813,6 +815,16 @@ element {
 .settings-flex {
   display: flex;
   justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+input.send-req {
+  color: blue;
+  cursor: pointer;
+  font-size: 12pt;
 }
 
 /*

@@ -77,7 +77,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
     </div>
     <div class="dash-grid r-cols" id="main">
         <div>
-            <h1 class="ml2rem">Team Member Settings</h1>
+            <h2 class="ml2rem">Team Member Settings</h2>
             <div class="settings-space">
                 <div class="settings-panel">
                     <div class="settings-flex r-cols">
@@ -85,7 +85,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             <?php
                             if (isset($results)) 
                             {
-                                echo "<h2>Members of ".$_SESSION['team']."</h2>";
+                                echo "<h3>Members of ".$_SESSION['team']."</h3>";
                                 while ($row = mysqli_fetch_assoc($results))
                                     echo "<p>".$row["email"]."</p>";
                             }
@@ -94,7 +94,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             ?>
                         </div>
                         <div>
-                            <h2>User Information</h2>
+                            <h3>User Information</h3>
                             <?php 
                             if (isset($_GET["error"])) 
                                 echo "<div><p>".$_GET["error"]."</p></div>";
@@ -107,7 +107,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                 </div>
             </div>
             <div class="settings-space">
-                <h1 class="ml2rem">Invitation Settings</h1>
+                <h2 class="ml2rem">Invitation Settings</h2>
                 <div class="settings-panel">
                     <div class="invites">
                         <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
@@ -130,12 +130,12 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                         }
                     ?>
                 </div>
-                <h1 class="ml2rem">Danger Zone</h1>
+                <h2 class="ml2rem">Danger Zone - Project Settings</h2>
                 <div class="settings-space">
                     <div class="settings-panel">
                         <div class="settings-flex r-cols">
                             <div>
-                                <!-- Not attempted 10/20/2020 -->
+                                <!-- WIP requires db over hall -->
                                 <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
                                 <form action="../controllers/edit_project.php" method="post">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
