@@ -10,11 +10,11 @@
     <?php
     if (mysqli_num_rows($results2) > 0) {
         while ($row = mysqli_fetch_assoc($results2)) {
-            echo "<td>".$row["status"]."</td>";
+            echo "<tr><td>".$row["status"]."</td>";
             echo "<td>".$row["team_name"]."</td>";
             echo "<td>".$row["receiver"]."</td>";
             echo "<td>".$row["sender"]."</td>";
-            echo "<td>".$row["date_created"]."</td>";
+            echo "<td>".$row["date_created"]."</td></tr>";
         }
     }
     ?>

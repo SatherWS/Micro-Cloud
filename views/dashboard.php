@@ -3,7 +3,7 @@
     if (!isset($_SESSION["unq_user"])) {
         header("Location: ../authentication/login.php");
     }
-    require "../controllers/parsedown_interface.php";
+
     include_once "../config/database.php";
     $db = new Database();
 
@@ -26,6 +26,7 @@
         $stmnt -> bind_param("s", $_SESSION["team"]);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
+
         while ($row = mysqli_fetch_assoc($results)) {
             $id = $row["id"];
             $content .= "<div onclick='openTask($id)' class='activity'><div class='todo-flex r-cols'>";
@@ -45,6 +46,7 @@
         $html .= "<button class='add-btn' type='submit' name='task-view' value='".$_SESSION["team"]."'>";
         $html .= "<h3>View Tasks</h3>";
         $html .= "</button></form>";
+        
         $sql = "select * from journal where team_name = ? order by date_created desc";
 
         $stmnt = mysqli_prepare($curs, $sql);

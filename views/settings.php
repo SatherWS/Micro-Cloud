@@ -109,15 +109,6 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
             <div class="settings-space">
                 <h1 class="ml2rem">Invitation Settings</h1>
                 <div class="settings-panel">
-                    <h3>Requests to join <?php echo $_SESSION["team"];?></h3>
-                    <?php
-                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-                            if (invite_count($curs, $_SESSION["team"]) > 0)
-                                include("./components/requests-table.php");
-                            else
-                                echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
-                        }
-                    ?>
                     <div class="invites">
                         <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
                         <?php
@@ -129,6 +120,15 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             }
                         ?>
                     </div>
+                    <h3>Requests to join project: <?php echo $_SESSION["team"];?></h3>
+                    <?php
+                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
+                            if (invite_count($curs, $_SESSION["team"]) > 0)
+                                include("./components/requests-table.php");
+                            else
+                                echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
+                        }
+                    ?>
                 </div>
                 <h1 class="ml2rem">Danger Zone</h1>
                 <div class="settings-space">
@@ -137,9 +137,9 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                             <div>
                                 <!-- Not attempted 10/20/2020 -->
                                 <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
-                                <form action="#" method="post">
+                                <form action="../controllers/edit_project.php" method="post">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
-                                    <input type="submit" value="EDIT PROJECT" onlick="alert('WIP')">
+                                    <input type="submit" name="edit_project" value="EDIT PROJECT">
                                 </form>
                             </div>
                             <div>

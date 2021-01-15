@@ -33,7 +33,8 @@
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
         $html .= "<p>".$row["description"]."</p>";
         $html .= "<input type='hidden' value='".$row["team_name"]."' name='teamname'>";
-        $html .= "<p>Admin: ".$row["admin"]."</p></div>";
+        $html .= "<p>Admin: ".$row["admin"]."</p>";
+        $html .= "<p>Date Created: ".$row["date_created"]."</p></div>";
         
         // vote control buttons
         $html .= "<form method='post'>";
@@ -48,14 +49,16 @@
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols'>";
-        $html .= "<p>Date Created: ".$row["date_created"]."</p>";
+        $html .= "<form class='blockzero' action='./controllers/add_entry.php' method='post'>";
+        $html .= "<input type='hidden' name='teamname' value='".$row["team_name"]."'>";
+        $html .= "<button type='submit' name='index-join'>Request to Join</button>";
+        $html .= "</form>";
 
         // project links
         $html .= "<div class='todo-flex r-cols index-btns'>";
         $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
         $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></button></h4>";
-        //$html .= "<form class='blockzero' action='./controllers/join_team.php' method='post'>";
-        $html .= "<h4><button><a href='#' class='add-btn-2'>Join Project</a></button></h4>";
+
         $html .= "</div></div></section>";
         $html .= "<div class='uline'></div>";
     }
@@ -96,9 +99,11 @@
     <div class="dash-grid r-col" id="main">
         <main>
             <div class="intro-head">
-                <h1 class="main-title">Swoop Project Management</h1>
-                <p>Most of the projects posted on this platform are either hardware or software related but, projects of any kind are highly encouraged. If you are interested in the source code of this website, <a href='#'>click here.</a></p>
-                <br></br>
+                <h1 class="main-title">Project & Content Management System</h1>
+                <p>Swoop is a decentralized project and content management platform. All the code is open source and free to use, modify and or distribute.
+                This allows users to spin up their own Swoop instances or they can use <a href='https://swoop.team'>this public swoop instance.</a></p>
+                <p><a href='#'>Click here to learn how spin up your own swoop instance.</a></p>
+                </br>
             </div>
             <section class="proj-feed">
                 <h2><?php printf($project_count); ?> projects hosted on this instance</h2>

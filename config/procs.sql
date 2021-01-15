@@ -13,20 +13,21 @@ BEGIN
     DELETE FROM members WHERE team_name = proj;
     DELETE FROM categories WHERE team_name = proj;
     DELETE FROM wikis WHERE team_name = proj;
+    DELETE FROM invites WHERE team_name = proj;
     DELETE FROM teams WHERE team_name = proj;
 END //
 DELIMITER ;
 
 -- proc changes the team name
 DELIMITER //
-CREATE PROCEDURE alter_team (IN old_name varchar(50), IN new_name varchar(50))
+CREATE PROCEDURE alter_project (IN old_name varchar(50), IN new_name varchar(50))
 BEGIN
+    update invites set team_name = new_name where team_name = old_name;
     update journal set team_name = new_name where team_name = old_name;
     update sub_tasks set team_name = new_name where team_name = old_name;
     update todo_list set team_name = new_name where team_name = old_name;
     update members set team_name = new_name where team_name = old_name;
     update categories set team_name = new_name where team_name = old_name;
-    update wikis set team_name = new_name where team_name = old_name;
     update teams set team_name = new_name where team_name = old_name;
 END //
 DELIMITER ;

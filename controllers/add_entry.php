@@ -16,7 +16,7 @@ if ($curs->connect_error) {
     die("Connection failed: " . $curs->connect_error);
 }
 
-// create journal entry
+// create journal entry (journals = articles)
 if (isset($_POST['add-journal'])) 
 {
     $subject = $_POST["jsubject"];
@@ -28,7 +28,7 @@ if (isset($_POST['add-journal']))
     header("Location: ../views/logs.php");
 }
 
-// add task to todo list
+// add task to todo list table
 if (isset($_POST['add-task'])) 
 {
     $sql = "insert into todo_list(title, assignee, description, deadline, importance, creator, team_name) values (?, ?, ?, ?, ?, ?, ?)";
@@ -94,17 +94,32 @@ if (isset($_POST["send-project"]))
             header("Location: ../views/dashboard.php?error=unable to add user to project");
     }
 
-    else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"]) || isset($_POST["dash-join"])) 
+    else if ($_POST["radio"] == "join" && projectCheck($curs, $_POST["teamname"])) 
     {
         $admin = getAdmin($curs, $_POST["teamname"]);
         $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
+        
         if ($stmnt->execute()) 
             header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_POST["teamname"]);
         else 
             header("Location: ../views/dashboard.php?error=Request did not send to ".$_POST["teamname"]);
     }
+}
+
+// joining a project from the index page
+if (isset($_POST["index-join"]))
+{
+    $admin = getAdmin($curs, $_POST["teamname"]);
+    $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
+    
+    if ($stmnt->execute()) 
+        header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_POST["teamname"]);
+    else 
+        header("Location: ../views/dashboard.php?error=Request did not send to ".$_POST["teamname"]);
 }
 $curs -> close();
 ?>

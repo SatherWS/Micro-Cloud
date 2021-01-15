@@ -5,7 +5,7 @@
     if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
     
-    // TODO: MOVE PHP ELEMENT TO CONTROLLERS v
+    // TODO: MOVE PHP ELEMENTS TO CONTROLLERS 
     $database = new Database();
     $pd = new Parsedown();
     $curs = $database->getConnection();
@@ -31,12 +31,11 @@
         $id = $_GET['journal'];
         $data = getAttachments($curs, $id);
         
-        print_r($data);
-        foreach ($data as $elem) {
-            echo $elem;
-        $attached_files .= "<a href='".$elem["file_path"]."' download>";
-        $attached_files .= $elem["file_name"].".".$elem["file_type"]."</a>";
+        if ($attached_files != "") {
+            $attached_files .= "<a href='".$elem["file_path"]."' download>";
+            $attached_files .= $elem["file_name"].".".$elem["file_type"]."</a>";
         }
+        
         $sql = "select * from journal where id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
@@ -91,7 +90,7 @@
         $stmnt -> execute();
         header("Location: ./logs.php");
     }
-    // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS ^
+    // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,14 +107,13 @@
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            processEscapes: true,
-            skipTags: ["script","noscript","style","textarea","pre","code"]
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true,
+                skipTags: ["script","noscript","style","textarea","pre","code"]
             }
         });
     </script>
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    
 </head>
 <body>
 <?php include("./components/header.php");?>
@@ -134,64 +132,65 @@
 
 <form action="../controllers/edit_entry.php" method="post" id="editor" enctype="multipart/form-data">
     <?php
-    // display article in plain text or inside a textarea depending on button click
-    // raw data is stored in the database and decoded with nl2br function
-        if (isset($row)) 
+    /*  display article in plain text or inside a textarea depending on button click
+        raw data is stored in the database and decoded with nl2br function
+    */
+    if (isset($row)) 
+    {
+        $id = $row['id'];
+
+        if (!$read_only) 
         {
-            $id = $row['id'];
+            echo "<div class='topnav2' id='item-container'>";
+            echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
+            echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
+            echo "</div>";
+            echo "<input type='hidden' value='$id' name='article_assoc'>";
 
-            if (!$read_only) 
-            {
-                echo "<div class='topnav2' id='item-container'>";
-                echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
-                echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
-                echo "</div>";
-                echo "<input type='hidden' value='$id' name='article_assoc'>";
+            // image upload form section
+            echo "<div class='todo-flex r-cols upload-forms'>";
+            echo "<section>";
+            echo "<br>Select an image to add to the article:<br>";
+            echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
+            echo "</section>";
 
-                // image upload form section
-                echo "<div class='todo-flex r-cols upload-forms'>";
-                echo "<section>";
-                echo "<br>Select an image to add to the article:<br>";
-                echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
-                echo "</section>";
+            echo "<section>";
+            echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
+            echo "<br></section>";
+            echo "</div>";
 
-                echo "<section>";
-                echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
-                echo "<br></section>";
-                echo "</div>";
+            // file upload form section
+            echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
+            echo "<section>";
+            echo "<br>Attach a relevant file to this article:<br>";
+            echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+            echo "</section>";
 
-                // file upload form section
-                echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
-                echo "<section>";
-                echo "<br>Attach a relevant file to this article:<br>";
-                echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
-                echo "</section>";
+            echo "<section>";
+            echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
+            echo "<br></section>";
 
-                echo "<section>";
-                echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
-                echo "<br></section>";
-
-                echo "</div>";
-            }
-
-            // detail view that displays to all user types 
-            echo "<div class='log-details'>";
-            echo "<h1 class='padb'>".$row['subject']."</h1>";
-            echo "<small>Author: ".$row['creator']."</small><br>";
-            echo "<small>Posted: ".$row['date_created']."</small><br>";
-            
-            if ($attached_files != "") {
-                echo "<small>Attachments: ".$attached_files."</small>";
-            }
+            echo "</div>";
         }
 
-        $md = $pd -> text($row['message']);
-        echo $md;
-        echo "</div>";
+        // detail view that displays to all user types 
+        echo "<div class='log-details'>";
+        echo "<h1 class='padb'>".$row['subject']."</h1>";
+        echo "<small>Author: ".$row['creator']."</small><br>";
+        echo "<small>Posted: ".$row['date_created']."</small><br>";
+        
+        if ($attached_files != "") {
+            echo "<small>Attachments: ".$attached_files."</small>";
+        }
+    }
 
-        if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
-            echo $html;
-    ?>
+    $md = $pd -> text($row['message']);
+    echo $md;
+    echo "</div>";
+
+    if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
+        echo $html;
+?>
 </form>
 <!--
 <br>
