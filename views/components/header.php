@@ -2,7 +2,6 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <!-- Team Steep vs. Team Stoop -->
                 <a href="../views/dashboard.php" class="active">Swoop.Team</a>
                 <i class="fa fa-wifi"></i>
             </li>
@@ -13,7 +12,6 @@
                 <div class="dropdown-content">
                     <a href="../index.php">Home Page</a>
                     <a href="./dashboard.php">Dashboard</a>
-                    <a href="../authentication/categories.php">Temp Tags</a>
                 </div>
             </li>
             <li class="dropdown">

@@ -61,12 +61,23 @@ if (isset($_POST["img-upload"]))
     
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
     $uploadOk = 1;
+
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
+    $file_name = pathinfo($target_file,PATHINFO_FILENAME);
+    $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
+    $file_class = "image";
+
+    // append to the associated article
     $md_img = "<br> ![uploaded image]($target_file)";
     $sql = "update journal set message = CONCAT(message, ?) where id = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("ss", $md_img, $journalnum);
+    $stmnt -> execute();
+
+    // add the image path to file storage paths
+    $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
     $stmnt -> execute();
 
     // Check if image file is a actual image or fake image
@@ -133,10 +144,11 @@ if (isset($_POST["file-upload"]))
   $dataFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
   $file_name = pathinfo($target_file,PATHINFO_FILENAME);
   $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
+  $file_class = "file";
 
-  $sql = "insert into file_storage(file_name, file_type, file_path, article_id) values(?, ?, ?, ?)";
+  $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
   $stmnt = mysqli_prepare($curs, $sql);
-  $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum);
+  $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
   $stmnt -> execute();
 
   // Check if file already exists

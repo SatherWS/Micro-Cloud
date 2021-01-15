@@ -18,22 +18,28 @@
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         
-        $stmnt -> execute();
+        if ($stmnt -> execute())
+            return true;
+        else
+            return false;
+        /*
         $results = $stmnt -> get_result();
         $ret = mysqli_fetch_assoc($results);
         return $ret;
+        */
     }
     
-    $attached_files = "";
+    $file_link = "";
 
     if (isset($_GET['journal'])) 
     {
         $id = $_GET['journal'];
         $data = getAttachments($curs, $id);
         
-        if ($attached_files != "") {
-            $attached_files .= "<a href='".$elem["file_path"]."' download>";
-            $attached_files .= $elem["file_name"].".".$elem["file_type"]."</a>";
+        if (getAttachments($curs, $id)) 
+        {
+            $file_link .= "<a href='./file-storage.php?article=$id'>";
+            $file_link .= "manage attached files</a>";
         }
         
         $sql = "select * from journal where id = ?";
@@ -179,8 +185,8 @@
         echo "<small>Author: ".$row['creator']."</small><br>";
         echo "<small>Posted: ".$row['date_created']."</small><br>";
         
-        if ($attached_files != "") {
-            echo "<small>Attachments: ".$attached_files."</small>";
+        if ($file_link != "") {
+            echo "<small>Attachments: ".$file_link."</small>";
         }
     }
 
