@@ -21,10 +21,10 @@
         </ul>
         <ul class="topnav-list">
             <li>
-                <a href="<?php echo $login_link; ?>">Login</a>
+                <a href="<?php echo $login_link;?>">Login</a>
             </li>
             <li>
-                <a href="<?php echo $signup_link; ?>">Register</a>
+                <a href="<?php echo $signup_link;?>">Register</a>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>
