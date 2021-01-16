@@ -1,3 +1,16 @@
+<?php
+    $login_link = "";
+    $signup_link = "";
+
+    if (isset($_POST["query"])) {
+        $login_link = "../authentication/login.php";
+        $signup_link = "../authentication/register.php";
+    }
+    else {
+        $login_link = "./authentication/login.php";
+        $signup_link = "./authentication/register.php";
+    }
+?>
 <nav class="topnav" id="myTopnav">
     <div class="index-nav parent-nav">
         <ul>
@@ -8,10 +21,10 @@
         </ul>
         <ul class="topnav-list">
             <li>
-                <a href="./authentication/login.php">Login</a>
+                <a href="<?php echo $login_link; ?>">Login</a>
             </li>
             <li>
-                <a href="./authentication/register.php">Register</a>
+                <a href="<?php echo $signup_link; ?>">Register</a>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>
