@@ -2,6 +2,7 @@
     include_once('../config/database.php');
     include("../libs/Parsedown.php");
     session_start();
+
     if (!isset($_SESSION["unq_user"])) 
         header("Location: ../authentication/login.php");
     
@@ -22,11 +23,6 @@
             return true;
         else
             return false;
-        /*
-        $results = $stmnt -> get_result();
-        $ret = mysqli_fetch_assoc($results);
-        return $ret;
-        */
     }
     
     $file_link = "";
@@ -48,9 +44,9 @@
             $file_link .= "<a href='./file-storage.php?article=$id&title=$title'>";
             $file_link .= "manage attached files</a>";
         }
-
         
-        if ($row["creator"] == $_SESSION["unq_user"]) {
+        if ($row["creator"] == $_SESSION["unq_user"]) 
+        {
             $show_editor = true;
             $read_only = false;
         }
@@ -146,40 +142,6 @@
     {
         $id = $row['id'];
 
-        if (!$read_only) 
-        {
-            echo "<div class='topnav2' id='item-container'>";
-            echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
-            echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
-            echo "</div>";
-            echo "<input type='hidden' value='$id' name='article_assoc'>";
-
-            // image upload form section
-            echo "<div class='todo-flex r-cols upload-forms'>";
-            echo "<section>";
-            echo "<br>Select an image to add to the article:<br>";
-            echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
-            echo "</section>";
-
-            echo "<section>";
-            echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
-            echo "<br></section>";
-            echo "</div>";
-
-            // file upload form section
-            echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
-            echo "<section>";
-            echo "<br>Attach a relevant file to this article:<br>";
-            echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
-            echo "</section>";
-
-            echo "<section>";
-            echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
-            echo "<br></section>";
-
-            echo "</div>";
-        }
-
         // detail view that displays to all user types 
         echo "<div class='log-details'>";
         echo "<h1 class='padb'>".$row['subject']."</h1>";
@@ -193,7 +155,42 @@
 
     $md = $pd -> text($row['message']);
     echo $md;
+
     echo "</div>";
+
+    if (!$read_only) 
+    {
+        echo "<div class='topnav2' id='item-container'>";
+        echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
+        echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
+        echo "</div>";
+        echo "<input type='hidden' value='$id' name='article_assoc'>";
+
+        // image upload form section
+        echo "<div class='todo-flex r-cols upload-forms'>";
+        echo "<section>";
+        echo "<br>Select an image to add to the article:<br>";
+        echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
+        echo "</section>";
+
+        echo "<section>";
+        echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
+        echo "<br></section>";
+        echo "</div>";
+
+        // file upload form section
+        echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
+        echo "<section>";
+        echo "<br>Attach a relevant file to this article:<br>";
+        echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+        echo "</section>";
+
+        echo "<section>";
+        echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
+        echo "<br></section>";
+
+        echo "</div>";
+    }
 
     if ($_POST['edit'] && mysqli_num_rows($results) > 0) 
         echo $html;

@@ -13,6 +13,7 @@
 
     $curs = $database->getConnection();
 
+    // TODO: Only show editor if you are admin of the project [IMPORTANT]
     if (isset($_GET['task'])) 
     {
         $id = $_GET['task'];
@@ -133,6 +134,7 @@
                         echo "<h2>".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
                         echo "<a href='#subModal' id='myBtn'>Add Sub Task</a>";
+                        echo "<br><br><div class='uline'></div>";
 
                         // Left detail view table
                         echo "<div class='todo-flex r-cols'>";
@@ -160,7 +162,7 @@
                         // Right email automation form
                         echo "<div class='emailer'>";
                         echo "<label class='container'>";
-                        echo "<input type='checkbox' checked='checked' name='remind' value='temp' class='pro-op'>";
+                        echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
                         echo "<span class='checkmark'></span>Send Email Reminders</label>";
                         echo "<br><select name='repeat' class='repeat-input eight-pxp'>";
                         echo "<option type='disabled'>Repitition Pattern</option>";
@@ -169,13 +171,12 @@
                         echo "<option>Monthly</option></select>";
                         echo "<br></br>";
                         echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
-                        //$wip = "onclick="."alert('work in progress').""";
                         echo "<input type='button' name='send-emails' value='Apply Settings' class='add-btn'/>";
                         echo "</div></div>";
                     }
                 }
 
-                // Task editting view render
+                // Task editing view render
                 $form = "";
                 if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
                     $form .= $editor->additionals($data);

@@ -98,14 +98,14 @@
     </article>
     <main>
         <div class="intro-head">
-            <h1 class="main-title">Project & Content Management System</h1>
-            <p>Swoop is a decentralized platform for project and content management. All the code is open source and free to use, modify and or distribute.
+            <h1 class="main-title">Content & Task Management System</h1>
+            <p>Swoop is a decentralized platform for content and task management. All the code is open source and free to use, modify and or distribute.
             This allows users to spin up their own Swoop instances or they can use <a href='https://swoop.team'>this public swoop instance.</a></p>
             <p><a href='#'>Click here to learn how spin up your own swoop instance.</a></p>
             </br>
         </div>
         <section class="proj-feed">
-            <h2><?php printf($project_count); ?> projects hosted on this instance</h2>
+            <h2><?php printf($project_count); ?> projects are hosted on this instance</h2>
             <div class="uline"></div>
             <?php echo $html;?>
         </section>
