@@ -158,8 +158,9 @@
 
     echo "</div>";
 
-    if (!$read_only) 
+    if (!$read_only && !isset($_POST["edit"])) 
     {
+        // File and image upload form
         echo "<div class='topnav2' id='item-container'>";
         echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
         echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
