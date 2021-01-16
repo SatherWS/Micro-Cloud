@@ -1,26 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 /*
-*   index.php styles
+*   Home section
 */
 .main-title {
   font-size: 32px;
 }
 .srch-section {
-  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   padding: 0 2rem;
-  padding-bottom: 10px;
   width: 80%;
   margin: 0 auto;
-  margin-bottom: 1rem;	
 }
 .search-field {
   margin-block-start: 2em;
+  margin-block-end: 2em;
   border: solid 1px rgb(122, 122, 122);
   padding: 10px;
   width: 100%;
+}
+.w-90 {
+  width: 90%;
+  margin: 0 auto;
 }
 .search-field:focus {
   outline: none;
@@ -1235,7 +1237,7 @@ button.add-btn {
   border-radius: 8px;
   padding: .5rem 1rem;
   margin: 10px 0;
-  border: solid #ddd 3px;
+  border: solid #ddd 2px;
 }
 
 .add-btn:hover {

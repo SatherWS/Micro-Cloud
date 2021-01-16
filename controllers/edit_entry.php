@@ -2,6 +2,7 @@
 include_once '../config/database.php';
 $database = new Database();
 $curs = $database->getConnection();
+header("Access-Control-Allow-Origin: *");
 
 if ($curs->connect_error) {
     die("Connection failed: " . $curs->connect_error);
@@ -47,6 +48,7 @@ if (isset($_POST['mod-task'])) {
 
 /*
 *   File upload for images in articles section
+*
 *   TODO: move everything below this comment to a separate file
 */
 

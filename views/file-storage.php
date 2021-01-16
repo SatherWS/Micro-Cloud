@@ -37,7 +37,7 @@
             $project_imgs .= "<div>";
             $project_imgs .= "<p><a href='".$row["file_path"]."' download>Download: ";
             $project_imgs .= $row["file_name"].".".$row["file_type"]."</a></p>";
-            $project_imgs .= "<p>Related Article: ".$row["subject"]."</p>";
+            $project_imgs .= "<p><a href='./journal-details.php?journal=".$row["article_id"]."'>Related Article: ".$row["subject"]."</a></p>";
             $project_imgs .= "<p>Creator: ".$row["creator"]."</p>";
             $project_imgs .= "</div>";
             $project_imgs .= "<div>";
@@ -45,7 +45,6 @@
             $project_imgs .= "</div>";
             $project_imgs .= "</div>";
         }   
-
     }
 
     if (isset($_GET["article"]) && isset($_GET["title"]))
@@ -121,7 +120,7 @@
                 <h2 class="ml2rem">Project files: <?php echo $_SESSION["team"];?></h2>
                 <div class="settings-space">
                     <div class="settings-panel">
-                        <h3>All Files uploaded</h3>
+                        <h3>All Files Uploaded</h3>
                         <table class="data journal-tab">
                             <tr class="tbl-head">
                                 <th>FILENAME</th>
@@ -135,7 +134,7 @@
                 </div>
                 <div class="settings-space">
                     <div class="settings-panel">
-                        <h3>All Images uploaded</h3>
+                        <h3>All Images Uploaded</h3>
                         <?php echo $project_imgs;?>
                     </div>
                 </div>

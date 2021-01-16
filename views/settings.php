@@ -135,7 +135,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                     <div class="settings-panel">
                         <div class="settings-flex r-cols">
                             <div>
-                                <!-- WIP requires db over hall -->
+                                <!-- WIP implementing `edit project` requires db over hall -->
                                 <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
                                 <form action="../controllers/edit_project.php" method="post">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
@@ -153,7 +153,7 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                     </div>
                 </div>
             </div>
-            <br><br><br><br>
+            <br></br>
         </div>
         <?php include("./components/sidebar.php");?>
     </div>

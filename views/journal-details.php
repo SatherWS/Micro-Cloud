@@ -124,7 +124,7 @@
 </head>
 <body>
 <?php include("./components/header.php");?>
-<div class="svg-bg sticky">
+<div class="svg-bg">
     <div class="todo-flex">
         <?php
             if ($show_editor)
@@ -186,7 +186,7 @@
         echo "<small>Author: ".$row['creator']."</small><br>";
         echo "<small>Posted: ".$row['date_created']."</small><br>";
         
-        if ($file_link != "") {
+        if ($file_link != "" && !$read_only) {
             echo "<small>Attachments: ".$file_link."</small>";
         }
     }

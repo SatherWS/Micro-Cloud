@@ -75,7 +75,7 @@ CREATE TABLE invites (
 CREATE TABLE journal (
   id int(11) primary key auto_increment,
   subject varchar(45) NOT NULL,
-  message varchar(10000) NOT NULL,
+  message varchar(100000) NOT NULL,
   -- move to seperate table referenced by teams table
   --category varchar(45) NOT NULL,
   creator varchar(50) NOT NULL,
