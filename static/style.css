@@ -442,7 +442,6 @@ textarea {
   margin-left: 1rem;
   z-index: 10;
 }
-
 .sup-text {
   margin-left: 10px;
 }
@@ -451,9 +450,12 @@ textarea {
   grid-template-columns: 10fr 2fr;
 }
 .side-bar {
-  padding: 0 2rem;
+  padding: 0 1rem;
   background: #fff;
   border-left: solid #ddd;
+}
+.overflow-y {
+  overflow-y: scroll;
 }
 .fixed-content {
   top: 0;

@@ -86,7 +86,6 @@ if (isset($_POST["send-project"]))
         if ($stmnt -> execute()) 
         {
             associateMember($curs, $_POST["teamname"], $_SESSION["unq_user"]);
-            addWiki($curs, $_POST["teamname"]);
             $_SESSION["team"] = $_POST["teamname"];
             header("Location: ../views/dashboard.php");
         }

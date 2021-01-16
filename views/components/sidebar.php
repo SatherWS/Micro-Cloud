@@ -25,7 +25,7 @@
 <section class="side-bar" id="side-bar">
     <div class="fixed-content">
         <div class="fixed-content-items">
-            <div>
+            <div class="overflow-y">
                 <?php
                     if (isset($_GET["error"])) 
                         echo "<p class='error-msg'><b>Error:</b> ".$_GET["error"]."</p>";
