@@ -1,5 +1,7 @@
 <?php
 include_once '../config/database.php';
+include './email_sender.php';
+
 $database = new Database();
 $curs = $database->getConnection();
 header("Access-Control-Allow-Origin: *");
@@ -13,7 +15,8 @@ if ($curs->connect_error) {
 */
 
 // update an article according to the changes made in the details form
-if (isset($_POST['edit'])) {
+if (isset($_POST['edit'])) 
+{
     $sql = "update journal set message = ?, subject = ? where id = ?";
     mysqli_query($curs, $sql);
     $stmnt = mysqli_prepare($curs, $sql);
@@ -36,14 +39,20 @@ if (isset($_POST['delete'])) {
 *   Main Tasks & Sub Task Editing Section 
 */
 
-if (isset($_POST['mod-task'])) {
-    $id = $_POST['mod-task'];
-    $sql = "update todo_list set title=?, description=?, date_created=?, deadline=?, importance=?, status=?, assignee=?, creator=? where id=?";
-    mysqli_query($curs, $sql);
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("sssssssss", $_POST["title"], $_POST["description"], $_POST["start-date"], $_POST["end-date"], $_POST["importance"], $_POST['change-status'], $_POST["change-assignee"], $_POST["change-creator"], $id);
-    $stmnt -> execute();
-    header("Location: ../views/task-details.php?task=".$id);
+if (isset($_POST['mod-task'])) 
+{
+  $id = $_POST['mod-task'];
+  $sql = "update todo_list set title=?, description=?, date_created=?, deadline=?, importance=?, status=?, assignee=?, creator=? where id=?";
+  mysqli_query($curs, $sql);
+  $stmnt = mysqli_prepare($curs, $sql);
+  $stmnt -> bind_param("sssssssss", $_POST["title"], $_POST["description"], $_POST["start-date"], $_POST["end-date"], $_POST["importance"], $_POST['change-status'], $_POST["change-assignee"], $_POST["change-creator"], $id);
+  $stmnt -> execute();
+  header("Location: ../views/task-details.php?task=".$id);
+}
+
+if (isset($_POST['send-email']))
+{
+  echo "send email to user";
 }
 
 /*
@@ -109,7 +118,7 @@ if (isset($_POST["img-upload"]))
 
     // Allow certain file formats
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
+    && $imageFileType != "gif" && $imageFileType != "nef" && $imageFileType != "NEF") {
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
     }

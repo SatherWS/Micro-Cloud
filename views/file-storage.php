@@ -35,10 +35,14 @@
             $project_imgs .= "<br><div class='uline'></div><br>";
             $project_imgs .= "<div class='todo-flex r-cols'>";
             $project_imgs .= "<div>";
+            $project_imgs .= "<h3>".$row["file_name"].".".$row["file_type"]."</h3>";
             $project_imgs .= "<p><a href='".$row["file_path"]."' download>Download: ";
             $project_imgs .= $row["file_name"].".".$row["file_type"]."</a></p>";
             $project_imgs .= "<p><a href='./journal-details.php?journal=".$row["article_id"]."'>Related Article: ".$row["subject"]."</a></p>";
             $project_imgs .= "<p>Creator: ".$row["creator"]."</p>";
+            $project_imgs .= "<form method='post' action='../controllers/delete_image.php'>";
+            $project_imgs .= "<input type='submit' value='Delete Image' name='delete-img' class='add-btn'>";
+            $project_imgs .= "</form>";
             $project_imgs .= "</div>";
             $project_imgs .= "<div>";
             $project_imgs .= "<img src='".$row["file_path"]."'>";

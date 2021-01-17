@@ -163,15 +163,11 @@
                         echo "<div class='emailer'>";
                         echo "<label class='container'>";
                         echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                        echo "<span class='checkmark'></span>Send Email Reminders</label>";
-                        echo "<br><select name='repeat' class='repeat-input eight-pxp'>";
-                        echo "<option type='disabled'>Repitition Pattern</option>";
-                        echo "<option>Daily</option>";
-                        echo "<option>Weekly</option>";
-                        echo "<option>Monthly</option></select>";
+                        echo "<span class='checkmark'></span>Send an email reminder</label>";
+                        echo "<input type='date' name='remind-date' class='repeat-input'>";
                         echo "<br></br>";
                         echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
-                        echo "<input type='button' name='send-emails' value='Apply Settings' class='add-btn'/>";
+                        echo "<input type='button' name='send-email' value='Apply Settings' class='add-btn'/>";
                         echo "</div></div>";
                     }
                 }
