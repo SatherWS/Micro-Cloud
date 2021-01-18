@@ -176,28 +176,35 @@
             ?>
             </div>
         </form>
-        <form action="../controllers/email_interface.php" method="post">
-        <?php 
-            // email reminder form
-            if (isset($_GET["task"]))
-            {
-                echo "<br><br>"; // TODO: this is a bad quick fix use css instead
-                $id = $_GET['task'];
-                echo "<h2 class='inner-task-panel'>Optional email reminders</h2>";
-                echo "<div class='emailer'>";
-                echo "<label class='container'>";
-                echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                echo "<span class='checkmark'></span>Send an email reminder</label>";
-                echo "<input type='date' name='remind-date' class='repeat-input'>";
-                echo "<br></br>";
-                echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input'/>";
-                echo "<input type='hidden' name='assignee' value=$assignee_address>";
-                echo "<input type='hidden' name='taskid' value=$id>";
-                echo "<button type='submit' name='send-email' class='add-btn'>Apply Settings</button>";
-                echo "</div>";
-            }
-        ?>
-        </form>
+        <br>
+        <div class="mailer-bg">
+            <div class="todo-flex r-cols inner-task-panel">
+                <div class="reminder-notes">
+                    <h2>Optional email reminders</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti numquam voluptate, exercitationem sunt hic eos veritatis temporibus odit alias? Itaque harum, quas impedit esse ipsam suscipit architecto fugit dolore quibusdam.</p>
+                </div>
+                <form action="../controllers/email_interface.php" method="post">
+                <?php 
+                    // email reminder form
+                    if (isset($_GET["task"]))
+                    {
+                        $id = $_GET['task'];
+                        echo "<div class='emailer'>";
+                        echo "<label class='container'>";
+                        echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
+                        echo "<span class='checkmark'></span>Send an email reminder</label>";
+                        echo "<input type='date' name='remind-date' class='repeat-input'>";
+                        echo "<br></br>";
+                        echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input'/>";
+                        echo "<input type='hidden' name='assignee' value=$assignee_address>";
+                        echo "<input type='hidden' name='taskid' value=$id>";
+                        echo "<br><br><button type='submit' name='send-email' class='add-btn'>Apply Settings</button>";
+                        echo "</div>";
+                    }
+                ?>
+                </form>
+            </div>
+        </div>
         <div class="inner-task-panel">
         <?php
             // sub tasks component
