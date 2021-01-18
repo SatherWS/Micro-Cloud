@@ -42,16 +42,19 @@ class EmailScheduler {
     }
 }
 
-    $db = new Database();
-    $curs = $db -> getConnection();
+/*
+$db = new Database();
+$curs = $db -> getConnection();
 
-    $sql = "select assignee, task_name, deadline from reminders order by exec_time";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
-    $data = mysqli_fetch_row($results);
+$sql = "select assignee, task_name, deadline from reminders order by exec_time";
+$stmnt = mysqli_prepare($curs, $sql);
+$stmnt -> execute();
+$results = $stmnt -> get_result();
+$data = mysqli_fetch_row($results);
+*/
 
-    $schedule = new EmailScheduler();
-    $schedule -> contactServer($data[0], $data[1], $data[2]);
+$schedule = new EmailScheduler();
+//$schedule -> contactServer($data[0], $data[1], $data[2]);
+$schedule -> contactServer("satherc@go.stockton.edu", "some jobber", "4-20-2021");
 
 ?>
