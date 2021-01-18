@@ -11,3 +11,11 @@ CREATE TABLE file_storage (
   date_created date default(CURRENT_DATE),
   foreign key (article_id) references journal(id)
 );
+
+CREATE TABLE reminders (
+  id int primary key auto_increment,
+  task_name varchar(75) not null,
+  deadline date not null,
+  exec_time datetime not null,
+  assignee varchar(50) not null
+);
