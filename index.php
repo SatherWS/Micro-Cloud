@@ -29,8 +29,8 @@
 
     while ($row = mysqli_fetch_assoc($result)) 
     {
-        $project_count = $row["count(*)"];
         $id = $row["team_name"];
+        // brief project description content
         $html .= "<section class='project-entry'><div class='todo-flex'>";
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
         $html .= "<p>".$row["description"]."</p>";
@@ -51,12 +51,13 @@
         $html .= "</form>";
 
         $html .= "<div class='settings-flex r-cols align-center'>";
+        // join project form/button
         $html .= "<form class='blockzero' action='./controllers/add_entry.php' method='post'>";
         $html .= "<input class='send-req' type='hidden' name='teamname' value='".$row["team_name"]."'>";
         $html .= "<button type='submit' name='index-join'>Want to join this project?</button>";
         $html .= "</form>";
 
-        // project links
+        // links for project tasks and articles
         $html .= "<div class='todo-flex r-cols index-btns'>";
         $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
         $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></button></h4>";
@@ -91,7 +92,7 @@
         <form action="./views/results.php" method="post" class="w-90">
             <div class="srch-section">
                 <input type="text" placeholder="Search" class="search-field" name="query">
-                <input type="submit" value="Search" class="add-btn">
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </div>
         </form>
         <div></div>

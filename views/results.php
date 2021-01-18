@@ -8,6 +8,9 @@
     
     else if ($_GET["filter"] == "tasks")
         $sql = "select * from todo_list where title like '%".$_POST["query"]."%' order by date_created desc";
+
+    else if ($_GET["filter"] == "users")
+        $sql = "select * from users where username like '%".$_POST["query"]."%' order by date_created desc";
     
     else
         $sql = "select * from teams where team_name like '%".$_POST["query"]."%' order by date_created desc";
@@ -95,7 +98,7 @@
         <form method="post" class="w-90">
             <div class="srch-section">
                 <input type="text" placeholder="Search" class="search-field" name="query">
-                <input type="submit" value="Search" class="add-btn">
+                <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </div>
         </form>
         <div></div>
@@ -107,6 +110,7 @@
                     <p><a href="javascript:void(0)" class="dropbtn">FILTER</a></p>
                     <div class="dropdown-content">
                         <p><a href="./results.php" class="dropbtn">PROJECTS</a></p>
+                        <p><a href="./results.php" class="dropbtn">USERS</a></p>
                         <p><a href="./results.php?filter=articles" class="dropbtn">ARTICLES</a></p>
                         <p><a href="./results.php?filter=tasks" class="dropbtn">TASKS</a></p>
                     </div>

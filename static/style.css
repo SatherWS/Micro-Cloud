@@ -750,7 +750,9 @@ element {
 .uline {
   border-bottom: solid #ddd;
 }
-
+.uline-lite {
+  border-bottom: solid #ddd 1px;
+}
 .inner-task-panel {
   width: 80%;
   margin: 0 auto;
@@ -1046,6 +1048,9 @@ button {
   border: solid #ddd 2px;
   padding: 2rem;
   border-radius: 8px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 45%;
 }
 .repeat-input {
   width: 100%;
@@ -1210,6 +1215,16 @@ tr:hover {background-color:#f5f5f5;}
   border-radius: 8px;
   padding: .5rem 1rem;
   border: solid #ddd 2px;
+}
+
+.search-btn {
+  height: fit-content!important;
+  margin-block-start: 2em;
+  margin-block-end: 2em;
+  padding: 10px;
+  color: #000;
+  background: #f1f1f1;
+  border: none!important;
 }
 
 .art-ops {

@@ -5,8 +5,8 @@
         <tr class="tbl-head">
             <th>ACTION</th>
             <th>PROJECT</th>
-            <th>RECEIVER</th>
             <th>SENDER</th>
+            <th>RECEIVER</th>
             <th>STATUS</th>
             <th>DATE SUBMITTED</th>
         </tr>
@@ -25,8 +25,8 @@
                     echo "<tr><td></td>";
                 }
                 echo "<td>".$row["team_name"]."</td>";
-                echo "<td>".$row["receiver"]."</td>";
                 echo "<td>".$row["sender"]."</td>";
+                echo "<td>".$row["receiver"]."</td>";
                 echo "<td>".$row["status"]."</td>";
                 echo "<td>".$row["date_created"]."</td>";
             }

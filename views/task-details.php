@@ -92,6 +92,8 @@
         $selectors = $selector.=$selector2;
         return $selectors;
     }
+
+    $assignee_address = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,14 +132,15 @@
                 {
                     while($row = mysqli_fetch_assoc($results)) 
                     {
+                        $assignee_address = $row["assignee"];
                         // Top task title, description and sub modal trigger
                         echo "<h2>".$row['title']."</h2>";
                         echo "<p>".$row["description"]."</p>";
                         echo "<a href='#subModal' id='myBtn'>Add Sub Task</a>";
-                        echo "<br><br><div class='uline'></div>";
+                        echo "<br><br><div class='uline-lite'></div>";
 
-                        // Left detail view table
-                        echo "<div class='todo-flex r-cols'>";
+                        // task detail view table
+                        echo "<div>";
                         echo "<div><table>";
                         echo "<tr><td><p><b>Status:</b></p></td>";
                         echo "<td><p>".$row['status']."</p></td>";
@@ -158,17 +161,7 @@
                         echo "<td><p>".$row['creator']."</p></td>";
                         echo "</tr>";
                         echo "</table></div>";
-
-                        // Right email automation form
-                        echo "<div class='emailer'>";
-                        echo "<label class='container'>";
-                        echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                        echo "<span class='checkmark'></span>Send an email reminder</label>";
-                        echo "<input type='date' name='remind-date' class='repeat-input'>";
-                        echo "<br></br>";
-                        echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
-                        echo "<input type='button' name='send-email' value='Apply Settings' class='add-btn'/>";
-                        echo "</div></div>";
+                        echo "</div>";
                     }
                 }
 
@@ -182,6 +175,28 @@
                 }
             ?>
             </div>
+        </form>
+        <form action="../controllers/email_interface.php" method="post">
+        <?php 
+            // email reminder form
+            if (isset($_GET["task"]))
+            {
+                echo "<br><br>"; // TODO: this is a bad quick fix use css instead
+                $id = $_GET['task'];
+                echo "<h2 class='inner-task-panel'>Optional email reminders</h2>";
+                echo "<div class='emailer'>";
+                echo "<label class='container'>";
+                echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
+                echo "<span class='checkmark'></span>Send an email reminder</label>";
+                echo "<input type='date' name='remind-date' class='repeat-input'>";
+                echo "<br></br>";
+                echo "<input type='time' name='repeat-count' placeholder='Set Reminder Time' class='repeat-input'/>";
+                echo "<input type='hidden' name='assignee' value=$assignee_address>";
+                echo "<input type='hidden' name='taskid' value=$id>";
+                echo "<button type='submit' name='send-email' class='add-btn'>Apply Settings</button>";
+                echo "</div>";
+            }
+        ?>
         </form>
         <div class="inner-task-panel">
         <?php

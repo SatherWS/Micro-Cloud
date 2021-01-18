@@ -1,6 +1,5 @@
 <?php
 include_once '../config/database.php';
-include './email_sender.php';
 
 $database = new Database();
 $curs = $database->getConnection();
@@ -50,15 +49,10 @@ if (isset($_POST['mod-task']))
   header("Location: ../views/task-details.php?task=".$id);
 }
 
-if (isset($_POST['send-email']))
-{
-  echo "send email to user";
-}
-
 /*
 *   File upload for images in articles section
 *
-*   TODO: move everything below this comment to a separate file
+*   TODO: move file upload code that is below this comment to a separate file
 */
 
 // send an image to the server

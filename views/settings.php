@@ -110,7 +110,6 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                 <h2 class="ml2rem">Invitation Settings</h2>
                 <div class="settings-panel">
                     <div class="invites">
-                        <h3>Requests sent by <?php echo $_SESSION["unq_user"];?></h3>
                         <?php
                             if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
                                 include("./components/sender-table.php");
@@ -122,12 +121,11 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                     </div>
                     <h3>Requests to join project: <?php echo $_SESSION["team"];?></h3>
                     <?php
-                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-                            if (invite_count($curs, $_SESSION["team"]) > 0)
-                                include("./components/requests-table.php");
-                            else
-                                echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
-                        }
+                        if (get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) 
+                            include("./components/requests-table.php");
+
+                        else
+                            echo "<h4 class='stng-msg'>No requests have been made yet...</h4>";
                     ?>
                 </div>
                 <h2 class="ml2rem">Danger Zone - Project Settings</h2>
