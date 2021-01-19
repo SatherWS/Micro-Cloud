@@ -8,7 +8,7 @@
     $db = new Database();
     $curs = $db -> getConnection();
 
-    $sql = "select journal.id, file_storage.article_id, journal.team_name, journal.subject, journal.creator, file_storage.file_path, file_storage.file_name, file_storage.file_class, file_storage.file_type, file_storage.date_created from journal inner join file_storage on journal.id = file_storage.article_id where journal.team_name = ?";
+    $sql = "select journal.id, file_storage.article_id, file_storage.id as img_id, journal.team_name, journal.subject, journal.creator, file_storage.file_path, file_storage.file_name, file_storage.file_class, file_storage.file_type, file_storage.date_created from journal inner join file_storage on journal.id = file_storage.article_id where journal.team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
@@ -42,6 +42,7 @@
             $project_imgs .= "<p>Creator: ".$row["creator"]."</p>";
             $project_imgs .= "<form method='post' action='../controllers/delete_image.php'>";
             $project_imgs .= "<input type='submit' value='Delete Image' name='delete-img' class='add-btn'>";
+            $project_imgs .= "<input type='hidden' value='".$row["img_id"]."' name='img-id' />";
             $project_imgs .= "</form>";
             $project_imgs .= "</div>";
             $project_imgs .= "<div>";

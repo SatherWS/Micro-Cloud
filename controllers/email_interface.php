@@ -35,6 +35,7 @@
 	exec("at ".$_POST["remind-time"]." ".$at_format." -f /var/www/html/controllers/email_sender.php");
 	echo "<br>";
 	echo "at ".$_POST["remind-time"]." ".$at_format." -f /var/www/html/controllers/email_sender.php"
+	header("Location: ../views/task-details.php?task=$id");
 	
 	/*
 	// attempt 1 at shell script creator

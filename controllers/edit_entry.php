@@ -61,9 +61,10 @@ if (isset($_POST["img-upload"]))
     $journalnum = $_POST["article_assoc"];
     $target_dir = "../uploads/images/$journalnum/";
 
-    if (!is_dir($target_dir))
+    if (!is_dir($target_dir)) {
         mkdir($target_dir);
-    
+        chmod($target_dir, 0777);
+    }
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
     $uploadOk = 1;
 
@@ -73,7 +74,7 @@ if (isset($_POST["img-upload"]))
     $file_class = "image";
 
     // append to the associated article
-    $md_img = "<br> ![uploaded image]($target_file)";
+    $md_img = " <br> ![uploaded image]($target_file)";
     $sql = "update journal set message = CONCAT(message, ?) where id = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("ss", $md_img, $journalnum);

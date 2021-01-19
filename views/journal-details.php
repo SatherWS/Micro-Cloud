@@ -42,7 +42,7 @@
         {
             $title = $row["subject"];
             $file_link .= "<a href='./file-storage.php?article=$id&title=$title'>";
-            $file_link .= "manage attached files</a>";
+            $file_link .= "View Attached Files</a>";
         }
         
         if ($row["creator"] == $_SESSION["unq_user"]) 
@@ -146,10 +146,11 @@
         echo "<div class='log-details'>";
         echo "<h1 class='padb'>".$row['subject']."</h1>";
         echo "<small>Author: ".$row['creator']."</small><br>";
+        echo "<small>Project: ".$row['team_name']."</small><br>";
         echo "<small>Posted: ".$row['date_created']."</small><br>";
         
         if ($file_link != "" && !$read_only) {
-            echo "<small>Attachments: ".$file_link."</small>";
+            echo $file_link;
         }
     }
 
