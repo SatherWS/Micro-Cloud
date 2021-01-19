@@ -27,8 +27,6 @@
         header("Location: ./index.php");
     }
 
-    $vis_range = 5;
-    $count = 0;
     while ($row = mysqli_fetch_assoc($result)) 
     {
         $id = $row["team_name"];
@@ -66,7 +64,6 @@
 
         $html .= "</div></div></section>";
         $html .= "<div class='uline'></div>";
-        $count++;
     }
 
     $project_count = mysqli_num_rows($result);

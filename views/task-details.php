@@ -128,51 +128,51 @@
         <form action="../controllers/edit_entry.php" method="post" class="task-auto" id="editor2">
             <div class="inner-task-panel">
             <?php
-                if ($_GET['task'] && mysqli_num_rows($results) > 0) 
+            if ($_GET['task'] && mysqli_num_rows($results) > 0) 
+            {
+                while($row = mysqli_fetch_assoc($results)) 
                 {
-                    while($row = mysqli_fetch_assoc($results)) 
-                    {
-                        $assignee_address = $row["assignee"];
-                        // Top task title, description and sub modal trigger
-                        echo "<h2>".$row['title']."</h2>";
-                        echo "<p>".$row["description"]."</p>";
-                        echo "<a href='#subModal' id='myBtn'>Add Sub Task</a>";
-                        echo "<br><br><div class='uline-lite'></div>";
+                    $assignee_address = $row["assignee"];
+                    // Top task title, description and sub modal trigger
+                    echo "<h2>".$row['title']."</h2>";
+                    echo "<p>".$row["description"]."</p>";
+                    echo "<a href='#subModal' id='myBtn'>Add Sub Task</a>";
+                    echo "<br><br><div class='uline-lite'></div>";
 
-                        // task detail view table
-                        echo "<div>";
-                        echo "<div><table>";
-                        echo "<tr><td><p><b>Status:</b></p></td>";
-                        echo "<td><p>".$row['status']."</p></td>";
-                        echo "</tr>";
-                        echo "<tr><td><p><b>Deadline:</b></p></td>";
-                        echo "<td><p>".$row['deadline']."</p></td>";
-                        echo "</tr>";
-                        echo "<tr><td><p><b>Start Date:</b></p></td>";
-                        echo "<td><p>".$row['date_created']."</p></td>";
-                        echo "</tr>";
-                        echo "<tr><td><p><b>Importance:</b></p></td>";
-                        echo "<td><p>".$row['importance']."</p></td>";
-                        echo "</tr>";
-                        echo "<tr><td><p><b>Assignee:</b></p></td>";
-                        echo "<td><p>".$row['assignee']."</p></td>";
-                        echo "</tr>";
-                        echo "<tr><td><p><b>Creator:</b></p></td>";
-                        echo "<td><p>".$row['creator']."</p></td>";
-                        echo "</tr>";
-                        echo "</table></div>";
-                        echo "</div>";
-                    }
+                    // task detail view table
+                    echo "<div>";
+                    echo "<div><table>";
+                    echo "<tr><td><p><b>Status:</b></p></td>";
+                    echo "<td><p>".$row['status']."</p></td>";
+                    echo "</tr>";
+                    echo "<tr><td><p><b>Deadline:</b></p></td>";
+                    echo "<td><p>".$row['deadline']."</p></td>";
+                    echo "</tr>";
+                    echo "<tr><td><p><b>Start Date:</b></p></td>";
+                    echo "<td><p>".$row['date_created']."</p></td>";
+                    echo "</tr>";
+                    echo "<tr><td><p><b>Importance:</b></p></td>";
+                    echo "<td><p>".$row['importance']."</p></td>";
+                    echo "</tr>";
+                    echo "<tr><td><p><b>Assignee:</b></p></td>";
+                    echo "<td><p>".$row['assignee']."</p></td>";
+                    echo "</tr>";
+                    echo "<tr><td><p><b>Creator:</b></p></td>";
+                    echo "<td><p>".$row['creator']."</p></td>";
+                    echo "</tr>";
+                    echo "</table></div>";
+                    echo "</div>";
                 }
+            }
 
-                // Task editing view render
-                $form = "";
-                if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
-                    $form .= $editor->additionals($data);
-                    $form .= $editor->create_editor($data);
-                    $form .= "</div></div>";
-                    echo $form;
-                }
+            // Task editing view render
+            $form = "";
+            if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
+                $form .= $editor->additionals($data);
+                $form .= $editor->create_editor($data);
+                $form .= "</div></div>";
+                echo $form;
+            }
             ?>
             </div>
         </form>
@@ -185,50 +185,50 @@
                 </div>
                 <form action="../controllers/email_interface.php" method="post">
                 <?php 
-                    // email reminder form
-                    if (isset($_GET["task"]))
-                    {
-                        $id = $_GET['task'];
-                        echo "<div class='emailer'>";
-                        echo "<label class='container'>";
-                        echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                        echo "<span class='checkmark'></span>Send an email reminder</label>";
-                        echo "<input type='date' name='remind-date' class='repeat-input'>";
-                        echo "<br></br>";
-                        echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input'/>";
-                        echo "<input type='hidden' name='assignee' value=$assignee_address>";
-                        echo "<input type='hidden' name='taskid' value=$id>";
-                        echo "<br><br><button type='submit' name='send-email' class='add-btn'>Apply Settings</button>";
-                        echo "</div>";
-                    }
+                // email reminder form
+                if (isset($_GET["task"]))
+                {
+                    $id = $_GET['task'];
+                    echo "<div class='emailer'>";
+                    echo "<label class='container'>";
+                    echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
+                    echo "<span class='checkmark'></span>Send an email reminder</label>";
+                    echo "<input type='date' name='remind-date' class='repeat-input'>";
+                    echo "<br></br>";
+                    echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input'/>";
+                    echo "<input type='hidden' name='assignee' value=$assignee_address>";
+                    echo "<input type='hidden' name='taskid' value=$id>";
+                    echo "<br><br><button type='submit' name='send-email' class='add-btn'>Apply Settings</button>";
+                    echo "</div>";
+                }
                 ?>
                 </form>
             </div>
         </div>
         <div class="inner-task-panel">
         <?php
-            // sub tasks component
-            if (isset($results2)) 
+        // sub tasks component
+        if (isset($results2)) 
+        {
+            while ($row2 = mysqli_fetch_assoc($results2)) 
             {
-                while ($row2 = mysqli_fetch_assoc($results2)) 
-                {
-                    echo "<br><div class='uline'></div><br>";
-                    echo "<div class='todo-flex r-cols'>";
-                    echo "<h3>Sub Task: ".$row2["title"]."</h3>";
-                    echo "<form method='post'>";
-                    $id = $row2['id'];
-                    echo "<button class='add-btn' type='submit' name='delete-sub' value='$id'><i class='fa fa-close'></i>Delete Sub Task</button>";
-                    echo "</form></div>";
-                    echo "<p>".$row2["descript"]."</p>";
-                    echo "<div class='todo-flex align-initial r-cols'>";
-                    echo "<div><p><b>Status:</b> ".$row2['status']."</p>";
-                    echo "<p><b>Start Date:</b> ".$row2['date_created']."</p>";
-                    echo "<p><b>End Date:</b> ".$row2['deadline']."</p></div>";
-                    echo "<div><p><b>Importance:</b> ".$row2['importance']."</p>";
-                    echo "<p><b>Assigned To:</b> ".$row2['assignee']."</p>";
-                    echo "<p><b>Created By:</b> ".$row2['creator']."</p></div></div>";
-                }
+                echo "<br><div class='uline'></div><br>";
+                echo "<div class='todo-flex r-cols'>";
+                echo "<h3>Sub Task: ".$row2["title"]."</h3>";
+                echo "<form method='post'>";
+                $id = $row2['id'];
+                echo "<button class='add-btn' type='submit' name='delete-sub' value='$id'><i class='fa fa-close'></i>Delete Sub Task</button>";
+                echo "</form></div>";
+                echo "<p>".$row2["descript"]."</p>";
+                echo "<div class='todo-flex align-initial r-cols'>";
+                echo "<div><p><b>Status:</b> ".$row2['status']."</p>";
+                echo "<p><b>Start Date:</b> ".$row2['date_created']."</p>";
+                echo "<p><b>End Date:</b> ".$row2['deadline']."</p></div>";
+                echo "<div><p><b>Importance:</b> ".$row2['importance']."</p>";
+                echo "<p><b>Assigned To:</b> ".$row2['assignee']."</p>";
+                echo "<p><b>Created By:</b> ".$row2['creator']."</p></div></div>";
             }
+        }
         ?>
     </div>
     <script>
