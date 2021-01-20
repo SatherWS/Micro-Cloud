@@ -4,12 +4,15 @@
 	$db = new Database();
 	$curs = $db -> getConnection();
 
-	$assignee = $_POST["assignee"];
-	$exec_datetime = $_POST['remind-date'].' '.$_POST['remind-time'];
 	$id = $_POST["taskid"];
+	$assignee = $_POST["assignee"];
+	$exec_date = $_POST['remind-date'];
+	$exec_time = $_POST["remind-time"];
+
+	$exec_datetime = $exec_date.' '.$_POST['remind-time'];
 
 	// get scheduled task
-	$sql = "select title, deadline from todo_list where id = ?";
+	$sql = "select title, description, deadline from todo_list where id = ?";
 	$stmnt = mysqli_prepare($curs, $sql);
 	$stmnt -> bind_param("s", $id);
 	$stmnt -> execute();
@@ -17,45 +20,15 @@
 	$row = mysqli_fetch_row($results);
 	
 	$task_name = $row[0];
-	$deadline = $row[1];
+	$descript = $row[1];
+	$deadline = $row[2];
 
-	echo $task_name."\n";
-	echo $exec_datetime."\n";
-	echo $assignee."\n";
-	echo $deadline."\n";
-
-	$sql = "insert into reminders(assignee, task_name, deadline, exec_time) values (?, ?, ?, ?)";
-	$stmnt = mysqli_prepare($curs, $sql);
-	$stmnt -> bind_param("ssss", $assignee, $task_name, $deadline, $exec_datetime);
-	$stmnt -> execute();
-
-	$exec_date = $_POST['remind-date'];
 	$at_format = substr($exec_date, 5, 2).substr($exec_date, 8, 2).substr($exec_date, 2, 2);
+	$script_path = "/var/www/html/controllers/email_sender.php";
 
-	exec("at ".$_POST["remind-time"]." ".$at_format." -f /var/www/html/controllers/email_sender.php");
-	echo "<br>";
-	echo "at ".$_POST["remind-time"]." ".$at_format." -f /var/www/html/controllers/email_sender.php"
-	header("Location: ../views/task-details.php?task=$id");
+	exec("echo $script_path '$assignee' '$task_name' '$descript' '$deadline' | at $exec_time $at_format");
 	
-	/*
-	// attempt 1 at shell script creator
-	exec("echo '#!/usr/bin/sh' > /var/www/html/models/scheduler/test-job.sh");
-	exec("echo  '<?php' >> /var/www/html/models/scheduler/test-job.sh");
-	exec("echo '$path  $assignee' >> /var/www/html/models/scheduler/test-job.sh");
-	exec("echo '?>' >> /var/www/html/models/scheduler/test-job.sh");
-	exec("chmod u+x /var/www/html/models/scheduler/test-job.sh");
+	echo "Command Executed!<br>";
+	echo "echo $script_path '$assignee' '$task_name' '$deadline' | at $exec_time $at_format";
 	header("Location: ../views/task-details.php?task=$id");
-
-	// attempt 2 at shell script creator
-	echo file_put_contents("/var/www/html/models/scheduler/test-script.sh", "#!/usr/bin/sh");
-	$shell_script = fopen("/var/www/html/models/scheduler/test-script.sh", "w") or die("Unable to open file!");
-	$code = "\n";
-	$code .= "<?php \n";
-	$code .= $path." ".$assignee;
-	$code .= "?>";
-	fwrite($shell_script, $code);
-	fclose($shell_script);
-	*/
-
-
 ?>

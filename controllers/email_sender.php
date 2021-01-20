@@ -5,12 +5,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php';
+require '/var/www/html/vendor/autoload.php';
 include_once "/var/www/html/config/database.php";
 
 class EmailScheduler {
 
-    public function contactServer($assignee, $task, $deadline) {
+    public function contactServer($assignee, $task, $descript, $deadline) {
         //Server settings
         try {
             $mail = new PHPMailer(true);
@@ -31,27 +31,18 @@ class EmailScheduler {
             // Content
             $mail->isHTML(true);                                         
             $mail->Subject = 'Email Reminder';
-            $mail->Body    = '<h2>The task: '.$task.' is due on '.$deadline.'</h2>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->Body    = '<h2>The task: '.$task.' is due on '.$deadline.'</h2><p>'.$descript.'</p>';
+            $mail->AltBody = 'The task: '.$task.' is due on '.$deadline.' '.$descript;
             $mail->send();
             echo "EMAIL HAS BEEN SENT!\n";
         
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo} \n";
         }
     }
 }
 
-    $db = new Database();
-    $curs = $db -> getConnection();
-
-    $sql = "select assignee, task_name, deadline from reminders order by exec_time";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> execute();
-    $results = $stmnt -> get_result();
-    $data = mysqli_fetch_row($results);
-
     $schedule = new EmailScheduler();
-    $schedule -> contactServer($data[0], $data[1], $data[2]);
+    $schedule -> contactServer($argv[1], $argv[2], $argv[3], $argv[4]);
 
 ?>
