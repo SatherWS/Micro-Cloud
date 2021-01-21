@@ -5,7 +5,7 @@ $db = new Database();
 $curs = $db -> getConnection();
 
 $id = $_POST["taskid"];
-$id = 53;
+//$id = 53;
 
 $assignee = $_POST["assignee"];
 $exec_date = $_POST['remind-date'];
@@ -23,21 +23,21 @@ $stmnt -> execute();
 $results = $stmnt -> get_result();
 $row = mysqli_fetch_row($results);
 
-$task_name = $row[0];
-$descript = $row[1];
-$deadline = $row[2];
+$task_name = escapeshellarg($row[0]);
+$descript = escapeshellarg($row[1]);
+$deadline = escapeshellarg($row[2]);
 
 $at_format = substr($exec_date, 5, 2).substr($exec_date, 8, 2).substr($exec_date, 2, 2);
-$script_path = "/var/www/html/controllers/email_sender.php";
+$script_path = "/var/www/html/controllers/smtp_interface.py";
 
 // execute at-job
-echo file_put_contents("test.txt","Hello World. Fuck you!");
-$at_exec = "echo '$script_path' '$assignee' '$task_name' '$descript' '$deadline' | at $exec_time $at_format";
+$at_exec = "echo python $script_path $assignee $task_name $descript $deadline | at $exec_time $at_format";
+echo $at_exec;
 exec($at_exec);
 
 
 // error log
 exec("echo 'Command Executed!\n' > /var/uploads/at-logs.txt");
 exec("echo $at_exec >> /var/uploads/at-logs.txt");
-header("Location: ../views/task-details.php?task=$id");
+//header("Location: ../views/task-details.php?task=$id");
 ?>
