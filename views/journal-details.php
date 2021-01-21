@@ -3,9 +3,6 @@
     include("../libs/Parsedown.php");
     session_start();
 
-    if (!isset($_SESSION["unq_user"])) 
-        header("Location: ../authentication/login.php");
-    
     // TODO: MOVE PHP ELEMENTS TO CONTROLLERS 
     $database = new Database();
     $pd = new Parsedown();

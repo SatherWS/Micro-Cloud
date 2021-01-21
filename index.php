@@ -8,9 +8,6 @@
     $project_count = 0;
     $limit = 5;
 
-    if (isset($_GET["more-projects"]))
-        $limit += 5;
-
     $sql = "select count(*) from teams";
     $result = mysqli_query($curs, $sql);
     $data = mysqli_fetch_assoc($result);
@@ -18,7 +15,13 @@
 
     $sql = "select * from teams order by date_created desc limit ?";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("s", $limit);
+    
+    if (isset($_GET["more-projects"])) {
+        $stmnt -> bind_param("s", $project_count);
+    }
+    else
+        $stmnt -> bind_param("s", $limit);
+    
     $stmnt -> execute();
     $result = $stmnt -> get_result();
 
@@ -40,8 +43,10 @@
         header("Location: ./index.php");
     }
 
+    $count = 0;
     while ($row = mysqli_fetch_assoc($result)) 
-    {
+    {   
+        $count += 1;
         // brief description of project's content
         $id = $row["team_name"];
         $html .= "<section class='project-entry'><div class='todo-flex'>";
@@ -118,20 +123,19 @@
             <div class="uline"></div>
             <?php echo $html;?>
             <br><br>
-            <h2 class='mr-5 text-center'><a href='?more-projects=5' class='add-btn-2'>Show 5 More Projects</a></h2>
+            <h2 class='mr-5 text-center'><a href='#last-five?more-projects=5' class='add-btn-2'>Show All Projects</a></h2>
             <br><br>
         </section>
     </main>
     <div class="col-container">
         <div class="col">
-            <h2>Column 1</h2>
-            <p>Hello World</p>
+            <h2>KNOWLEDGE BASE</h2>
+            <p>About this project</p>
+            <p>How to articles</p>
         </div>
-
         <div class="col">
-            <h2>Column 2</h2>
-            <p>Some other text..</p>
-            <p>Some other text..</p>
+            <h2>LINKS</h2>
+            <p><a class="footer-link" href='#'>Source code</a></p>
         </div>
     </div>
     <script src="./static/main.js"></script>

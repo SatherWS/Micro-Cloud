@@ -24,15 +24,15 @@ class EmailScheduler {
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
             //Recipients
-            $mail->setFrom('swoopctms@gmail.com', 'Mailer');
+            $mail->setFrom('swoopctms@gmail.com', 'Swoop Admin');
             $mail->addAddress($assignee, 'Swoop User');
             $mail->addReplyTo('swoopctms@gmail.com', 'Information');
 
             // Content
             $mail->isHTML(true);                                         
             $mail->Subject = 'Email Reminder';
-            $mail->Body    = '<h2>'.$task.' is due on '.$deadline.'</h2><p>'.$descript.'</p>';
-            $mail->AltBody = $task.' is due on '.$deadline.' '.$descript;
+            $mail->Body    = "<h2>$task is due on $deadline</h2><p>$descript</p>";
+            $mail->AltBody = "$task is due on $deadline $descript";
             $mail->send();
             echo "EMAIL HAS BEEN SENT!\n";
         

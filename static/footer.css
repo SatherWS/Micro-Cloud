@@ -11,7 +11,9 @@
 .col {
     display: table-cell;
     padding: 16px;
-    text-align: center;
+}
+.footer-link {
+    color: #fff;
 }
 
 @media only screen and (max-width: 600px) {

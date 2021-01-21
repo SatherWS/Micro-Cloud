@@ -1,8 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION["unq_user"])) {
-        header("Location: ../authentication/login.php");
-    }
+
     include_once ("../config/database.php");
     $database = new Database();
     $curs = $database->getConnection();
@@ -46,6 +44,7 @@
         <?php
             if (isset($_GET["project"]))
                 echo "<p class='welcome'>". $_GET["project"]. "</p>";
+            
             else
                 echo "<p class='welcome'>". $_SESSION["team"]. "</p>";
             
