@@ -4,7 +4,6 @@ gmail_user = 'swoopctms@gmail.com'
 gmail_password = 'qlfwsrjhrzzbfknk'
 receiver = sys.argv[1]
 deadline = "\nDeadline: "+ sys.argv[4]
-
 message = 'Subject: {}\n\n{}'.format(sys.argv[2], sys.argv[3]+deadline)
 
 try:

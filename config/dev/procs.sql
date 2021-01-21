@@ -12,9 +12,22 @@ BEGIN
     DELETE FROM todo_list WHERE team_name = proj;
     DELETE FROM members WHERE team_name = proj;
     DELETE FROM categories WHERE team_name = proj;
-    DELETE FROM wikis WHERE team_name = proj;
     DELETE FROM invites WHERE team_name = proj;
     DELETE FROM teams WHERE team_name = proj;
+END //
+DELIMITER ;
+
+-- proc that deletes user accounts
+DELIMITER //
+CREATE PROCEDURE delete_account (IN proj VARCHAR(200))
+BEGIN
+    DELETE FROM journal WHERE creator = proj;
+    DELETE FROM sub_tasks WHERE creator = proj;
+    DELETE FROM todo_list WHERE creator = proj;
+    DELETE FROM members WHERE email = proj;
+    DELETE FROM invites WHERE receiver = proj or sender = proj;
+    DELETE FROM teams WHERE admin = proj;
+    DELETE FROM users WHERE email = proj;
 END //
 DELIMITER ;
 

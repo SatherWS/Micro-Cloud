@@ -133,15 +133,14 @@ if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSIO
                     <div class="settings-panel">
                         <div class="settings-flex r-cols">
                             <div>
-                                <!-- WIP implementing `edit project` requires db over hall -->
-                                <h3>Edit Project: <?php echo $_SESSION["team"];?></h3>
-                                <form action="../controllers/edit_project.php" method="post">
-                                    <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
-                                    <input type="submit" name="edit_project" value="EDIT PROJECT">
+                                <h3>Delete your account: <?php echo $_SESSION["unq_user"];?></h3>
+                                <form action="../controllers/delete_project.php" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                                    <input type="hidden" name="account" value="<?php echo $_SESSION["unq_user"];?>">
+                                    <input type="submit" name="delete_acct" value="DELETE ACCOUNT">
                                 </form>
                             </div>
                             <div>
-                                <h3>Delete Project: <?php echo $_SESSION["team"];?></h3>
+                                <h3>Delete your project: <?php echo $_SESSION["team"];?></h3>
                                 <form action="../controllers/delete_project.php" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');">
                                     <input type="hidden" name="project" value="<?php echo $_SESSION["team"];?>">
                                     <input type="submit" name="delete_proj" value="DELETE PROJECT">

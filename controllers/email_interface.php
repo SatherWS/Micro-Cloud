@@ -5,8 +5,6 @@ $db = new Database();
 $curs = $db -> getConnection();
 
 $id = $_POST["taskid"];
-//$id = 53;
-
 $assignee = $_POST["assignee"];
 $exec_date = $_POST['remind-date'];
 $exec_time = $_POST["remind-time"];
@@ -30,14 +28,8 @@ $deadline = escapeshellarg($row[2]);
 $at_format = substr($exec_date, 5, 2).substr($exec_date, 8, 2).substr($exec_date, 2, 2);
 $script_path = "/var/www/html/controllers/smtp_interface.py";
 
-// execute at-job
-$at_exec = "echo python $script_path $assignee $task_name $descript $deadline | at $exec_time $at_format";
-echo $at_exec;
+// execute the at-job
+$at_exec = "echo \"python $script_path $assignee $task_name $descript $deadline \" | at $exec_time $at_format";
 exec($at_exec);
-
-
-// error log
-exec("echo 'Command Executed!\n' > /var/uploads/at-logs.txt");
-exec("echo $at_exec >> /var/uploads/at-logs.txt");
-//header("Location: ../views/task-details.php?task=$id");
+header("Location: ../views/task-details.php?task=$id");
 ?>
