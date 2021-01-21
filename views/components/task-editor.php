@@ -14,6 +14,7 @@
             $selector .= "</select>";
             return $selector;
         }
+        
         function create_editor($row) {
             $id = $row["id"];
             //$html = "<h2>Editing Main Task: ".$row['title']."</h2>";

@@ -3,11 +3,24 @@
     include_once("./config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
-    $sql = "select * from teams order by date_created desc";
-    $result = mysqli_query($curs, $sql);
-
+    
     $html = "";
     $project_count = 0;
+    $limit = 5;
+
+    if (isset($_GET["more-projects"]))
+        $limit += 5;
+
+    $sql = "select count(*) from teams";
+    $result = mysqli_query($curs, $sql);
+    $data = mysqli_fetch_assoc($result);
+    $project_count = $data["count(*)"];
+
+    $sql = "select * from teams order by date_created desc limit ?";
+    $stmnt = mysqli_prepare($curs, $sql);
+    $stmnt -> bind_param("s", $limit);
+    $stmnt -> execute();
+    $result = $stmnt -> get_result();
 
     if (isset($_POST["upvote"])) 
     {
@@ -29,8 +42,8 @@
 
     while ($row = mysqli_fetch_assoc($result)) 
     {
+        // brief description of project's content
         $id = $row["team_name"];
-        // brief project description content
         $html .= "<section class='project-entry'><div class='todo-flex'>";
         $html .= "<div id='proj-container'><h1>".$row["team_name"]."</h1>";
         $html .= "<p>".$row["description"]."</p>";
@@ -50,24 +63,18 @@
         $html .= "</button></div></div>";
         $html .= "</form>";
 
+        // link to join a project
         $html .= "<div class='settings-flex r-cols align-center'>";
-        // join project form/button
-        $html .= "<form class='blockzero' action='./controllers/add_entry.php' method='post'>";
-        $html .= "<input class='send-req' type='hidden' name='teamname' value='".$row["team_name"]."'>";
-        $html .= "<button type='submit' name='index-join'>Want to join this project?</button>";
-        $html .= "</form>";
+        $html .= "<a href='./controllers/add_entry.php?index-join=$id'>Want to join this project?</a>";
 
         // links for project tasks and articles
         $html .= "<div class='todo-flex r-cols index-btns'>";
-        $html .= "<h4><button><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></button></h4>";
-        $html .= "<h4><button><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></button></h4>";
+        $html .= "<h4 class='mr-5'><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Project Articles</a></h4>";
+        $html .= "<h4><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></h4>";
 
         $html .= "</div></div></section>";
         $html .= "<div class='uline'></div>";
     }
-
-    $project_count = mysqli_num_rows($result);
-    mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +82,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/style.css">
+    <link rel="stylesheet" href="./static/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./favicon.png">
@@ -109,9 +117,23 @@
             <h2><?php printf($project_count); ?> projects are hosted on this instance</h2>
             <div class="uline"></div>
             <?php echo $html;?>
+            <br><br>
+            <h2 class='mr-5 text-center'><a href='?more-projects=5' class='add-btn-2'>Show 5 More Projects</a></h2>
+            <br><br>
         </section>
     </main>
+    <div class="col-container">
+        <div class="col">
+            <h2>Column 1</h2>
+            <p>Hello World</p>
+        </div>
 
+        <div class="col">
+            <h2>Column 2</h2>
+            <p>Some other text..</p>
+            <p>Some other text..</p>
+        </div>
+    </div>
     <script src="./static/main.js"></script>
     <script>
         for (const btn of document.querySelectorAll('.vote')) 

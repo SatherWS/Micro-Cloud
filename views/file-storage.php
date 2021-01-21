@@ -24,7 +24,8 @@
             $project_files .= "<tr>";
             $project_files .= "<td><p><a href='".$row["file_path"]."' download>";
             $project_files .= $row["file_name"].".".$row["file_type"]."</a></p></td>";
-            $project_files .= "<td>".$row["subject"]."</td>";
+            $project_files .= "<td><a href='./journal-details.php?journal=".$row["id"]."'>";
+            $project_files .= $row["subject"]."</a></td>";
             $project_files .= "<td>".$row["creator"]."</td>";
             $project_files .= "<td>".$row["date_created"]."</td>";
             $project_files .= "</tr>";
@@ -80,9 +81,11 @@
                 $images .= "<br><div class='uline'></div><br>";
                 $images .= "<div class='todo-flex r-cols'>";
                 $images .= "<div>";
+                $images .= "<h3>".$row["file_name"].".".$row["file_type"]."</h3>";
                 $images .= "<p><a href='".$row["file_path"]."' download>Download: ";
                 $images .= $row["file_name"].".".$row["file_type"]."</a></p>";
-                $images .= "<p><a href='./journal-details.php?journal=".$_GET["article"]."'>Article Link: ".$_GET["title"]."</a></p>";
+                $images .= "<p><a href='./journal-details.php?journal=".$row["article_id"]."'>Related Article: ".$row["subject"]."</a></p>";
+                $images .= "<p>Creator: ".$row["creator"]."</p>";
                 $images .= "</div>";
                 $images .= "<div>";
                 $images .= "<img src='".$row["file_path"]."'>";

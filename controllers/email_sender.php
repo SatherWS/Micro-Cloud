@@ -31,8 +31,8 @@ class EmailScheduler {
             // Content
             $mail->isHTML(true);                                         
             $mail->Subject = 'Email Reminder';
-            $mail->Body    = '<h2>The task: '.$task.' is due on '.$deadline.'</h2><p>'.$descript.'</p>';
-            $mail->AltBody = 'The task: '.$task.' is due on '.$deadline.' '.$descript;
+            $mail->Body    = '<h2>'.$task.' is due on '.$deadline.'</h2><p>'.$descript.'</p>';
+            $mail->AltBody = $task.' is due on '.$deadline.' '.$descript;
             $mail->send();
             echo "EMAIL HAS BEEN SENT!\n";
         

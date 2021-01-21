@@ -125,8 +125,10 @@
         <?php
             if ($show_editor)
                 include("./components/note-headers/edit_post.php");
+
             else if (!$show_editor && !$read_only)    
                 include("./components/note-headers/save_post.php");
+
             else if (!$show_editor && $read_only)
                 echo "<h4 class='ml2rem'></h4>";
         ?>
@@ -152,12 +154,12 @@
         if ($file_link != "" && !$read_only) {
             echo $file_link;
         }
+        $md = $pd -> text($row['message']);
+        echo $md;
+    
+        echo "</div>";
     }
 
-    $md = $pd -> text($row['message']);
-    echo $md;
-
-    echo "</div>";
 
     if (!$read_only && !isset($_POST["edit"])) 
     {

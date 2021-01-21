@@ -65,7 +65,6 @@ function associateMember($curs, $team, $user)
 {
     $sql = "insert into members(team_name, email) values (?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    //$stmnt->bind_param("ss", $_POST["teamname"], $_SESSION["unq_user"]);
     $stmnt -> bind_param("ss", $team, $user);
     if ($stmnt->execute())
         return true;
@@ -108,17 +107,18 @@ if (isset($_POST["send-project"]))
 }
 
 // joining a project from the index page
-if (isset($_POST["index-join"]))
+if (isset($_GET["index-join"]))
 {
-    $admin = getAdmin($curs, $_POST["teamname"]);
+    $admin = getAdmin($curs, $_GET["index-join"]);
     $sql = "insert into invites(team_name, sender, receiver) values(?, ?, ?)";
     $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt->bind_param("sss", $_POST["teamname"], $_SESSION["unq_user"], $admin);
+    $stmnt->bind_param("sss", $_GET["index-join"], $_SESSION["unq_user"], $admin);
     
     if ($stmnt->execute()) 
-        header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_POST["teamname"]);
+        header("Location: ../views/dashboard.php?msg=Request sent to the admin of ".$_GET["index-join"]);
     else 
-        header("Location: ../views/dashboard.php?error=Request did not send to ".$_POST["teamname"]);
+        header("Location: ../views/dashboard.php?error=Request did not send to ".$_GET["index-join"]);
 }
+
 $curs -> close();
 ?>
