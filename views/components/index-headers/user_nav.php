@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <!-- Team Steep vs. Team Stoop -->
-                <a href="#" class="active">Swoop.Team</a>
+                <a href="#" class="active">Swoop CTMS</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>

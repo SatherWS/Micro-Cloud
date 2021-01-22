@@ -8,7 +8,7 @@
 </div>
 <!-- Edit a journal post -->
 <form action="./journal-details.php" method="post" class="mr2rem">
-    <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['journal'];?>">
+    <button class="add-btn" type="submit" name="edit" value="<?php echo $_GET['journal'];?>" tabindex=1>
 		<i class="fa fa-edit"></i>Edit Article
 	</button>
 </form>

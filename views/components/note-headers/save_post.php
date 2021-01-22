@@ -6,5 +6,5 @@
 </form>
 <!-- Save a journal post after editing -->
 <button onclick='triggerForm()' name='save' class='add-btn mr2rem'>
-    <i class='fa fa-save'></i><span class='opt-desc'>Save Changes</span>
+    <i class='fa fa-save'></i><span class='opt-desc' tabindex=1>Save Changes</span>
 </button>

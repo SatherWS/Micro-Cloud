@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="task-panel">
-        <form action="../controllers/edit_entry.php" method="post" class="task-auto" id="editor2">
+        <!-- Task details UI-->
             <div class="inner-task-panel">
             <?php
             if ($_GET['task'] && mysqli_num_rows($results) > 0) 
@@ -136,19 +136,35 @@
                     // Top task title, description and sub modal trigger
                     echo "<h2>".$row['title']."</h2>";
                     echo "<p>Task Admin: <span class='usrname'>".$row["creator"]."</span></p>";
-                    echo "<p>".$row["description"]." This task was assigned to <span class='usrname'>";
-                    echo $row["assignee"]."</span></p><br>";
+                    echo "<p>Assigned to: <span class='usrname'>".$row["assignee"]."</span></p>";
+                    echo "<p>".$row["description"]."</p><br>";
                     echo "<a href='#subModal' id='myBtn' class='add-btn-2'>Add a subtask</a>";
-                    echo "<br><br><div class='uline-lite'></div>";
+                    echo "<br><br><div class='uline'></div>";
 
                     // task detail view table
-                    echo "<div>";
+                    echo "<div class='todo-flex r-cols'>";
                     echo "<div>";
                     echo "<pre><p><b>Status: &#9; </b>".$row['status']."</p></pre>";
                     echo "<pre><p><b>Deadline: &#9; </b>".$row['deadline']."</p></pre>";
                     echo "<pre><p><b>Date Created: &#9; </b>".$row['date_created']."</p></pre>";
                     echo "<pre><p><b>Importance: &#9; </b>".$row['importance']."</p></pre>";
                     echo "</div>";
+
+                    // email reminder form
+                    echo "<form action='../controllers/email_interface.php' method='post'>";
+                    echo "<div class='emailer'>";
+                    echo "<label class='container'>";
+                    echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
+                    echo "<span class='checkmark'></span>Send an email reminder</label>";
+                    echo "<input type='date' name='remind-date' class='repeat-input' required>";
+                    echo "<br></br>";
+                    echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input' required/>";
+                    echo "<input type='hidden' name='assignee' value=$assignee_address>";
+                    echo "<input type='hidden' name='taskid' value=$id>";
+                    echo "<br><br><button type='submit' name='send-email' class='add-btn-2'>Set email reminder</button>";
+                    echo "</div>";
+                    echo "</form>";
+
                     echo "</div>";
                 }
             }
@@ -156,39 +172,16 @@
             // Task editing view render
             $form = "";
             if (isset($_POST['edit']) && mysqli_num_rows($results) > 0) {
+                $form .= "<form action='../controllers/edit_entry.php' method='post' class='task-auto' id='editor2'>";
                 $form .= $editor->additionals($data);
                 $form .= $editor->create_editor($data);
                 $form .= "</div></div>";
+                $form .= "</form>";
                 echo $form;
             }
             ?>
             </div>
-        </form>
         
-        <div class="task-panel">
-            <div class="inner-task-panel">
-            <form action="../controllers/email_interface.php" method="post">
-            <?php 
-            // email reminder form
-            if (isset($_GET["task"]))
-            {
-                $id = $_GET['task'];
-                echo "<div class='emailer'>";
-                echo "<label class='container'>";
-                echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                echo "<span class='checkmark'></span>Send an email reminder</label>";
-                echo "<input type='date' name='remind-date' class='repeat-input' required>";
-                echo "<br></br>";
-                echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input' required/>";
-                echo "<input type='hidden' name='assignee' value=$assignee_address>";
-                echo "<input type='hidden' name='taskid' value=$id>";
-                echo "<br><br><button type='submit' name='send-email' class='add-btn-2'>Apply Settings</button>";
-                echo "</div>";
-            }
-            ?>
-            </form>
-            </div>
-        </div>
         <div class="inner-task-panel">
         <?php
         // sub tasks component
@@ -196,12 +189,12 @@
         {
             while ($row2 = mysqli_fetch_assoc($results2)) 
             {
-                echo "<br><div class='uline'></div><br>";
+                echo "<div class='uline'></div><br>";
                 echo "<div class='todo-flex r-cols'>";
                 echo "<h3>Sub Task: ".$row2["title"]."</h3>";
                 echo "<form method='post'>";
                 $id = $row2['id'];
-                echo "<button class='add-btn' type='submit' name='delete-sub' value='$id'><i class='fa fa-close'></i>Delete Sub Task</button>";
+                echo "<button class='add-btn-2' type='submit' name='delete-sub' value='$id'><i class='fa fa-close'></i>Delete Sub Task</button>";
                 echo "</form></div>";
                 echo "<p>".$row2["descript"]."</p>";
                 echo "<div class='todo-flex align-initial r-cols'>";

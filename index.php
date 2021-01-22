@@ -123,19 +123,19 @@
             <div class="uline"></div>
             <?php echo $html;?>
             <br><br>
-            <h2 class='mr-5 text-center'><a href='#last-five?more-projects=5' class='add-btn-2'>Show All Projects</a></h2>
+            <h3 class='mr-5 text-center'><a href='#last-five?more-projects=5' class='add-btn-2'>Show All Projects</a></h3>
             <br><br>
         </section>
     </main>
     <div class="col-container">
         <div class="col">
             <h2>KNOWLEDGE BASE</h2>
-            <p>About this project</p>
-            <p>How to articles</p>
+            <p><a class="footer-link" href="#">About this project</a></p>
+            <p><a class="footer-link" href="#">How to articles</a></p>
         </div>
         <div class="col">
             <h2>LINKS</h2>
-            <p><a class="footer-link" href='#'>Source code</a></p>
+            <p><a class="footer-link" href='#'>Source code via GitHub</a></p>
         </div>
     </div>
     <script src="./static/main.js"></script>

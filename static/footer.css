@@ -10,7 +10,7 @@
 }
 .col {
     display: table-cell;
-    padding: 16px;
+    padding: 16px 3rem;
 }
 .footer-link {
     color: #fff;

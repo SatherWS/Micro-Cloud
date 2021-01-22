@@ -2,7 +2,7 @@
     <div class="index-nav parent-nav">
         <ul>
             <li>
-                <a href="../index.php" class="active">Swoop.Team</a>
+                <a href="../index.php" class="active">Swoop CTMS</a>
                 <i class="fa fa-wifi"></i>
             </li>
         </ul>

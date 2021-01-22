@@ -28,7 +28,7 @@
             </select>
             <br><br>
             <textarea name="st-desc" id="subt-txt-area" cols="30" rows="10" placeholder="Subtask Description..."></textarea>
-            <br><br>
+            <br>
             <lable>Set Deadline</lable>
             <br>
             <input type='date' name='end-date' class='spc-n' required>
@@ -41,7 +41,7 @@
             </select>
             <br><br>
             <input type='hidden' name='mod-subtask' value='<?php echo $_GET['task'];?>'>
-            <input type="submit" name="add-subtask" value="Submit">
+            <input type="submit" name="add-subtask" value="Create Subtask" class="add-btn-2">
         </div>
     </div>
 </form>

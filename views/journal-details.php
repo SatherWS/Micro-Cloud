@@ -68,8 +68,8 @@
             while($row = mysqli_fetch_assoc($results)) 
             {
                 $html .= "<div class='log-container editor'>";
-                $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs'>";
-                $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field'>".$row['message']."</textarea>";
+                $html .= "<input type='text' value='".$row["subject"]."' name='jsubs' class='edit-subs' tabindex=2>";
+                $html .= "<textarea name='edited' cols='100' rows='14' class='edit-field' tabindex=3>".$row['message']."</textarea>";
                 $html .= "<input type='hidden' name='edit' value='".$row['id']."'></div>";
             }
         }

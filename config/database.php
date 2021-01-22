@@ -1,8 +1,8 @@
 <?php
     class Database {
         private $hostname = "localhost";
-        private $user = "root";
         private $database = "swoop";
+        private $user = "root";
         private $password = "toor";
 
         public function getConnection(){

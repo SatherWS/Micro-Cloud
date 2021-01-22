@@ -45,6 +45,9 @@ input.add-btn {
   padding: .75rem;
   border-radius: 8px;
 }
+a#myBtn {
+  font-size: 14px;
+}
 .cta-header {
   margin-block-start: 0!important;
   margin-block-end: 0!important;
@@ -945,7 +948,6 @@ input.send-req {
 }
 
 .editor {
-  width: 80%;
   margin: 0 auto;
   text-align: center;
 }
@@ -1047,10 +1049,9 @@ button {
   font-size: 25px;
 }
 .emailer {
-  border: solid #ddd 1px;
+  border: solid #ddd 2px;
   padding: 2rem;
   border-radius: 8px;
-  margin: 0 auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
   background: #fff;

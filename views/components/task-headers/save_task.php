@@ -2,5 +2,5 @@
 <form action="./task-details.php" method="post" onsubmit="return confirm('Are you sure you want to delete this task? All sub tasks of the main tasks will be deleted.');">
     <button class="add-btn" type='submit' name='delete' value="<?php echo $id; ?>"><i class='fa fa-close'></i>Delete Task</button>
 </form>
-<button onclick='triggerForm2()' class='add-btn'>
+<button onclick='triggerForm2()' class='add-btn' tabindex=1>
 <i class='fa fa-save'></i><span class='opt-desc'>Save Changes</span></button>
