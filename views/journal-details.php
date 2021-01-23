@@ -99,6 +99,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/mini_nav.css">
+    <link rel="stylesheet" href="../static/code-highlight.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
@@ -175,20 +176,20 @@
         echo "</section>";
 
         echo "<section>";
-        echo "<input type='submit' value='Upload Image' name='img-upload' class='add-btn'>";
-        echo "<br></section>";
+        echo "<input type='submit' value='Image Upload' name='img-upload' class='add-btn-2'>";
+        echo "</section>";
         echo "</div>";
 
         // file upload form section
         echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
         echo "<section>";
-        echo "<br>Attach a relevant file to this article:<br>";
+        echo "<br><span>Attach a relevant file to this article:</span><br>";
         echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
         echo "</section>";
 
         echo "<section>";
-        echo "<input type='submit' value='Attach Files' name='file-upload' class='add-btn'>";
-        echo "<br></section>";
+        echo "<input type='submit' value='File Upload' name='file-upload' class='add-btn-2'>";
+        echo "</section>";
 
         echo "</div>";
     }
@@ -197,15 +198,13 @@
         echo $html;
 ?>
 </form>
-<!--
-<br>
-<form action="">
+<!-- Comment form -->
+<form action="" class="comment-form">
     <div class="log-details">
-        <textarea name="comment" cols="30" rows="10"></textarea>
-        <input type="submit" value="Send Comment">
+        <textarea name="comment" cols="30" rows="10" placeholder="Commenting as <?php echo $_SESSION["unq_user"];?>"></textarea>
+        <input type="submit" value="Send Comment" class="add-btn-2">
     </div>
 </form>
--->
 <script>
     function triggerForm() {
         document.getElementById("editor").submit();
@@ -225,6 +224,10 @@
                 forms[i].style.display = "flex";
             }
         }
+    }
+
+    function showIcons() {
+        return 0;
     }
 </script>
 <script src="../static/main.js"></script>

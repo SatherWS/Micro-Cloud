@@ -80,7 +80,6 @@
 
       var options = {
 	// set height of gantt chart
-        height: 1000,
         gantt: {
           trackHeight: 50,
           barHeight: 35,
@@ -116,21 +115,21 @@
         ?>
         </div>
         <form action="./analytics.php" method="POST">
-        <div class="todo-flex">    
-            <div class="spc-container">
-                <label>Start Date</label><br>
-                <input type="date" name="start-date" class="simple-input"><br>
-            </div>
-            <div class="todo-flex flex-end spc-container">
-                <div>
-                    <label>End Date</label><br>
-                    <input type="date" name="end-date" class="simple-input remove-right-border"> 
+            <div class="todo-flex">    
+                <div class="spc-container">
+                    <label>Start Date</label><br>
+                    <input type="date" name="start-date" class="simple-input"><br>
                 </div>
-                <div>
-                    <input type="submit" value="Set Range" name="range" class="date-btn">
+                <div class="todo-flex flex-end spc-container">
+                    <div>
+                        <label>End Date</label><br>
+                        <input type="date" name="end-date" class="simple-input remove-right-border"> 
+                    </div>
+                    <div>
+                        <input type="submit" value="Set Range" name="range" class="date-btn">
+                    </div>
                 </div>
             </div>
-        </div>
         </form>
         <!-- Gantt chart div -->
         <div id="chart_div"></div>
@@ -140,8 +139,7 @@
                 <div id="piechart"></div>
                 <br><br>
                 <div class="text-center">
-                    <a href="./show-tasks.php" class="date-btn">View Tasks</a>
-                    <a href="./create-task.php" class="date-btn">Create Task</a>
+                    <a href="./show-tasks.php" class="add-btn-2">View tasks for <?php echo $_SESSION["team"];?></a>
                 </div>
             </div>
             <div class="pie-data">
@@ -178,9 +176,9 @@
                         }
                     ?>
                 </table>
-                <br><br>
             </div>
         </div>
+        <br><br>
     </article>
     <?php include("./components/sidebar.php");?>
 </div>

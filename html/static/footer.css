@@ -12,10 +12,8 @@
     display: table-cell;
     padding: 16px 3rem;
 }
-a.footer-link.git {
-    background: green;
-    padding: .6rem;
-    border-radius: 5px;
+.footer-link.git {
+    
 }
 .footer-link {
     color: #fff;

@@ -31,7 +31,7 @@
                 </div>
             </li>
             <li>
-                <a href="./views/file-storage.php">Files</a>
+                <a href="./views/file-storage.php">Storage</a>
             </li>
             <li>
                 <a href="./views/analytics.php">Analytics</a>

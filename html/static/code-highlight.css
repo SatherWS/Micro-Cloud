@@ -1,0 +1,27 @@
+pre {
+    padding: .8em;
+    overflow: auto;
+    background: #f1f1f1;
+}
+
+code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.4;
+    -moz-tab-size: 8;
+    -o-tab-size: 8;
+    tab-size: 8;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    background: #f1f1f1;
+}
+
+.log-details a {
+    color: blue!important;
+}

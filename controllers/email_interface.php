@@ -7,9 +7,9 @@ $curs = $db -> getConnection();
 
 $id = $_POST["taskid"];
 $assignee = $_SESSION["unq_user"];
+
 $exec_date = $_POST['remind-date'];
 $exec_time = $_POST["remind-time"];
-
 $exec_datetime = $exec_date.' '.$_POST['remind-time'];
 
 // get scheduled task
@@ -29,7 +29,7 @@ if ($stmnt -> execute() && isset($id)) {
     $script_path = "/var/www/html/controllers/smtp_interface.py";
 
     // execute the at-job
-    $at_exec = "echo \"python $script_path $assignee $task_name $descript $deadline \" | at $exec_time $at_format";
+    $at_exec = "echo \"python3 $script_path $assignee $task_name $descript $deadline \" | at $exec_time $at_format";
     exec($at_exec);
     header("Location: ../views/task-details.php?task=$id");
 }

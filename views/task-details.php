@@ -161,7 +161,9 @@
                     echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input' required/>";
                     echo "<input type='hidden' name='assignee' value=$assignee_address>";
                     echo "<input type='hidden' name='taskid' value=$id>";
-                    echo "<br><br><button type='submit' name='send-email' class='add-btn-2'>Set email reminder</button>";
+                    echo "<div class='text-center'>";
+                    echo "<br><button type='submit' name='send-email' class='add-btn-2'>Set email reminder</button>";
+                    echo "</div>";
                     echo "</div>";
                     echo "</form>";
 

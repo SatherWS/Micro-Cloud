@@ -73,19 +73,6 @@ if (isset($_POST["img-upload"]))
     $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
     $file_class = "image";
 
-    // append to the associated article
-    $md_img = " <br> ![uploaded image]($target_file)";
-    $sql = "update journal set message = CONCAT(message, ?) where id = ?";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("ss", $md_img, $journalnum);
-    $stmnt -> execute();
-
-    // add the image path to file storage paths
-    $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
-    $stmnt = mysqli_prepare($curs, $sql);
-    $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
-    $stmnt -> execute();
-
     // Check if image file is a actual image or fake image
     if (isset($_POST["imageToUpload"])) {
       $check = getimagesize($_FILES["imageToUpload"]["tmp_name"]);
@@ -126,6 +113,20 @@ if (isset($_POST["img-upload"]))
     else {
       if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been uploaded.";
+
+        // append to the associated article
+        $md_img = " <br> ![uploaded image]($target_file)";
+        $sql = "update journal set message = CONCAT(message, ?) where id = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("ss", $md_img, $journalnum);
+        $stmnt -> execute();
+
+        // add the image path to file storage paths
+        $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
+        $stmnt -> execute();
+        
         header("Location: ../views/journal-details.php?journal=$journalnum");
       } 
       else {
@@ -151,11 +152,6 @@ if (isset($_POST["file-upload"]))
   $file_name = pathinfo($target_file,PATHINFO_FILENAME);
   $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
   $file_class = "file";
-
-  $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
-  $stmnt = mysqli_prepare($curs, $sql);
-  $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
-  $stmnt -> execute();
 
   // Check if file already exists
   if (file_exists($target_file)) {
@@ -184,6 +180,12 @@ if (isset($_POST["file-upload"]))
   else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+      
+      $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+      $stmnt = mysqli_prepare($curs, $sql);
+      $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
+      $stmnt -> execute();
+      
       header("Location: ../views/journal-details.php?journal=$journalnum");
     } 
     else {

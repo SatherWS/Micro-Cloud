@@ -750,12 +750,20 @@ element {
   padding-bottom: 1rem;
 }
 
+.comment-form {
+  background: #f1f1f1;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
 .uline {
   border-bottom: solid #ddd;
 }
+
 .uline-lite {
   border-bottom: solid #ddd 1px;
 }
+
 .inner-task-panel {
   width: 80%;
   margin: 0 auto;
@@ -1078,6 +1086,10 @@ button {
 /* ---------------------------------+
   Todo & Journal Icons              |
 -----------------------------------*/
+.fa-github:before {
+  padding-right: 8px;
+  font-size: 18pt;
+}
 .fa-save:before {
   padding-right: 8px;
 }
@@ -1582,9 +1594,19 @@ button.add-btn {
   /* used for smart phones */
   /* removed only keyword before screen keyword 6/18 */
   @media screen and (max-width: 600px) {
-    /* nav bar */
+    /* nav bar 
     .topnav-list {
       margin-right: 1.6rem;
+    }
+    */
+    .ml2rem {
+      margin-left: 1rem!important;
+    }
+    .mr2rem {
+      margin-right: 1rem!important;
+    }
+    .welcome {
+      padding: 1rem;
     }
     .parent-nav {
       padding: 0;

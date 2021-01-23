@@ -106,15 +106,15 @@
                         <br>
                         <span class="sup-text">Create Task</span> 
                     </a>
+                    <a class="dash-item" href="./file-storage.php">
+                        <i class="fa fa-database spc-1"></i>
+                        <br>
+                    <span class="sup-text">Storage</span> 
+                    </a>
                     <a class="dash-item" href="./analytics.php">
                         <i class="fa fa-line-chart spc-1"></i>
                         <br>
                     <span class="sup-text">Analytics</span> 
-                    </a>
-                    <a class="dash-item" href="./settings.php">
-                        <i class="fa fa-gear spc-1"></i>
-                        <br>
-                    <span class="sup-text">Settings</span> 
                     </a>
                 </div>
                 <div class="todo-flex r-cols">
@@ -132,13 +132,32 @@
             <?php include("./components/sidebar.php");?>
         </div>
     </div>
+
+    <script src="../static/main.js"></script>
+    <script src="../static/modal.js"></script>
     <script>
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                hideSideBar();
+            }
+        }   
+
+        var x = window.matchMedia("(max-width: 822px)");
+        myFunction(x); // Call listener function at run time
+        x.addListener(myFunction); // Attach listener function on state changes
+
+        var x = window.matchMedia("(max-width: 750px)");
+        check_mediaq(x);
+        x.addListener(check_mediaq);
+
+
         function openArticle(id) {
             window.location='./journal-details.php?journal='+id;
         }
         function openTask(id) {
             window.location='./task-details.php?task='+id;
         }
+        
         // this needs to be included in every page that has the side bar team modal
         function validateTextarea() {
             var x = document.getElementById("txt-area");
@@ -156,7 +175,5 @@
             }
         }
     </script>
-    <script src="../static/main.js"></script>
-    <script src="../static/modal.js"></script>
 </body>
 </html>

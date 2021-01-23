@@ -41,7 +41,7 @@ body = """\
 <body>
     <h2>TASK DUE: {}</h2>
     <div class="uline"></div>
-    <table {}>
+    <table style='100%'>
         <tr>
             <td>
                 <p><b>DEADLINE:</b> {}</p>
@@ -60,29 +60,12 @@ body = """\
     <br>
     
     <div class="btn-container">
-        <a href="https://swoop.team/views/task-details.php?task={}" class="add-btn-2">VIEW TASK</a>
+        <a href="https://swoop.team/views/task-details.php?task=420" class="add-btn-2">VIEW TASK</a>
     </div>
 </body>
 </html>
-""".format("width='100%'", subject, deadline, description)
-
+"""
+body = body.format(subject, deadline, description)
 html = css + body
 
-# Record the MIME types of both parts - text/plain and text/html.
-part1 = MIMEText(text, 'plain')
-part2 = MIMEText(html, 'html')
-
-# Attach parts into message container.
-# the HTML message, is best and preferred.
-msg.attach(part1)
-msg.attach(part2)
-
-try:
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.ehlo()
-    server.login(gmail_user, gmail_password)
-    server.sendmail(gmail_user, receiver, msg.as_string())
-    print("Message sent!")
-    server.close()
-except:
-    print("message did not send...")
+print(html)

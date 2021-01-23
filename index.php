@@ -74,7 +74,7 @@
 
         // links for project tasks and articles
         $html .= "<div class='todo-flex r-cols index-btns'>";
-        $html .= "<h4 class='mr-5'><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Project Articles</a></h4>";
+        $html .= "<h4 class='mr-5'><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></h4>";
         $html .= "<h4><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></h4>";
 
         $html .= "</div></div></section>";
@@ -123,7 +123,7 @@
             <div class="uline"></div>
             <?php echo $html;?>
             <br><br>
-            <h3 class='mr-5 text-center'><a href='#last-five?more-projects=5' class='add-btn-2'>Show All Projects</a></h3>
+            <h3 class='mr-5 text-center'><a href='./index.php?more-projects=5' class='add-btn-2'>Show All Projects</a></h3>
             <br><br>
         </section>
     </main>
@@ -133,9 +133,11 @@
             <p><a class="footer-link" href="#">About this project</a></p>
             <p><a class="footer-link" href="#">How to articles</a></p>
         </div>
-        <div class="col">
+        <div class="col text-right">
             <h2>LINKS</h2>
-            <p><a class="footer-link" href='#'>Source code via GitHub</a></p>
+            <p><a class="footer-link git" href='#'> 
+            <i class="fa fa-github"></i> View our source code</a></p>
+            <p><a class="footer-link" href='#'>Why does our name sound silly?</a></p>
         </div>
     </div>
     <script src="./static/main.js"></script>

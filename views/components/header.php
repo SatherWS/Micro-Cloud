@@ -30,7 +30,7 @@
                 </div>
             </li>
             <li>
-                <a href="./file-storage.php">Files</a>
+                <a href="./file-storage.php">Storage</a>
             </li>
             <li>
                 <a href="./analytics.php">Analytics</a>
