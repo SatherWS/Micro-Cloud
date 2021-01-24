@@ -92,9 +92,9 @@ CREATE TABLE comments (
   id int(11) primary key auto_increment,
   comment varchar(150) not null,
   user_email varchar(75) not null,
-  journal_id int(11),
-  foreign key(journal_id) references journal(id),
-  foreign key(user_email) references users(email)
+  article_id int(11),
+  date_created date DEFAULT(CURRENT_DATE),
+  foreign key(article_id) references journal(id)
 );
 
 CREATE TABLE todo_list (

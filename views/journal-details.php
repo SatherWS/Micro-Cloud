@@ -1,6 +1,7 @@
 <?php 
     include_once('../config/database.php');
     include("../libs/Parsedown.php");
+    include("../models/comment.php");
     session_start();
 
     // TODO: MOVE PHP ELEMENTS TO CONTROLLERS 
@@ -163,7 +164,7 @@
     {
         // File and image upload form
         echo "<div class='topnav2' id='item-container'>";
-        echo "<a class='choice active' onclick='changeActive(0)' href='#choice'>Insert an image file</a>";
+        echo "<a class='choice active' onclick='changeActive(0)' href='#choice' id='mobile'>Insert an image file</a>";
         echo "<a class='choice' onclick='changeActive(1)' href='#choice'>Attach an approved file</a>";
         echo "</div>";
         echo "<input type='hidden' value='$id' name='article_assoc'>";
@@ -199,12 +200,36 @@
 ?>
 </form>
 <!-- Comment form -->
-<form action="" class="comment-form">
+<?php
+    if (!isset($_SESSION["unq_user"]))
+        $user = "guest";
+    else
+        $user = $_SESSION["unq_user"];
+?>
+<div class="comment-area">
+    <form method="post" action="../models/comment.php" id="comments">
+        <div class="log-details">
+            <textarea name="comment" cols="30" rows="10" placeholder="Commenting as <?php echo $user;?>"></textarea>
+            <input type="hidden" name="art_id" value="<?php echo $_GET['journal'];?>">
+            <input type="submit" value="Post Comment" class="add-btn-2">
+        </div>
+    </form>
+    <br>
     <div class="log-details">
-        <textarea name="comment" cols="30" rows="10" placeholder="Commenting as <?php echo $_SESSION["unq_user"];?>"></textarea>
-        <input type="submit" value="Send Comment" class="add-btn-2">
+        <?php
+            $comments = new Comments();
+            $comm_lst = $comments -> showComments($curs, $_GET["journal"]);
+
+            while ($row = mysqli_fetch_assoc($comm_lst)) {
+                echo "<div class='uline'></div>";
+                echo "<p><b>".$row["user_email"]."</b></p>";
+                echo "<p>".$row["comment"]."</p>";
+                echo "<small>".$row["date_created"]."</small><br><br>";
+            }
+        ?>
     </div>
-</form>
+</div>
+
 <script>
     function triggerForm() {
         document.getElementById("editor").submit();

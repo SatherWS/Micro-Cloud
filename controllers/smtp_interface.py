@@ -9,6 +9,9 @@ receiver = sys.argv[1]
 subject = "TASK DUE: "+sys.argv[2]
 description = sys.argv[3]
 deadline = sys.argv[4]
+status = sys.argv[5]
+task_id = sys.argv[6]
+creator = sys.argv[7]
 
 # Create message container - the correct MIME type is multipart/alternative.
 msg = MIMEMultipart('alternative')
@@ -16,7 +19,11 @@ msg['Subject'] = subject
 msg['From'] = gmail_user
 msg['To'] = receiver
 
-text = sys.argv[3] + " is due on " + deadline
+text = "TASK DUE: "+subject+"\n" 
+text += "DEADLINE: "+deadline
+text += "\n"+description+"\n"
+text += status +"\n"
+
 css = """\
 <html>
     <head>
@@ -26,7 +33,7 @@ css = """\
             }
             .add-btn-2 {
                 background-image: linear-gradient(315deg, #4c4177 0%, #2a5470 74%);
-                color: white;
+                color: white!important;
                 padding: .75rem;
                 border-radius: 8px;
             }
@@ -41,48 +48,80 @@ body = """\
 <body>
     <h2>TASK DUE: {}</h2>
     <div class="uline"></div>
-    <table {}>
+    <table style='100%'>
         <tr>
             <td>
                 <p><b>DEADLINE:</b> {}</p>
             </td>
             <td align="right">
-                <p><b>TEMP</b></p>
+                <p><b>{}</b></p>
             </td>
         </tr>
     </table>
     <p><b>DESCRIPTION: </b>{}</p>
+""" 
+
+subtasks = """\
     <p><b>SUBTASKS</b></p>
     <ul>
-        <li>TEMP</li>
+        {}
     </ul>
-    <p>Assigned by: <a href="mailto:TEMP">TEMP</a></p>
+"""
+
+end_body = """\
+    <p>Assigned by: <a href="mailto:{}">{}</a></p>
     <br>
-    
     <div class="btn-container">
         <a href="https://swoop.team/views/task-details.php?task={}" class="add-btn-2">VIEW TASK</a>
     </div>
 </body>
 </html>
-""".format("width='100%'", subject, deadline, description)
+"""
 
-html = css + body
+# subtasks sections
+if len(sys.argv) == 9:
+    subtask_list = sys.argv[8]
+    subtask_list = subtask_list.split(",")
 
-# Record the MIME types of both parts - text/plain and text/html.
-part1 = MIMEText(text, 'plain')
-part2 = MIMEText(html, 'html')
+inner_ul = ""
+for item in subtask_list:
+    inner_ul += "<li>"
+    inner_ul += item
+    inner_ul += "</li>"
+    text += "*"+ item +"\n"
 
-# Attach parts into message container.
-# the HTML message, is best and preferred.
-msg.attach(part1)
-msg.attach(part2)
+text += "Assigned by: "+creator+"\n"
+text = "[VIEW TASK][1]"
+text += "[1]: https://swoop.team/views/task-details.php?task="+task_id
 
-try:
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.ehlo()
-    server.login(gmail_user, gmail_password)
-    server.sendmail(gmail_user, receiver, msg.as_string())
-    print("Message sent!")
-    server.close()
-except:
-    print("message did not send...")
+# append the HTML email together
+body = body.format(subject, deadline, status, description)
+end_body = end_body.format(creator, creator, task_id)
+subtasks = subtasks.format(inner_ul)
+
+if inner_ul == "":
+    html = css + body + end_body
+else:
+    html = css + body + subtasks + end_body
+
+
+# attach message to MIME and send the email
+if __name__ == "__main__":
+    # Record the MIME types of both parts - text/plain and text/html.
+    part1 = MIMEText(text, 'plain')
+    part2 = MIMEText(html, 'html')
+
+    # Attach parts into message container.
+    # the HTML message, is best and preferred.
+    msg.attach(part1)
+    msg.attach(part2)
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(gmail_user, receiver, msg.as_string())
+        print("Message sent!")
+        server.close()
+    except:
+        print("message did not send...")

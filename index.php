@@ -137,7 +137,6 @@
             <h2>LINKS</h2>
             <p><a class="footer-link git" href='#'> 
             <i class="fa fa-github"></i> View our source code</a></p>
-            <p><a class="footer-link" href='#'>Why does our name sound silly?</a></p>
         </div>
     </div>
     <script src="./static/main.js"></script>

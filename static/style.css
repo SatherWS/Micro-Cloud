@@ -750,7 +750,7 @@ element {
   padding-bottom: 1rem;
 }
 
-.comment-form {
+.comment-area {
   background: #f1f1f1;
   padding-bottom: 2rem;
   padding-top: 2rem;
@@ -1082,6 +1082,9 @@ button {
   width: 100%!important;
   height: 125px!important;
   font-size: 16pt;
+}
+.comment-form textarea {
+  height: 110px;
 }
 /* ---------------------------------+
   Todo & Journal Icons              |
@@ -1437,22 +1440,20 @@ button.add-btn {
   /*
   Labeling mobile tables: Journal Section
   */
-  .journal-tab td:nth-of-type(1):before { content: "Category"; }
-  .journal-tab td:nth-of-type(2):before { content: "Title"; }
-  .journal-tab td:nth-of-type(3):before { content: "Preview"; }
-  .journal-tab td:nth-of-type(4):before { content: "Creator"; }  
-  .journal-tab td:nth-of-type(5):before { content: "Date Posted"; }
+  .journal-tab td:nth-of-type(1):before { content: "Title"; }
+  .journal-tab td:nth-of-type(2):before { content: "Preview"; }
+  .journal-tab td:nth-of-type(3):before { content: "Creator"; }  
+  .journal-tab td:nth-of-type(4):before { content: "Date Posted"; }
 
   /*
   Labeling mobile tables: Task Section
   */
-  .task-tab td:nth-of-type(1):before { content: "Title"; }
-  .task-tab td:nth-of-type(2):before { content: "Status"; }
-  .task-tab td:nth-of-type(3):before { content: "Assigned To"; }
-  .task-tab td:nth-of-type(4):before { content: "Team"; }
+  .task-tab td:nth-of-type(1):before { content: "Deadline"; }
+  .task-tab td:nth-of-type(2):before { content: "Title"; }
+  .task-tab td:nth-of-type(3):before { content: "Status"; }
+  .task-tab td:nth-of-type(4):before { content: "Assignee"; }
   .task-tab td:nth-of-type(5):before { content: "Priority"; }
-  .task-tab td:nth-of-type(6):before { content: "Due Date"; }  
-  .task-tab td:nth-of-type(7):before { content: "Date Posted"; }
+  .task-tab td:nth-of-type(6):before { content: "Date Posted"; }
 
   .settings-tab td:nth-of-type(1):before { content: "Action"; }
   .settings-tab td:nth-of-type(2):before { content: "Project"; }
@@ -1531,6 +1532,7 @@ button.add-btn {
   }
   
   @media screen and (max-width: 600px) {
+
     .sup-text {
       font-size: 16pt;
     }
@@ -1575,11 +1577,14 @@ button.add-btn {
     }
     #logs-title {
       margin-left: 1rem!important;
+      margin-left: 0!important;
     }
     .log-details {
       padding: 0 1rem!important;
     }
-
+    .log-container {
+      padding: 0 1rem!important;
+    }
     /* dashboard mobile views */
     .grid-container {
       display: grid;

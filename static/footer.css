@@ -13,9 +13,9 @@
     padding: 16px 3rem;
 }
 a.footer-link.git {
-    background: green;
     padding: .6rem;
     border-radius: 5px;
+    border: solid #fff 2px;
 }
 .footer-link {
     color: #fff;

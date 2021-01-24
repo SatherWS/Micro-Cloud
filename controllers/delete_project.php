@@ -17,7 +17,7 @@
     $db = new Database();
     $curs = $db -> getConnection();
     
-    if (isset($_POST["delete_project"])) {
+    if (isset($_POST["delete_proj"])) {
         $proj = $_POST["project"];
         $sql = "call delete_project(?)";
     }
@@ -30,7 +30,7 @@
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $proj);
     
-    if (isset($_POST["delete_project"])) 
+    if (isset($_POST["delete_proj"])) 
     {   
         if ($stmnt -> execute()) {
             $_SESSION["team"] = getNextSesh($curs, $_SESSION["unq_user"]);

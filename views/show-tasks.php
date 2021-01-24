@@ -87,7 +87,7 @@
         <div class="log-container">
             <div class="todo-flex r-cols">
                 <?php echo "<h3>$total TOTAL TASKS $filter</h3>";?>
-                <section class="todo-flex">
+                <section class="todo-flex r-cols">
                     <form method="POST">
                         <select class="main-selector mr2rem" name="s-status" id="myselect" onchange="this.form.submit()">
                             <option value="none" selected disabled hidden>Search by Status</option>
