@@ -137,3 +137,10 @@ CREATE TABLE file_storage (
   date_created date default(CURRENT_DATE),
   foreign key (article_id) references journal(id)
 );
+
+CREATE TABLE tokens (
+  id int primary key auto_increment,
+  email varchar(255) not null,
+  token varchar(255) unique,
+  date_requested datetime default current_timestamp
+);

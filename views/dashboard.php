@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="dash-grid r-col" id="main">
-            <main>
+            <main class="dash-ui">
                 <div class="grid-container">
                     <a class="dash-item" href="./create-journal.php">
                         <i class="fa fa-pencil spc-1"></i>

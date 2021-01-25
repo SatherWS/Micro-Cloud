@@ -125,7 +125,7 @@
                     if (isset($_GET["title"]) && isset($_GET["article"]))
                         include("./components/article-files.php");
                 ?>
-                <h2 class="ml2rem">Project files: <?php echo $_SESSION["team"];?></h2>
+                <h2 class="ml2rem">Project files & images: <?php echo $_SESSION["team"];?></h2>
                 <div class="settings-space">
                     <div class="settings-panel">
                         <h3>All Files Uploaded</h3>

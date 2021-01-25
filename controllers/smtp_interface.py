@@ -6,7 +6,7 @@ gmail_user = 'swoopctms@gmail.com'
 gmail_password = 'qlfwsrjhrzzbfknk'
 
 receiver = sys.argv[1]
-subject = "TASK DUE: "+sys.argv[2]
+subject = sys.argv[2]
 description = sys.argv[3]
 deadline = sys.argv[4]
 status = sys.argv[5]

@@ -59,8 +59,8 @@ if ($stmnt -> execute() && isset($id)) {
     exec($at_exec);
     echo "<br>";
     echo $at_exec;
-    //header("Location: ../views/task-details.php?task=$id");
+    header("Location: ../views/task-details.php?task=$id");
 }
 else 
-    //header("Location: ../views/dashboard.php?error='unable to set reminder'");
+    header("Location: ../views/dashboard.php?error='unable to set reminder'");
 ?>

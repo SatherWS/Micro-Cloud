@@ -9,7 +9,7 @@
 .srch-section {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
 }
 .search-field {
@@ -180,7 +180,7 @@ nav {
   color: green;
 }
 .spc-pt {
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 /* other user input components */
 
@@ -452,6 +452,9 @@ textarea {
   display: grid;
   grid-template-columns: 10fr 2fr;
 }
+.dash-ui {
+  width:90%;
+}
 .side-bar {
   padding: 0 1rem;
   background: #fff;
@@ -505,7 +508,7 @@ main {
   width: auto;
   margin: 0 auto;
   margin-bottom: 1rem;
-  width: 90%;
+  /*width: 90%;*/
 }
 
 .dash-footer {

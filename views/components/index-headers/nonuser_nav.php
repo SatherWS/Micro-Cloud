@@ -21,6 +21,9 @@
         </ul>
         <ul class="topnav-list">
             <li>
+                <a href="#">About this project</a>
+            </li>
+            <li>
                 <a href="<?php echo $login_link;?>">Login</a>
             </li>
             <li>

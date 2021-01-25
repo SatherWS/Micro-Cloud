@@ -6,9 +6,6 @@
     if ($_GET["filter"] == "articles")
         $sql = "select * from journal where subject like '%".$_POST["query"]."%' order by date_created desc";
     
-    else if ($_GET["filter"] == "tasks")
-        $sql = "select * from todo_list where title like '%".$_POST["query"]."%' order by date_created desc";
-
     else if ($_GET["filter"] == "users")
         $sql = "select * from users where username like '%".$_POST["query"]."%' order by date_created desc";
     
@@ -72,8 +69,6 @@
         $html .= "<div class='uline'></div>";
     }
 
-    //if (isset($_GET["filter"]))
-    // adjust html variable to suit journal and todo_list
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,13 +102,7 @@
         <section class="proj-feed">
             <div class="todo-flex r-cols">
                 <div class="dropdown">
-                    <p><a href="javascript:void(0)" class="dropbtn">FILTER</a></p>
-                    <div class="dropdown-content">
-                        <p><a href="./results.php" class="dropbtn">PROJECTS</a></p>
-                        <p><a href="./results.php" class="dropbtn">USERS</a></p>
-                        <p><a href="./results.php?filter=articles" class="dropbtn">ARTICLES</a></p>
-                        <p><a href="./results.php?filter=tasks" class="dropbtn">TASKS</a></p>
-                    </div>
+                    <p><a href="../authentication/register.php" class="dropbtn">REGISTER</a></p>
                 </div>
                 <p><a href="../index.php">HOME</a></p>
             </div>
