@@ -33,7 +33,8 @@
             $content .= "<div><h2>Task: ".$row["title"]."</h2>";
             $content .= "<p><b>Deadline:</b> ".$row["time_due"]." ".$row["deadline"]."</p>";
             $content .= "<p><b>Posted:</b> ".$row["date_created"]."</p></div>";
-            $content .= "<div><p><b>Assignee:</b> ".$row["assignee"]."</p>";
+            $content .= "<div><p><b>Importance:</b> ".$row["importance"]."</p>";
+            $content .= "<p><b>Assignee:</b> ".$row["assignee"]."</p>";
             $content .= "<p><b>Creator:</b> ".$row["creator"]."</p></div></div>";
             $content .= "<div class='todo-flex r-cols'>";
             $content .= "<p class='activity-item'>".$row["description"]."</p>";
