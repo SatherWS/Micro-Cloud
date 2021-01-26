@@ -209,7 +209,7 @@
 <div class="comment-area">
     <form method="post" action="../models/comment.php" id="comments">
         <div class="log-details">
-            <textarea name="comment" cols="30" rows="10" placeholder="Commenting as <?php echo $user;?>"></textarea>
+            <textarea class="comment-txt" name="comment" cols="30" placeholder="Commenting as <?php echo $user;?>"></textarea>
             <input type="hidden" name="art_id" value="<?php echo $_GET['journal'];?>">
             <input type="submit" value="Post Comment" class="add-btn-2">
         </div>

@@ -38,16 +38,16 @@ if (isset($_SESSION["team"])) {
     $results = $stmnt -> get_result();
 }
 if (invite_count($curs, $_SESSION["unq_user"]) > 0) {
-    $sql2 = "select * from invites where sender = ? order by date_created desc";
+    $sql2 = "select * from invites where sender = ? and team_name = ? order by date_created desc";
     $stmnt2 = mysqli_prepare($curs, $sql2);
-    $stmnt2->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt2->bind_param("ss", $_SESSION["unq_user"], $_SESSION["team"]);
     $stmnt2->execute();
     $results2 = $stmnt2->get_result();
 }
 if (isset($_SESSION["team"]) && get_admin($curs, $_SESSION["unq_user"], $_SESSION["team"])) {
-    $sql3 = "select * from invites where receiver = ? order by date_created desc";
+    $sql3 = "select * from invites where receiver = ? and team_name = ? order by date_created desc";
     $stmnt3 = mysqli_prepare($curs, $sql3);
-    $stmnt3->bind_param("s", $_SESSION["unq_user"]);
+    $stmnt3->bind_param("ss", $_SESSION["unq_user"], $_SESSION["team"]);
     $stmnt3->execute();
     $results3 = $stmnt3->get_result();
 }

@@ -26,7 +26,7 @@
                 <div class="dropdown-content">
                     <a href="./create-journal.php">New Article</a>
                     <a href="./logs.php">View Articles</a>
-                    <a href="./categories.php">Categories</a>
+                    <!--<a href="./categories.php">Categories</a>-->
                 </div>
             </li>
             <li>

@@ -1089,6 +1089,9 @@ button {
 .comment-form textarea {
   height: 110px;
 }
+.comment-txt {
+  height: 100px!important;
+}
 /* ---------------------------------+
   Todo & Journal Icons              |
 -----------------------------------*/
