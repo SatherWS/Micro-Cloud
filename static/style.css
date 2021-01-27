@@ -1690,8 +1690,15 @@ button.add-btn {
     .svg-bg {
       width: 100%;
     }
+    main {
+      width: 100%;
+    }
+    #proj-container p {
+      font-size: 14pt;
+    }
     .intro-head p {
       width: 100%;
+      font-size: 14pt;
     }
     .log-header {
       padding-left: 0;

@@ -142,9 +142,11 @@ if (isset($_POST["file-upload"]))
   $journalnum = $_POST["article_assoc"];
   $target_dir = "../uploads/files/$journalnum/";
 
-  if (!is_dir($target_dir))
+  if (!is_dir($target_dir)) {
     mkdir($target_dir);
-
+    chmod($target_dir, 0777);
+  }
+  
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
   

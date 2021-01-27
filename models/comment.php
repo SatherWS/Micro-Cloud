@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once("../config/database.php");
     $db = new Database();
     $curs = $db -> getConnection();

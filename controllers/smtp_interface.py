@@ -24,6 +24,25 @@ text += "DEADLINE: "+deadline
 text += "\n"+description+"\n"
 text += status +"\n"
 
+
+# subtasks section (only executes if arg 9 is set)
+if len(sys.argv) == 9:
+    subtask_list = sys.argv[8]
+    subtask_list = subtask_list.split(",")
+
+    subtasks = "<p><b>SUBTASKS</b></p><ul>{}</ul>"
+        
+    inner_ul = ""
+    for item in subtask_list:
+        inner_ul += "<li>"
+        inner_ul += item
+        inner_ul += "</li>"
+        text += "*"+ item +"\n"
+    
+    subtasks = subtasks.format(inner_ul)
+
+
+
 css = """\
 <html>
     <head>
@@ -61,13 +80,6 @@ body = """\
     <p><b>DESCRIPTION: </b>{}</p>
 """ 
 
-subtasks = """\
-    <p><b>SUBTASKS</b></p>
-    <ul>
-        {}
-    </ul>
-"""
-
 end_body = """\
     <p>Assigned by: <a href="mailto:{}">{}</a></p>
     <br>
@@ -78,18 +90,6 @@ end_body = """\
 </html>
 """
 
-# subtasks sections
-if len(sys.argv) == 9:
-    subtask_list = sys.argv[8]
-    subtask_list = subtask_list.split(",")
-
-inner_ul = ""
-for item in subtask_list:
-    inner_ul += "<li>"
-    inner_ul += item
-    inner_ul += "</li>"
-    text += "*"+ item +"\n"
-
 text += "Assigned by: "+creator+"\n"
 text = "[VIEW TASK][1]"
 text += "[1]: https://swoop.team/views/task-details.php?task="+task_id
@@ -97,12 +97,11 @@ text += "[1]: https://swoop.team/views/task-details.php?task="+task_id
 # append the HTML email together
 body = body.format(subject, deadline, status, description)
 end_body = end_body.format(creator, creator, task_id)
-subtasks = subtasks.format(inner_ul)
 
-if inner_ul == "":
-    html = css + body + end_body
-else:
+if len(sys.argv) == 9:
     html = css + body + subtasks + end_body
+else:
+    html = css + body + end_body
 
 
 # attach message to MIME and send the email
