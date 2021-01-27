@@ -65,7 +65,7 @@ css = """\
 
 body = """\
 <body>
-    <h2>{}</h2>
+    <h2>TASK DUE: {}</h2>
     <div class="uline"></div>
     <table style='100%'>
         <tr>
