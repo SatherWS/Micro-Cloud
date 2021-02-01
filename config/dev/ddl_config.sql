@@ -8,15 +8,15 @@
 -- Server version: 8.0.18
 -- PHP Version: 7.3.11
 
-DROP TABLE comments;
-DROP TABLE sub_tasks;
-DROP TABLE todo_list;
-DROP TABLE journal;
-DROP TABLE members;
-DROP TABLE invites;
-DROP TABLE teams;
-DROP TABLE users;
-DROP TABLE file_storage;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS sub_tasks;
+DROP TABLE IF EXISTS todo_list;
+DROP TABLE IF EXISTS journal;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS invites;
+DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS file_storage;
 
 CREATE TABLE users (
   id int primary key auto_increment,
@@ -60,6 +60,7 @@ CREATE TABLE members (
   foreign key(team_name) references teams(team_name)
 );
 
+
 CREATE TABLE invites (
   id int primary key auto_increment,
   sender varchar(75),
@@ -71,13 +72,10 @@ CREATE TABLE invites (
   foreign key(team_name) references teams(team_name)
 );
 
--- has 1 warning when created
 CREATE TABLE journal (
   id int(11) primary key auto_increment,
   subject varchar(45) NOT NULL,
-  message varchar(100000) NOT NULL,
-  -- move to seperate table referenced by teams table
-  --category varchar(45) NOT NULL,
+  message text(100000) NOT NULL,
   creator varchar(50) NOT NULL,
   is_public varchar(20) default "not_public" not null,
   date_created datetime DEFAULT CURRENT_TIMESTAMP,
@@ -86,16 +84,16 @@ CREATE TABLE journal (
   foreign key (team_name) references teams(team_name)
 );
 
--- NOT IMPLEMENTED, but would be cool
--- has 2 warnings when created
+
 CREATE TABLE comments (
   id int(11) primary key auto_increment,
   comment varchar(150) not null,
   user_email varchar(75) not null,
-  article_id int(11),
+  article_id int(11) not null,
   date_created date DEFAULT(CURRENT_DATE),
   foreign key(article_id) references journal(id)
 );
+
 
 CREATE TABLE todo_list (
 	id int primary key auto_increment,

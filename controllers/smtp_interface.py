@@ -72,8 +72,10 @@ body = """\
             <td>
                 <p><b>DEADLINE:</b> {}</p>
             </td>
-            <td align="right">
-                <p><b>{}</b></p>
+        </tr>
+        <tr>
+            <td>
+                <p><b>STATUS: </b>{}</p>
             </td>
         </tr>
     </table>
