@@ -126,14 +126,14 @@ CREATE TABLE sub_tasks (
   foreign key (team_name) references teams(team_name)
 );
 
+-- drop current table 2/1/2021
 CREATE TABLE file_storage (
   id int primary key auto_increment,
-  article_id int not null,
+  article_id int null,
   file_name varchar(100) not null,
   file_type varchar(10) not null,
   file_path varchar(200) not null,
-  date_created date default(CURRENT_DATE),
-  foreign key (article_id) references journal(id)
+  date_created date default(CURRENT_DATE)
 );
 
 CREATE TABLE tokens (
