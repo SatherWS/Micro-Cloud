@@ -7,12 +7,15 @@
     if (isset($_POST["send-reset"])) {
         $sql = "insert into tokens(email, token) values (?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-
         $token = random_bytes(20);
-        $stmnt -> bind_param("ss", $_POST["email"], bin2hex($token));
+        $token = bin2hex($token);
+        $reciever = $_POST["email"];
+
+        $stmnt -> bind_param("ss", $reciever, $token);
+        $script_path = "/var/www/html/controllers/send_token.py";
 
         if ($stmnt -> execute()) {
-            exec("python3 send_token.py ".$_POST["email"]);
+            exec("python3 $script_path $reciever $token");
             header("Location: ../index.php?msg='Password reset has been sent'");
         }
         else

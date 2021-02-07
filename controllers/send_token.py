@@ -1,37 +1,27 @@
 import smtplib, sys
-import pymysql
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
-db = pymysql.connect(host='localhost', user='root', passwd='1m0r3_projde@th', db='swoop')
-db.autocommit(True)
 
 gmail_user = 'swoopctms@gmail.com'
 gmail_password = 'qlfwsrjhrzzbfknk'
 receiver = sys.argv[1]
+token = sys.argv[2]
 
-curs = db.cursor()
-sql = "select token from tokens where email = %s order by date_requested"
-curs.execute(sql, [receiver])
-data = curs.fetchone()
 html, text = "", ""
 
 html += "<html><head><style>"
 html += ".uline {border-bottom: solid #ddd;}</style></head>"
 html += "<body><h2>A password reset has been requested</h2>"
 html += "<div class='uline'></div>"
-html += "<a href='https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
-html += "'>Click this link to reset your password</a>" 
+html += "<h3><a href='https://swoop.team/authentication/change_pswd.php?token="+token
+html += "'>Click here to reset your password</a></h3>" 
 
-text += "Click this link to reset your password "+data[0][0]
-text += "[1]: https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
+text += "Click here to reset your password "+token
+text += "[1]: https://swoop.team/authentication/change_pswd.php?token="+token
 text += "A password reset has been requested \n"
 text += "[Click this link to reset your password][1]"
-
 html += "</body></html>"
-print(html, text)
-curs.close()
-db.close()
+
 
 # attach message to MIME and send the email
 if __name__ == "__main__":

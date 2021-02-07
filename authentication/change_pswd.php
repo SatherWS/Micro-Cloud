@@ -28,7 +28,7 @@
         <div class="form-container">
             <div class="todo-panel">
                 <div class="inner-panel">
-                    <h1>Change Password</h1>
+                    <h2>Password Reset</h2>
                     <div class="flex-subs">
                         <label>New password:</label><br>
                         <input type="password" name="pswd_1" id="pswd_1" placeholder="Enter your new password" class="spc-n login-comp" required>
