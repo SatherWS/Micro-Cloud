@@ -117,7 +117,7 @@
     </script>
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </head>
-<body>
+<body class="article-details">
 <?php include("./components/header.php");?>
 <div class="svg-bg">
     <div class="todo-flex">
@@ -208,7 +208,7 @@
 ?>
 <div class="comment-area">
     <form method="post" action="../models/comment.php" id="comments">
-        <div class="log-details">
+        <div class="log-details comment-form-bg">
             <textarea class="comment-txt" name="comment" cols="30" placeholder="Commenting as <?php echo $user;?>"></textarea>
             <input type="hidden" name="art_id" value="<?php echo $_GET['journal'];?>">
             <input type="submit" value="Post Comment" class="add-btn-2">

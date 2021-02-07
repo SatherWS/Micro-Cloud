@@ -943,6 +943,7 @@ input.send-req {
 
 .log-container {
   padding: 0 2rem;
+  background: #fff;
 }
 
 .log-container h3 {
@@ -980,8 +981,17 @@ input.send-req {
 }
 
 .log-details {
-  width: 900px;
+  width: 1100px;
   margin: 0 auto;
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.article-details {
+  background: #fff!important;
+}
+.comment-form-bg {
+  background: #f1f1f1!important;
 }
 
 .log-details p {

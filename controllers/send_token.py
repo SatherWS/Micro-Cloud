@@ -3,41 +3,35 @@ import pymysql
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-db = pymysql.connect(host='localhost', user='root', passwd='toor', db='swoop')
+db = pymysql.connect(host='localhost', user='root', passwd='1m0r3_projde@th', db='swoop')
 db.autocommit(True)
 
 gmail_user = 'swoopctms@gmail.com'
 gmail_password = 'qlfwsrjhrzzbfknk'
 receiver = sys.argv[1]
-print(receiver)
 
-with db.cursor() as curs:
-    sql = "select token, email from tokens where email = %s order by date_requested"
-    curs.execute(sql, [receiver])
-    data = curs.fetchone()
-    if data:
-        print(data)
-    curs.close()
-    db.close()
-
+curs = db.cursor()
+sql = "select token from tokens where email = %s order by date_requested"
+curs.execute(sql, [receiver])
+data = curs.fetchone()
 html, text = "", ""
 
 html += "<html><head><style>"
 html += ".uline {border-bottom: solid #ddd;}</style></head>"
 html += "<body><h2>A password reset has been requested</h2>"
 html += "<div class='uline'></div>"
-#html += "<a href='https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
-#html += "<a href='https://127.0.0.1/authentication/change_pswd.php?token="+data[0][0]
+html += "<a href='https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
 html += "'>Click this link to reset your password</a>" 
 
-#text += "Click this link to reset your password "+data[0][0]
-#text += "[1]: https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
+text += "Click this link to reset your password "+data[0][0]
+text += "[1]: https://swoop.team/authentication/change_pswd.php?token="+data[0][0]
 text += "A password reset has been requested \n"
 text += "[Click this link to reset your password][1]"
 
 html += "</body></html>"
 print(html, text)
 curs.close()
+db.close()
 
 # attach message to MIME and send the email
 if __name__ == "__main__":
@@ -59,7 +53,7 @@ if __name__ == "__main__":
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.ehlo()
         server.login(gmail_user, gmail_password)
-        #server.sendmail(gmail_user, receiver, msg.as_string())
+        server.sendmail(gmail_user, receiver, msg.as_string())
         print("Message sent!")
         server.close()
     except:
