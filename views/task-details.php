@@ -10,10 +10,9 @@
 
     $editor = new TaskEditor();
     $database = new Database();
-
     $curs = $database->getConnection();
 
-    // TODO: Only show editor if you are admin of the project [IMPORTANT]
+
     if (isset($_GET['task'])) 
     {
         $id = $_GET['task'];
@@ -22,12 +21,14 @@
         $stmnt -> bind_param("s", $id);
         $stmnt -> execute();
         $results = $stmnt -> get_result();
-        $show_editor = true;
+	$show_editor = true;
+	/*
         $sql = "select * from sub_tasks where task_id = ?";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $id);
         if ($stmnt -> execute())
-            $results2 = $stmnt -> get_result();
+		$results2 = $stmnt -> get_result();
+	 */
     }
 
     if (isset($_POST['edit'])) 

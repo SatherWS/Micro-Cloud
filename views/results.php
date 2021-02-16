@@ -83,20 +83,26 @@
     <title>Swoop.Team</title>
 </head>
 <body>
-    <?php 
-        if (isset($_SESSION["unq_user"]))
-            include("./components/header.php");
-        else
-            include("./components/index-headers/nonuser_nav.php");
-    ?>
+    <?php include("./components/header.php");?>
     <article class="svg-bg">
-        <form method="post" class="w-90">
+	<div class="todo-flex r-cols search-area">
+	<form method="post" class="w-90">
             <div class="srch-section">
                 <input type="text" placeholder="Search" class="search-field" name="query">
                 <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </div>
         </form>
-        <div></div>
+	<div class="todo-flex r-cols">
+		<div class="add-btn mr-5">
+			<a href="../authentication/login.php">Login</a>
+		</div>
+		
+		<div class="add-btn">
+			<a href="../authentication/register.php">Register</a>
+		</div>
+	</div>
+
+	</div>
     </article>
     <main>
         <section class="proj-feed">

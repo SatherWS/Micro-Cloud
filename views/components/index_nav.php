@@ -40,7 +40,12 @@
                 <a href="./views/settings.php">Settings</a>
             </li>
             <li>
-                <a href="./controllers/logout.php">Logout</a>
+		<?php
+		if (isset($_SESSION["unq_user"]))
+			echo "<a href='./controllers/logout.php'>Logout</a>";
+		else
+			echo "<a href='./authentication/login.php'>Login</a>";
+		?>
             </li>
             <a href="javascript:void(0);" class="icon" onclick="navToggle()">
                 <i class="fa fa-bars"></i>

@@ -6,11 +6,15 @@
 .main-title {
   font-size: 32px;
 }
+.search-area {
+  width: 83%;
+  margin: 0 auto;
+}
 .srch-section {
   display: flex;
   justify-content: space-between;
-  width: 85%;
-  margin: 0 auto;
+  width: 60%;
+/*  margin: 0 auto;*/
 }
 .search-field {
   margin-block-start: 2em;
