@@ -1,6 +1,39 @@
 <?php
     if (!isset($_GET["token"]))
         header("Location: ../index.php");
+
+    include_once("../config/database.php");
+    $db = new Database();
+    $curs = $db -> getConnection();
+    $token = $_GET["token"];
+    if (isset($_POST["changer"])) {
+        echo $_POST["changer"];
+        $sql = "select email from tokens where token = ?";
+        $stmnt = mysqli_prepare($curs, $sql);
+        $stmnt -> bind_param("s", $token);
+        
+        
+    
+        if ($stmnt -> execute()) {
+            echo "passed";
+            $results = $stmnt -> get_result();
+            $row = mysqli_fetch_assoc($results); 
+            echo $row["email"];
+            $sql = "update users set pswd = ? where email = ?";
+            $stmnt = mysqli_prepare($curs, $sql);
+            // encrypt newly created password
+            $hash = password_hash($_POST["pswd_1"], PASSWORD_BCRYPT);
+            $stmnt -> bind_param("ss", $hash, $row["email"]);
+            $stmnt -> execute();
+
+            $sql = "delete from tokens where email = ?";
+            $stmnt = mysqli_prepare($curs, $sql);
+            $stmnt -> bind_param("s", $row["email"]);
+            $stmnt -> execute();
+            header("Location: ../authentication/login.php");
+                
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +57,7 @@
         </ul>
     </div>
     </nav>
-    <form class="spc-pt" id="reset-form" action="../controllers/password_reset.php">
+    <form class="spc-pt" id="reset-form" method="post">
         <div class="form-container">
             <div class="todo-panel">
                 <div class="inner-panel">
@@ -33,11 +66,9 @@
                         <label>New password:</label><br>
                         <input type="password" name="pswd_1" id="pswd_1" placeholder="Enter your new password" class="spc-n login-comp" required>
                         <br><br>
-                        <label>Repeat new password:</label><br>
-                        <input type="password" name="pswd_2" id="pswd_2" placeholder="Repeat your password" class="spc-n login-comp" required>
                     </div>
                     <br>
-                    <button type="button" class="spc-n" id="form-control2" name="changer" onclick="checkPasswords()">Reset Password</button>                   
+                    <input type="submit" class="spc-n" id="form-control2" name="changer" value="Reset Password">
                     <?php
                         if (isset($_GET["error"])) {
                             include("./error.php");

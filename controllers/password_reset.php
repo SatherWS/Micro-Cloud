@@ -21,28 +21,5 @@
         else
             header("Location: ../index.php?msg='There was a problem password reset has not been sent'");
     }
-    
-    else if (isset($_POST["changer"])) {
-        $sql = "select email from tokens where token = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("s", $_GET["token"]);
-        $stmnt -> execute();
-        $results = $stmnt -> get_result();
 
-        if (mysqli_num_rows($results) > 0) {
-            while ($row = mysqli_fetch_assoc($results)) {
-                $sql = "update users set pswd = ? where email = ?";
-                $stmnt = mysqli_prepare($curs, $sql);
-                // encrypt newly created password
-                $hash = password_hash($_POST["pswd_1"], PASSWORD_BCRYPT);
-                $stmnt -> bind_param("ss", $hash, $row["email"]);
-                $stmnt -> execute();
-
-                $sql = "delete from tokens where email = ?";
-                $stmnt = mysqli_prepare($curs, $sql);
-                $stmnt -> bind_param("s", $row["email"]);
-                $stmnt -> execute();
-            }
-        }
-    }
 ?>
