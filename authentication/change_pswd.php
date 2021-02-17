@@ -65,10 +65,13 @@
                     <div class="flex-subs">
                         <label>New password:</label><br>
                         <input type="password" name="pswd_1" id="pswd_1" placeholder="Enter your new password" class="spc-n login-comp" required>
-                        <br><br>
+			<br><br>
+
+			<input type="password" name="pswd_2" id="pswd_2" placeholder="Repeat your password" class="spc-n login-comp" required>
+			<br><br>
                     </div>
                     <br>
-                    <input type="submit" class="spc-n" id="form-control2" name="changer" value="Reset Password">
+                    <button onclick="checkPasswords()" class="spc-n" id="form-control2" name="changer">Reset Password</button>
                     <?php
                         if (isset($_GET["error"])) {
                             include("./error.php");

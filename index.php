@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
     include_once("./config/database.php");
     $db = new Database();
     $curs = $db->getConnection();
@@ -74,7 +74,7 @@
 
         // links for project tasks and articles
         $html .= "<div class='todo-flex r-cols index-btns'>";
-        $html .= "<h4 class='mr-5'><a href='./views/logs.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></h4>";
+        $html .= "<h4 class='mr-5'><a href='./views/show-journals.php?project=".$row["team_name"]."'class='add-btn-2'>Read Articles</a></h4>";
         $html .= "<h4><a href='./views/show-tasks.php?project=".$row["team_name"]."' class='add-btn-2'>Project Tasks</a></h4>";
 
         $html .= "</div></div></section>";

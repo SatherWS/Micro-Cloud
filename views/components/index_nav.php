@@ -26,7 +26,7 @@
                 <a href="javascript:void(0)" class="dropbtn">Articles</a>
                 <div class="dropdown-content">
                     <a href="./views/create-journal.php">New Article</a>
-                    <a href="./views/logs.php">View Articles</a>
+                    <a href="./views/show-journals.php">View Articles</a>
                     <!--<a href="./views/categories.php">Categories</a>-->
                 </div>
             </li>

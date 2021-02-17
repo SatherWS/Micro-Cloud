@@ -25,7 +25,7 @@ if (isset($_POST['add-journal']))
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("ssss", $subject, $msg, $_SESSION["unq_user"], $_SESSION["team"]);
     $stmnt -> execute();
-    header("Location: ../views/logs.php");
+    header("Location: ../views/show-journals.php");
 }
 
 // add task to todo list table

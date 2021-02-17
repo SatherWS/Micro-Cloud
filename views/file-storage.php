@@ -103,6 +103,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swoop | File Storage</title>
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/mini_nav.css">
     <link rel="stylesheet" href="../static/modal.css">
     <link rel="stylesheet" href="../static/checkmarks.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -121,6 +122,35 @@
         </div>
         <div class="dash-grid r-cols" id="main">
             <div>
+                <form method="post" action="../controllers/upload_data.php" enctype="multipart/form-data">
+                    <div class='mt-0 topnav2' id='item-container'>
+                        <a class='choice active' onclick='changeActive(0)' href='#choice' id='mobile'>Upload an image file</a>
+                        <a class='choice' onclick='changeActive(1)' href='#choice'>Upload an approved file</a>
+                    </div>
+                        <input type='hidden' value='$id' name='article_assoc'>
+
+                        <div class='todo-flex r-cols upload-forms'>
+                        <section>
+                            <br>Upload an image:<br>
+                            <input type='file' name='imageToUpload' id='imageToUpload'>
+                        </section>
+
+                        <section>
+                            <input type='submit' value='Image Upload' name='img-upload' class='add-btn-2'>
+                            </section>
+                        </div>
+
+                    <div class='todo-flex r-cols upload-forms' style='display:none;'>
+                        <section>
+                            <br><span>Upload a file:</span><br>
+                            <input type='file' name='fileToUpload' id='fileToUpload'>
+                        </section>
+
+                        <section>
+                            <input type='submit' value='File Upload' name='file-upload' class='add-btn-2'>
+                        </section>
+                    </div>
+                </form>
                 <?php 
                     if (isset($_GET["title"]) && isset($_GET["article"]))
                         include("./components/article-files.php");
@@ -153,5 +183,22 @@
     </div>
     <script src="../static/main.js"></script>
     <script src="../static/modal.js"></script>
+    <script>
+        function changeActive(selected) {
+            var choices = document.getElementsByClassName("choice");
+            var forms = document.getElementsByClassName("upload-forms");
+            
+            for (var i = 0; i < choices.length; i++) {
+                if (i != selected) {
+                    choices[i].style.borderBottom = "none";
+                    forms[i].style.display = "none";
+                }
+                else {
+                    choices[i].style.borderBottom = "3px solid #4c4177";
+                    forms[i].style.display = "flex";
+                }
+            }
+        }
+    </script>
 </body>
 </html>

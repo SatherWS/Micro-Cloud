@@ -1,7 +1,7 @@
 <!-- Go back to the list page -->
 <div class="ml2rem">
 	<div class="add-btn">
-	    <a href="./logs.php">
+	    <a href="./show-journals.php">
 			<i class='fa fa-arrow-circle-o-left'></i>Go Back
 	    </a>
 	</div>

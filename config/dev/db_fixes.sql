@@ -19,3 +19,5 @@ CREATE TABLE reminders (
   exec_time datetime not null,
   assignee varchar(50) not null
 );
+
+insert into journal (id, subject, creator, team) values (0, "all user files", "satherc@outlook.com", "test");
