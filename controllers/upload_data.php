@@ -1,9 +1,9 @@
 <?php
-	session_start();
-	include_once("../config/database.php");
-	$db = new Database();
-	$curs = $db -> getConnection();
-	$null_article = 0;
+session_start();
+include_once("../config/database.php");
+$db = new Database();
+$curs = $db -> getConnection();
+
 /*
 *   File upload for images in articles section
 *
@@ -14,7 +14,7 @@
 if (isset($_POST["img-upload"])) 
 {
     $team = $_SESSION['team'];
-    $target_dir = "../uploads/images/$team/";
+    $target_dir = "../uploads/images/$team/general/";
 
     if (!is_dir($target_dir)) {
         mkdir($target_dir);
@@ -26,7 +26,7 @@ if (isset($_POST["img-upload"]))
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $file_name = pathinfo($target_file,PATHINFO_FILENAME);
     $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
-    $file_class = "image";
+    $file_class = "general image ".$_SESSION["team"];
 
     // Check if image file is a actual image or fake image
     if (isset($_POST["imageToUpload"])) {
@@ -70,17 +70,10 @@ if (isset($_POST["img-upload"]))
       if (move_uploaded_file($_FILES["imageToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been uploaded.";
 
-        // append to the associated article
-        $md_img = " <br> ![uploaded image]($target_file)";
-        $sql = "update journal set message = CONCAT(message, ?) where id = ?";
-        $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("ss", $md_img, $journalnum);
-        $stmnt -> execute();
-
         // add the image path to file storage paths
-        $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+        $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
-        $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $null_article, $file_class);
+        $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $file_class);
         $stmnt -> execute();
         
         header("Location: ../views/file-storage.php");
@@ -96,7 +89,7 @@ if (isset($_POST["img-upload"]))
 if (isset($_POST["file-upload"])) 
 {
 	$team = $_SESSION["team"];
-	$target_dir = "../uploads/files/$team/";
+	$target_dir = "../uploads/files/$team/general/";
 
   if (!is_dir($target_dir)) {
     mkdir($target_dir);
@@ -109,7 +102,7 @@ if (isset($_POST["file-upload"]))
   $dataFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
   $file_name = pathinfo($target_file,PATHINFO_FILENAME);
   $file_type = pathinfo($target_file,PATHINFO_EXTENSION);
-  $file_class = "file";
+  $file_class = "general file ".$_SESSION["team"];
 
   // Check if file already exists
   if (file_exists($target_file)) {
@@ -139,9 +132,9 @@ if (isset($_POST["file-upload"]))
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
       
-      $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+      $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, ?, ?)";
       $stmnt = mysqli_prepare($curs, $sql);
-      $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $null_article, $file_class);
+      $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $file_class);
       $stmnt -> execute();
       
       header("Location: ../views/file-storage.php");

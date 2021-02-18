@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `file_storage`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `file_storage` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `article_id` int NOT NULL,
+  `article_id` int NULL,
   `file_name` varchar(100) NOT NULL,
   `file_type` varchar(10) NOT NULL,
   `file_path` varchar(200) NOT NULL,
@@ -140,28 +140,6 @@ CREATE TABLE `members` (
 
 --
 -- Dumping data for table `members`
---
-
-
---
--- Table structure for table `reminders`
---
-
-DROP TABLE IF EXISTS `reminders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reminders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `task_name` varchar(75) NOT NULL,
-  `deadline` date NOT NULL,
-  `exec_time` datetime NOT NULL,
-  `assignee` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `reminders`
 --
 
 

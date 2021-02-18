@@ -170,7 +170,7 @@
         echo "<input type='hidden' value='$id' name='article_assoc'>";
 
         // image upload form section
-        echo "<div class='todo-flex r-cols upload-forms'>";
+        echo "<div class='todo-flex r-cols upload-forms flex-end'>";
         echo "<section>";
         echo "<br>Select an image to add to the article:<br>";
         echo "<input type='file' name='imageToUpload' id='imageToUpload'>";
@@ -182,7 +182,7 @@
         echo "</div>";
 
         // file upload form section
-        echo "<div class='todo-flex r-cols upload-forms' style='display:none;'>";
+        echo "<div class='todo-flex r-cols upload-forms flex-end' style='display:none;'>";
         echo "<section>";
         echo "<br><span>Attach a relevant file to this article:</span><br>";
         echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
@@ -215,7 +215,7 @@
         </div>
     </form>
     <br>
-    <div class="log-details">
+    <div class="log-details clr-grey">
         <?php
             $comments = new Comments();
             $comm_lst = $comments -> showComments($curs, $_GET["journal"]);

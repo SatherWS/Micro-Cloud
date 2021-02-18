@@ -93,13 +93,23 @@
             </div>
         </form>
 	<div class="todo-flex r-cols">
-		<div class="add-btn mr-5">
-			<a href="../authentication/login.php">Login</a>
-		</div>
-		
-		<div class="add-btn">
-			<a href="../authentication/register.php">Register</a>
-		</div>
+        <?php
+			if (!isset($_SESSION["unq_user"])) {
+                echo "<div class='add-btn mr-5'>";
+				echo "<a href='../authentication/login.php' class='add-btn'>Login</a>";
+				echo "</div>";
+
+                echo "<div class='add-btn'>";
+				echo "<a href='../authentication/register.php' class='add-btn'>Register</a>";
+				echo "</div>";
+			}
+			else {
+				echo "<div></div>";
+				echo "<div class='add-btn'>";
+				echo "<a href='../controllers/logout.php' class='add-btn'>Logout</a>";
+				echo "</div>";
+			}
+        ?>
 	</div>
 
 	</div>

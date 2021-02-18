@@ -8,7 +8,7 @@
     $db = new Database();
     $curs = $db -> getConnection();
 
-    $sql = "select journal.id, file_storage.article_id, file_storage.id as img_id, journal.team_name, journal.subject, journal.creator, file_storage.file_path, file_storage.file_name, file_storage.file_class, file_storage.file_type, file_storage.date_created from journal inner join file_storage on journal.id = file_storage.article_id where journal.team_name = ?";
+    $sql = "select journal.id, file_storage.article_id, file_storage.id as img_id, journal.team_name,journal.subject, journal.creator, file_storage.file_path, file_storage.file_name, file_storage.file_class,file_storage.file_type, file_storage.date_created from journal inner join file_storage on journal.id = file_storage.article_id or journal.team_name = substring_index(file_storage.file_class, ' ', -1) where journal.team_name = ?";
     $stmnt = mysqli_prepare($curs, $sql);
     $stmnt -> bind_param("s", $_SESSION["team"]);
     $stmnt -> execute();
@@ -19,7 +19,8 @@
 
     while ($row = mysqli_fetch_assoc($result))
     {
-        if ($row["file_class"] == "file") 
+	$general_upload = explode(" ", $row["file_class"]);
+        if ($row["file_class"] == "file" || $general_upload[0].$general_upload[1] == "general file")
         {
             $project_files .= "<tr>";
             $project_files .= "<td><p><a href='".$row["file_path"]."' download>";
@@ -31,7 +32,7 @@
             $project_files .= "</tr>";
         }
 
-        if ($row["file_class"] == "image") 
+        if ($row["file_class"] == "image" || $general_upload[0].$general[1] == "general image") 
         {
             $project_imgs .= "<br><div class='uline'></div><br>";
             $project_imgs .= "<div class='todo-flex r-cols'>";
@@ -41,6 +42,7 @@
             $project_imgs .= $row["file_name"].".".$row["file_type"]."</a></p>";
             $project_imgs .= "<p><a href='./journal-details.php?journal=".$row["article_id"]."'>Related Article: ".$row["subject"]."</a></p>";
             $project_imgs .= "<p>Creator: ".$row["creator"]."</p>";
+            $project_imgs .= "<p>Date Posted: ".$row["date_created"]."</p>";
             $project_imgs .= "<form method='post' action='../controllers/delete_image.php'>";
             $project_imgs .= "<input type='submit' value='Delete Image' name='delete-img' class='add-btn'>";
             $project_imgs .= "<input type='hidden' value='".$row["img_id"]."' name='img-id' />";
@@ -122,14 +124,14 @@
         </div>
         <div class="dash-grid r-cols" id="main">
             <div>
-                <form method="post" action="../controllers/upload_data.php" enctype="multipart/form-data">
+                <form method="post" action="../controllers/upload_data.php" enctype="multipart/form-data" class="inner-nav2">
                     <div class='mt-0 topnav2' id='item-container'>
                         <a class='choice active' onclick='changeActive(0)' href='#choice' id='mobile'>Upload an image file</a>
                         <a class='choice' onclick='changeActive(1)' href='#choice'>Upload an approved file</a>
                     </div>
                         <input type='hidden' value='$id' name='article_assoc'>
 
-                        <div class='todo-flex r-cols upload-forms'>
+                        <div class='todo-flex r-cols upload-forms flex-end'>
                         <section>
                             <br>Upload an image:<br>
                             <input type='file' name='imageToUpload' id='imageToUpload'>
@@ -140,7 +142,7 @@
                             </section>
                         </div>
 
-                    <div class='todo-flex r-cols upload-forms' style='display:none;'>
+                    <div class='todo-flex r-cols upload-forms flex-end' style='display:none;'>
                         <section>
                             <br><span>Upload a file:</span><br>
                             <input type='file' name='fileToUpload' id='fileToUpload'>
@@ -149,8 +151,9 @@
                         <section>
                             <input type='submit' value='File Upload' name='file-upload' class='add-btn-2'>
                         </section>
-                    </div>
-                </form>
+		    </div>
+		<br>
+		</form>
                 <?php 
                     if (isset($_GET["title"]) && isset($_GET["article"]))
                         include("./components/article-files.php");

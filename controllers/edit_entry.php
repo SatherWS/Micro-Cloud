@@ -1,6 +1,7 @@
 <?php
 include_once '../config/database.php';
 
+session_start();
 $database = new Database();
 $curs = $database->getConnection();
 header("Access-Control-Allow-Origin: *");
@@ -59,7 +60,7 @@ if (isset($_POST['mod-task']))
 if (isset($_POST["img-upload"])) 
 {
     $journalnum = $_POST["article_assoc"];
-    $target_dir = "../uploads/images/$journalnum/";
+    $target_dir = "../uploads/images/".$_SESSION["team"]."/$journalnum/";
 
     if (!is_dir($target_dir)) {
         mkdir($target_dir);
@@ -140,7 +141,7 @@ if (isset($_POST["img-upload"]))
 if (isset($_POST["file-upload"])) 
 {
   $journalnum = $_POST["article_assoc"];
-  $target_dir = "../uploads/files/$journalnum/";
+  $target_dir = "../uploads/files/".$_SESSION["team"]."/$journalnum/";
 
   if (!is_dir($target_dir)) {
     mkdir($target_dir);

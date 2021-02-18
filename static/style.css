@@ -1635,6 +1635,12 @@ button.add-btn {
       margin-right: 1.6rem;
     }
     */
+    .auth-btns {
+	    padding-bottom:1rem;
+    }
+    .srch-section {
+	    width: 100%!important;
+    }
     .ml2rem {
       margin-left: 1rem!important;
     }
