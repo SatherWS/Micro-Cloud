@@ -76,6 +76,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./favicon.png">
@@ -129,7 +130,19 @@
             ?>
         </section>
     </main>
-
+    <div class="col-container">
+        <div class="col">
+            <h2>KNOWLEDGE BASE</h2>
+            <p><a class="footer-link" href="#">About this project</a></p>
+            <p><a class="footer-link" href="#">How to articles</a></p>
+            <p><a class="footer-link" href="https://colinsather.github.io">&copy;2021 Colin Sather</a></p>
+        </div>
+        <div class="col text-right">
+            <h2>LINKS</h2>
+            <p><a class="footer-link git" href='#'> 
+            <i class="fa fa-github"></i> View our source code</a></p>
+        </div>
+    </div>
     <script src="../static/main.js"></script>
 </body>
 </html>

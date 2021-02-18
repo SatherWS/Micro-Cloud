@@ -147,6 +147,7 @@ session_start();
             <h2>KNOWLEDGE BASE</h2>
             <p><a class="footer-link" href="#">About this project</a></p>
             <p><a class="footer-link" href="#">How to articles</a></p>
+            <p><a class="footer-link" href="https://colinsather.github.io">&copy;2021 Colin Sather</a></p>
         </div>
         <div class="col text-right">
             <h2>LINKS</h2>
