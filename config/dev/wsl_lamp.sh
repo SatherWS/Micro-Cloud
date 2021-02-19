@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# This script starts apache2 service, creates mysqld directories if empty.
+# This script was designed for starting up the software needed for a LAMP stack on Windows sub-system for Linux(WSL)
+# Starts apache2 service, creates mysqld directories if empty.
 # Usually the commands need to be executed manually in WSL for some reason.
 
 sudo service apache2 start

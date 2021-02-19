@@ -7,7 +7,7 @@
   font-size: 32px;
 }
 .search-area {
-  width: 83%;
+  width: 85.5%;
   margin: 0 auto;
 }
 .srch-section {
@@ -516,7 +516,6 @@ textarea {
 }
 
 main {
-  padding: 0 2rem;
   width: auto;
   margin: 0 auto;
   margin-bottom: 1rem;
@@ -946,7 +945,7 @@ input.send-req {
 }
 
 .log-container {
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   background: #fff;
 }
 
@@ -1361,10 +1360,16 @@ button.add-btn {
 
 @media screen and (min-height: 930px) {
   textarea {
-    height: 420px;
+    width: 80%!important;
   }
   .scroll-item {
     width: 600px;
+  }
+  .log-details {
+  	width: 92%;
+  }
+  .search-area {
+	  width: 90%!important;
   }
 }
 

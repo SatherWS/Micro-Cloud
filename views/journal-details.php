@@ -211,6 +211,7 @@
         <div class="log-details comment-form-bg">
             <textarea class="comment-txt" name="comment" cols="30" placeholder="Commenting as <?php echo $user;?>"></textarea>
             <input type="hidden" name="art_id" value="<?php echo $_GET['journal'];?>">
+		<br>
             <input type="submit" value="Post Comment" class="add-btn-2">
         </div>
     </form>
