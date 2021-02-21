@@ -63,8 +63,7 @@ if (isset($_POST["img-upload"]))
     $target_dir = "../uploads/images/".$_SESSION["team"]."/$journalnum/";
 
     if (!is_dir($target_dir)) {
-        mkdir($target_dir);
-        chmod($target_dir, 0777);
+        mkdir($target_dir, 0777, true);
     }
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
     $uploadOk = 1;
@@ -144,8 +143,7 @@ if (isset($_POST["file-upload"]))
   $target_dir = "../uploads/files/".$_SESSION["team"]."/$journalnum/";
 
   if (!is_dir($target_dir)) {
-    mkdir($target_dir);
-    chmod($target_dir, 0777);
+    mkdir($target_dir, 0777, true);
   }
   
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
