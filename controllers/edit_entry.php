@@ -66,6 +66,7 @@ if (isset($_POST["img-upload"]))
         mkdir($target_dir, 0777, true);
     }
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
+    //$target_file = str_replace(' ', '%20', $target_file);
     $uploadOk = 1;
 
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -122,7 +123,7 @@ if (isset($_POST["img-upload"]))
         $stmnt -> execute();
 
         // add the image path to file storage paths
-        $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+        $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, replace(?, ' ', '%20'), ?, ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
         $stmnt -> execute();
@@ -182,7 +183,7 @@ if (isset($_POST["file-upload"]))
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
       
-      $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, ?, ?, ?)";
+      $sql = "insert into file_storage(file_name, file_type, file_path, article_id, file_class) values(?, ?, replace(?, ' ', '%20'), ?, ?)";
       $stmnt = mysqli_prepare($curs, $sql);
       $stmnt -> bind_param("sssss", $file_name, $file_type, $target_file, $journalnum, $file_class);
       $stmnt -> execute();

@@ -40,7 +40,7 @@
         {
             $title = $row["subject"];
             $file_link .= "<a href='./file-storage.php?article=$id&title=$title'>";
-            $file_link .= "View Attached Files</a>";
+            $file_link .= "View attached files</a>";
         }
         
         if ($row["creator"] == $_SESSION["unq_user"]) 

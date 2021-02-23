@@ -70,7 +70,7 @@ if (isset($_POST["img-upload"]))
         echo "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been uploaded.";
 
         // add the image path to file storage paths
-        $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, ?, ?)";
+        $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, replace(?, ' ', '%20'), ?)";
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $file_class);
         $stmnt -> execute();
@@ -130,7 +130,7 @@ if (isset($_POST["file-upload"]))
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
       
-      $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, ?, ?)";
+      $sql = "insert into file_storage(file_name, file_type, file_path, file_class) values(?, ?, replace(?, ' ', '%20'), ?)";
       $stmnt = mysqli_prepare($curs, $sql);
       $stmnt -> bind_param("ssss", $file_name, $file_type, $target_file, $file_class);
       $stmnt -> execute();

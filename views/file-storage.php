@@ -20,7 +20,8 @@
     while ($row = mysqli_fetch_assoc($result))
     {
 	$general_upload = explode(" ", $row["file_class"]);
-        if ($row["file_class"] == "file" || $general_upload[0].$general_upload[1] == "general file")
+
+	if ($row["file_class"] == "file" || $general_upload[0]." ".$general_upload[1] == "general file")
         {
             $project_files .= "<tr>";
             $project_files .= "<td><p><a href='".$row["file_path"]."' download>";
@@ -32,7 +33,7 @@
             $project_files .= "</tr>";
         }
 
-        if ($row["file_class"] == "image" || $general_upload[0].$general[1] == "general image") 
+        if ($row["file_class"] == "image" || $general_upload[0]." ".$general_upload[1] == "general image") 
         {
             $project_imgs .= "<br><div class='uline'></div><br>";
             $project_imgs .= "<div class='todo-flex r-cols'>";
@@ -52,7 +53,7 @@
             $project_imgs .= "<img src='".$row["file_path"]."'>";
             $project_imgs .= "</div>";
             $project_imgs .= "</div>";
-        }   
+	}   
     }
 
     if (isset($_GET["article"]) && isset($_GET["title"]))

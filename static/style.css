@@ -1321,8 +1321,11 @@ button.add-btn {
 -----------------------------------*/
 /* 1920 monitors */
 @media screen and (min-width: 1900px) {
-  main {
-    width: 95%;
+  .search-area {
+  	width:77%!important;
+  }
+   main {
+    width: 85%;
   }
   .todo-panel textarea {
     height: 442px;
@@ -1365,14 +1368,12 @@ button.add-btn {
   .scroll-item {
     width: 600px;
   }
+  /*
   .log-details {
   	width: 92%;
   }
-  .search-area {
-	  width: 90%!important;
-  }
+  */
 }
-
 @media screen and (max-width: 830px) {
   .intro-head p {
 	width: 100%;
