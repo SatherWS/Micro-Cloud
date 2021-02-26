@@ -1362,6 +1362,9 @@ button.add-btn {
 }
 
 @media screen and (min-height: 930px) {
+  .edit-subs {
+	  width: 80%!important;
+  }
   textarea {
     width: 80%!important;
   }

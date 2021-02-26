@@ -154,7 +154,7 @@
                     echo "<div class='emailer'>";
                     echo "<label class='container'>";
                     echo "<input type='checkbox' name='remind' value='temp' class='pro-op'>";
-                    echo "<span class='checkmark'></span>Send an email reminder</label>";
+                    echo "<span class='checkmark'></span>Remind everyone</label>";
                     echo "<input type='date' name='remind-date' class='repeat-input' required>";
                     echo "<br></br>";
                     echo "<input type='time' name='remind-time' placeholder='Set Reminder Time' class='repeat-input' required/>";
