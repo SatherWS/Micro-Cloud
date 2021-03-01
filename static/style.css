@@ -988,6 +988,7 @@ input.send-req {
   margin: 0 auto;
   background: #fff;
   padding: 0 1rem;
+  min-height: 40vh;
 }
 
 .article-details {
