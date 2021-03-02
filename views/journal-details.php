@@ -89,7 +89,7 @@
         $stmnt = mysqli_prepare($curs, $sql);
         $stmnt -> bind_param("s", $_POST['delete']);
         $stmnt -> execute();
-        header("Location: ./logs.php");
+        header("Location: ./show-journals.php");
     }
     // TODO: MOVE ALL ABOVE THIS TO CONTROLLERS 
 ?>

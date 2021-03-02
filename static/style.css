@@ -1327,6 +1327,7 @@ button.add-btn {
   }
    main {
     width: 85%;
+    min-height: 60vh;
   }
   .todo-panel textarea {
     height: 442px;
@@ -1360,6 +1361,9 @@ button.add-btn {
   /*
   textarea {width: 995px;}
   */
+   .search-area {
+	   width: 90.5%;
+   }
 }
 
 @media screen and (min-height: 930px) {

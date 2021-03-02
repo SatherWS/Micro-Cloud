@@ -66,7 +66,7 @@ if (isset($_POST["img-upload"]))
         mkdir($target_dir, 0777, true);
     }
     $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
-    //$target_file = str_replace(' ', '%20', $target_file);
+    $target_file = str_replace(' ', '%20', $target_file);
     $uploadOk = 1;
 
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
