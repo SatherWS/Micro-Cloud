@@ -1334,14 +1334,16 @@ button.add-btn {
   }
 }
 
-/* samsung monitor size */
+/* larger laptop monitor size */
 @media screen and (max-width: 1370px) {
-  /* In progress */
   #form-control {
     width: 45%;
   }
   .cat-list {
     width: 48%;
+  }
+  .search-area {
+	  width: 90%;
   }
   .scroll-item {
     width: 350px;

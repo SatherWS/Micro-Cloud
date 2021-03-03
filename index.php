@@ -128,9 +128,9 @@ session_start();
     <main>
         <div class="intro-head">
             <h1 class="main-title">Content & Task Management System</h1>
-            <p>Swoop is a decentralized platform for content and task management. All the code is open source and free to use, modify and distribute.
-            Users are encouraged to spin up their own Swoop instances or they can use <a href='https://swoop.team'>this public swoop instance.</a></p>
-            <p><a href='#'>Click here to learn how spin up your own swoop instance.</a></p>
+            <p>Swoop is a open source platform for content and task management. All the code for this website is free to use, modify and distribute.
+	    With this website users can write articles using Markdown syntax, create tasks for their teams and store files in a public cloud.
+	    <p><a href='#'>Click here to learn how spin up your own swoop instance.</a></p>
             </br>
         </div>
         <section class="proj-feed">
