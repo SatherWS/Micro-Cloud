@@ -17,7 +17,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- proc that deletes user accounts
+-- proc that deletes the logged in user's account
 DELIMITER //
 CREATE PROCEDURE delete_account (IN proj VARCHAR(200))
 BEGIN
@@ -45,7 +45,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- stored proc that alters logged in user d/n work
+-- WIP stored proc that alters information of the logged in user 
 DELIMITER //
 CREATE PROCEDURE alter_account (IN email VARCHAR(75), IN user VARCHAR(75))
 BEGIN
@@ -59,7 +59,5 @@ END //
 DELIMITER ;
 
 -- TODO: CREATE PROCS FOR COMMENTS BELOW
-
--- stored proc that deletes logged in user
 
 -- stored proc that deletes members from projects

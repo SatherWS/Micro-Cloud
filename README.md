@@ -23,11 +23,25 @@ Swoop runs on [the LAMP stack](https://en.wikipedia.org/wiki/LAMP_%28software_bu
 ```
 # TODO: Recreate installation steps on a VM
 
-# Apache web server installation
-
 # MYSQL database installation
+cd /tmp && wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
+sudo apt-get install ./mysql-apt-config_0.8.16-1_all.deb
+sudo apt-get update
 
-# PHP and Python installation
+# Install the mysql server and start it
+sudo apt-get install mysql-server
+systemctl start mysqld
+
+# Get the temporary password
+temp_password=$(grep password /var/log/mysqld.log | awk '{print $NF}')
+
+# Set up a batch file with the SQL commands
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$1'; flush privileges;" > reset_pass.sql
+
+# PHP and Apache2 web server installation
+sudo apt-get install php php-mysqli
+sudo apt-get install apache2
+sudo systemctl apache2 start
 ```
 
 ### Database configuration
@@ -58,7 +72,7 @@ To support email reminders you'll need to connect to some kind of SMTP server fo
 
 [How to enable application passwords](google.com)
 
-Next you'll need to modify the python script in `/controllers/smtp_interface.py` to match your credentials.
+Next you'll need to modify the python script in `controllers/smtp_interface.py` to match your credentials.
 ```
 import smtplib, sys
 from email.mime.multipart import MIMEMultipart

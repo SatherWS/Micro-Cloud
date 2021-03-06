@@ -13,7 +13,7 @@ session_start();
     $data = mysqli_fetch_assoc($result);
     $project_count = $data["count(*)"];
 
-    $sql = "select * from teams order by date_created desc limit ?";
+    $sql = "select * from teams order by rating desc limit ?";
     $stmnt = mysqli_prepare($curs, $sql);
     
     if (isset($_GET["more-projects"])) {

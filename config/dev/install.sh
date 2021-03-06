@@ -10,6 +10,7 @@ sudo systemctl apache2 start
 cd /tmp
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
 sudo apt-get install ./mysql-apt-config_0.8.16-1_all.deb
+sudo apt-get update
 
 # Install the server and start it
 sudo apt-get install mysql-server
