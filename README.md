@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/colinsather/Swoop.Team/master/static/logo.png">
+  <img src="https://github.com/colinsather/Swoop.Team/master/static/sctms.png">
 </p>
 
 ___
