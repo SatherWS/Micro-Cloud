@@ -984,7 +984,7 @@ input.send-req {
 }
 
 .log-details {
-  width: 1100px;
+  width: 900px;
   margin: 0 auto;
   background: #fff;
   padding: 0 1rem;
@@ -1362,9 +1362,6 @@ button.add-btn {
   }
   
   .cat-list {width: 40%;}
-  /*
-  textarea {width: 995px;}
-  */
    .search-area {
 	   width: 90.5%;
    }
