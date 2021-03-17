@@ -2,3 +2,4 @@
 **/uploads/files
 config/backups
 .vscode
+.well-known

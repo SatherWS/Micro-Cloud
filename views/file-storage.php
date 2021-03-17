@@ -35,7 +35,7 @@
 
         if ($row["file_class"] == "image" || $general_upload[0]." ".$general_upload[1] == "general image") 
         {
-            $project_imgs .= "<br><div class='uline'></div><br>";
+            $project_imgs .= "<br><div class='uline-lite'></div><br>";
             $project_imgs .= "<div class='todo-flex r-cols'>";
             $project_imgs .= "<div>";
             $project_imgs .= "<h3>".$row["file_name"].".".$row["file_type"]."</h3>";

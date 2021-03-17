@@ -115,7 +115,7 @@ if (isset($_POST["file-upload"]))
   }
 
   // Allow certain file formats
-  if ($dataFileType != "docx" && $dataFileType != "doc" && $dataFileType != "pdf"
+  if ($dataFileType != "docx" && $dataFileType != "doc" && $dataFileType != "pdf" && $dataFileType != "m4a"
   && $dataFileType != "txt" && $dataFileType != "xlsx" && $dataFileType != "xlsm" && $dataFileType != "zip") {
     echo "Sorry, only DOCX, DOC, PDF & TXT files are allowed.";
     $uploadOk = 0;
