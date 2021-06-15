@@ -4,7 +4,7 @@
 
 ## Project Details
 Swoop CTMS is a content and task management system. The task management part of the system is able to perform task delegation and send automated email reminders to yourself about upcoming deadlines. The content management part of the application allows users to write articles using [the markdown document formatting language.](https://www.markdownguide.org/cheat-sheet/) SCTMS's article editing interface allows users to embed images and videos from web URLs or upload images directly from their hard drives. In addition Swoop CTMS provides a form of cloud storage by giving users the option to link various types of files to their articles.
-___
+
 ## Deploying an Instance of Swoop CTMS
 All of our code is open source which allows users to run their own instances of this application. This is useful because certain people prefer to use this application for personal use only and keep all their tasks and articles not publicly accessible from our website. This also enables organizations to use this as an internal projects and or content management system. In the future I may write some shell scripts that aid in installing the dependencies needed.
 
