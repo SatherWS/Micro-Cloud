@@ -64,7 +64,7 @@ a#myBtn {
 }
 
 .intro-head {
-  width: 90%;
+  width: 85%;
   margin: 0 auto;
   font-size: 14pt;
   padding: 1rem;
@@ -77,7 +77,7 @@ a#myBtn {
 }
 
 .proj-feed {
-  width: 90%;
+  width: 85%;
   margin: 0 auto;
   padding: 1rem;
   margin-top: 1rem;
@@ -1578,7 +1578,12 @@ button.add-btn {
   }
   
   @media screen and (max-width: 600px) {
-
+    .intro-head {
+	width: 90%!important;
+    }
+    .proj-feed {
+	    width: 90%;
+     }
     .sup-text {
       font-size: 16pt;
     }
