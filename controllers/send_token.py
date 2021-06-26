@@ -17,7 +17,7 @@ html += "<html><head><style>"
 html += ".uline {border-bottom: solid #ddd;}</style></head>"
 html += "<body><h3>A password reset has been requested</h3>"
 html += "<div class='uline'></div>"
-html += "<h3><a href='http://10.0.0.52/authentication/change_pswd.php?token="+token
+html += "<h3><a href='https://swoop.team/authentication/change_pswd.php?token="+token
 html += "'>Click here to reset your password</a></h3>" 
 
 text += "Click here to reset your password "+token
