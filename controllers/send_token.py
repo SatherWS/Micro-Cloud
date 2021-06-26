@@ -1,9 +1,13 @@
 import smtplib, sys
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 gmail_user = 'swoopctms@gmail.com'
-gmail_password = 'qlfwsrjhrzzbfknk'
+gmail_password = os.environ.get("APP_PSWD")
+print(gmail_password)
 receiver = sys.argv[1]
 token = sys.argv[2]
 

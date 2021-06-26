@@ -60,7 +60,9 @@ To support email reminders you'll need to connect to some kind of SMTP server fo
 
 [How to enable application passwords](google.com)
 
-Next you'll need to modify the python script in `controllers/smtp_interface.py` to match your credentials.
+Next you'll need to modify the following python scripts in the `controllers` directory to match your credentials.
+	* smtp_interface.py
+	* send_token.py 
 ```
 import smtplib, sys
 from email.mime.multipart import MIMEMultipart
