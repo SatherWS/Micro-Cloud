@@ -151,7 +151,7 @@ session_start();
         </div>
         <div class="col text-right">
             <h2>LINKS</h2>
-            <p><a class="footer-link git" href='#'> 
+            <p><a class="footer-link git" href='https://github.com/ColinSather/Swoop.Team'> 
             <i class="fa fa-github"></i> View our source code</a></p>
         </div>
     </div>
