@@ -1325,7 +1325,7 @@ button.add-btn {
 /* 1920 monitors */
 @media screen and (min-width: 1900px) {
   .search-area {
-  	width:77%!important;
+  	width:72.5%!important;
   }
    main {
     width: 85%;
