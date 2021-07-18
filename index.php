@@ -130,8 +130,7 @@ session_start();
             <h1 class="main-title">Content & Task Management System</h1>
             <p>Swoop is a open source platform for content and task management. All the code for this website is free to use, modify and distribute.
 	    With this website users can write articles using Markdown syntax, create tasks for their teams and store files in a public cloud.
-	    <p>Only interested in our Markdown editor? <a href='#'>Check out our desktop app YAM Editor (coming soon)!</a></p>
-            </br>
+	    <\p>
         </div>
         <section class="proj-feed">
             <h2><?php printf($project_count); ?> projects are hosted on this instance</h2>
